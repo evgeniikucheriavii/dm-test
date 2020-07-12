@@ -1,0 +1,12 @@
+<nav class="nav">
+	<div class="nav__content">
+		<section class="nav-section nav-section_left">
+			<a *ngFor="let l of links; let i = index" routerLink="{{l.link}}" class="nav-item nav-item_left" routerLinkActive="nav-item_active"><div class="nav-item__content">{{l.name}}</div></a>
+		</section>
+		<section class="nav-section nav-section_rigth">
+			<a routerLink="/messages" class="nav-item nav-item_right"><div class="nav-item__content"><img src="assets/images/Mail.svg" class="nav-item__image"></div></a>
+			<a routerLink="/settings" class="nav-item nav-item_right"><div class="nav-item__content"><img src="assets/images/Gear.svg" class="nav-item__image"></div></a>
+			<a routerLink="/exit" class="nav-item nav-item_right"><div class="nav-item__content"><img src="assets/images/Exit.svg" class="nav-item__image"></div></a>
+		</section>
+	</div>
+</nav>

@@ -1,0 +1,246 @@
+.resources-sections
+{
+	display: flex;
+	flex-direction: row;
+	align-content: stretch;
+	justify-items: stretch;
+	align-items: stretch;
+	height: 100%;
+	width: 100%;
+	justify-content: stretch;
+}
+
+.main-section_left
+{
+	flex: 3;
+}
+
+.main-section_right
+{
+	flex: 7;
+	box-shadow: 0px 2px 4px rgba(4, 41, 57, 0.25);
+}
+
+/*General left*/
+
+.container 
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	align-content: stretch;
+	height: 100%;
+	width: 100%;
+}
+
+.left-section
+{
+	display: flex;
+}
+
+/*General end*/
+
+/*Header*/
+
+.left-section__header
+{
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1;
+}
+
+.header-section
+{
+	display: flex;
+	align-content: center;
+}
+
+.header-section__right
+{
+	text-align: center;
+	margin-right: 30px;
+}
+
+.header-section__left
+{
+	margin-left: 30px;
+	font-size: 22px;
+	line-height: 26px;
+	flex: 3;
+}
+
+/*Header end*/
+
+/*Search*/
+
+.left-section__search
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	flex: 1;
+}
+
+/*Search end*/
+
+/*List*/
+
+.left-section__list
+{
+	display: flex;
+	flex-direction: column;
+	align-content: flex-start;
+	flex: 2;
+}
+
+.list-row
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: left;
+	padding: 11px 28px;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+.list-row_active, .list-row:hover
+{
+	color: #4A5DC2;
+	background: #F1F6FD;
+	box-shadow: 0px 1px 1px rgba(8, 29, 61, 0.23);
+}
+
+.list-row_head 
+{
+	font-weight: 500;
+	color: #042635;
+}
+
+.list__num
+{
+	flex: 1;
+}
+
+.list__name
+{
+	flex: 4;
+}
+
+.list__type, .list__util
+{
+	flex: 2;
+}
+
+.list__util 
+{
+	text-align: center;
+}
+
+.sort-image
+{
+	width: 9px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/*List end*/
+
+/*Pages*/
+
+.left-section__pages
+{
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+	align-content: space-around;
+	justify-content: center;
+	align-items: center;
+}
+
+/*Pages end*/
+
+/*General right*/
+
+/*General end*/
+
+.header-section_right
+{
+	text-align: center;
+	margin-right: 30px;
+}
+
+.right-section__header
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex: 2;
+	padding: 0 43px;
+	align-items: center;
+}
+
+.header-name
+{
+	font-style: normal;
+	font-weight: bold;
+	font-size: 32px;
+	line-height: 37px;
+	color: #093751;
+}
+
+.right-section__filters
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0 40px;
+	align-items: center;
+	flex: 1;
+}
+
+.filter-label
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.right-section__graph
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-content: flex-start;
+	flex: 15;
+	padding: 0 40px;
+}
+
+.graph-row
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	border-bottom: 1px solid rgba(12, 42, 133, 0.2);
+	padding: 0 0 10px 0;
+}
+
+.graph-row:first-child, .graph-row:last-child
+{
+	border: 0;
+}
+
+.graph-column
+{
+	flex: 2;
+	text-align: center;
+}
+
+.graph-column:first-child, .graph-column:last-child
+{
+	flex: 1;
+}
