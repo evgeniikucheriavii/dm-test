@@ -1,0 +1,136 @@
+<div class="resources-sections">
+	<section class="main-section main-section_left">
+		<div class="container">
+			<section class="left-section left-section__header">
+				<section class="header-section header-section__left">
+					Список ресурсов
+				</section>
+		
+				<section class="header-section header-section__right">
+					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+					<button class="button"><img src="assets/images/Import.svg" class="button__image"> Импортировать</button>
+				</section>
+			</section>
+		
+			<section class="left-section left-section__search">
+				<form>
+					<label class="search-label">
+						<input type="search" class="search-input" placeholder="Поиск" name="search" id="search_input">
+						<button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
+					</label>
+				</form>
+				<label class="select-label">
+					<select name="filter" id="filter" class="select-elem">
+						<option value="1">Фильтр</option>
+						<option value="2">Трудовой</option>
+						<option value="3">Не трудовой</option>
+					</select>
+				</label>
+			</section>
+		
+			<section class="left-section left-section__list">
+				<div class="list-row list-row_head">
+					<div class="list__num">#</div>
+					<div class="list__name">Ресурс</div>
+					<div class="list__type"><img src="assets/images/sort.png" class="sort-image"> Тип</div>
+					<div class="list__util"><img src="assets/images/sort.png" class="sort-image"> Утилизация</div>
+				</div>
+				<div *ngFor="let r of resources; let i = index">
+					<div class="list-row">
+						<div class="list__num">{{i + 1}}</div>
+						<div class="list__name">{{r.name}}</div>
+						<div class="list__type">{{r.type}}</div>
+						<div class="list__util _{{r.color}}">{{r.util}}%</div>
+					</div>
+				</div>
+			</section>
+			<section class="left-section left-section__pages">
+				<a href="#" class="page-link page-link_inactive"><img src="assets/images/Left_b.svg" class="button__image"> Пред</a>
+				<a href="#" class="page-link">1</a>
+				<a href="#" class="page-link page-link_inactive">...</a>
+				<a href="#" class="page-link">4</a>
+				<a href="#" class="page-link page-link_active">5</a>
+				<a href="#" class="page-link">6</a>
+				<a href="#" class="page-link page-link_inactive">...</a>
+				<a href="#" class="page-link">11</a>
+				<a href="#" class="page-link">След <img src="assets/images/Right_b.svg" class="button__image"></a>
+			</section>
+		</div>
+	</section>
+	<section class="main-section main-section_right">
+		<div class="container">
+			<section class="right-section right-section__header">
+				<div class="header-name">{{currentResource}}</div>
+				<div class="tabs">
+					<button class="tab tab_active" id="tab_load">Загрузка</button>
+					<button class="tab" id="tab_services">Услуги</button>
+					<button class="tab" id="tab_log">Лог</button>
+				</div>
+			</section>
+			<section class="right-section right-section__filters">
+				<label class="filter-label">
+					<span class="graph-filter">Тип</span>
+					<label class="select-label select-label_graph">
+						<select class="select-elem">
+							<option value="1">Трудовой</option>
+							<option value="2">Не трудовой</option>
+						</select>
+					</label>
+				</label>
+				<label class="filter-label">
+					<span class="graph-filter">Признак</span>
+					<label class="select-label select-label_graph">
+						<select class="select-elem">
+							<option value="1">Родительский</option>
+							<option value="2">Дочерний</option>
+						</select>
+					</label>
+				</label>
+				<label class="filter-label">
+					<span class="graph-filter">Частота</span>
+					<label class="select-label select-label_graph">
+						<select class="select-elem">
+							<option value="1">Раз в неделю</option>
+							<option value="2">Раз в месяц</option>
+							<option value="3">Раз в год</option>
+						</select>
+					</label>
+				</label>
+				<label class="filter-label">
+					<span class="graph-filter">Статус</span>
+					<label class="select-label select-label_graph">
+						<select class="select-elem">
+							<option value="1">Активен</option>
+							<option value="2">Пасивен</option>
+						</select>
+					</label>
+				</label>
+			</section>
+			<section class="right-section right-section__graph">
+				<div class="graph-row graph-row_head">
+					<div class="graph-column"><button class="arrow-button arrow-button_left"></button></div>
+					<div class="graph-column" *ngFor="let d of dates">
+						<div class="graph-column__date">{{d.date}}</div>
+						<div class="graph-column__util _{{d.color}}">{{d.util}}%</div>
+					</div>
+					<div class="graph-column"><button class="arrow-button arrow-button_right"></button></div>
+				</div>
+				
+				<div>
+			
+				</div>
+				<div class="graph-row" *ngFor="let hour of hours">
+					<div class="graph-column">{{hour}}:00</div>
+					<div class="graph-column"></div>
+					<div class="graph-column"></div>
+					<div class="graph-column"></div>
+					<div class="graph-column"></div>
+					<div class="graph-column"></div>
+					<div class="graph-column"></div>
+					<div class="graph-column"></div>
+					<div class="graph-column"></div>
+				</div>
+			</section>
+		</div>
+	</section>
+</div>

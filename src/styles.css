@@ -1,1 +1,324 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	src: url('assets/fonts/Roboto-Regular-webfont.woff') format('woff');
+}
+
+body, html
+{
+	height: 100vh;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: Roboto;
+	font-size: 16px;
+	color: #111;
+	overflow: hidden;
+	background: linear-gradient(0deg, #F9FCFD, #F9FCFD), #FFFFFF;
+}
+
+textarea, select, input, button { outline: none; }
+
+.wrapper
+{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.main 
+{
+	box-shadow: 0px 2px 4px rgba(4, 41, 57, 0.25);
+	background: linear-gradient(180deg, #DAE5F7 0%, rgba(233, 238, 242, 0) 18%);
+	margin: 0 40px 100px 40px;
+	border-radius: 4px;
+	overflow: hidden;
+	flex: 11;
+}
+
+.main__content
+{
+	height: 100%;
+	width: 100%;	
+}
+
+.button
+{
+	background: #3D71BF;
+	border: 0;
+	border-radius: 4px;
+	font-size: 12px;
+	line-height: 14px;
+	color: #fff;
+	padding: 12px;
+	margin: 5px;
+	height: 36px;
+}
+
+.button:hover
+{
+	background: #0C62E3;
+}
+
+.arrow-button
+{
+	cursor: pointer;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: 2px solid #3D71BF;
+	box-sizing: border-box;
+	background-color: #fff;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.arrow-button_left
+{
+	background-image: url(assets/images/Left_b.svg);
+	
+}
+
+.arrow-button_right
+{
+	background-image: url(assets/images/Right_b.svg);
+}
+
+.arrow-button_left:hover
+{
+	background-image: url(assets/images/Left_w.svg);
+}
+
+.arrow-button_right:hover
+{
+	background-image: url(assets/images/Right_w.svg);
+}
+
+.arrow-button:hover
+{
+	border: 2px solid #0C62E3;
+	background-color: #0C62E3;
+}
+
+.page-link
+{
+	padding: 8px 12px;
+	background: #fff;
+	color: #000;
+	text-decoration: none;
+	display: block;
+	border: 2px solid #3D71BF;
+	border-radius: 4px;
+	font-size: 14px;
+	line-height: 16px;
+	margin: 5px;
+}
+
+.page-link_inactive
+{
+	opacity: 0.2;
+	cursor: default;
+}
+
+.page-link_active, .page-link:hover
+{
+	background: #3D71BF;
+	color: #fff;
+}
+
+.page-link_inactive:hover
+{
+	background: #fff;
+	color: #000;
+}
+
+.input
+{
+	width: 244px;
+	height: 36px;
+}
+
+.search-label
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 244px;
+	height: 36px;
+	background: #fff;
+	box-sizing: border-box;
+	border-radius: 4px;
+	border: 2px solid transparent;
+	box-shadow: 0px 1px 4px rgba(9, 47, 64, 0.2);
+}
+
+.search-label:focus-within
+{
+	border: 2px solid #3D71BF;
+}
+
+.search-input
+{
+	background: transparent;
+	border: 0;
+	flex: 9;
+	padding: 0 0 0 15px;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+.search-button
+{
+	border: 0;
+	background: transparent;
+	flex: 1;
+}
+
+/*Select*/
+
+.select-elem
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	outline: 0;
+	box-shadow: none;
+	border: 0 !important;
+	background: #fff;
+	background-image: none;
+}
+
+.graph-filter
+{
+	font-size: 14px;
+	line-height: 16px;
+	color: #000000;
+	opacity: 0.6;
+}
+
+/* Remove IE arrow */
+select::-ms-expand { display: none;}
+
+.select-label 
+{
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 244px;
+	height: 36px;
+	background: #fff;
+	box-sizing: border-box;
+	border-radius: 4px;
+	box-shadow: 0px 1px 4px rgba(9, 47, 64, 0.2);
+	overflow: hidden;
+	border: 2px solid transparent;
+}
+
+.select-label_graph
+{
+	width: 212px;
+	margin: 10px;
+}
+
+.select-label:focus-within, .select-label:hover
+{
+	border: 2px solid #3D71BF;
+}
+
+.select-elem 
+{
+	flex: 1;
+	padding: 0 0 0 15px;
+	color: #000;
+	cursor: pointer;
+}
+
+.select-label::after 
+{
+	content: url(assets/images/Up.svg);
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	width: 29px;
+	height: 29px;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+	background: #0C62E3;
+	pointer-events: none;
+	border-radius: 4px;
+}
+
+.select-label:focus-within::after, .select-label:focus-within::after
+{ 
+	background: transparent;
+	content: url(assets/images/Down.svg);
+}
+
+/*Select end*/
+
+
+._green { color: #0EC600; }
+._brown { color: #933A04; }
+._lgreen { color: #A6C200; }
+._bgreen { color: #2D9F10; }
+._red { color: #E70000; }
+
+.main-section 
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.main-section_left
+{
+	flex: 3;
+}
+
+.main-section_right
+{
+	flex: 7;
+	box-shadow: 0px 2px 4px rgba(4, 41, 57, 0.25);
+	display: flex;
+	flex-direction: column;
+}
+
+.tabs
+{
+	width: 303px;
+	height: 36px;
+	background: linear-gradient(180deg, #052435 0%, #093751 77.78%);
+	border: 1px solid #FFFFFF;
+	box-sizing: border-box;
+	border-radius: 38px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.tab
+{
+	width: 99px;
+	height: 32px;
+	background: transparent;
+	border: 0;
+	color: #fff;
+	font-size: 14px;
+	line-height: 16px;
+	cursor: pointer;
+}
+
+.tab_active
+{
+	background: linear-gradient(180deg, #FFFFFF 25%, #E4EAEE 89.06%);
+	border: 1px solid #FFFFFF;
+	color: #093751;
+	cursor: default;
+	box-sizing: border-box;
+	border-radius: 38px;
+}
