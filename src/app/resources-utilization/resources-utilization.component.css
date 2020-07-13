@@ -113,10 +113,12 @@
 	box-shadow: 0px 1px 1px rgba(8, 29, 61, 0.23);
 }
 
-.list-row_head 
+.list-row_head, .list-row_head:hover 
 {
 	font-weight: 500;
 	color: #042635;
+	background: transparent;
+	box-shadow: none;
 }
 
 .list__num
