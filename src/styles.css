@@ -239,24 +239,27 @@ select::-ms-expand { display: none;}
 
 .select-label::after 
 {
-	content: url(assets/images/Up.svg);
+	content: url(assets/images/Down.png);
 	position: absolute;
-	top: 2px;
-	right: 2px;
-	width: 29px;
-	height: 29px;
-	text-align: center;
+	top: 0;
+	right: 0;
+	width: 34px;
+	height: 34px;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
 	cursor: pointer;
 	color: #fff;
-	background: #0C62E3;
+	background: #3D71BF;
 	pointer-events: none;
+	border: 6px solid #fff;
 	border-radius: 4px;
 }
 
 .select-label:focus-within::after, .select-label:focus-within::after
 { 
 	background: transparent;
-	content: url(assets/images/Down.svg);
+	content: url(assets/images/Up.png);
 }
 
 /*Select end*/
