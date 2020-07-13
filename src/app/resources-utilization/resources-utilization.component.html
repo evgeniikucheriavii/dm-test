@@ -109,7 +109,7 @@
 			<section class="right-section right-section__graph">
 				<div class="graph-row graph-row_head">
 					<div class="graph-column"><button class="arrow-button arrow-button_left"></button></div>
-					<div class="graph-column" *ngFor="let d of dates">
+					<div class="graph-column graph-column_head" *ngFor="let d of dates">
 						<div class="graph-column__date">{{d.date}}</div>
 						<div class="graph-column__util _{{d.color}}">{{d.util}}%</div>
 					</div>

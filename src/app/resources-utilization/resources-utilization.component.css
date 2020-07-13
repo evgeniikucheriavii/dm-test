@@ -242,6 +242,16 @@
 	text-align: center;
 }
 
+.graph-column_head
+{
+	border-right: 1px solid rgba(61, 113, 191, 0.3);
+}
+
+.graph-column_head:nth-child(8n)
+{
+	border-right: 1px solid transparent;
+}
+
 .graph-column:first-child, .graph-column:last-child
 {
 	flex: 1;
