@@ -33,9 +33,16 @@
 	width: 100%;
 }
 
+.container__left
+{
+	justify-content: stretch;
+	
+}
+
 .left-section
 {
 	display: flex;
+
 }
 
 /*General end*/
@@ -56,16 +63,25 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	flex: 1;
+	width: 100%;
+	box-sizing: border-box;
 }
 
+.header__top_left
+{
+	padding: 32px 28px 29px 28px;
+}
+
+.header__top_right
+{
+	padding: 0 43px;
+}
 
 .header-section__left
 {
 	font-size: 22px;
 	line-height: 26px;
 	flex: 3;
-	margin-left: 30px;
 }
 
 .header-section__right
@@ -73,7 +89,6 @@
 	display: flex;
 	align-content: center;
 	text-align: center;
-	margin-right: 30px;
 }
 
 .header__bottom
@@ -82,11 +97,19 @@
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: flex-start;
-	flex: 1;
-	margin: 0 28px;
 }
 
+.header__bottom_left
+{
+	padding: 0 28px 28px 28px;
+}
 
+.header__bottom_right
+{
+	width: 94%;
+	justify-content: space-between;
+	flex: 1.23;
+}
 
 /*Header end*/
 
@@ -98,18 +121,19 @@
 	display: flex;
 	flex-direction: column;
 	align-content: flex-start;
-	flex: 3;
+	flex: 4;
 }
 
 .list-row
 {
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	align-items: flex-start;
 	text-align: left;
-	padding: 11px 28px;
+	padding: 9px 28px;
 	font-size: 14px;
 	line-height: 16px;
+	border-bottom: 1px solid rgba(61, 113, 191, 0.1);
 }
 
 .list-row_active, .list-row:hover
@@ -119,12 +143,19 @@
 	box-shadow: 0px 1px 1px rgba(8, 29, 61, 0.23);
 }
 
+.list-row:last-child
+{
+	border-bottom: 1px solid transparent;
+}
+
+
 .list-row_head, .list-row_head:hover 
 {
 	font-weight: 500;
 	color: #042635;
 	background: transparent;
 	box-shadow: none;
+	border-bottom: 1px solid transparent;
 }
 
 .list__num
@@ -186,7 +217,6 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	flex: 2;
-	padding: 0 43px;
 	align-items: center;
 }
 
@@ -204,7 +234,6 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin: 0 40px;
 	align-items: center;
 	flex: 1;
 }
@@ -215,7 +244,6 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	margin-right: 10px;
 }
 
 .right-section__graph
@@ -224,7 +252,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-content: flex-start;
-	flex: 8;
+	flex: 9;
 	padding: 0 40px;
 }
 

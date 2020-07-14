@@ -1,9 +1,9 @@
 <div class="resources-sections">
 	<section class="main-section main-section_left">
-		<div class="container">
+		<div class="container container__left">
 			<section class="left-section left-section__header">
 
-				<section class="header__top">
+				<section class="header__top header__top_left">
 
 					<section class="header-section header-section__left">
 						Список ресурсов
@@ -16,7 +16,7 @@
 					
 				</section>
 			
-				<section class="header__bottom">
+				<section class="header__bottom header__bottom_left">
 					<form>
 						<label class="search-label">
 							<input type="search" class="search-input" placeholder="Поиск" name="search" id="search_input">
@@ -40,13 +40,11 @@
 					<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Тип</div>
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Утилизация</div>
 				</div>
-				<div *ngFor="let r of resources; let i = index">
-					<div class="list-row">
-						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{r.name}}</div>
-						<div class="list__type">{{r.type}}</div>
-						<div class="list__util _{{r.color}}">{{r.util}}%</div>
-					</div>
+				<div class="list-row" *ngFor="let r of resources; let i = index">
+					<div class="list__num">{{i + 1}}</div>
+					<div class="list__name">{{r.name}}</div>
+					<div class="list__type">{{r.type}}</div>
+					<div class="list__util _{{r.color}}">{{r.util}}%</div>
 				</div>
 			</section>
 			<section class="left-section left-section__pages">
@@ -65,7 +63,7 @@
 	<section class="main-section main-section_right">
 		<div class="container">
 			<section class="right-section right-section__header">
-				<section class="header__top">
+				<section class="header__top header__top_right">
 					<div class="header-name">{{currentResource}}</div>
 					<div class="tabs">
 						<button class="tab tab_active" id="tab_load">Загрузка</button>
@@ -73,7 +71,7 @@
 						<button class="tab" id="tab_log">Лог</button>
 					</div>
 				</section>
-				<section class="header__bottom">
+				<section class="header__bottom header__bottom_right">
 					<label class="filter-label">
 						<span class="graph-filter">Тип</span>
 						<label class="select-label select-label_graph">
