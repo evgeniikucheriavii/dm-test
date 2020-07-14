@@ -147,6 +147,7 @@ textarea, select, input, button { outline: none; }
 	align-items: center;
 	width: 244px;
 	height: 36px;
+	margin-right: 17px;
 	background: #fff;
 	box-sizing: border-box;
 	border-radius: 4px;
