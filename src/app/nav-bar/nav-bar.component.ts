@@ -8,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class NavBarComponent implements OnInit 
 {
 	links = [];
+	messages:number;
 
 	constructor() { }
 
 	ngOnInit(): void 
 	{
+		this.messages = 1;
+
 		this.links = 
 		[
 			new NavLink("Утилизация ресурсов", "/utilization"),

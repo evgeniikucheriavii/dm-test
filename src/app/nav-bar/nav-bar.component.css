@@ -57,5 +57,23 @@
 
 .nav-item__content
 {
-	padding: 25px 30px 20px 30px	;
+	padding: 25px 30px 20px 30px;
+}
+
+.messages
+{
+	background: #D30F03;
+	border-radius: 50%;
+	font-weight: 900;
+	width: 21px;
+	height: 21px;
+	box-sizing: border-box;
+	padding: 4px;
+	font-size: 12px;
+	line-height: 14px;
+	text-align: center;
+	position: absolute;
+	left: 88%;
+	top: 2.34%;
+
 }
