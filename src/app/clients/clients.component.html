@@ -44,7 +44,7 @@
 				<div class="list-row" *ngFor="let c of clients; let i = index">
 					<div class="list__num">{{i + 1}}</div>
 					<div class="list__name">{{c.fio}}</div>
-					<div class="list__type"><laber class="checkbox"><input type="checkbox" class="checkbox__checkbox" checked="{{c.sale}}"></laber></div>
+					<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox" checked="{{c.sale}}"></label> <label class="box-label box-label_radio"><input type="radio" class="box-label__input box-label__input_radio"></label></div>
 					<div class="list__util">{{c.rfm}}</div>
 					<div class="list__util">{{c.ltvString}}</div>
 				</div>
