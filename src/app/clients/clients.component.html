@@ -6,7 +6,7 @@
 				<section class="header__top header__top_left">
 
 					<section class="header-section header-section__left">
-						Список ресурсов
+						Список клиентов
 					</section>
 			
 					<section class="header-section header-section__right">
@@ -36,15 +36,17 @@
 			<section class="left-section left-section__list">
 				<div class="list-row list-row_head">
 					<div class="list__num">#</div>
-					<div class="list__name">Ресурс</div>
-					<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Тип</div>
-					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Утилизация</div>
+					<div class="list__name">ФИО</div>
+					<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Акции</div>
+					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> RFM</div>
+					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> LTV</div>
 				</div>
-				<div class="list-row" *ngFor="let r of resources; let i = index">
+				<div class="list-row" *ngFor="let c of clients; let i = index">
 					<div class="list__num">{{i + 1}}</div>
-					<div class="list__name">{{r.name}}</div>
-					<div class="list__type">{{r.type}}</div>
-					<div class="list__util _{{r.color}}">{{r.util}}%</div>
+					<div class="list__name">{{c.fio}}</div>
+					<div class="list__type"><laber class="checkbox"><input type="checkbox" class="checkbox__checkbox" checked="{{c.sale}}"></laber></div>
+					<div class="list__util">{{c.rfm}}</div>
+					<div class="list__util">{{c.ltv}}</div>
 				</div>
 			</section>
 			<section class="left-section left-section__pages">
@@ -64,7 +66,7 @@
 		<div class="container">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
-					<div class="header-name">{{currentResource}}</div>
+					<div class="header-name">{{currentClient}}</div>
 					<div class="tabs">
 						<button class="tab tab_active" id="tab_load">Контакты и транзакции</button>
 						<button class="tab" id="tab_services">Бронирование</button>
