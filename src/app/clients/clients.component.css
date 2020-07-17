@@ -124,6 +124,7 @@
 	height: 187px;
 	box-sizing: border-box;
 	padding: 45px 60px;
+	margin-bottom: 19px;
 
 	background: url(../../assets/images/Contacts_banner.png) 100% 100% no-repeat;
 	background-color: #003584;
@@ -159,6 +160,22 @@
 	font-style: normal;
 }
 
+.list
+{
+
+}
+
+.list__title
+{
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #042635;
+}
+
+
+
 /*Contacts and transactions end*/
 
 /*List*/
@@ -170,6 +187,7 @@
 	align-content: flex-start;
 	flex: 4;
 }
+
 
 .list-row
 {

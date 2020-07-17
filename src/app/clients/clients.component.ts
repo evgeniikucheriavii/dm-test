@@ -59,6 +59,11 @@ export class ClientsComponent implements OnInit
 			new LogEntry("Консультативный прием", "Массаж 45 минут", "Колесов А.В.", "11.05.2018", true)
 		];
 
+		this.currentClient.contacts = [
+			new Contact(0, "88005553535", "20.03.2020"),
+			new Contact(1, "mail@gmail.com", "20.03.2020")
+		];
+
 		this.tabs = [
 			new Tab("contacts", "Контакты и транзакции"),
 			new Tab("reserve", "Бронирование"),
@@ -100,7 +105,7 @@ class Client
 	ltv:number;
 
 	log = [];
-
+	contacts = [];
 
 	ltvString:string;
 	
@@ -119,6 +124,30 @@ class Client
 		let output = nfObject.format(value);
 
 		return output; 
+	}
+}
+
+class Contact
+{
+	type:number;
+	value:string;
+	lastdate:string;
+	typeString:string;
+
+	constructor(type:number, value:string, lastdate:string)
+	{
+		this.type = type;
+		this.value = value;
+		this.lastdate = lastdate;
+
+		if(this.type == 0)
+		{
+			this.typeString = "Телефон";
+		}
+		else
+		{
+			this.typeString = "Почта";
+		}
 	}
 }
 
@@ -151,3 +180,4 @@ class LogEntry
 		}
 	}
 }
+
