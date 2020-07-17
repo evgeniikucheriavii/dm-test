@@ -63,16 +63,28 @@
 		</div>
 	</section>
 	<section class="main-section main-section_right">
-		<div class="container">
+		<div class="container container_log">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
 					<div class="header-name">{{currentClient.fio}}</div>
 					<div class="tabs">
-						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}">{{t.name}}</button>
+						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
 					</div>
 				</section>
 			</section>
-			<section class="right-section right-section__list">
+
+			<!--Contacts-->
+			<section class="right-section right-section__list" *ngIf="currentTab == 0">
+				Contacts
+			</section>
+
+			<!--Reserve-->
+			<section class="right-section right-section__list" *ngIf="currentTab == 1">
+				Reserve
+			</section>
+
+			<!--Log-->
+			<section class="right-section right-section__list" *ngIf="currentTab == 2">
 				<div class="list-row list-row_head">
 					<div class="list__num">#</div>
 					<div class="list__name">Обращение</div>

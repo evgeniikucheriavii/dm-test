@@ -65,12 +65,12 @@ export class ClientsComponent implements OnInit
 			new Tab("log", "История обращений")
 		];
 
-		this.currentTab = 2;
+		this.currentTab = 0;
 
 		this.tabs[this.currentTab].Activate();
 	}
 
-	SwitchTab(index:number)
+	public SwitchTab(index:number)
 	{
 		if(index <= this.tabs.length)
 		{
