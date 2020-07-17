@@ -308,7 +308,7 @@ select::-ms-expand { display: none;}
 .tab
 {
 	height: 32px;
-	padding: 8px 19px;
+	padding: 7px 19px;
 	background: transparent;
 	border: 0;
 	color: #fff;
