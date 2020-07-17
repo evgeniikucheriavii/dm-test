@@ -125,12 +125,12 @@
 						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Стоимость</div>
 						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Дата</div>
 					</div>
-					<div class="list-row" *ngFor="let c of currentClient.contacts; let i = index">
+					<div class="list-row" *ngFor="let t of currentClient.transactions; let i = index">
 						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{c.fio}}</div>
-						<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox"></label></div>
-						<div class="list__util">{{c.rfm}}</div>
-						<div class="list__util">{{c.ltvString}}</div>
+						<div class="list__name">{{t.service}}</div>
+						<div class="list__type">{{t.master}}</div>
+						<div class="list__util">{{t.sum}}</div>
+						<div class="list__util">{{t.date}}</div>
 					</div>
 				</section>
 				

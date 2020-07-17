@@ -64,6 +64,15 @@ export class ClientsComponent implements OnInit
 			new Contact(1, "mail@gmail.com", "20.03.2020")
 		];
 
+		this.currentClient.transactions = [
+				new TransactionLog("Массаж 45 минут", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Вибрационная терапия", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Массаж 45 минут", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Вибрационная терапия", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020"),
+		];
+
 		this.tabs = [
 			new Tab("contacts", "Контакты и транзакции"),
 			new Tab("reserve", "Бронирование"),
@@ -88,12 +97,7 @@ export class ClientsComponent implements OnInit
 
 			this.tabs[this.currentTab].Activate();
 		}
-
-		//TODO: ChangeSection() method call
 	}
-
-	//TODO: ChangeSection() method
-
 }
 
 
@@ -106,6 +110,7 @@ class Client
 
 	log = [];
 	contacts = [];
+	transactions = [];
 
 	ltvString:string;
 	
@@ -148,6 +153,22 @@ class Contact
 		{
 			this.typeString = "Почта";
 		}
+	}
+}
+
+class TransactionLog
+{
+	service:string;
+	master:string;
+	date:string;
+	sum:number;
+
+	constructor(service:string, master:string, sum:number, date:string)
+	{
+		this.service = service;
+		this.master = master;
+		this.sum = sum;
+		this.date = date;
 	}
 }
 
