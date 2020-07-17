@@ -339,6 +339,7 @@ select::-ms-expand { display: none;}
 	box-shadow: 0px 1px 4px rgba(9, 47, 64, 0.2);
 	width: 16px;
 	height: 16px;
+	margin: 2px;
 }
 
 .box-label_checkbox

@@ -160,6 +160,11 @@
 	font-style: normal;
 }
 
+.banner-item__body
+{
+	color: #B8D4FF;
+}
+
 .list
 {
 
@@ -172,6 +177,7 @@
 	font-size: 14px;
 	line-height: 16px;
 	color: #042635;
+	padding: 8px 0;
 }
 
 
