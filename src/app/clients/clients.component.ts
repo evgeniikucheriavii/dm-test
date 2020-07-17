@@ -9,17 +9,18 @@ import { Tab } from '../tab';
 
 export class ClientsComponent implements OnInit 
 {
+	tabs = [];
+	sections = [];
 
 	clients = [];
-	tabs = [];
-	currentClient:string;
+	
+	currentClient:Client;
 	currentTab:number;
 
 	constructor() { }
 
 	ngOnInit(): void 
 	{
-		this.currentClient = "Колесов А. В.";
 
 		this.clients = [
 			new Client("Иванов Иван", 1231, 44000),
@@ -38,13 +39,33 @@ export class ClientsComponent implements OnInit
 			new Client("Аппарат Экзарта", 3212, 50345)
 		];
 
+		this.currentClient = this.clients[2];
+
+		this.currentClient.log = [
+			new LogEntry("Консультативный прием", "Массаж 45 минут", "Колесов А.В.", "22.01.2020", true),
+			new LogEntry("Детский консультативный прием", "Вибрационная терапия", "Калиниченко Д.С", "12.02.2019", true),
+			new LogEntry("Электростатический массаж", "Тейпирование", "Колесов А.В.", "11.05.2018", true),
+			new LogEntry("Коррекция ортопедическиз стелек", "Массаж 45 минут", "Калиниченко Д.С", "22.01.2020", true),
+			new LogEntry("Консультативный прием", "Вибрационная терапия", "Колесов А.В.", "12.02.2019", true),
+			new LogEntry("Детский консультативный прием", "Тейпирование", "Калиниченко Д.С", "11.05.2018", true),
+			new LogEntry("Консультативный прием", "Массаж 45 минут", "Колесов А.В.", "22.01.2020", true),
+			new LogEntry("Коррекция ортопедическиз стелек", "Вибрационная терапия", "Калиниченко Д.С", "12.02.2019", true),
+			new LogEntry("Лечебная физкультура", "Тейпирование", "Колесов А.В.", "11.05.2018", true),
+			new LogEntry("Лечебная физкультура", "Вибрационная терапия", "Калиниченко Д.С", "22.01.2020", true),
+			new LogEntry("Консультативный прием", "Массаж 45 минут", "Калиниченко Д.С", "12.02.2019", true),
+			new LogEntry("Детский консультативный прием", "Вибрационная терапия", "Калиниченко Д.С", "11.05.2018", true),
+			new LogEntry("Консультативный прием", "Тейпирование", "Калиниченко Д.С", "22.01.2020", true),
+			new LogEntry("Коррекция ортопедическиз стелек", "Вибрационная терапия", "Калиниченко Д.С", "12.02.2019", true),
+			new LogEntry("Консультативный прием", "Массаж 45 минут", "Колесов А.В.", "11.05.2018", true)
+		];
+
 		this.tabs = [
 			new Tab("contacts", "Контакты и транзакции"),
 			new Tab("reserve", "Бронирование"),
 			new Tab("log", "История обращений")
 		];
 
-		this.currentTab = 0;
+		this.currentTab = 2;
 
 		this.tabs[this.currentTab].Activate();
 	}
@@ -62,7 +83,11 @@ export class ClientsComponent implements OnInit
 
 			this.tabs[this.currentTab].Activate();
 		}
+
+		//TODO: ChangeSection() method call
 	}
+
+	//TODO: ChangeSection() method
 
 }
 
@@ -73,6 +98,9 @@ class Client
 	sale:boolean = false;
 	rfm:number;
 	ltv:number;
+
+	log = [];
+
 
 	ltvString:string;
 	
@@ -91,5 +119,35 @@ class Client
 		let output = nfObject.format(value);
 
 		return output; 
+	}
+}
+
+class LogEntry
+{
+	query:string;
+	service:string;
+	master:string;
+
+	date:string;
+
+	status:boolean;
+	statusString:string;
+
+	constructor(query:string, service:string, master:string, date:string, status:boolean)
+	{
+		this.query = query;
+		this.service = service;
+		this.master = master;
+		this.date = date;
+		this.status = status;
+
+		if(this.status)
+		{
+			this.statusString = "Закрыта";
+		} 
+		else 
+		{
+			this.statusString = "Открыта";
+		}
 	}
 }

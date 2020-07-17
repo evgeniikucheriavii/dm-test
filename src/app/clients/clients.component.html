@@ -44,7 +44,7 @@
 				<div class="list-row" *ngFor="let c of clients; let i = index">
 					<div class="list__num">{{i + 1}}</div>
 					<div class="list__name">{{c.fio}}</div>
-					<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox" checked="{{c.sale}}"></label> <label class="box-label box-label_radio"><input type="radio" class="box-label__input box-label__input_radio"></label></div>
+					<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox" checked="{{c.sale}}"></label></div>
 					<div class="list__util">{{c.rfm}}</div>
 					<div class="list__util">{{c.ltvString}}</div>
 				</div>
@@ -66,17 +66,29 @@
 		<div class="container">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
-					<div class="header-name">{{currentClient}}</div>
+					<div class="header-name">{{currentClient.fio}}</div>
 					<div class="tabs">
 						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}">{{t.name}}</button>
 					</div>
 				</section>
-				<section class="header__bottom header__bottom_right">
-					
-				</section>
 			</section>
-			<section class="right-section right-section__graph">
-				
+			<section class="right-section right-section__list">
+				<div class="list-row list-row_head">
+					<div class="list__num">#</div>
+					<div class="list__name">Обращение</div>
+					<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Услуга</div>
+					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Мастер</div>
+					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Дата</div>
+					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Статус</div>
+				</div>
+				<div class="list-row" *ngFor="let l of currentClient.log; let i = index">
+					<div class="list__num">{{i + 1}}</div>
+					<div class="list__name">{{l.query}}</div>
+					<div class="list__type">{{l.service}}</div>
+					<div class="list__util">{{l.master}}</div>
+					<div class="list__util">{{l.date}}</div>
+					<div class="list__util">{{l.statusString}}</div>
+				</div>
 			</section>
 		</div>
 	</section>
