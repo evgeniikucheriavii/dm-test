@@ -68,9 +68,7 @@
 				<section class="header__top header__top_right">
 					<div class="header-name">{{currentClient}}</div>
 					<div class="tabs">
-						<button class="tab tab_active" id="tab_load">Контакты и транзакции</button>
-						<button class="tab" id="tab_services">Бронирование</button>
-						<button class="tab" id="tab_log">История обращений</button>
+						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}">{{t.name}}</button>
 					</div>
 				</section>
 				<section class="header__bottom header__bottom_right">

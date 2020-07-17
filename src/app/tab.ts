@@ -1,5 +1,6 @@
 export class Tab 
 {
+	id:string;
 	name:string;
 	classes:string;
 	active:boolean = false;
@@ -7,8 +8,9 @@ export class Tab
 	static Classname:string = "tab";
 	static ClassnameActive:string = "tab_active";
 
-	constructor(name:string)
+	constructor(id:string, name:string)
 	{
+		this.id = id;
 		this.name = name;
 
 		this.classes = Tab.Classname;
