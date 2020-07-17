@@ -294,12 +294,12 @@ select::-ms-expand { display: none;}
 
 .tabs
 {
-	width: 303px;
 	height: 36px;
 	background: linear-gradient(180deg, #052435 0%, #093751 77.78%);
 	border: 1px solid #FFFFFF;
 	box-sizing: border-box;
 	border-radius: 38px;
+	padding: 1px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
@@ -307,8 +307,8 @@ select::-ms-expand { display: none;}
 
 .tab
 {
-	width: 99px;
 	height: 32px;
+	padding: 8px 19px;
 	background: transparent;
 	border: 0;
 	color: #fff;
@@ -323,6 +323,6 @@ select::-ms-expand { display: none;}
 	border: 1px solid #FFFFFF;
 	color: #093751;
 	cursor: default;
-	box-sizing: border-box;
+	
 	border-radius: 38px;
 }
