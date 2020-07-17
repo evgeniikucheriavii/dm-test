@@ -44,7 +44,7 @@
 				<div class="list-row" *ngFor="let c of clients; let i = index">
 					<div class="list__num">{{i + 1}}</div>
 					<div class="list__name">{{c.fio}}</div>
-					<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox" checked="{{c.sale}}"></label></div>
+					<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox"></label></div>
 					<div class="list__util">{{c.rfm}}</div>
 					<div class="list__util">{{c.ltvString}}</div>
 				</div>
@@ -76,7 +76,7 @@
 				<div class="list-row list-row_head">
 					<div class="list__num">#</div>
 					<div class="list__name">Обращение</div>
-					<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Услуга</div>
+					<div class="list__service"><img src="assets/images/Sort_inactive.png" class="sort-image"> Услуга</div>
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Мастер</div>
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Дата</div>
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Статус</div>
@@ -84,10 +84,14 @@
 				<div class="list-row" *ngFor="let l of currentClient.log; let i = index">
 					<div class="list__num">{{i + 1}}</div>
 					<div class="list__name">{{l.query}}</div>
-					<div class="list__type">{{l.service}}</div>
+					<div class="list__service">{{l.service}}</div>
 					<div class="list__util">{{l.master}}</div>
 					<div class="list__util">{{l.date}}</div>
-					<div class="list__util">{{l.statusString}}</div>
+					<div class="list__util">
+						<div *ngIf="l.status; then closedBlock else openBlock"></div>
+						<ng-template #closedBlock><span class="status-column status-column_closed"><img src="assets/images/Closed.svg" class="status-column__image"> {{l.statusString}}</span></ng-template>
+						<ng-template #openBlock><span class="status-column status-column_open"><img src="assets/images/Open.svg" class="status-column__image"> {{l.statusString}}</span></ng-template> 
+					</div>
 				</div>
 			</section>
 		</div>
