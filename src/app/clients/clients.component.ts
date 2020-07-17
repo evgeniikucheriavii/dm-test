@@ -22,20 +22,20 @@ export class ClientsComponent implements OnInit
 		this.currentClient = "Колесов А. В.";
 
 		this.clients = [
-			new Client("Иванов Иван", 0, 15),
-			new Client("Сидоров Сергей", 0, 10),
-			new Client("Колесов А. В.", 0, 12),
-			new Client("Петрова Светлана", 0, 5),
-			new Client("Баярова Алина", 0, 22),
-			new Client("Аппарат Экзарта", 0, 31),
-			new Client("Платформа Галилео", 0, 3),
-			new Client("Петрова Светлана", 0, 18),
-			new Client("Баярова Алина", 0, 22),
-			new Client("Петрова Светлана", 0, 33),
-			new Client("Аппарат Экзарта", 0, 15),
-			new Client("Платформа Галилео", 0, 10),
-			new Client("Петрова Светлана", 0, 12),
-			new Client("Аппарат Экзарта", 0, 5)
+			new Client("Иванов Иван", 1231, 44000),
+			new Client("Сидоров Сергей", 1231, 63000),
+			new Client("Колесов А. В.", 1131, 50000),
+			new Client("Петрова Светлана", 3212, 7200),
+			new Client("Баярова Алина", 2122, 22500),
+			new Client("Аппарат Экзарта", 2312, 50345),
+			new Client("Платформа Галилео", 1231, 63000),       
+			new Client("Петрова Светлана", 1231, 50000),
+			new Client("Баярова Алина", 1131, 7200),
+			new Client("Петрова Светлана", 3212, 22500),
+			new Client("Аппарат Экзарта", 2122, 50345),
+			new Client("Платформа Галилео", 2312, 7200),
+			new Client("Петрова Светлана", 1131, 22500),
+			new Client("Аппарат Экзарта", 3212, 50345)
 		];
 
 		this.tabs = [
@@ -74,10 +74,22 @@ class Client
 	rfm:number;
 	ltv:number;
 
+	ltvString:string;
+	
 	constructor(fio:string, rfm:number, ltv:number)
 	{
 		this.fio = fio;
 		this.rfm = rfm;
 		this.ltv = ltv;
+
+		this.ltvString = this.Format(ltv);
+	}
+
+	private Format(value:number)
+	{
+		let nfObject = new Intl.NumberFormat('ru-RU');
+		let output = nfObject.format(value);
+
+		return output; 
 	}
 }
