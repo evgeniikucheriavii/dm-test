@@ -102,16 +102,64 @@
 	padding: 0 28px 28px 28px;
 }
 
-.header__bottom_right
-{
-	padding: 0 43px 28px 43px;
-	justify-content: space-between;
-	box-sizing: border-box;
-	width: 100%;
-}
-
 /*Header end*/
 
+
+/*Contacts and transactions*/
+
+.right-section__transactions
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-content: flex-start;
+	flex: 9;
+	padding: 0 40px 100px 40px; 
+}
+
+
+.banner
+{
+	width: 1199px;
+	height: 187px;
+	box-sizing: border-box;
+	padding: 45px 60px;
+
+	background: url(../../assets/images/Contacts_banner.png) 100% 100% no-repeat;
+	background-color: #003584;
+	background-size: cover;
+
+	font-size: 18px;
+	line-height: 21px;
+	color: #fff;
+	
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: stretch;
+}
+
+.banner-item
+{
+	border-left: 1px solid rgba(184, 215, 255, 0.3); 
+	padding: 0 	40px;
+}
+
+.banner-item:first-child
+{
+	border-left: 1px solid transparent;
+}
+
+.banner-item__header
+{
+	font-weight: bold;
+	padding: 4.5px 0;
+	font-family: Roboto;
+	font-style: normal;
+}
+
+/*Contacts and transactions end*/
 
 /*List*/
 

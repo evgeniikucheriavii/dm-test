@@ -74,8 +74,29 @@
 			</section>
 
 			<!--Contacts-->
-			<section class="right-section right-section__list" *ngIf="currentTab == 0">
-				Contacts
+			<section class="right-section right-section__transactions" *ngIf="currentTab == 0">
+				<div class="banner">					
+					<div class="banner-item">
+						<div class="banner-item__header">RFM: </div>
+						<div class="banner-item__body">{{currentClient.rfm}}</div>
+					</div>
+					<div class="banner-item">
+						<div class="banner-item__header">LTV: </div>
+						<div class="banner-item__body">{{currentClient.rfm}}</div>
+					</div>
+					<div class="banner-item">
+						<div class="banner-item__header">Участник акции </div>
+						<div class="banner-item__body">{{currentClient.rfm}}</div>
+					</div>
+					<div class="banner-item">
+						<div class="banner-item__header">Контактная политика: </div>
+						<div class="banner-item__body">max 2 раза в месяц<br>если скидка больше 30%</div>
+					</div>
+					<div class="banner-item">
+						<div class="banner-item__header">Цикл CX: </div>
+						<div class="banner-item__body">готов к коммуникации<br> ⟶ продажа</div>
+					</div>
+				</div>
 			</section>
 
 			<!--Reserve-->
