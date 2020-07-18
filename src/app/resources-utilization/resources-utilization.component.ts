@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Tab } from '../tab';
 
 @Component({
   selector: 'app-resources-utilization',
@@ -8,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class ResourcesUtilizationComponent implements OnInit {
 
 	currentResource:string;
+	currentTab:number;
 
 	resources = [];
 	hours = [];
 	dates = [];
+	tabs = [];
 
 	constructor() { }
 
@@ -49,6 +52,31 @@ export class ResourcesUtilizationComponent implements OnInit {
 		];
 
 		this.hours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ];
+
+		this.currentTab = 0;
+
+		this.tabs = [
+			new Tab("contacts", "Загрузка"),
+			new Tab("reserve", "Услуги"),
+			new Tab("log", "Лог")
+		];
+
+		this.tabs[this.currentTab].Activate();
+	}
+
+	public SwitchTab(index:number)
+	{
+		if(index <= this.tabs.length)
+		{
+			this.currentTab = index;
+
+			for(let i = 0; i < this.tabs.length; i++)
+			{
+				this.tabs[i].Deactivate();
+			}
+
+			this.tabs[this.currentTab].Activate();
+		}
 	}
 
 }

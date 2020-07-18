@@ -66,12 +66,12 @@
 				<section class="header__top header__top_right">
 					<div class="header-name">{{currentResource}}</div>
 					<div class="tabs">
-						<button class="tab tab_active" id="tab_load">Загрузка</button>
-						<button class="tab" id="tab_services">Услуги</button>
-						<button class="tab" id="tab_log">Лог</button>
+						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
 					</div>
 				</section>
-				<section class="header__bottom header__bottom_right">
+
+				<!--Load-->
+				<section class="header__bottom header__bottom_right" *ngIf="currentTab == 0">
 					<label class="filter-label">
 						<span class="graph-filter">Тип</span>
 						<label class="select-label select-label_graph">
@@ -110,8 +110,20 @@
 						</label>
 					</label>
 				</section>
+
+				<!--Service-->
+				<section class="header__bottom header__bottom_right" *ngIf="currentTab == 1">
+					
+				</section>
+
+				<!--Log-->
+				<section class="header__bottom header__bottom_right" *ngIf="currentTab == 2">
+					
+				</section>
 			</section>
-			<section class="right-section right-section__graph">
+
+			<!--Load-->
+			<section class="right-section right-section__graph" *ngIf="currentTab == 0">
 				<div class="graph-row graph-row_head">
 					<div class="graph-column"><button class="arrow-button arrow-button_left"></button></div>
 					<div class="graph-column graph-column_head" *ngFor="let d of dates">
@@ -135,6 +147,16 @@
 					<div class="graph-column"></div>
 					<div class="graph-column"></div>
 				</div>
+			</section>
+
+			<!--Services-->
+			<section class="right-section right-section__graph" *ngIf="currentTab == 1">
+				Services
+			</section>
+
+			<!--Log-->
+			<section class="right-section right-section__graph" *ngIf="currentTab == 2">
+				Log
 			</section>
 		</div>
 	</section>
