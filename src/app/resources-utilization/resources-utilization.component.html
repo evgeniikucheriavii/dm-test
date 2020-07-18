@@ -113,7 +113,14 @@
 
 				<!--Service-->
 				<section class="header__bottom header__bottom_right" *ngIf="currentTab == 1">
-					
+					<label class="header-search-label">
+						<span class="header-search-label__title">Поиск  </span>
+						<label class="header-search-label__element search-label">
+							<input type="search" class="search-input" name="search" id="search_input">
+							<button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
+						</label>
+					</label>
+					<button class="button header-bottom__button">Добавить услугу</button>
 				</section>
 
 				<!--Log-->

@@ -110,6 +110,33 @@
 	width: 100%;
 }
 
+.header-search-label
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.header-search-label__title
+{
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 14px;
+	line-height: 16px;
+	margin-right: 10px;
+}
+
+.header-search-label__element
+{
+	width: 600px;
+}
+
+.header-bottom__button
+{
+	padding-left: 25px !important;
+	padding-right: 25px !important;
+
+}
+
 /*Header end*/
 
 
