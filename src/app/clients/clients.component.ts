@@ -71,6 +71,10 @@ export class ClientsComponent implements OnInit
 				new TransactionLog("Массаж 45 минут", "Колесов А. В.", 1500, "20.03.2020"),
 				new TransactionLog("Вибрационная терапия", "Колесов А. В.", 1500, "20.03.2020"),
 				new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020"),
+				new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020")
 		];
 
 		this.tabs = [

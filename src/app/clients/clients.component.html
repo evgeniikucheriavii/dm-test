@@ -102,9 +102,9 @@
 					</div>
 				</div>
 
-				<section class="left-section left-section__list">
+				<section class="left-section left-section__list contacts-list">
 					<div class="list__title">Контакты</div>
-					<div class="list-row list-row_head">
+					<div class="list-row list-row_head contacts-list__head">
 						<div class="list__num">#</div>
 						<div class="list__name">Канал</div>
 						<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Номер \ Ник</div>
@@ -120,21 +120,23 @@
 					</div>
 				</section>
 
-				<section class="left-section left-section__list">
+				<section class="left-section left-section__list transactions-list">
 					<div class="list__title">Транзакции</div>
-					<div class="list-row list-row_head">
+					<div class="list-row list-row_head transactions-list__head">
 						<div class="list__num">#</div>
 						<div class="list__name">Услуга</div>
 						<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Мастер</div>
 						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Стоимость</div>
 						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Дата</div>
 					</div>
-					<div class="list-row" *ngFor="let t of currentClient.transactions; let i = index">
-						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{t.service}}</div>
-						<div class="list__type">{{t.master}}</div>
-						<div class="list__util">{{t.sum}}</div>
-						<div class="list__util">{{t.date}}</div>
+					<div class="transactions-list__body">
+						<div class="list-row" *ngFor="let t of currentClient.transactions; let i = index">
+							<div class="list__num">{{i + 1}}</div>
+							<div class="list__name">{{t.service}}</div>
+							<div class="list__type">{{t.master}}</div>
+							<div class="list__util">{{t.sum}}</div>
+							<div class="list__util">{{t.date}}</div>
+						</div>
 					</div>
 				</section>
 				

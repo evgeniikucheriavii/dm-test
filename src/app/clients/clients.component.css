@@ -180,8 +180,29 @@
 	padding: 8px 0;
 }
 
+.contacts-list
+{
+	flex: 1 !important;
+	margin-bottom: 20px;
+}
 
+.contacts-list__head, .transactions-list__head
+{
+	border-bottom: 1px solid #3D71BF !important;
+}
 
+.transactions-list
+{
+	flex: 4 !important;
+	max-height: 300px;
+	margin-bottom: 130px !important;
+	overflow: hidden;
+}
+
+.transactions-list__body
+{
+	overflow: auto;
+}
 /*Contacts and transactions end*/
 
 /*List*/
