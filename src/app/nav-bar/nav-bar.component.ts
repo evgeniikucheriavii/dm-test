@@ -20,6 +20,7 @@ export class NavBarComponent implements OnInit
 		[
 			new NavLink("Утилизация ресурсов", "/utilization"),
 			new NavLink("Динамическое ценообразование", "/prices"),
+			new NavLink("Рекомендательный движок", "/recomendations"),
 			new NavLink("Расписания", "/schedules"),
 			new NavLink("Клиенты", "/clients"),
 			new NavLink("Справочник", "/help")
