@@ -53,7 +53,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 		this.hours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ];
 
-		this.currentTab = 0;
+		this.currentTab = 1;
 
 		this.tabs = [
 			new Tab("contacts", "Загрузка"),
@@ -114,6 +114,32 @@ class Resource
 		{
 			this.color = "bgreen";
 		}
+	}
+}
+
+class ServiceLog
+{
+	service:string;
+	duration:string;
+	sum:number;
+
+	sumFormat:string;
+
+	constructor(service:string, duration:string, sum:number)
+	{
+		this.service = service;
+		this.sum = sum;
+		this.duration = duration;
+
+		this.sumFormat = this.Format(this.sum);
+	}
+
+	private Format(value:number)
+	{
+		let nfObject = new Intl.NumberFormat('ru-RU');
+		let output = nfObject.format(value);
+
+		return output; 
 	}
 }
 
