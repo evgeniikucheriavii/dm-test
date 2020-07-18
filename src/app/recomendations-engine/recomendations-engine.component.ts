@@ -11,6 +11,9 @@ export class RecomendationsEngineComponent implements OnInit
 	tabs = [];
 	currentTab:number;
 
+	rules = [];
+	currentRule:Rule;
+
 	constructor() { }
 
 	ngOnInit(): void 
@@ -23,6 +26,14 @@ export class RecomendationsEngineComponent implements OnInit
 		this.currentTab = 0;
 
 		this.tabs[this.currentTab].Activate();
+
+		this.rules = [
+			new Rule("За 2 дня до утилизации", 30),
+			new Rule("За 1 день до утилизации", 40),
+			new Rule("В день утилизации", 50)
+		];
+
+		this.currentRule = this.rules[2];
 	}
 
 	public SwitchTab(index:number)
@@ -38,5 +49,18 @@ export class RecomendationsEngineComponent implements OnInit
 
 			this.tabs[this.currentTab].Activate();
 		}
+	}
+}
+
+
+class Rule
+{
+	title:string;
+	discount:number;
+
+	constructor(title:string, discount:number)
+	{
+		this.title = title;
+		this.discount = discount;
 	}
 }

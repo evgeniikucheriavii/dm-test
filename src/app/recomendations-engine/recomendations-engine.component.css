@@ -35,7 +35,7 @@
 	margin-bottom: 30px;
 }
 
-.top_rules, .bottom_rules
+.top_rules
 {
 	margin-left: 230px;
 }
@@ -51,12 +51,18 @@
 	justify-content: stretch;
 }
 
-.bottom-section_left
+.bottom_rules
+{
+	margin-left: 230px;
+	margin-right: 230px;
+}
+
+.content-bottom__left
 {
 	flex: 1;	
 }
 
-.bottom-section_right
+.content-bottom__right
 {
 	flex: 2;
 
@@ -64,8 +70,131 @@
 	border: 2px solid #F1F6FD;
 	box-sizing: border-box;
 	box-shadow: 0px 2px 4px rgba(4, 41, 57, 0.25);
+
+}
+
+.right_rules
+{
+	margin-left: 70px;
 }
 
 /*Bottom end*/
 
 /*List*/
+
+.left-section__list
+{
+	display: flex;
+	flex-direction: column;
+	align-content: flex-start;
+	flex: 4;
+}
+
+.list-row
+{
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	text-align: left;
+	padding: 9px 28px;
+	font-size: 14px;
+	line-height: 16px;
+	border-bottom: 1px solid rgba(61, 113, 191, 0.1);
+}
+
+.list-row_active, .list-row:hover
+{
+	color: #4A5DC2;
+	background: #F1F6FD;
+	box-shadow: 0px 1px 1px rgba(8, 29, 61, 0.23);
+}
+
+.list-row:last-child
+{
+	border-bottom: 1px solid transparent;
+}
+
+
+.list-row_head, .list-row_head:hover 
+{
+	font-weight: 500;
+	color: #042635;
+	background: transparent;
+	box-shadow: none;
+	border-bottom: 1px solid transparent;
+}
+
+.list__num
+{
+	flex: 1;
+}
+
+.list__name
+{
+	flex: 4;
+}
+
+.list__type, .list__util
+{
+	flex: 2;
+}
+
+.list__util 
+{
+	text-align: center;
+}
+
+.sort-image
+{
+	width: 9px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.resources-row
+{
+	padding: 9px 2px;
+}
+
+.resources-list
+{
+	flex: 4 !important;
+	max-height: 550px;
+	margin-bottom: 130px !important;
+	overflow: hidden;
+}
+
+.resources-list__head
+{
+	border-bottom: 1px solid rgba(61, 113, 191, 0.3) !important;
+}
+
+.resources-list__body
+{
+	overflow: auto;
+}
+
+.resources-list__body::-webkit-scrollbar 
+{
+	width: 6px;
+}
+
+/* Track */
+.resources-list__body::-webkit-scrollbar-track 
+{
+	background: linear-gradient(180deg, rgba(0, 64, 160, 0.1) 0%, rgba(26, 82, 165, 0.1) 77.78%);
+	opacity: 0.1;
+	border-radius: 28px;
+	width: 6px;
+}
+
+/* Handle */
+.resources-list__body::-webkit-scrollbar-thumb
+{
+	background: #093751;
+	border-radius: 28px;
+	width: 6px;
+	height: 39px;
+}
+
+/*List end*/
