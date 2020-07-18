@@ -116,7 +116,17 @@
 						<div class="list__name">{{c.typeString}}</div>
 						<div class="list__type">{{c.value}}</div>
 						<div class="list__util">{{c.lastdate}}</div>
-						<div class="list__util">Action</div>
+						<div class="list__util">
+							<div *ngIf="c.type == 0; then callBlock else mailBlock"></div>
+						<ng-template #callBlock>
+							<img src="assets/images/Phone.svg" class="status-column__image">
+							<img src="assets/images/Dots.svg" class="status-column__dots">
+						</ng-template>
+						<ng-template #mailBlock>
+							<img src="assets/images/Mail_blue.svg" class="status-column__image">
+							<img src="assets/images/Dots.svg" class="status-column__dots">
+						</ng-template> 
+						</div>
 					</div>
 				</section>
 

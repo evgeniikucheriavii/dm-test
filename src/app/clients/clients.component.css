@@ -227,6 +227,12 @@
 	height: 39px;
 }
 
+.status-column__dots
+{
+	height: 16px;
+	margin-left: 25px;
+}
+
 /*Contacts and transactions end*/
 
 /*List*/
