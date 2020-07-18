@@ -22,13 +22,13 @@
 					<div class="list-row list-row_head  rules-list__head">
 						<div class="list__num">#</div>
 						<div class="list__name">Название раздела</div>
-						<div class="list__type">Скидка</div>
+						<div class="list__type">Скидка в %</div>
 					</div>
 					<div class="rules-list__body">
 						<div class="list-row" *ngFor="let r of rules; let i = index">
 							<div class="list__num">{{i + 1}}</div>
 							<div class="list__name">{{r.title}}</div>
-							<div class="list__type">{{r.discount}}%</div>
+							<div class="list__type">{{r.discount}}</div>
 						</div>
 					</div>
 				</section>
@@ -42,7 +42,21 @@
 			</section>
 
 			<section class="content-bottom__right right_rules">
-				right
+				
+				<section class="left-section left-section__list resources-list" style="height: 500px;">
+					<div class="list-row list-row_head  rules-list__head">
+						<div class="list__name">Ресурсы и % загрузки от целевых значений</div>
+						<div class="list__type">Скидка %</div>
+					</div>
+					<div class="rules-list__body">
+						<div class="list-row" *ngFor="let r of resources; let i = index">
+							<div class="list__num">{{i + 1}}.</div>
+							<div class="list__name">{{r.title}}</div>
+							<div class="list__type">{{r.discount}}</div>
+						</div>
+					</div>
+				</section>
+
 			</section>
 
 		</section>

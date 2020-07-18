@@ -14,6 +14,8 @@ export class RecomendationsEngineComponent implements OnInit
 	rules = [];
 	currentRule:Rule;
 
+	resources = [];
+
 	constructor() { }
 
 	ngOnInit(): void 
@@ -34,6 +36,17 @@ export class RecomendationsEngineComponent implements OnInit
 		];
 
 		this.currentRule = this.rules[2];
+
+		this.resources = [
+			new Rule("Если ресурс >60% до цели ", 0),
+			new Rule("Если ресурс 60<40% до цели ", 0),
+			new Rule("Если ресурс 40<20% до цели ", 0),
+			new Rule("Если ресурс 20<0% до цели ", 0),
+			new Rule("Если ресурс 0<20% сверху цели ", 0),
+			new Rule("Если ресурс 20%<40% сверху цели ", 0),
+			new Rule("Если ресурс 40%<60% сверху цели", 0),
+			new Rule("Если ресурс 60% сверху цели", 0)
+		];
 	}
 
 	public SwitchTab(index:number)
