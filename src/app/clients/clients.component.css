@@ -203,6 +203,30 @@
 {
 	overflow: auto;
 }
+
+.transactions-list__body::-webkit-scrollbar 
+{
+	width: 6px;
+}
+
+/* Track */
+.transactions-list__body::-webkit-scrollbar-track 
+{
+	background: linear-gradient(180deg, rgba(0, 64, 160, 0.1) 0%, rgba(26, 82, 165, 0.1) 77.78%);
+	opacity: 0.1;
+	border-radius: 28px;
+	width: 6px;
+}
+
+/* Handle */
+.transactions-list__body::-webkit-scrollbar-thumb
+{
+	background: #093751;
+	border-radius: 28px;
+	width: 6px;
+	height: 39px;
+}
+
 /*Contacts and transactions end*/
 
 /*List*/
