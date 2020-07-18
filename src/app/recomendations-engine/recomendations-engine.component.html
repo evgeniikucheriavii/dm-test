@@ -1,1 +1,34 @@
-<p>recomendations-engine works!</p>
+<div class="container">
+	<section class="content-section">
+		<section class="content-section__top">
+			<!--utilization-rules-->
+			<div *ngIf="currentTab == 0" class="top_rules">Настройка правила: в день утилизации</div>
+
+			<!--actions-->
+			<div *ngIf="currentTab == 1" class="top_actions">Action center</div>
+
+			<div class="tabs">
+				<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
+			</div>
+
+		</section>
+
+		<!--utilization-rules-->
+		<section class="content-section__bottom bottom_rules" *ngIf="currentTab == 0">
+			
+			<section class="bottom-section bottom-section_left">
+				left
+			</section>
+
+			<section class="bottom-section bottom-section_right">
+				right
+			</section>
+
+		</section>
+
+		<!--action-->
+		<section class="content-section__bottom bottom_actions" *ngIf="currentTab == 1">
+			action center
+		</section>
+	</section>
+</div>
