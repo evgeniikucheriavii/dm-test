@@ -2,7 +2,7 @@
 	<section class="content-section">
 		<section class="content-section__top">
 			<!--utilization-rules-->
-			<div *ngIf="currentTab == 0" class="top_rules">Настройка правила: {{currentRule.title}}</div>
+			<div *ngIf="currentTab == 0" class="top_rules">Настройка правила: <span class="rule-name">{{currentRule.title}}</span></div>
 
 			<!--actions-->
 			<div *ngIf="currentTab == 1" class="top_actions">Action center</div>

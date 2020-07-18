@@ -38,6 +38,16 @@
 .top_rules
 {
 	margin-left: 230px;
+	font-size: 18px;
+	line-height: 21px;
+	color: #042635;
+}
+
+.rule-name
+{
+	color: #4420E8;
+	text-transform: lowercase;
+	font-weight: bold;
 }
 
 /*Top end*/
