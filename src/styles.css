@@ -47,19 +47,34 @@ textarea, select, input, button { outline: none; }
 .button
 {
 	background: #3D71BF;
+	border: 1px solid #3D71BF; 
 	border: 0;
 	border-radius: 4px;
+	box-sizing: border-box;
 	font-size: 12px;
 	line-height: 14px;
 	color: #fff;
 	padding: 12px;
 	margin: 5px;
 	height: 36px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.button_hollow
+{
+	border: 1px solid #3D71BF; 
+	background: #fff;
+	color: #000;
+	padding: 11px;
 }
 
 .button:hover
 {
 	background: #0C62E3;
+	border: 1px solid #0C62E3; 
+	color: #fff;
+	padding: 11px;
 }
 
 .arrow-button
