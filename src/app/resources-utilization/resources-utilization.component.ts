@@ -8,7 +8,7 @@ import { Tab } from '../tab';
 })
 export class ResourcesUtilizationComponent implements OnInit {
 
-	currentResource:string;
+	currentResource:Resource;
 	currentTab:number;
 
 	resources = [];
@@ -20,8 +20,6 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 	ngOnInit(): void 
 	{
-		this.currentResource = "Колесов А. В.";
-
 		this.resources =
 		[
 			new Resource("Иванов Иван", "Трудовой", 15),
@@ -40,6 +38,8 @@ export class ResourcesUtilizationComponent implements OnInit {
 			new Resource("Аппарат Экзарта", "Оборудование", 5)
 		];
 
+		this.currentResource = this.resources[2];
+
 		this.dates =
 		[
 			new DateGraph("12.06", 15),
@@ -52,6 +52,33 @@ export class ResourcesUtilizationComponent implements OnInit {
 		];
 
 		this.hours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ];
+
+		this.currentResource.services = [
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500)
+		];
+		
+
 
 		this.currentTab = 1;
 
@@ -87,6 +114,8 @@ class Resource
 	type:string;
 	util:number;
 	color:string;
+
+	services = [];
 
 	constructor(name:string, type:string, util:number)
 	{

@@ -64,7 +64,7 @@
 		<div class="container">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
-					<div class="header-name">{{currentResource}}</div>
+					<div class="header-name">{{currentResource.name}}</div>
 					<div class="tabs">
 						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
 					</div>
@@ -158,7 +158,22 @@
 
 			<!--Services-->
 			<section class="right-section right-section__graph" *ngIf="currentTab == 1">
-				Services
+				<section class="left-section left-section__list resources-list">
+					<div class="list-row list-row_head resources-row resources-list__head">
+						<div class="list__num">#</div>
+						<div class="list__name">Услуга</div>
+						<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Длительность</div>
+						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Стоимость</div>
+					</div>
+					<div class="resources-list__body">
+						<div class="list-row resources-row" *ngFor="let s of currentResource.services; let i = index">
+							<div class="list__num">{{i + 1}}</div>
+							<div class="list__name">{{s.service}}</div>
+							<div class="list__type">{{s.duration}}</div>
+							<div class="list__util">{{s.sumFormat}}</div>
+						</div>
+					</div>
+				</section>
 			</section>
 
 			<!--Log-->

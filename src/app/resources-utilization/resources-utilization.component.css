@@ -211,6 +211,52 @@
 	vertical-align: middle;
 }
 
+.resources-row
+{
+	padding: 9px 2px;
+}
+
+.resources-list
+{
+	flex: 4 !important;
+	max-height: 550px;
+	margin-bottom: 130px !important;
+	overflow: hidden;
+}
+
+.resources-list__head
+{
+	border-bottom: 1px solid rgba(61, 113, 191, 0.3) !important;
+}
+
+.resources-list__body
+{
+	overflow: auto;
+}
+
+.resources-list__body::-webkit-scrollbar 
+{
+	width: 6px;
+}
+
+/* Track */
+.resources-list__body::-webkit-scrollbar-track 
+{
+	background: linear-gradient(180deg, rgba(0, 64, 160, 0.1) 0%, rgba(26, 82, 165, 0.1) 77.78%);
+	opacity: 0.1;
+	border-radius: 28px;
+	width: 6px;
+}
+
+/* Handle */
+.resources-list__body::-webkit-scrollbar-thumb
+{
+	background: #093751;
+	border-radius: 28px;
+	width: 6px;
+	height: 39px;
+}
+
 /*List end*/
 
 /*Pages*/
