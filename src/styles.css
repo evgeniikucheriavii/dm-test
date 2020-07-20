@@ -372,7 +372,13 @@ select::-ms-expand { display: none;}
 	border-radius: 50%;
 }
 
-.box-label:hover, .box-label__input:checked
+.box-label:hover
+{
+	box-shadow: 0px 1px 4px rgba(9, 47, 64, 0.2);
+	border: 1px solid #0040A0;
+}
+
+.box-label__input:checked
 { 
 	background: linear-gradient(180deg, #0040A0 0%, #1A52A5 77.78%);
 	box-shadow: 0px 1px 4px rgba(9, 47, 64, 0.2);
@@ -396,7 +402,7 @@ select::-ms-expand { display: none;}
 	margin: 0;
 }
 
-.box-label__input:hover:after, .box-label__input:checked::after
+.box-label__input:checked::after
 {
 	content: url(assets/images/Mark.svg);
 	position:relative;
@@ -404,12 +410,6 @@ select::-ms-expand { display: none;}
 	left: 3px;
 	width: 7.5px;
 	height: 5px;
-}
-
-.box-label__input:hover:after
-{
-	top: 0px;
-	left: 4px;
 }
 
 /*Checkboxes and radio end*/
