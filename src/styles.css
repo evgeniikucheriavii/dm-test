@@ -32,7 +32,7 @@ textarea, select, input, button { outline: none; }
 {
 	box-shadow: 0px 2px 4px rgba(4, 41, 57, 0.25);
 	background: linear-gradient(180deg, #DAE5F7 0%, rgba(233, 238, 242, 0) 18%);
-	margin: 0 40px 100px 40px;
+	margin: 0 40px 20px 40px;
 	border-radius: 4px;
 	overflow: hidden;
 	flex: 11;
