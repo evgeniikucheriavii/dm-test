@@ -14,10 +14,33 @@
 					</label>
 				</label>
 
-				<div class="priority">
-					<div class="priority__header">Приоритизация</div>
+				<div class="priority" id="priority">
+					<div class="priority__header" (click)="PriorityClick();">
+						<div>Приоритезация</div>
+						<img src="assets/images/Up.png" class="priority__arrow">
+					</div>
 					<div class="priority__body">
-						
+						<div class="priority__block">
+							<div class="priority__sub-header">По услугам</div>
+							<label class="priority__label"><label class="box-label box-label_radio">
+								<input type="radio" class="box-label__input box-label__input_radio" name="service" value="expensive">
+							</label> Дорогую </label>
+							<label class="priority__label"><label class="box-label box-label_radio">
+								<input type="radio" class="box-label__input box-label__input_radio" name="service" value="potential">
+							</label> С большим клиентским потенциалом </label>
+						</div>
+
+						<hr class="hr">
+
+						<div class="priority__block">
+							<div class="priority__sub-header">По специалистам</div>
+							<label class="priority__label"><label class="box-label box-label_radio">
+								<input type="radio" class="box-label__input box-label__input_radio" name="staff" value="ctr">
+							</label> С кем выше конверсия </label>
+							<label class="priority__label"><label class="box-label box-label_radio">
+								<input type="radio" class="box-label__input box-label__input_radio" name="staff" value="load">
+							</label> По принципу выравнивания загрузки </label>
+						</div>
 					</div>
 				</div>
 

@@ -20,6 +20,12 @@ body, html
 
 textarea, select, input, button { outline: none; }
 
+.hr
+{
+	opacity: 0.3;
+	border: 1px solid #B9CCE8;
+}
+
 .wrapper
 {
 	width: 100%;

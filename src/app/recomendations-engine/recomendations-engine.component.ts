@@ -63,6 +63,20 @@ export class RecomendationsEngineComponent implements OnInit
 			this.tabs[this.currentTab].Activate();
 		}
 	}
+
+	public PriorityClick()
+	{
+		let priority = document.getElementById("priority");
+
+		if(priority.className == "priority")
+		{
+			priority.className = "priority priority_active";
+		}
+		else
+		{
+			priority.className = "priority";
+		}
+	}
 }
 
 
