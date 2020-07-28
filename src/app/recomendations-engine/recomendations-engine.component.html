@@ -5,7 +5,24 @@
 			<div *ngIf="currentTab == 0" class="top_rules">Настройка правила: <span class="rule-name">{{currentRule.title}}</span></div>
 
 			<!--actions-->
-			<div *ngIf="currentTab == 1" class="top_actions">Action center</div>
+			<div *ngIf="currentTab == 1" class="top_actions">
+				<label class="header-search-label">
+					<span class="header-search-label__title">Поиск  </span>
+					<label class="header-search-label__element search-label">
+						<input type="search" class="search-input" name="search" id="search_input">
+						<button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
+					</label>
+				</label>
+
+				<div class="priority">
+					<div class="priority__header">Приоритизация</div>
+					<div class="priority__body">
+						
+					</div>
+				</div>
+
+				<button class="button header-bottom__button"> <img src="assets/images/Plus.svg" class="button__image"> Добавить слот</button>
+			</div>
 
 			<div class="tabs">
 				<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
@@ -63,6 +80,9 @@
 
 		<!--action-->
 		<section class="content-section__bottom bottom_actions" *ngIf="currentTab == 1">
+
+
+
 			action center
 		</section>
 	</section>

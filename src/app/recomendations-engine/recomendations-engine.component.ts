@@ -25,7 +25,7 @@ export class RecomendationsEngineComponent implements OnInit
 			new Tab("actions", "Action Center")
 		];
 
-		this.currentTab = 0;
+		this.currentTab = 1;
 
 		this.tabs[this.currentTab].Activate();
 
