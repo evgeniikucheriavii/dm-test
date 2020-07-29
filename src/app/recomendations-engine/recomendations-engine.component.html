@@ -109,19 +109,19 @@
 					<div class="list-row list-row_head  rules-list__head">
 						<div class="list__num">#</div>
 						<div class="list__type">Ресурс</div>
-						<div class="list__type">Услуга</div>
-						<div class="list__type">Временный интервал</div>
-						<div class="list__type">Оценили сообщения</div>
-						<div class="list__type">Статус</div>
+						<div class="list__service">Услуга</div>
+						<div class="list__service">Временный интервал</div>
+						<div class="list__util">Оценили сообщения</div>
+						<div class="list__util">Статус</div>
 					</div>
 					<div class="rules-list__body">
 						<div class="list-row" *ngFor="let r of data; let i = index">
 							<div class="list__num">{{i + 1}}</div>
 							<div class="list__type">{{r.name}}</div>
-							<div class="list__type">{{r.service}}</div>
-							<div class="list__type">{{r.interval}}</div>
-							<div class="list__type">{{r.vote}}</div>
-							<div class="list__type">
+							<div class="list__service">{{r.service}}</div>
+							<div class="list__service">{{r.interval}}</div>
+							<div class="list__util">{{r.vote}}</div>
+							<div class="list__util">
 								<div *ngIf="r.status == 0" class="status_closed">
 									<img src="assets/images/Lock.svg" class="status-img">
 									закрыто
@@ -153,8 +153,8 @@
 							<div><b>Ресурс:</b> Колесов А. В.</div>
 							<div><b>Цена:</b> 750 р (скидка 37%)</div>
 							<div><b>Дата:</b> 12.06.2020</div>
-							<div><b>Назначена:</b></div>
-							<div><b>Время:</b></div>
+							<div><b>Назначена:</b> 10.06.2020 в 16:21</div>
+							<div><b>Время:</b> 16:30 - 17:30</div>
 							<div><b>Канал:</b> SMS</div>
 						</div>
 

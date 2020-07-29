@@ -509,14 +509,14 @@ select::-ms-expand { display: none;}
 	flex: 4;
 }
 
+.list__service
+{
+	flex: 3;
+}
+
 .list__type, .list__util
 {
 	flex: 2;
-}
-
-.list__util 
-{
-	text-align: center;
 }
 
 
