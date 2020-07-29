@@ -237,9 +237,10 @@
 .actions-bottom__right-top
 {
 	flex: 1;
-	background: linear-gradient(180deg, #DAE5F7 0%, rgba(233, 238, 242, 0) 100%);
+	background: linear-gradient(180deg, #DAE5F7 0%, rgba(233, 238, 242, 0) 70%);
 	margin: -40px;
 	padding: 40px;
+	border-radius: 4px 4px 0 0;
 }
 
 .actions-bottom__right-bottom
