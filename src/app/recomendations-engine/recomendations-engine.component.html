@@ -104,9 +104,31 @@
 		<!--action-->
 		<section class="content-section__bottom bottom_actions" *ngIf="currentTab == 1">
 
+			<section class="actions-bottom__left">
+				<section class="left-section left-section__list resources-list" style="height: 500px;">
+					<div class="list-row list-row_head  rules-list__head">
+						<div class="list__num">#</div>
+						<div class="list__name">Ресурс</div>
+						<div class="list__type">Временный интервал</div>
+						<div class="list__type">Оценили сообщения</div>
+						<div class="list__type">Статус</div>
+					</div>
+					<div class="rules-list__body">
+						<div class="list-row" *ngFor="let r of resources; let i = index">
+							<div class="list__num">{{i + 1}}</div>
+							<div class="list__name">Иванов Иван</div>
+							<div class="list__type">13.06.2020 13:00 - 14:00</div>
+							<div class="list__type">0</div>
+							<div class="list__type">Закрыто</div>
+						</div>
+					</div>
+				</section>
+			</section>
+			
 
+			<section class="actions-bottom__right">
 
-			action center
+			</section>
 		</section>
 	</section>
 </div>

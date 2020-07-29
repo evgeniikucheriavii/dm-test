@@ -179,7 +179,7 @@
 {
 	display: flex;
 	flex-direction: row;
-	justify-content: stretch;
+	justify-content: stretch; 
 }
 
 .bottom_rules
@@ -196,7 +196,6 @@
 .content-bottom__right
 {
 	flex: 2;
-
 	background: #FFFFFF;
 	border: 2px solid #F1F6FD;
 	box-sizing: border-box;
@@ -220,6 +219,19 @@
 {
 	margin-top: 20px;
 }
+
+
+.actions-bottom__left
+{
+	flex: 3;
+}
+
+.actions-bottom__right
+{
+	flex: 2;
+	background: linear-gradient(180deg, #DAE5F7 0%, rgba(233, 238, 242, 0) 30%);
+}
+
 
 /*Bottom end*/
 
