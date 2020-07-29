@@ -35,6 +35,14 @@ textarea, select, input, button { outline: none; }
 	background: transparent;
 }
 
+.line
+{
+	margin: 12px 0;
+	font-size: 14px;
+	line-height: 16px;
+	color: #153649;
+}
+
 .hr
 {
 	opacity: 0.3;
