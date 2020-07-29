@@ -20,6 +20,21 @@ body, html
 
 textarea, select, input, button { outline: none; }
 
+.textarea
+{
+	border: 2px solid #3D71BF;
+	box-sizing: border-box;
+	border-radius: 4px;
+	width: 427px;
+	height: 153px;
+	margin: 5px;
+	font-size: 14px;
+	line-height: 16px;
+	color: #7C7D7E;
+	padding: 20px;
+	background: transparent;
+}
+
 .hr
 {
 	opacity: 0.3;
