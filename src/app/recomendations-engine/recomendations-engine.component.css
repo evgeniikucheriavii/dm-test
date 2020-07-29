@@ -193,6 +193,40 @@
 	flex: 1;	
 }
 
+.status-img
+{
+	width: 8px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.header-status-img
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin: 5px 10px 5px 15px;
+}
+
+.status_active
+{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+
+	color: #5AB413;
+}
+
+.status_closed
+{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+}
+
 .content-bottom__right
 {
 	flex: 2;

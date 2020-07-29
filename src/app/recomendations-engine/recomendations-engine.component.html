@@ -105,21 +105,33 @@
 		<section class="content-section__bottom bottom_actions" *ngIf="currentTab == 1">
 
 			<section class="actions-bottom__left">
-				<section class="left-section left-section__list resources-list" style="height: 500px;">
+				<section class="left-section left-section__list resources-list" style="height: 745px;">
 					<div class="list-row list-row_head  rules-list__head">
 						<div class="list__num">#</div>
-						<div class="list__name">Ресурс</div>
+						<div class="list__type">Ресурс</div>
+						<div class="list__type">Услуга</div>
 						<div class="list__type">Временный интервал</div>
 						<div class="list__type">Оценили сообщения</div>
 						<div class="list__type">Статус</div>
 					</div>
 					<div class="rules-list__body">
-						<div class="list-row" *ngFor="let r of resources; let i = index">
+						<div class="list-row" *ngFor="let r of data; let i = index">
 							<div class="list__num">{{i + 1}}</div>
-							<div class="list__name">Иванов Иван</div>
-							<div class="list__type">13.06.2020 13:00 - 14:00</div>
-							<div class="list__type">0</div>
-							<div class="list__type">Закрыто</div>
+							<div class="list__type">{{r.name}}</div>
+							<div class="list__type">{{r.service}}</div>
+							<div class="list__type">{{r.interval}}</div>
+							<div class="list__type">{{r.vote}}</div>
+							<div class="list__type">
+								<div *ngIf="r.status == 0" class="status_closed">
+									<img src="assets/images/Lock.svg" class="status-img">
+									закрыто
+								</div>
+
+								<div *ngIf="r.status == 1" class="status_active">
+									<img src="assets/images/Active.svg" class="status-img">
+									активно
+								</div>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -132,7 +144,7 @@
 
 					<div class="right-top__header">
 						<div>Предложения</div>
-						<div><b>Статус:</b> Закрыто</div>
+						<div><b>Статус</b> <img src="assets/images/Lock.svg" class="header-status-img"> Закрыто</div>
 					</div>
 
 					<div class="right-top__body">
@@ -164,12 +176,27 @@
 							<div class="list__name">Клиент</div>
 							<div class="list__type">Статус</div>
 						</div>
-						<div class="rules-list__body">
-							<div class="list-row" *ngFor="let r of resources; let i = index">
-								<div class="list__num">{{i + 1}}</div>
-								<div class="list__type">Иванов Иван</div>
-								<div class="list__name">13.06.2020 13:00 - 14:00</div>
-								<div class="list__type">Закрыто</div>
+						<div class="rules-list__body" style="height: 372px;">
+							<div class="list-row" *ngFor="let s of searchLog; let i = index">
+								<div class="list__num">{{s.id}}</div>
+								<div class="list__type">{{s.date}}</div>
+								<div class="list__name">{{s.client}}</div>
+								<div class="list__type">
+									<div *ngIf="s.status == 0">
+										<img src="assets/images/Approve.svg">
+										Забронировала
+									</div>
+
+									<div *ngIf="s.status == 1">
+										<img src="assets/images/Eye.svg">
+										Не прочитал
+									</div>
+
+									<div *ngIf="s.status == 2">
+										<img src="assets/images/Cross.svg">
+										Удалил
+									</div>
+								</div>
 							</div>
 						</div>
 					</section>

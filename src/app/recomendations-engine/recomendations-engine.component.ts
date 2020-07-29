@@ -16,6 +16,10 @@ export class RecomendationsEngineComponent implements OnInit
 
 	resources = [];
 
+	searchLog = [];
+
+	data = [];
+
 	constructor() { }
 
 	ngOnInit(): void 
@@ -46,6 +50,43 @@ export class RecomendationsEngineComponent implements OnInit
 			new Rule("Если ресурс 20%<40% сверху цели ", 0),
 			new Rule("Если ресурс 40%<60% сверху цели", 0),
 			new Rule("Если ресурс 60% сверху цели", 0)
+		];
+
+
+		this.searchLog = [
+			new SearchLog(11, "12.06 14.03", "Иванов Иван", 0),
+			new SearchLog(10, "12.06 14.03", "Иванов Иван", 1),
+			new SearchLog(9, "12.06 14.03", "Иванов Иван", 2),
+			new SearchLog(8, "12.06 14.03", "Иванов Иван", 0),
+			new SearchLog(7, "12.06 14.03", "Иванов Иван", 1),
+			new SearchLog(6, "12.06 14.03", "Иванов Иван", 2),
+			new SearchLog(5, "12.06 14.03", "Иванов Иван", 0),
+			new SearchLog(4, "12.06 14.03", "Иванов Иван", 1),
+			new SearchLog(3, "12.06 14.03", "Иванов Иван", 2),
+			new SearchLog(2, "12.06 14.03", "Иванов Иван", 0),
+			new SearchLog(1, "12.06 14.03", "Иванов Иван", 1)
+		];
+
+		this.data = [
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 0),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 13, 0),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 0),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 2, 0),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 4, 0),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 15, 0),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 32, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 2, 0),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 7, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 2, 0),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
+			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
 		];
 	}
 
@@ -89,5 +130,39 @@ class Rule
 	{
 		this.title = title;
 		this.discount = discount;
+	}
+}
+
+class SearchLog
+{
+	id:number;
+	date:string;
+	client:string;
+	status:number;
+
+	constructor(id:number, date:string, client:string, status:number)
+	{
+		this.id = id;
+		this.date = date;
+		this.client = client;
+		this.status = status;
+	}
+}
+
+class Resource
+{
+	name:string;
+	service:string;
+	interval:string;
+	vote:number;
+	status:number;
+
+	constructor(name:string, service:string, interval:string, vote:number, status:number)
+	{
+		this.name = name;
+		this.service = service;
+		this.interval = interval;
+		this.vote = vote;
+		this.status = status;
 	}
 }
