@@ -24,6 +24,44 @@
 	</section>
 
 	<section class="section-bottom">
-		Bottom
+		<div class="schedule">
+			<div class="schedule__title">
+
+				<div class="schedule-title__top schedule-row">
+					<div class="list-item list-item_big">Ресуры</div>
+
+					<div class="list-item list-item_small" *ngFor="let d of dates; let i = index">{{d.date}}</div>
+
+					<div class="list-item list-item_big">Итого в текущем месяце</div>
+				</div>
+
+				<div class="schedule-title__bottom schedule-row">
+					<div class="list-item list-item_big">Дни</div>
+
+					<div class="list-item list-item_small" *ngFor="let d of dates; let i = index">{{d.name}}</div>
+
+					<div class="list-item list-item_medium">План</div>
+					<div class="list-item list-item_medium">Отработано</div>
+					<div class="list-item list-item_medium">Осталось</div>
+				</div>
+
+			</div>
+
+			<div class="schedule__body">
+
+				<div class="schedule-cat" *ngFor="let c of cats; let i = index">
+					<div class="cat-title">{{c.name}}</div>
+
+					<div class="cat-body">
+						<div class="schedule-row" *ngFor="let r of c.resourses; let i = index">
+
+						</div>
+					</div>
+					
+				</div>
+				
+
+			</div>
+		</div>
 	</section>
 </div>
