@@ -78,6 +78,12 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
+}
+
+.schedule-row:hover
+{
+	background: rgba(241, 246, 253, 0.5);
 }
 
 .list-item_name
@@ -93,12 +99,36 @@
 
 .list-item_small
 {
-	flex: 1;
+	width: 92px;
+	text-align: center;
 }
 
 .list-item_medium
 {
-	flex: 2;
+	width: 144px;
+	text-align: center;
+}
+
+.list-item_medium-first
+{
+	margin-left: 136px;
+}
+
+._right-line
+{
+	border-right: 1px solid #ECF1F9;
+}
+
+._left-line
+{
+	border-left: 1px solid #ECF1F9;
+}
+
+.list-item_sum
+{
+	width: 430px;
+	margin-left: 136px;
+	text-align: center;
 }
 
 .cat-title
@@ -125,6 +155,7 @@
 	color: #000;
 	justify-content: center;
 	align-items: center;
+	font-weight: 400;
 }
 
 ._hidden
@@ -136,7 +167,7 @@
 {
 	background: #EFF4FB;
 	width: 100%;
-	height: 100%;
+	height: 36px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -147,10 +178,36 @@
 {
 	background: rgba(211, 15, 3, 0.1);
 	width: 100%;
-	height: 100%;
+	height: 36px;
 	color: #D30F03;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 76px;
+}
+
+/*Footer*/
+
+.footer
+{
+	background: #FDFAF1;
+	border-radius: 0px 0px 4px 4px;
+	padding: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px -40px 0 -40px;
+}
+
+.status
+{
+	margin-right: 50px;
+	font-size: 18px;
+	line-height: 21px;
+}
+
+.status__value
+{
+	font-weight: bold;
+	color: #00CB00;
 }

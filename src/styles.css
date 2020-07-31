@@ -108,6 +108,18 @@ textarea, select, input, button { outline: none; }
 	padding: 11px;
 }
 
+.button:disabled:hover
+{
+	background: #3D71BF;
+	border: 1px solid #3D71BF; 
+}
+
+.button:disabled
+{
+	opacity: 0.2;
+	cursor: default;
+}
+
 .arrow-button
 {
 	cursor: pointer;

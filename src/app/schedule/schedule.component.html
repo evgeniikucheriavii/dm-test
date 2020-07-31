@@ -24,6 +24,7 @@
 	</section>
 
 	<section class="section-bottom">
+
 		<div class="schedule">
 			<div class="schedule__title">
 
@@ -32,7 +33,7 @@
 
 					<div class="list-item list-item_small" *ngFor="let d of dates; let i = index">{{d.date}}</div>
 
-					<div class="list-item list-item_big">Итого в текущем месяце</div>
+					<div class="list-item list-item_sum">Итого в текущем месяце</div>
 				</div>
 
 				<div class="schedule-title__bottom schedule-row">
@@ -40,7 +41,7 @@
 
 					<div class="list-item list-item_small" *ngFor="let d of dates; let i = index">{{d.name}}</div>
 
-					<div class="list-item list-item_medium">План</div>
+					<div class="list-item list-item_medium list-item_medium-first">План</div>
 					<div class="list-item list-item_medium">Отработано</div>
 					<div class="list-item list-item_medium">Осталось</div>
 				</div>
@@ -63,9 +64,9 @@
 								<div class="_red-bg" *ngIf="a.task == 0">0</div>
 							</div>
 
-							<div class="list-item list-item_medium">{{r.plan}}</div>
+							<div class="list-item list-item_medium list-item_medium-first _right-line">{{r.plan}}</div>
 							<div class="list-item list-item_medium">{{r.done}}</div>
-							<div class="list-item list-item_medium">{{r.left}}</div>
+							<div class="list-item list-item_medium _left-line">{{r.left}}</div>
 
 						</div>
 					</div>
@@ -75,5 +76,16 @@
 
 			</div>
 		</div>
+
+		<div class="footer">
+			<div class="status">
+				<span class="status__title">Статус: </span>
+				<span class="status__value">утверждено</span>
+			</div>
+
+			<button class="button" disabled><img src="assets/images/Approve_W.svg" class="button__image"> Утвердить</button>
+			<button class="button"><img src="assets/images/Cancel.svg" class="button__image"> Отозвать</button>
+		</div>
+
 	</section>
 </div>
