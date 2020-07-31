@@ -34,6 +34,47 @@
 
 	<section class="section-bottom">
 
+		<section class="left-section left-section__list resources-list" style="height: 745px;">
+			<div class="list-row list-row_head  rules-list__head">
+				<div class="list__num">#</div>
+				<div class="list__name">Ресурс</div>
+				<div class="list__util"><img src="assets/images/Sort.svg" class="sort-image"> Цена max</div>
+				<div class="list__util"><img src="assets/images/Sort.svg" class="sort-image"> Цена min</div>
+				<div class="list__util"><img src="assets/images/Sort.svg" class="sort-image"> Коэф</div>
+				<div class="list__type"><img src="assets/images/Sort.svg" class="sort-image"> Целевой доход</div>
+				<div class="list__type"><img src="assets/images/Sort.svg" class="sort-image"> Max доход в месяц</div>
+				<div class="list__type"><img src="assets/images/Sort.svg" class="sort-image"> Min доход в месяц</div>
+				<div class="list__service"><img src="assets/images/Sort.svg" class="sort-image"> Продажа</div>
+			</div>
+			<div class="rules-list__body">
+				<div class="list-row" *ngFor="let r of data; let i = index">
+					<div class="list__num">{{i}}</div>
+					<div class="list__name">{{r.name}}</div>
+					<div class="list__util">{{r.priceMax}}</div>
+					<div class="list__util">{{r.priceM}}</div>
+					<div class="list__util">{{r.koeff}}</div>
+					<div class="list__type">{{r.goalIncome}}</div>
+					<div class="list__type">{{r.maxMonthlyIncome}}</div>
+					<div class="list__type">{{r.minMonthlyIncome}}</div>
+
+					<div class="list__service">
+						<div *ngIf="r.status == 0" class="status_closed">
+							<img src="assets/images/Lock.svg" class="status-img">
+							Заблокирована системой
+						</div>
+
+						<div *ngIf="r.status == 1" class="status_active">
+							<img src="assets/images/Active.svg" class="status-img">
+							Открыта
+						</div>
+					</div>
+					<div class="list__util">
+						
+					</div>
+				</div>
+			</div>
+		</section>
+
 		<div class="footer">
 			<div>
 				Всего ресурсов: 32
