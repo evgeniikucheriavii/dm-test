@@ -1,6 +1,39 @@
+.container
+{
+	padding: 40px;
+}
+
 .section-top
 {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+}
+
+.header-search-label
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.header-search-label__title
+{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	color: rgba(0, 0, 0, 0.6);
+	margin-right: 25px;
+}
+
+.header-search-label__element
+{
+	width: 457px;
+}
+
+.header-select-label
+{
+	margin-right: 25px;
 }
