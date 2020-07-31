@@ -56,7 +56,10 @@
 						<div class="schedule-row" *ngFor="let r of c.resources; let i = index">
 							<div class="list-item list-item_big list-item_name">{{r.name}}</div>
 
-							<div class="list-item list-item_small" *ngFor="let a of r.activities">{{a.task}}</div>
+							<div class="list-item list-item_small" *ngFor="let a of r.activities">
+								<div class="_green-bg" *ngIf="a.task == 1">1</div>
+								<div class="_red-bg" *ngIf="a.task == 0">0</div>
+							</div>
 
 							<div class="list-item list-item_medium">{{r.plan}}</div>
 							<div class="list-item list-item_medium">{{r.done}}</div>
