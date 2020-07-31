@@ -104,6 +104,24 @@ export class ScheduleComponent implements OnInit
 
 	}
 
+	ToggleCat(index:number)
+	{
+		console.log(index);
+		let toggle = document.getElementById("cat-toggle_" + index);
+		let body = document.getElementById("cat-body_" + index);
+
+		if(toggle.innerHTML == "+")
+		{
+			body.className = "cat-body";
+			toggle.innerHTML = "⎼";
+		}
+		else
+		{
+			body.className = "cat-body _hidden";
+			toggle.innerHTML = "+";
+		}
+	}
+
 }
 
 class Resource

@@ -50,9 +50,11 @@
 			<div class="schedule__body">
 
 				<div class="schedule-cat" *ngFor="let c of cats; let i = index">
-					<div class="cat-title">{{c.name}}</div>
+					<div class="cat-title" (click)="ToggleCat(i);">
+						<div class="cat-toggle" id="cat-toggle_{{i}}">⎼</div> {{c.name}}
+					</div>
 
-					<div class="cat-body">
+					<div class="cat-body" id="cat-body_{{i}}">
 						<div class="schedule-row" *ngFor="let r of c.resources; let i = index">
 							<div class="list-item list-item_big list-item_name">{{r.name}}</div>
 

@@ -110,6 +110,26 @@
 	line-height: 19px;
 	color: #3D71BF;
 	margin: 15px 0;
+	cursor: pointer;
+}
+
+.cat-toggle
+{
+	display: inline-flex;
+	vertical-align: middle;
+	margin-right: 13px;
+	width: 19px;
+	height: 19px;
+	box-sizing: border-box;
+	border: 2px solid #3D71BF;
+	color: #000;
+	justify-content: center;
+	align-items: center;
+}
+
+._hidden
+{
+	display: none;
 }
 
 ._green-bg
