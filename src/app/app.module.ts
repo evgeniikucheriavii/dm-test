@@ -8,11 +8,12 @@ import { ResourcesUtilizationComponent } from './resources-utilization/resources
 import { ClientsComponent } from './clients/clients.component';
 import { RecomendationsEngineComponent } from './recomendations-engine/recomendations-engine.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { PricesComponent } from './prices/prices.component';
 
 const appRoutes = [
 	{ path: '', component: AppComponent },
 	{ path: 'utilization', component: ResourcesUtilizationComponent },
-	{ path: 'prices', component: AppComponent },
+	{ path: 'prices', component: PricesComponent },
 	{ path: 'recomendations', component: RecomendationsEngineComponent },
 	{ path: 'schedules', component: ScheduleComponent },
 	{ path: 'clients', component: ClientsComponent },
@@ -27,6 +28,7 @@ const appRoutes = [
     ClientsComponent,
     RecomendationsEngineComponent,
     ScheduleComponent,
+    PricesComponent,
   ],
   imports: [
 	BrowserModule,
