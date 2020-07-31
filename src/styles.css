@@ -187,7 +187,7 @@ textarea, select, input, button { outline: none; }
 	height: 36px;
 }
 
-.search-label
+.search-label, .date-label
 {
 	display: flex;
 	flex-direction: row;
@@ -202,12 +202,12 @@ textarea, select, input, button { outline: none; }
 	box-shadow: 0px 1px 4px rgba(9, 47, 64, 0.2);
 }
 
-.search-label:focus-within
+.search-label:focus-within, .date-label:focus-within
 {
 	border: 2px solid #3D71BF;
 }
 
-.search-input
+.search-input, .date-input
 {
 	background: transparent;
 	border: 0;
@@ -222,6 +222,22 @@ textarea, select, input, button { outline: none; }
 	border: 0;
 	background: transparent;
 	flex: 1;
+}
+
+
+.date-input
+{
+	background:#fff url(assets/images/Calendar.svg)  97% 50% no-repeat ;
+}
+
+.date-input::-webkit-inner-spin-button 
+{
+	display: none;
+}
+
+.date-input::-webkit-calendar-picker-indicator 
+{
+	opacity: 0;
 }
 
 /*Select*/

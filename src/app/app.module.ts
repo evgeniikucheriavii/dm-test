@@ -7,13 +7,14 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ResourcesUtilizationComponent } from './resources-utilization/resources-utilization.component';
 import { ClientsComponent } from './clients/clients.component';
 import { RecomendationsEngineComponent } from './recomendations-engine/recomendations-engine.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 const appRoutes = [
 	{ path: '', component: AppComponent },
 	{ path: 'utilization', component: ResourcesUtilizationComponent },
 	{ path: 'prices', component: AppComponent },
 	{ path: 'recomendations', component: RecomendationsEngineComponent },
-	{ path: 'schedules', component: AppComponent },
+	{ path: 'schedules', component: ScheduleComponent },
 	{ path: 'clients', component: ClientsComponent },
 	{ path: 'help', component: AppComponent }
 ];
@@ -25,6 +26,7 @@ const appRoutes = [
     ResourcesUtilizationComponent,
     ClientsComponent,
     RecomendationsEngineComponent,
+    ScheduleComponent,
   ],
   imports: [
 	BrowserModule,
