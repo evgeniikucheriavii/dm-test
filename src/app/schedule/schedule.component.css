@@ -69,6 +69,15 @@
 .schedule-row
 {
 	height: 36px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.list-item_name
+{
+	padding-left: 40px; 
+	box-sizing: border-box;
 }
 
 .list-item_big

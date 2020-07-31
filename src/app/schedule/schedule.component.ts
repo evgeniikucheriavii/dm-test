@@ -28,8 +28,6 @@ export class ScheduleComponent implements OnInit
 			{ date: "09.07", name: "Вт" },
 		];
 
-
-
 		let hr = { name: "Трудовые", resources: [
 			new Resource("Калиниченко Д.С.", 140, 40, 100, [
 				{ date: "01.07", task: 1 },

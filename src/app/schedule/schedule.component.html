@@ -53,7 +53,14 @@
 					<div class="cat-title">{{c.name}}</div>
 
 					<div class="cat-body">
-						<div class="schedule-row" *ngFor="let r of c.resourses; let i = index">
+						<div class="schedule-row" *ngFor="let r of c.resources; let i = index">
+							<div class="list-item list-item_big list-item_name">{{r.name}}</div>
+
+							<div class="list-item list-item_small" *ngFor="let a of r.activities">{{a.task}}</div>
+
+							<div class="list-item list-item_medium">{{r.plan}}</div>
+							<div class="list-item list-item_medium">{{r.done}}</div>
+							<div class="list-item list-item_medium">{{r.left}}</div>
 
 						</div>
 					</div>
