@@ -41,6 +41,18 @@ textarea, select, input, button { outline: none; }
 	font-size: 14px;
 	line-height: 16px;
 	color: #153649;
+	overflow: hidden;
+	background: linear-gradient(0deg, #F9FCFD, #F9FCFD), #FFFFFF;
+}
+
+textarea, select, input, button { outline: none; }
+
+.textarea
+{
+	border: 2px solid #3D71BF;
+	box-sizing: border-box;
+	border-radius: 4px;
+	width: 427px;
 }
 
 .hr
@@ -250,6 +262,70 @@ textarea, select, input, button { outline: none; }
 .date-input::-webkit-calendar-picker-indicator 
 {
 	opacity: 0;
+}
+
+/*switch*/
+
+.switch
+{
+	position: relative;
+	width: 36px;
+	height: 21px;
+	display: inline-block;
+	vertical-align: middle;
+	border: 1px solid #FFFFFF;
+	background: linear-gradient(180deg, #CDD6E4 0%, #C8D0DC 77.78%);
+	box-sizing: border-box;
+	border-radius: 38px;
+}
+
+.switch__input
+{
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+.switch__slider
+{
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(180deg, #CDD6E4 0%, #C8D0DC 77.78%);
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 38px;
+}
+
+.switch__slider:before
+{
+	position: absolute;
+	content: "";
+	height: 16px;
+	width: 15px;
+	left: 1.5px;
+	bottom: 1.5px;
+	background: linear-gradient(180deg, #FFFFFF 25%, #E4EAEE 89.06%);
+	border: 1px solid #fff;
+	box-sizing: border-box;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 50%;
+}
+
+.switch__input:checked + .switch__slider 
+{
+	background: linear-gradient(180deg, #0040A0 0%, #1A52A5 77.78%);
+}
+
+.switch__input:checked + .switch__slider:before 
+{
+	-webkit-transform: translateX(15.5px);
+	-ms-transform: translateX(15.5px);
+	transform: translateX(15.5px);
 }
 
 /*Select*/
