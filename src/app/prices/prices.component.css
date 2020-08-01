@@ -47,6 +47,10 @@
 
 }
 
+.rules-list__body
+{
+	height: 650px;
+}
 
 /*Footer*/
 
@@ -58,7 +62,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 50px -40px 0 -40px;
+	margin: 0 -40px 0 -40px;
 }
 
 .status
@@ -72,4 +76,9 @@
 {
 	font-weight: bold;
 	color: #00CB00;
+}
+
+.status-img
+{
+	width: 10px;
 }

@@ -199,7 +199,7 @@ textarea, select, input, button { outline: none; }
 	height: 36px;
 }
 
-.search-label, .date-label
+.search-label, .date-label, .input-label
 {
 	display: flex;
 	flex-direction: row;
@@ -214,12 +214,12 @@ textarea, select, input, button { outline: none; }
 	box-shadow: 0px 1px 4px rgba(9, 47, 64, 0.2);
 }
 
-.search-label:focus-within, .date-label:focus-within
+.search-label:focus-within, .date-label:focus-within, .input-label:focus-within
 {
 	border: 2px solid #3D71BF;
 }
 
-.search-input, .date-input
+.search-input, .date-input, .input
 {
 	background: transparent;
 	border: 0;
@@ -547,6 +547,34 @@ select::-ms-expand { display: none;}
 	flex: 2;
 }
 
+
+.list__body
+{
+	overflow: auto;
+}
+
+.list__body::-webkit-scrollbar 
+{
+	width: 6px;
+}
+
+/* Track */
+.list__body::-webkit-scrollbar-track 
+{
+	background: linear-gradient(180deg, rgba(0, 64, 160, 0.1) 0%, rgba(26, 82, 165, 0.1) 77.78%);
+	opacity: 0.1;
+	border-radius: 28px;
+	width: 6px;
+}
+
+/* Handle */
+.list__body::-webkit-scrollbar-thumb
+{
+	background: #093751;
+	border-radius: 28px;
+	width: 6px;
+	height: 39px;
+}
 
 /*Lists end*/
 
