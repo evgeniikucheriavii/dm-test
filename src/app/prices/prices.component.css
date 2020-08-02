@@ -52,6 +52,21 @@
 	height: 650px;
 }
 
+.list__sale
+{
+	margin-left: 100px;
+}
+
+.list__util
+{
+	flex: 1.5;
+}
+
+.list__koef
+{
+	flex: 1;
+}
+
 /*Footer*/
 
 .footer
@@ -78,6 +93,11 @@
 	margin-right: 80px;
 	font-size: 18px;
 	line-height: 21px;
+}
+
+.status_closed
+{
+	color: rgba(4, 38, 53, 0.5);
 }
 
 .status__value

@@ -85,6 +85,14 @@ textarea, select, input, button { outline: none; }
 	width: 100%;	
 }
 
+.status-img
+{
+	width: 8px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 9px;
+}
+
 .button
 {
 	background: #3D71BF;
