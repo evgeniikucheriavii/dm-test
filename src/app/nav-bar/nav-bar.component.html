@@ -1,7 +1,22 @@
 <nav class="nav">
 	<div class="nav__content">
 		<section class="nav-section nav-section_left">
-			<a *ngFor="let l of links; let i = index" routerLink="{{l.link}}" class="nav-item nav-item_left" routerLinkActive="nav-item_active"><div class="nav-item__content">{{l.name}}</div></a>
+			<div *ngFor="let l of links; let i = index" class="nav-item nav-item_left">
+				<a class="nav-item__content" routerLink="{{l.link}}" routerLinkActive="nav-item__content_active" *ngIf="l.children.length == 0">
+					{{l.name}}
+				</a>
+				<a class="nav-item__content nav-item__content_children" routerLink="{{l.link}}" routerLinkActive="nav-item__content_active" *ngIf="l.children.length > 0">
+					{{l.name}}
+					<img src="assets/images/NavArrow.svg" class="nav-arrow">
+				</a>
+				<div class="nav-item__body" *ngIf="l.children.length > 0">
+					<div *ngFor="let c of l.children; let i = index" class="child-item">
+						<a class="child-item__content" routerLink="{{c.link}}" routerLinkActive="child-item__content_active">
+							{{c.name}}
+						</a>
+					</div>
+				</div>
+			</div>
 		</section>
 		<section class="nav-section nav-section_rigth">
 			<a routerLink="/messages" class="nav-item nav-item_right"><div class="nav-item__content"><img src="assets/images/Mail.svg" class="nav-item__image"><div class="messages" *ngIf="messages > 0">{{messages}}</div></div></a>

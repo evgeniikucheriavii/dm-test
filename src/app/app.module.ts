@@ -9,6 +9,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { RecomendationsEngineComponent } from './recomendations-engine/recomendations-engine.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { PricesComponent } from './prices/prices.component';
+import { CompanyScheduleComponent } from './company-schedule/company-schedule.component';
 
 const appRoutes = [
 	{ path: '', component: AppComponent },
@@ -16,6 +17,7 @@ const appRoutes = [
 	{ path: 'prices', component: PricesComponent },
 	{ path: 'recomendations', component: RecomendationsEngineComponent },
 	{ path: 'schedules', component: ScheduleComponent },
+	{ path: 'company-schedules', component: CompanyScheduleComponent },
 	{ path: 'clients', component: ClientsComponent },
 	{ path: 'help', component: AppComponent }
 ];
@@ -29,6 +31,7 @@ const appRoutes = [
     RecomendationsEngineComponent,
     ScheduleComponent,
     PricesComponent,
+    CompanyScheduleComponent,
   ],
   imports: [
 	BrowserModule,

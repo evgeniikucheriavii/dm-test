@@ -23,7 +23,7 @@ export class NavBarComponent implements OnInit
 			new NavLink("Рекомендательный движок", "/recomendations"),
 			new NavLink("Расписания", "/schedules", [
 				new NavLink("Рабочий график", "/schedules"),
-				new NavLink("Расписании компании", "/company-schedule")
+				new NavLink("Расписании компании", "/company-schedules")
 			]),
 			new NavLink("Клиенты", "/clients"),
 			new NavLink("Справочник", "/help")
@@ -42,7 +42,7 @@ class NavLink
 
 	children = [];
 	
-	constructor(name:string, link:string, children:any = null)
+	constructor(name:string, link:string, children:any = [])
 	{
 		this.name = name;
 		this.link = link;
