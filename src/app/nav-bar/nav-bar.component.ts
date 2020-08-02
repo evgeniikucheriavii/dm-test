@@ -21,7 +21,10 @@ export class NavBarComponent implements OnInit
 			new NavLink("Утилизация ресурсов", "/utilization"),
 			new NavLink("Динамическое ценообразование", "/prices"),
 			new NavLink("Рекомендательный движок", "/recomendations"),
-			new NavLink("Расписания", "/schedules"),
+			new NavLink("Расписания", "/schedules", [
+				new NavLink("Рабочий график", "/schedules"),
+				new NavLink("Расписании компании", "/company-schedule")
+			]),
 			new NavLink("Клиенты", "/clients"),
 			new NavLink("Справочник", "/help")
 		];
@@ -36,10 +39,28 @@ class NavLink
 	name:string;
 	link:string;
 	isActive:boolean = false;
+
+	children = [];
 	
-	constructor(name:string, link:string)
+	constructor(name:string, link:string, children:any = null)
 	{
 		this.name = name;
 		this.link = link;
+		this.children = children;
+	}
+
+	CheckChildren()
+	{
+		if(this.children.length > 0)
+		{
+			for(let i = 0; i < this.children.length; i++)
+			{
+				if(this.children[i].isActive)
+				{
+					this.isActive = true;
+					break;
+				}
+			}
+		}
 	}
 }
