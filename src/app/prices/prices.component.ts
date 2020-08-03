@@ -9,6 +9,7 @@ export class PricesComponent implements OnInit
 {
 
 	data = [];
+	openedDetails:number = -1;
 
 	constructor() { }
 
@@ -34,6 +35,38 @@ export class PricesComponent implements OnInit
 			new Resource("Петрова Светлана", 1245, 1000, 1, 1000, 25000, 12500, 1)
 		];
 
+		let obj = this;
+		window.addEventListener("click", function (e) { obj.HideDetails(e); });
+	}
+
+	ShowDetails(i:number)
+	{
+		this.HideDetails();
+		let block = document.getElementById("details_" + i);
+		let btn = document.getElementById("details-btn_" + i);
+
+		block.className = "details-menu details-menu_active";
+		this.openedDetails = i;
+	}
+
+	HideDetails(e = null)
+	{
+		if(e != null)
+		{
+			if(e.target.className.includes("details"))
+			{
+				return;
+			}
+		}
+
+		if(this.openedDetails >= 0)
+		{
+			let block = document.getElementById("details_" + this.openedDetails);
+			block.className = "details-menu";
+	
+			this.openedDetails = -1;
+		}
+		
 	}
 
 }

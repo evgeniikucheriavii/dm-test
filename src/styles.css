@@ -378,6 +378,16 @@ select::-ms-expand { display: none;}
 	border: 2px solid transparent;
 }
 
+.select-label:disabled, .select-elem:disabled
+{
+	opacity: 0.1;
+}
+
+.select-label:disabled:hover
+{
+	border: 2px solid transparent !important;
+}
+
 .select-label_graph
 {
 	width: 212px;

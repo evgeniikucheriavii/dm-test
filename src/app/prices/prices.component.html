@@ -4,8 +4,7 @@
 			<span class="header-search-label__title">Поиск </span>
 			<label class="header-search-label__element search-label">
 				<input type="search" class="search-input" name="search" id="search_input">
-				<button type="submit" class="search-button" id="search_submit"><img class="button__image"
-						src="assets/images/Search.svg"></button>
+				<button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
 			</label>
 		</label>
 
@@ -68,6 +67,39 @@
 							<img src="assets/images/Active.svg" class="status-img">
 							Открыта
 						</div>
+					</div>
+
+					<div class="details-button" (click)="ShowDetails(i);" id="details-btn_{{i}}"><img class="details-image" src="assets/images/Details.svg"></div>
+					<div class="details-menu" id="details_{{i}}">
+						<label class="details-toggle">
+							<label class="switch _details">
+								<input class='switch__input _details' type="checkbox">
+								<span class="switch__slider _details"></span>
+							</label>
+							Заблокировать
+						</label>
+						<label class="header-select-label select-label details-select">
+							<select name="filter" id="filter" class="select-elem _details">
+								<option value="1">На 1 день</option>
+								<option value="2">На 1 неделю</option>
+								<option value="3">На 1 месяц</option>
+							</select>
+						</label>
+
+						<label class="details-toggle" disabled>
+							<label class="switch _details">
+								<input class='switch__input _details' type="checkbox" disabled>
+								<span class="switch__slider _details"></span>
+							</label>
+							Уведомления
+						</label>
+						<label class="header-select-label select-label details-select" disabled>
+							<select name="filter" id="filter" class="select-elem _details" disabled>
+								<option value="1">За час и полчаса</option>
+								<option value="2">За день</option>
+								<option value="3">За неделю</option>
+							</select>
+						</label>
 					</div>
 				</div>
 			</div>
