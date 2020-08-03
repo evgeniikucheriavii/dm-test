@@ -72,9 +72,41 @@
 	flex: 1.5;
 }
 
+.list-row_b
+{
+	justify-content: space-between;
+}
+
+.list__n
+{
+	width: 40px;
+}
+
 .list__koef
 {
-	flex: 1;
+	width: 98px;
+	text-align: center;
+	margin-right: 40px;
+}
+
+.list__pname
+{
+	width: 425px;
+}
+
+.list__pmin
+{
+	width: 120px;
+}
+
+.list__pmax
+{
+	width: 162px;
+}
+
+.list__pmax_last
+{
+	margin-right: 80px !important;
 }
 
 /*Footer*/
