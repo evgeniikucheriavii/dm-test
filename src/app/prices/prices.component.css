@@ -39,6 +39,16 @@
 	margin-right: 20px;
 }
 
+.head-sales
+{
+	margin-right: 30px;
+}
+
+.head-toggle
+{
+	margin: 0 15px 0 30px !important;
+}
+
 /*List*/
 
 .rules-list__head
