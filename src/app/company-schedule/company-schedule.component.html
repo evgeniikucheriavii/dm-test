@@ -26,7 +26,7 @@
 
 		<div class="calendar">
 			<div class="calendar__title">
-				< July >
+				<button class="arrow-button"><</button> July <button class="arrow-button">></button>
 			</div>
 			<div class="calendar__body">
 				<div class="calendar__week calendar__week_head">
@@ -38,9 +38,7 @@
 					<div class="calendar__day">СБ</div>
 					<div class="calendar__day">ВС</div>
 				</div>
-				<div class="calendar__week">
-
-				</div>
+				
 			</div>
 		</div>
 
@@ -74,7 +72,29 @@
 	</section>
 
 	<section class="section__right">
-		
+		<div class="schedule-table">
+
+			<div class="table-row table-row_head">
+				<div class="table-col table-col_time"></div>
+				<div class="table-col" *ngFor="let s of schedule; let i = index;">
+					{{s.name}}
+				</div>
+			</div>
+
+			<div class="table-row" *ngFor="let t of time; let i = index;">
+				<div class="table-col table-col_time">{{t.hour}}:00</div>
+
+				<div class="table-col" *ngFor="let s of schedule; let i = index;">
+					<div *ngIf="s.HasTasks(t.hour)" class="table-col__container">
+					<div class="table-task" *ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;" style="flex: {{j.duration}};">
+							{{j.hour}}
+							{{j.start}} - {{j.duration}}
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</section>
 
 </div>
