@@ -10,6 +10,7 @@ export class CompanyScheduleComponent implements OnInit
 
 	calendar:Calendar;
 	time = [];
+	currentHour:number;
 
 	schedule = [];
 
@@ -32,92 +33,110 @@ export class CompanyScheduleComponent implements OnInit
 			{ hour: 20 }
 		];
 		
+		this.currentHour = 14;
 
 		this.schedule = [
 			new Resource("name", [
 				new Schedule(9, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15),
-					new Task("Task", 45, 15)
+					new Task("Task", 0, 15, 0),
+					new Task("Task", 15, 15, 0),
+					new Task("Task", 30, 15, 0),
+					new Task("Task", 45, 15, 0)
 				]),
 				new Schedule(10, [
-					new Task("Task", 0, 60)
+					new Task("Task", 0, 60, 1)
 				]),
 				new Schedule(15, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15)
+					new Task("Task", 0, 15, 0),
+					new Task("Task", 15, 15, 2),
+					new Task("Task", 30, 15, 3)
 				]),
 			]),
 			new Resource("name", [
 				new Schedule(9, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15),
-					new Task("Task", 45, 15)
+					new Task("Task", 0, 15, 0),
+					new Task("Task", 15, 15, 1),
+					new Task("Task", 30, 15, 2),
+					new Task("Task", 45, 15, 3)
 				]),
 				new Schedule(10, [
-					new Task("Task", 0, 60)
+					new Task("Task", 0, 60, 0)
 				]),
 				new Schedule(15, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15)
+					new Task("Task", 0, 15, 0),
+					new Task("Task", 15, 15, 0),
+					new Task("Task", 30, 15, 0)
 				]),
 			]),
 
 			new Resource("name", [
 				new Schedule(15, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15),
-					new Task("Task", 45, 15)
+					new Task("Task", 0, 15, 0),
+					new Task("Task", 15, 15, 0),
+					new Task("Task", 30, 15, 3),
+					new Task("Task", 45, 15, 0)
 				]),
 				new Schedule(17, [
-					new Task("Task", 0, 60)
+					new Task("Task", 0, 60, 0)
 				]),
 				new Schedule(19, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15)
+					new Task("Task", 0, 15, 0),
+					new Task("Task", 15, 15, 0),
+					new Task("Task", 30, 15, 0)
 				]),
 			]),
 
 			new Resource("name", [
 				new Schedule(12, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15),
-					new Task("Task", 45, 15)
+					new Task("Task", 0, 15, 1),
+					new Task("Task", 15, 15, 1),
+					new Task("Task", 30, 15, 1),
+					new Task("Task", 45, 15, 1)
 				]),
 				new Schedule(16, [
-					new Task("Task", 0, 60)
+					new Task("Task", 0, 60, 0)
 				]),
 				new Schedule(20, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15)
+					new Task("Task", 0, 15, 0),
+					new Task("Task", 15, 15, 0),
+					new Task("Task", 30, 15, 1)
 				]),
 			]),
 
 			new Resource("name", [
 				new Schedule(15, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15),
-					new Task("Task", 45, 15)
+					new Task("Task", 0, 15, 0),
+					new Task("Task", 15, 15, 2),
+					new Task("Task", 30, 15, 2),
+					new Task("Task", 45, 15, 0)
 				]),
 				new Schedule(17, [
-					new Task("Task", 0, 60)
+					new Task("Task", 0, 60, 0)
 				]),
 				new Schedule(19, [
-					new Task("Task", 0, 15),
-					new Task("Task", 15, 15),
-					new Task("Task", 30, 15)
+					new Task("Task", 0, 15, 3),
+					new Task("Task", 15, 15, 3),
+					new Task("Task", 30, 15, 3)
 				]),
 			]),
 		];
+	}
+
+	GetRowClass(hour:number)
+	{
+		if(this.currentHour > hour)
+		{
+			return "_past-hour";
+		} 
+		else if(this.currentHour == hour)
+		{
+			return "_current-hour";
+		}
+		else
+		{
+			return "_future-hour";
+		}
+		
 	}
 
 }
@@ -205,13 +224,25 @@ class Task
 	duration:number;
 
 	name:string;
-	type:number;
 
-	constructor(name:string, start:number, duration:number)
+	type:number;
+	typeClass:string;
+
+	constructor(name:string, start:number, duration:number, type:number)
 	{
 		this.name = name;
 		this.start = start;
 		this.duration = duration;
+		this.type = type;
+
+		switch(this.type)
+		{
+			case 0: this.typeClass = "legend_promo"; break;
+			case 1: this.typeClass = "legend_service"; break;
+			case 2: this.typeClass = "legend_reserve"; break;
+			case 3: this.typeClass = "legend_fail"; break;
+		}
+
 	}
 }
 

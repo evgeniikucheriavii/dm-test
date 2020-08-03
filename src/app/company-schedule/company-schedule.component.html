@@ -81,14 +81,14 @@
 				</div>
 			</div>
 
-			<div class="table-row" *ngFor="let t of time; let i = index;">
+			<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
 				<div class="table-col table-col_time">{{t.hour}}:00</div>
 
 				<div class="table-col" *ngFor="let s of schedule; let i = index;">
 					<div *ngIf="s.HasTasks(t.hour)" class="table-col__container">
-					<div class="table-task" *ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;" style="flex: {{j.duration}};">
-							{{j.hour}}
-							{{j.start}} - {{j.duration}}
+					<div class="table-task {{j.typeClass}}" *ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;" style="flex: {{j.duration}};">
+							<div class="task-name">{{j.name}}</div>
+							<div class="task-time">{{t.hour}}:{{j.start}} - {{t.hour}}:{{j.start + j.duration}}</div>
 						</div>
 					</div>
 				</div>
