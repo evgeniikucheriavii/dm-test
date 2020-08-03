@@ -183,6 +183,7 @@
 	border-bottom: 1px solid transparent;
 	height: 30px;
 	margin-bottom: 20px;
+	color: #093751;
 }
 
 .table-col:last-child
@@ -220,6 +221,18 @@
 	box-sizing: border-box;
 }
 
+.task_small .task-time, .task_small .task-name
+{ 
+	max-width: 60px !important; 
+	text-overflow: ellipsis;
+	overflow: hidden; 
+	white-space: nowrap;
+}
+
+.task_medium { }
+.task_large {  }
+.task_huge {  }
+
 .table-task:last-child
 {
 	margin-right: 0;
@@ -232,10 +245,25 @@
 
 .task-time
 {
-	width: 15px;
 	text-overflow: ellipsis;
 	overflow: hidden; 
 	white-space: nowrap;
+}
+
+.task-add
+{
+	display: block;
+	width: 18px;
+	height: 18px;
+	box-sizing: border-box;
+	text-align: center;
+	padding: 1px 2px;
+	background: rgba(196, 196, 196, 0.2);
+	color: #0C62E3;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 16px;
+	border-radius: 50%;
 }
 
 ._past-hour .table-col_time
@@ -245,13 +273,27 @@
 
 ._current-hour .table-col_time
 {
-	padding-left: 24px;
+	padding-left: 14px;
 	background-image: url(../../assets/images/Time_Arrow.svg);
 	background-size: 100% 100%;
-	background-position: center;
+	font-weight: bold;
+	background-position: center center;
 	background-repeat: no-repeat;
-	box-sizing: border-box;
 	/* main sahd2 */
+}
+
+._current-hour .table-col_time .time-content
+{
+	margin-top: -14px;
+}
+
+._current-hour .table-col_time::after
+{
+	content: "сейчас";
+	display: block;
+	position: relative;
+	top: 12px;
+	left: -35px;
 }
 
 /**/

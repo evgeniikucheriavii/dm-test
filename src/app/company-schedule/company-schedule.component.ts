@@ -36,7 +36,7 @@ export class CompanyScheduleComponent implements OnInit
 		this.currentHour = 14;
 
 		this.schedule = [
-			new Resource("name", [
+			new Resource("Калиниченко Д.С.", [
 				new Schedule(9, [
 					new Task("Task", 0, 15, 0),
 					new Task("Task", 15, 15, 0),
@@ -52,7 +52,7 @@ export class CompanyScheduleComponent implements OnInit
 					new Task("Task", 30, 15, 3)
 				]),
 			]),
-			new Resource("name", [
+			new Resource("Колесов А.В.", [
 				new Schedule(9, [
 					new Task("Task", 0, 15, 0),
 					new Task("Task", 15, 15, 1),
@@ -69,7 +69,7 @@ export class CompanyScheduleComponent implements OnInit
 				]),
 			]),
 
-			new Resource("name", [
+			new Resource("Гринченко М.А.", [
 				new Schedule(15, [
 					new Task("Task", 0, 15, 0),
 					new Task("Task", 15, 15, 0),
@@ -86,7 +86,7 @@ export class CompanyScheduleComponent implements OnInit
 				]),
 			]),
 
-			new Resource("name", [
+			new Resource("Аппарат Экзарта", [
 				new Schedule(12, [
 					new Task("Task", 0, 15, 1),
 					new Task("Task", 15, 15, 1),
@@ -98,12 +98,11 @@ export class CompanyScheduleComponent implements OnInit
 				]),
 				new Schedule(20, [
 					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 0),
-					new Task("Task", 30, 15, 1)
+					new Task("Task", 15, 15, 0)
 				]),
 			]),
 
-			new Resource("name", [
+			new Resource("Гринченко М.А.", [
 				new Schedule(15, [
 					new Task("Task", 0, 15, 0),
 					new Task("Task", 15, 15, 2),
@@ -228,6 +227,8 @@ class Task
 	type:number;
 	typeClass:string;
 
+	sizeClass:string;
+
 	constructor(name:string, start:number, duration:number, type:number)
 	{
 		this.name = name;
@@ -243,6 +244,27 @@ class Task
 			case 3: this.typeClass = "legend_fail"; break;
 		}
 
+		if(this.duration >= 15 && this.duration < 30)
+		{
+			this.sizeClass = "task_small";
+		}
+		else if(this.duration >= 30 && this.duration < 45)
+		{
+			this.sizeClass = "task_medium";
+		}
+		else if(this.duration >= 45 && this.duration < 60)
+		{
+			this.sizeClass = "task_large";
+		}
+		else
+		{
+			this.sizeClass = "task_huge";
+		}
+	}
+
+	Classes()
+	{
+		return this.typeClass + " " + this.sizeClass; 
 	}
 }
 

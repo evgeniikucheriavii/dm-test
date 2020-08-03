@@ -22,7 +22,8 @@
 			Убрать завершенные акции
 		</label>
 
-		<button class="button button_left"><img src="assets/images/Plus.svg" class="button__image  button__image_left"> Забронировать услугу</button>
+		<button class="button button_left"><img src="assets/images/Plus.svg" class="button__image  button__image_left">
+			Забронировать услугу</button>
 
 		<div class="calendar">
 			<div class="calendar__title">
@@ -38,13 +39,13 @@
 					<div class="calendar__day">СБ</div>
 					<div class="calendar__day">ВС</div>
 				</div>
-				
+
 			</div>
 		</div>
 
 		<div class="left-title">Загрузка расписания</div>
 		<label>
-			Ресурсы: 
+			Ресурсы:
 			<label class="header-select-label select-label">
 				<select name="filter" id="filter" class="select-elem">
 					<option value="1">Все</option>
@@ -82,15 +83,33 @@
 			</div>
 
 			<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
-				<div class="table-col table-col_time">{{t.hour}}:00</div>
+				<div class="table-col table-col_time">
+					<div class="time-content">{{t.hour}}:00</div>
+				</div>
 
 				<div class="table-col" *ngFor="let s of schedule; let i = index;">
 					<div *ngIf="s.HasTasks(t.hour)" class="table-col__container">
-					<div class="table-task {{j.typeClass}}" *ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;" style="flex: {{j.duration}};">
+						<div class="table-task {{j.Classes()}}"
+							*ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;">
 							<div class="task-name">{{j.name}}</div>
-							<div class="task-time">{{t.hour}}:{{j.start}} - {{t.hour}}:{{j.start + j.duration}}</div>
+							<div class="task-time">
+								{{t.hour}}:<span *ngIf="j.start < 10">0</span>{{j.start}} -
+								<span *ngIf="j.start + j.duration == 60">{{t.hour + 1}}:00</span>
+								<span *ngIf="j.start + j.duration < 60">{{t.hour}}:{{j.start + j.duration}}</span>
+							</div>
+						</div>
+						<div class="table-task" *ngIf="!s.GetTasks(t.hour).Check()">
+							<span *ngIf="currentHour <= t.hour" class="task-add">+</span>
+							<span *ngIf="currentHour > t.hour">-</span>
 						</div>
 					</div>
+					<div *ngIf="!s.HasTasks(t.hour)" class="table-col__container">
+						<div class="table-task">
+							<span *ngIf="currentHour <= t.hour" class="task-add">+</span>
+							<span *ngIf="currentHour > t.hour">-</span>
+						</div>
+					</div>
+					
 				</div>
 
 			</div>
