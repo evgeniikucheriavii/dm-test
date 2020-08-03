@@ -1,0 +1,103 @@
+.container
+{
+	display: flex;
+	flex-direction: row;
+}
+
+.section__left
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	padding: 40px;
+}
+
+.button_left
+{
+	padding: 12px 15px;
+	text-align: left;
+}
+
+.button__image_left
+{
+	margin-right: 15px;
+}
+
+/**/
+
+.calendar
+{
+	display: block;
+}
+
+.calendar__week
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.calendar__week_head
+{
+	font-size: 12px;
+	line-height: 14px;
+	color: rgba(4, 38, 53, 0.6);
+}
+
+.calendar__day
+{
+	width: 30px;
+	height: 30px;
+	text-align: center;
+}
+
+/**/
+
+/**/
+
+.left-title
+{
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #042635;
+	text-align: center;
+	padding: 15px;
+}
+
+.legend-item
+{
+	padding: 12.5px;
+	font-size: 10px;
+	line-height: 12px;
+	text-align: center;
+	margin-bottom: 2px;
+}
+
+.legend_promo { background: #4D7FCA; color: #fff; }
+.legend_service { background: #FADF80; color: #68420A; }
+.legend_reserve { background: #4EAB51; color: #fff; }
+.legend_fail { background: #F5A2A2; color: #530808; }
+.legend_add { background: #fff; color: #232526; }
+.legend_waste { background: #fff; color: #232526; }
+.legend_promo-end { background: #E6ECF6; color: rgba(61, 113, 191, 0.5); }
+.legend_service-end { background: #FFFCF3; color: rgba(104, 66, 10, 0.5); }
+.legend_empty { background: #FDEDED; color: rgba(174, 30, 21, 0.5); }
+.legend_reserve-end { background: #DAEEEA; color: rgba(37, 98, 9, 0.5); }
+
+/**/
+
+.section__right
+{
+	margin: 40px;
+	width: 1495px;
+	background: #FFFFFF;
+	border: 2px solid #F1F6FD;
+	box-sizing: border-box;
+	/* main sahd2 */
+
+	box-shadow: 0px 2px 4px rgba(4, 41, 57, 0.25);
+	border-radius: 4px;
+}
