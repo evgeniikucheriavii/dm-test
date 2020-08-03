@@ -67,6 +67,17 @@
 	padding: 15px;
 }
 
+.left-input
+{
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.left-input_checkbox
+{
+	margin-bottom: 20px;
+}
+
 .legend-item
 {
 	padding: 12.5px;
@@ -80,8 +91,8 @@
 .legend_service { background: #FADF80; color: #68420A; }
 .legend_reserve { background: #4EAB51; color: #fff; }
 .legend_fail { background: #F5A2A2; color: #530808; }
-.legend_add { background: #fff; color: #232526; }
-.legend_waste { background: #fff; color: #232526; }
+.legend_add { background: #fff; color: #232526; font-weight: 300; }
+.legend_waste { background: #fff; color: #232526; font-weight: 300; }
 .legend_promo-end { background: #E6ECF6; color: rgba(61, 113, 191, 0.5); }
 .legend_service-end { background: #FFFCF3; color: rgba(104, 66, 10, 0.5); }
 .legend_empty { background: #FDEDED; color: rgba(174, 30, 21, 0.5); }
@@ -152,6 +163,11 @@
 	font-weight: bold;
 	font-size: 18px;
 	line-height: 21px;
+}
+
+.table-row:last-child
+{
+	margin-bottom: 50px;
 }
 
 .table-col, .table-col__container
@@ -252,7 +268,8 @@
 
 .task-add
 {
-	display: block;
+	display: inline-block;
+	vertical-align: middle;
 	width: 18px;
 	height: 18px;
 	box-sizing: border-box;
@@ -264,6 +281,7 @@
 	font-size: 14px;
 	line-height: 16px;
 	border-radius: 50%;
+
 }
 
 ._past-hour .table-col_time
