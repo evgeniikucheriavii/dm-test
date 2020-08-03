@@ -22,12 +22,12 @@
 			Убрать завершенные акции
 		</label>
 
-		<button class="button button_left"><img src="assets/images/Plus.svg" class="button__image  button__image_left">
+		<button class="button"><img src="assets/images/Plus.svg" class="button__image  button__image_left">
 			Забронировать услугу</button>
 
 		<div class="calendar">
 			<div class="calendar__title">
-				<button class="arrow-button"><</button> July <button class="arrow-button">></button>
+				<button class="arrow-button arrow-button_left"></button> Июль <button class="arrow-button arrow-button_right"></button>
 			</div>
 			<div class="calendar__body">
 				<div class="calendar__week calendar__week_head">
@@ -39,14 +39,58 @@
 					<div class="calendar__day">СБ</div>
 					<div class="calendar__day">ВС</div>
 				</div>
-
+				<div class="calendar__week">
+					<div class="calendar__day"></div>
+					<div class="calendar__day"></div>
+					<div class="calendar__day"></div>
+					<div class="calendar__day">1</div>
+					<div class="calendar__day">2</div>
+					<div class="calendar__day calendar__day_weekend">3</div>
+					<div class="calendar__day calendar__day_weekend">4</div>
+				</div>
+				<div class="calendar__week">
+					<div class="calendar__day">5</div>
+					<div class="calendar__day">6</div>
+					<div class="calendar__day">7</div>
+					<div class="calendar__day">8</div>
+					<div class="calendar__day">9</div>
+					<div class="calendar__day calendar__day_weekend">10</div>
+					<div class="calendar__day calendar__day_weekend calendar__day_current">11</div>
+				</div>
+				<div class="calendar__week">
+					<div class="calendar__day">12</div>
+					<div class="calendar__day">13</div>
+					<div class="calendar__day">14</div>
+					<div class="calendar__day">15</div>
+					<div class="calendar__day">16</div>
+					<div class="calendar__day calendar__day_weekend">17</div>
+					<div class="calendar__day calendar__day_weekend">18</div>
+				</div>
+				<div class="calendar__week">
+					<div class="calendar__day">19</div>
+					<div class="calendar__day">20</div>
+					<div class="calendar__day">21</div>
+					<div class="calendar__day">22</div>
+					<div class="calendar__day">23</div>
+					<div class="calendar__day calendar__day_weekend">24</div>
+					<div class="calendar__day calendar__day_weekend">25</div>
+				</div>
+				<div class="calendar__week">
+					<div class="calendar__day">26</div>
+					<div class="calendar__day">27</div>
+					<div class="calendar__day">28</div>
+					<div class="calendar__day">29</div>
+					<div class="calendar__day">30</div>
+					<div class="calendar__day calendar__day_weekend"></div>
+					<div class="calendar__day calendar__day_weekend"></div>
+				</div>
 			</div>
 		</div>
 
 		<div class="left-title">Загрузка расписания</div>
-		<label>
-			Ресурсы:
-			<label class="header-select-label select-label">
+		<label class="left-row">
+			<div class="left-row__title">Ресурсы:</div>
+			<label class="header-select-label select-label left-row__select">
 				<select name="filter" id="filter" class="select-elem">
 					<option value="1">Все</option>
 					<option value="2">Все</option>
@@ -54,8 +98,8 @@
 				</select>
 			</label>
 		</label>
-		<label>
-			Загрузка: 40%
+		<label class="left-row left-row_bottom">
+			<div class="left-row__title">Загрузка:</div> <div class="left-row__load">40%</div>
 		</label>
 
 
