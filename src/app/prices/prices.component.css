@@ -80,13 +80,14 @@
 .list__n
 {
 	width: 40px;
+	margin-right: 20px;
 }
 
 .list__koef
 {
 	width: 98px;
 	text-align: center;
-	margin-right: 40px;
+	margin-right: 20px;
 }
 
 .list__pname
@@ -102,6 +103,11 @@
 .list__pmax
 {
 	width: 162px;
+}
+
+.list__pmax_first
+{
+	margin-left: 25px;
 }
 
 .list__pmax_last
