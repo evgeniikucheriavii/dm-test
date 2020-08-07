@@ -62,10 +62,15 @@ export class CompanyScheduleComponent implements OnInit
 				new Schedule(10, [
 					new Task("Task", 0, 60, 0)
 				]),
+
 				new Schedule(15, [
 					new Task("Task", 0, 15, 0),
 					new Task("Task", 15, 15, 0),
 					new Task("Task", 30, 15, 0)
+				]),
+
+				new Schedule(17, [
+					new Task("Task", 0, 60, 1)
 				]),
 			]),
 
@@ -77,7 +82,7 @@ export class CompanyScheduleComponent implements OnInit
 					new Task("Task", 45, 15, 0)
 				]),
 				new Schedule(17, [
-					new Task("Task", 0, 60, 0)
+					new Task("Task", 0, 60, 0),
 				]),
 				new Schedule(19, [
 					new Task("Task", 0, 15, 0),
