@@ -52,7 +52,7 @@
 
 				<div class="schedule-cat" *ngFor="let c of cats; let i = index">
 					<div class="cat-title" (click)="ToggleCat(i);">
-						<div class="cat-toggle" id="cat-toggle_{{i}}">⎼</div> {{c.name}}
+						<div class="cat-toggle" id="cat-toggle_{{i}}">-</div> {{c.name}}
 					</div>
 
 					<div class="cat-body" id="cat-body_{{i}}">

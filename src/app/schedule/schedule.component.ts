@@ -113,7 +113,7 @@ export class ScheduleComponent implements OnInit
 		if(toggle.innerHTML == "+")
 		{
 			body.className = "cat-body";
-			toggle.innerHTML = "⎼";
+			toggle.innerHTML = "-";
 		}
 		else
 		{
