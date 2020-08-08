@@ -8,6 +8,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	margin-bottom: 40px;
 }
 
 .header-search-label
@@ -59,7 +60,7 @@
 
 .rules-list__body
 {
-	height: 650px;
+	height: 620px;
 }
 
 .list__sale
