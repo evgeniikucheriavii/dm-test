@@ -23,12 +23,17 @@
 							<button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
 						</label>
 					</form>
-					<label class="select-label">
-						<select name="filter" id="filter" class="select-elem">
-							<option value="1">Фильтр</option>
-							<option value="2">Трудовой</option>
-							<option value="3">Не трудовой</option>
-						</select>
+					<label for="select_01" class="select">
+						<input type="radio" name="list" value="not_changed" id="bg_01" class="select-bg select-radio select-list" checked />
+						<input type="radio" name="list" value="not_changed" class="select-select select-radio select-list" id="select_01">
+						<label class="bg" for="bg_01"></label>
+						<div class="items">
+							<input type="radio" name="list" value="first_value" id="list[0]" class="select-radio select-list">
+							<label for="list[0]">Трудовой</label>
+							<input type="radio" name="list" value="second_value" id="list[1]" class="select-radio select-list">
+							<label for="list[1]">Не трудовой</label>
+							<span id="text" class="select-text">Фильтр</span>
+						</div>
 					</label>
 				</section>
 			</section>
@@ -74,39 +79,70 @@
 				<section class="header__bottom header__bottom_right" *ngIf="currentTab == 0">
 					<label class="filter-label">
 						<span class="graph-filter">Тип</span>
-						<label class="select-label select-label_graph">
-							<select class="select-elem">
-								<option value="1">Трудовой</option>
-								<option value="2">Не трудовой</option>
-							</select>
+						<label for="select_a_01" class="select select-label_graph">
+							<input type="radio" name="list_a" value="not_changed" id="bg_a_01" class="select-bg select-radio select-list" checked />
+							<input type="radio" name="list_a" value="not_changed" class="select-select select-radio select-list" id="select_a_01">
+							<label class="bg" for="bg_a_01"></label>
+							<div class="items">
+								<input type="radio" name="list_a" value="first_value" id="list_a[0]" class="select-radio select-list">
+								<label for="list_a[0]">Трудовой</label>
+								<input type="radio" name="list_a" value="second_value" id="list_a[1]" class="select-radio select-list">
+								<label for="list_a[1]">Не трудовой</label>
+								<span id="text_a" class="select-text">Фильтр</span>
+							</div>
 						</label>
 					</label>
 					<label class="filter-label">
 						<span class="graph-filter">Признак</span>
-						<label class="select-label select-label_graph">
-							<select class="select-elem">
-								<option value="1">Родительский</option>
-								<option value="2">Дочерний</option>
-							</select>
+
+						<label for="select_b" class="select select-label_graph">
+							<input type="radio" name="list_b" value="not_changed" id="bg_b" class="select-bg select-radio select-list" checked />
+							<input type="radio" name="list_b" value="not_changed" class="select-select select-radio select-list" id="select_b">
+							<label class="bg" for="bg_b"></label>
+							<div class="items">
+								<input type="radio" name="list_b" value="first_value" id="list_b[0]" class="select-radio select-list">
+								<label for="list_b[0]">Родительский</label>
+								<input type="radio" name="list_b" value="second_value" id="list_b[1]" class="select-radio select-list">
+								<label for="list_b[1]">Дочерний</label>
+								<span id="text_b" class="select-text">Признак</span>
+							</div>
 						</label>
+						
 					</label>
 					<label class="filter-label">
 						<span class="graph-filter">Частота</span>
-						<label class="select-label select-label_graph">
-							<select class="select-elem">
-								<option value="1">Раз в неделю</option>
-								<option value="2">Раз в месяц</option>
-								<option value="3">Раз в год</option>
-							</select>
+						
+						<label for="select_c" class="select select-label_graph">
+							<input type="radio" name="list_c" value="not_changed" id="bg_c" class="select-bg select-radio select-list" checked />
+							<input type="radio" name="list_c" value="not_changed" class="select-select select-radio select-list" id="select_c">
+							<label class="bg" for="bg_c"></label>
+							<div class="items">
+								<input type="radio" name="list_c" value="first_value" id="list_c[0]" class="select-radio select-list">
+								<label for="list_c[0]">Раз в неделю</label>
+								<input type="radio" name="list_c" value="second_value" id="list_c[1]" class="select-radio select-list">
+								<label for="list_c[1]">Раз в месяц</label>
+								<input type="radio" name="list_c" value="thrird_value" id="list_c[2]" class="select-radio select-list">
+								<label for="list_c[2]">Раз в год</label>
+								<span id="text_c" class="select-text">Частота</span>
+							</div>
 						</label>
+
+
 					</label>
 					<label class="filter-label">
 						<span class="graph-filter">Статус</span>
-						<label class="select-label select-label_graph">
-							<select class="select-elem">
-								<option value="1">Активен</option>
-								<option value="2">Пасивен</option>
-							</select>
+
+						<label for="select_d" class="select select-label_graph">
+							<input type="radio" name="list_d" value="not_changed" id="bg_d" class="select-bg select-radio select-list" checked />
+							<input type="radio" name="list_d" value="not_changed" class="select-select select-radio select-list" id="select_d">
+							<label class="bg" for="bg_d"></label>
+							<div class="items">
+								<input type="radio" name="list_d" value="first_value" id="list_d[0]" class="select-radio select-list">
+								<label for="list_d[0]">Активен</label>
+								<input type="radio" name="list_d" value="second_value" id="list_d[1]" class="select-radio select-list">
+								<label for="list_d[1]">Пасивен</label>
+								<span id="text_d" class="select-text">Статус</span>
+							</div>
 						</label>
 					</label>
 				</section>

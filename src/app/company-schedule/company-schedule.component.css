@@ -134,6 +134,11 @@
 	width: 127px;
 }
 
+.left-row__select .items
+{
+	width: 127px;
+}
+
 .legend-item
 {
 	padding: 12.5px;

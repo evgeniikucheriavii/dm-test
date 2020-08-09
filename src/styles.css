@@ -460,6 +460,7 @@ select::-ms-expand { display: none;}
 	width: 244px;
 	height: 36px;
 	box-sizing: border-box;
+	cursor: default;
 }
 
 .select:before
@@ -470,14 +471,14 @@ select::-ms-expand { display: none;}
 	position: absolute;
 	right: 4px;
 	top: 3.5px;
-	z-index: 2;
+	z-index: 32;
 	width: 29px;
 	height: 29px;
 	box-sizing: border-box;
 	padding-top: 2px;
 	text-align: center;
 	border-radius: 4px;
-	cursor: pointer;
+	cursor: default;
 }
 
 .select:hover:before
@@ -486,17 +487,17 @@ select::-ms-expand { display: none;}
 	content: url(assets/images/Up.png);
 }
 
-.select input[name="list"]:not(:checked) ~ .select-text
+.select .select-list:not(:checked) ~ .select-text
 {
 	color: black;
 	background: white;
 }
 
-.select input[name="list"]:checked ~ .select-text
+.select .select-list:checked ~ .select-text
 {
-	background: transparent;
-	color: transparent;
-	z-index: 2;
+	background: transparent !important;
+	color: transparent !important;
+	z-index: 300;
 }
 
 .select-select:disabled ~ .items .select-text
@@ -510,8 +511,9 @@ select::-ms-expand { display: none;}
 	min-height: 36px;
 	position: absolute; 
 	overflow: hidden; 
+	z-index: 30;
 	width: 244px;
-	cursor: pointer;
+	cursor: default;
 	background: #FFFFFF;
 	box-shadow: 0px 1px 4px rgba(9, 47, 64, 0.2);
 	border-radius: 4px;
@@ -534,7 +536,6 @@ select::-ms-expand { display: none;}
 {
 	background: #F1F6FD;
 	box-shadow: 0px 1px 1px rgba(8, 29, 61, 0.23);
-	cursor: pointer;
 }
 
 .select-select:checked ~ .items
@@ -562,6 +563,11 @@ select::-ms-expand { display: none;}
 	bottom: 0;
 	right: 0;
 	z-index: 0;
+}
+
+._top-select 
+{
+	z-index: 5000;
 }
 
 /* Select End*/

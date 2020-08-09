@@ -8,12 +8,17 @@
 			</label>
 		</label>
 
-		<label class="header-select-label select-label">
-			<select name="filter" id="filter" class="select-elem">
-				<option value="1">Фильтр</option>
-				<option value="2">Трудовой</option>
-				<option value="3">Не трудовой</option>
-			</select>
+		<label for="select_01" class="select header-select-label">
+			<input type="radio" name="list" value="not_changed" id="bg_01" class="select-bg select-radio select-list" checked />
+			<input type="radio" name="list" value="not_changed" class="select-select select-radio select-list" id="select_01">
+			<label class="bg" for="bg_01"></label>
+			<div class="items">
+				<input type="radio" name="list" value="first_value" id="list[0]" class="select-radio select-list">
+				<label for="list[0]">Трудовой</label>
+				<input type="radio" name="list" value="second_value" id="list[1]" class="select-radio select-list">
+				<label for="list[1]">Не трудовой</label>
+				<span id="text" class="select-text">Фильтр</span>
+			</div>
 		</label>
 
 		<label class="head-sales">
@@ -78,12 +83,20 @@
 							</label>
 							Заблокировать
 						</label>
-						<label class="header-select-label select-label details-select">
-							<select name="filter" id="filter" class="select-elem _details">
-								<option value="1">На 1 день</option>
-								<option value="2">На 1 неделю</option>
-								<option value="3">На 1 месяц</option>
-							</select>
+
+						<label for="select_a_{{i}}" class="select header-select-label details-select _top-select">
+							<input type="radio" name="list_a_{{i}}" value="not_changed" id="bg_a_{{i}}" class="select-bg select-radio _details select-list" checked />
+							<input type="radio" name="list_a_{{i}}" value="not_changed" class="select-select select-radio _details select-list" id="select_a_{{i}}">
+							<label class="bg _details" for="bg_a_{{i}}"></label>
+							<div class="items _details">
+								<input type="radio" name="list_a_{{i}}" value="first_value" id="list_a_{{i}}[0]" class="select-radio _details select-list">
+								<label for="list_a_{{i}}[0]" class="_details">На 1 день</label>
+								<input type="radio" name="list_a_{{i}}" value="second_value" id="list_a_{{i}}[1]" class="select-radio _details select-list">
+								<label for="list_a_{{i}}[1]" class="_details">На 1 неделю</label>
+								<input type="radio" name="list_a_{{i}}" value="thrird_value" id="list_a_{{i}}[2]" class="select-radio _details select-list">
+								<label for="list_a_{{i}}[2]" class="_details">На 1 месяц</label>
+								<span id="text_a_{{i}}" class="select-text _details">Заблокировать</span>
+							</div>
 						</label>
 
 						<label class="details-toggle" disabled>
@@ -93,12 +106,20 @@
 							</label>
 							Уведомления
 						</label>
-						<label class="header-select-label select-label details-select" disabled>
-							<select name="filter" id="filter" class="select-elem _details" disabled>
-								<option value="1">За час и полчаса</option>
-								<option value="2">За день</option>
-								<option value="3">За неделю</option>
-							</select>
+
+						<label for="select_b_{{i}}" class="select header-select-label details-select">
+							<input type="radio" name="list_b_{{i}}" value="not_changed" id="bg_b_{{i}}" class="select-bg select-radio _details select-list" checked />
+							<input type="radio" name="list_b_{{i}}" value="not_changed" class="select-select select-radio _details select-list" id="select_b_{{i}}">
+							<label class="bg _details" for="bg_b_{{i}}"></label>
+							<div class="items _details">
+								<input type="radio" name="list_b_{{i}}" value="first_value" id="list_b_{{i}}[0]" class="select-radio _details select-list">
+								<label for="list_b_{{i}}[0]" class="_details">За час и полчаса</label>
+								<input type="radio" name="list_b_{{i}}" value="second_value" id="list_b_{{i}}[1]" class="select-radio _details select-list">
+								<label for="list_b_{{i}}[1]" class="_details">За день</label>
+								<input type="radio" name="list_b_{{i}}" value="thrird_value" id="list_b_{{i}}[2]" class="select-radio _details select-list">
+								<label for="list_b_{{i}}[2]" class="_details">За неделю</label>
+								<span id="text_b_{{i}}" class="select-text _details">Уведомить</span>
+							</div>
 						</label>
 					</div>
 				</div>

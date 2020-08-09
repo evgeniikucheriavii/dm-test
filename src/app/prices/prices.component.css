@@ -122,6 +122,11 @@
 	width: 90%;
 }
 
+.details-select .items
+{
+	width: 100%;
+}
+
 .list-row_b:hover .details-button
 {
 	display: block;

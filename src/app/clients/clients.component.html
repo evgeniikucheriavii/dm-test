@@ -23,12 +23,17 @@
 							<button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
 						</label>
 					</form>
-					<label class="select-label">
-						<select name="filter" id="filter" class="select-elem">
-							<option value="1">Фильтр</option>
-							<option value="2">Трудовой</option>
-							<option value="3">Не трудовой</option>
-						</select>
+					<label for="select_01" class="select">
+						<input type="radio" name="list" value="not_changed" id="bg_01" class="select-bg select-radio select-list" checked />
+						<input type="radio" name="list" value="not_changed" class="select-select select-radio select-list" id="select_01">
+						<label class="bg" for="bg_01"></label>
+						<div class="items">
+							<input type="radio" name="list" value="first_value" id="list[0]" class="select-radio select-list">
+							<label for="list[0]">Трудовой</label>
+							<input type="radio" name="list" value="second_value" id="list[1]" class="select-radio select-list">
+							<label for="list[1]">Не трудовой</label>
+							<span id="text" class="select-text">Фильтр</span>
+						</div>
 					</label>
 				</section>
 			</section>

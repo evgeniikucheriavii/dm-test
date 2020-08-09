@@ -80,7 +80,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 		
 
 
-		this.currentTab = 1;
+		this.currentTab = 0;
 
 		this.tabs = [
 			new Tab("contacts", "Загрузка"),
