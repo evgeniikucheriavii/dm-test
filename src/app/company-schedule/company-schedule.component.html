@@ -131,7 +131,10 @@
 		<div class="time-table">
 			<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
 				<div class="table-col table-col_time">
-					<div class="time-content">{{t.hour}}:00</div>
+					<div class="time-content">
+						<div>{{t.hour}}:00</div>
+						<div *ngIf="IsCurrentHour(t.hour)">сейчас</div>
+					</div>
 				</div>
 			</div>
 		</div>

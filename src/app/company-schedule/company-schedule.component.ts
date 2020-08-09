@@ -126,6 +126,18 @@ export class CompanyScheduleComponent implements OnInit
 		];
 	}
 
+	IsCurrentHour(hour:number)
+	{
+		if(this.currentHour == hour)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	GetRowClass(hour:number)
 	{
 		if(this.currentHour > hour)
