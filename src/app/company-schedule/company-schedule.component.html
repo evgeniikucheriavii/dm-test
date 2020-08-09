@@ -128,20 +128,22 @@
 	</section>
 
 	<section class="section__right">
+		<div class="time-table">
+			<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
+				<div class="table-col table-col_time">
+					<div class="time-content">{{t.hour}}:00</div>
+				</div>
+			</div>
+		</div>
 		<div class="schedule-table">
 
 			<div class="table-row table-row_head">
-				<div class="table-col table-col_time"></div>
-				<div class="table-col" *ngFor="let s of schedule; let i = index;">
+				<div class="table-col" *ngFor="let s of schedule; let i = index;" >
 					{{s.name}}
 				</div>
 			</div>
 
 			<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
-				<div class="table-col table-col_time">
-					<div class="time-content">{{t.hour}}:00</div>
-				</div>
-
 				<div class="table-col" *ngFor="let s of schedule; let i = index;">
 					<div *ngIf="s.HasTasks(t.hour)" class="table-col__container">
 						<div class="table-task {{j.Classes()}}"

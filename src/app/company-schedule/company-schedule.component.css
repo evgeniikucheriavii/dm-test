@@ -173,9 +173,18 @@
 
 	box-shadow: 0px 2px 4px rgba(4, 41, 57, 0.25);
 	border-radius: 4px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: stretch;
 }
 
 /**/
+
+.time-table
+{
+	margin-top: 55px;
+}
 
 .schedule-table
 {

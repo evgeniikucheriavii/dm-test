@@ -390,8 +390,13 @@ select::-ms-expand { display: none;}
 
 .select-label_graph
 {
-	width: 212px;
+	width: 212px !important;
 	margin: 10px;
+}
+
+.select-label_graph .items
+{
+	width: 212px;
 }
 
 .select-label:focus-within, .select-label:hover
