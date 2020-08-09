@@ -9,12 +9,17 @@
 			</label>
 		</label>
 
-		<label class="header-select-label select-label">
-			<select name="filter" id="filter" class="select-elem">
-				<option value="1">Фильтр</option>
-				<option value="2">Трудовой</option>
-				<option value="3">Не трудовой</option>
-			</select>
+		<label for="select_01" class="select header-select-label">
+			<input type="radio" name="list" value="not_changed" id="bg_01" class="select-bg select-radio" checked />
+			<input type="radio" name="list" value="not_changed" class="select-select select-radio" id="select_01">
+			<label class="bg" for="bg_01"></label>
+			<div class="items">
+				<input type="radio" name="list" value="first_value" id="list[0]" class="select-radio">
+				<label for="list[0]">Трудовой</label>
+				<input type="radio" name="list" value="second_value" id="list[1]" class="select-radio">
+				<label for="list[1]">Не трудовой</label>
+				<span id="text" class="select-text">Фильтр</span>
+			</div>
 		</label>
 
 		<label class="header-date-label__element date-label">
@@ -70,9 +75,9 @@
 
 						</div>
 					</div>
-					
+
 				</div>
-				
+
 
 			</div>
 		</div>
@@ -83,7 +88,8 @@
 				<span class="status__value">утверждено</span>
 			</div>
 
-			<button class="button" disabled><img src="assets/images/Approve_W.svg" class="button__image"> Утвердить</button>
+			<button class="button" disabled><img src="assets/images/Approve_W.svg" class="button__image">
+				Утвердить</button>
 			<button class="button"><img src="assets/images/Cancel.svg" class="button__image"> Отозвать</button>
 		</div>
 
