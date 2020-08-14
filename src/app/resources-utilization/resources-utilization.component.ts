@@ -80,11 +80,13 @@ export class ResourcesUtilizationComponent implements OnInit {
 		
 
 
-		this.currentTab = 0;
+		this.currentTab = 2;
 
 		this.tabs = [
-			new Tab("contacts", "Загрузка"),
-			new Tab("reserve", "Услуги"),
+			new Tab("profile", "Профиль"),
+			new Tab("sales", "Продажи"),
+			new Tab("load", "Загрузка"),
+			new Tab("service", "Услуги"),
 			new Tab("log", "Лог")
 		];
 

@@ -54,7 +54,6 @@
 	flex-direction: column;
 	justify-content: stretch;
 	align-items: stretch;
-	flex: 2;
 }
 
 .header__top
@@ -82,7 +81,7 @@
 {
 	font-size: 22px;
 	line-height: 26px;
-	flex: 3;
+	color: #042635;
 }
 
 .header-section__right
@@ -148,7 +147,6 @@
 	display: flex;
 	flex-direction: column;
 	align-content: flex-start;
-	flex: 4;
 }
 
 .resources-row
@@ -203,11 +201,11 @@
 
 .left-section__pages
 {
-	flex: 1;
 	display: flex;
 	flex-direction: row;
 	align-content: space-around;
-	justify-content: center;
+	justify-content: start;
+	padding: 0 30px 20px 30px;
 	align-items: center;
 }
 

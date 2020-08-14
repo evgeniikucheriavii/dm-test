@@ -4,16 +4,9 @@
 			<section class="left-section left-section__header">
 
 				<section class="header__top header__top_left">
-
 					<section class="header-section header-section__left">
 						Список ресурсов
 					</section>
-			
-					<section class="header-section header-section__right">
-						<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-						<button class="button"><img src="assets/images/Import.svg" class="button__image"> Импортировать</button>
-					</section>
-					
 				</section>
 			
 				<section class="header__bottom header__bottom_left">
@@ -45,24 +38,21 @@
 					<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Тип</div>
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Утилизация</div>
 				</div>
-				<div class="list-row" *ngFor="let r of resources; let i = index">
-					<div class="list__num">{{i + 1}}</div>
-					<div class="list__name">{{r.name}}</div>
-					<div class="list__type">{{r.type}}</div>
-					<div class="list__util _{{r.color}}">{{r.util}}%</div>
+				<div class="list__body" style="height: 600px;">
+					<div class="list-row" *ngFor="let r of resources; let i = index">
+						<div class="list__num">{{i + 1}}</div>
+						<div class="list__name">{{r.name}}</div>
+						<div class="list__type">{{r.type}}</div>
+						<div class="list__util _{{r.color}}">{{r.util}}%</div>
+					</div>
 				</div>
 			</section>
-			<section class="left-section left-section__pages">
-				<a href="#" class="page-link page-link_inactive"><img src="assets/images/Left_b.svg" class="button__image"> Пред</a>
-				<a href="#" class="page-link">1</a>
-				<a href="#" class="page-link page-link_inactive">...</a>
-				<a href="#" class="page-link">4</a>
-				<a href="#" class="page-link page-link_active">5</a>
-				<a href="#" class="page-link">6</a>
-				<a href="#" class="page-link page-link_inactive">...</a>
-				<a href="#" class="page-link">11</a>
-				<a href="#" class="page-link">След <img src="assets/images/Right_b.svg" class="button__image"></a>
+
+			<section class="left-section__pages">
+				<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+				<button class="button"><img src="assets/images/Import.svg" class="button__image"> Импортировать</button>
 			</section>
+
 		</div>
 	</section>
 	<section class="main-section main-section_right">
@@ -75,80 +65,8 @@
 					</div>
 				</section>
 
-				<!--Load-->
-				<section class="header__bottom header__bottom_right" *ngIf="currentTab == 0">
-					<label class="filter-label">
-						<span class="graph-filter">Тип</span>
-						<label for="select_a_01" class="select select-label_graph">
-							<input type="radio" name="list_a" value="not_changed" id="bg_a_01" class="select-bg select-radio select-list" checked />
-							<input type="radio" name="list_a" value="not_changed" class="select-select select-radio select-list" id="select_a_01">
-							<label class="bg" for="bg_a_01"></label>
-							<div class="items">
-								<input type="radio" name="list_a" value="first_value" id="list_a[0]" class="select-radio select-list">
-								<label for="list_a[0]">Трудовой</label>
-								<input type="radio" name="list_a" value="second_value" id="list_a[1]" class="select-radio select-list">
-								<label for="list_a[1]">Не трудовой</label>
-								<span id="text_a" class="select-text">Фильтр</span>
-							</div>
-						</label>
-					</label>
-					<label class="filter-label">
-						<span class="graph-filter">Признак</span>
-
-						<label for="select_b" class="select select-label_graph">
-							<input type="radio" name="list_b" value="not_changed" id="bg_b" class="select-bg select-radio select-list" checked />
-							<input type="radio" name="list_b" value="not_changed" class="select-select select-radio select-list" id="select_b">
-							<label class="bg" for="bg_b"></label>
-							<div class="items">
-								<input type="radio" name="list_b" value="first_value" id="list_b[0]" class="select-radio select-list">
-								<label for="list_b[0]">Родительский</label>
-								<input type="radio" name="list_b" value="second_value" id="list_b[1]" class="select-radio select-list">
-								<label for="list_b[1]">Дочерний</label>
-								<span id="text_b" class="select-text">Признак</span>
-							</div>
-						</label>
-						
-					</label>
-					<label class="filter-label">
-						<span class="graph-filter">Частота</span>
-						
-						<label for="select_c" class="select select-label_graph">
-							<input type="radio" name="list_c" value="not_changed" id="bg_c" class="select-bg select-radio select-list" checked />
-							<input type="radio" name="list_c" value="not_changed" class="select-select select-radio select-list" id="select_c">
-							<label class="bg" for="bg_c"></label>
-							<div class="items">
-								<input type="radio" name="list_c" value="first_value" id="list_c[0]" class="select-radio select-list">
-								<label for="list_c[0]">Раз в неделю</label>
-								<input type="radio" name="list_c" value="second_value" id="list_c[1]" class="select-radio select-list">
-								<label for="list_c[1]">Раз в месяц</label>
-								<input type="radio" name="list_c" value="thrird_value" id="list_c[2]" class="select-radio select-list">
-								<label for="list_c[2]">Раз в год</label>
-								<span id="text_c" class="select-text">Частота</span>
-							</div>
-						</label>
-
-
-					</label>
-					<label class="filter-label">
-						<span class="graph-filter">Статус</span>
-
-						<label for="select_d" class="select select-label_graph">
-							<input type="radio" name="list_d" value="not_changed" id="bg_d" class="select-bg select-radio select-list" checked />
-							<input type="radio" name="list_d" value="not_changed" class="select-select select-radio select-list" id="select_d">
-							<label class="bg" for="bg_d"></label>
-							<div class="items">
-								<input type="radio" name="list_d" value="first_value" id="list_d[0]" class="select-radio select-list">
-								<label for="list_d[0]">Активен</label>
-								<input type="radio" name="list_d" value="second_value" id="list_d[1]" class="select-radio select-list">
-								<label for="list_d[1]">Пасивен</label>
-								<span id="text_d" class="select-text">Статус</span>
-							</div>
-						</label>
-					</label>
-				</section>
-
 				<!--Service-->
-				<section class="header__bottom header__bottom_right" *ngIf="currentTab == 1">
+				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'service'">
 					<label class="header-search-label">
 						<span class="header-search-label__title">Поиск  </span>
 						<label class="header-search-label__element search-label">
@@ -160,13 +78,13 @@
 				</section>
 
 				<!--Log-->
-				<section class="header__bottom header__bottom_right" *ngIf="currentTab == 2">
+				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'log'">
 					
 				</section>
 			</section>
 
 			<!--Load-->
-			<section class="right-section right-section__graph" *ngIf="currentTab == 0">
+			<section class="right-section right-section__graph" *ngIf="tabs[currentTab].id == 'load'">
 				<div class="graph-row graph-row_head">
 					<div class="graph-column"><button class="arrow-button arrow-button_left"></button></div>
 					<div class="graph-column graph-column_head" *ngFor="let d of dates">
@@ -193,7 +111,7 @@
 			</section>
 
 			<!--Services-->
-			<section class="right-section right-section__graph" *ngIf="currentTab == 1">
+			<section class="right-section right-section__graph" *ngIf="tabs[currentTab].id == 'service'">
 				<section class="left-section left-section__list resources-list">
 					<div class="list-row list-row_head resources-row resources-list__head">
 						<div class="list__num">#</div>
@@ -213,7 +131,7 @@
 			</section>
 
 			<!--Log-->
-			<section class="right-section right-section__graph" *ngIf="currentTab == 2">
+			<section class="right-section right-section__graph" *ngIf="tabs[currentTab].id == 'log'">
 				Log
 			</section>
 		</div>
