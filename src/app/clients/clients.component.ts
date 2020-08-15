@@ -60,8 +60,9 @@ export class ClientsComponent implements OnInit
 		];
 
 		this.currentClient.contacts = [
-			new Contact(0, "88005553535", "20.03.2020"),
-			new Contact(1, "mail@gmail.com", "20.03.2020")
+			new Contact(0, "Телефон",  "88005553535", "20.03.2020"),
+			new Contact(1, "Почта", "mail@gmail.com", "20.03.2020"),
+			new Contact(1, "WhatsApp", "88005553535", "20.03.2020")
 		];
 
 		this.currentClient.transactions = [
@@ -77,6 +78,12 @@ export class ClientsComponent implements OnInit
 				new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020")
 		];
 
+		this.currentClient.specials = [
+			new Special("Коммуникации только по email", "20.03.2019"),
+			new Special("Коммуникации только по email", "20.03.2019"),
+			new Special("Коммуникации только по email", "20.03.2019")
+		];
+
 		this.tabs = [
 			new Tab("profile", "Профиль"),
 			new Tab("sales", "Покупки"),
@@ -84,7 +91,7 @@ export class ClientsComponent implements OnInit
 			new Tab("log", "История обращений")
 		];
 
-		this.currentTab = 3;
+		this.currentTab = 0;
 
 		this.tabs[this.currentTab].Activate();
 	}
@@ -117,6 +124,8 @@ class Client
 	contacts = [];
 	transactions = [];
 
+	specials = [];
+
 	ltvString:string;
 	
 	constructor(fio:string, rfm:number, ltv:number)
@@ -140,13 +149,15 @@ class Client
 class Contact
 {
 	type:number;
+	name:string;
 	value:string;
 	lastdate:string;
 	typeString:string;
 
-	constructor(type:number, value:string, lastdate:string)
+	constructor(type:number, name:string, value:string, lastdate:string)
 	{
 		this.type = type;
+		this.name = name;
 		this.value = value;
 		this.lastdate = lastdate;
 
@@ -173,6 +184,18 @@ class TransactionLog
 		this.service = service;
 		this.master = master;
 		this.sum = sum;
+		this.date = date;
+	}
+}
+
+class Special
+{
+	name:string;
+	date:string;
+
+	constructor(name:string, date:string)
+	{
+		this.name = name;
 		this.date = date;
 	}
 }

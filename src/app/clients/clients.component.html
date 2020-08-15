@@ -109,52 +109,56 @@
 					</div>
 				</div>
 
+				<section class="left-section left-section__list transactions-list">
+					<div class="list__title">Особенность</div>
+					<div class="list-row list-row_head transactions-list__head">
+						<div class="list__num">#</div>
+						<div class="list__name">Особенность</div>
+						<div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Добавлено</div>
+					</div>
+					<div class="transactions-list__body">
+						<div class="list-row" *ngFor="let s of currentClient.specials; let i = index">
+							<div class="list__num">{{i + 1}}</div>
+							<div class="list__name">{{s.name}}</div>
+							<div class="list__name">{{s.date}}</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="left-section left-section__pages">
+					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+				</section>
+
 				<section class="left-section left-section__list contacts-list">
 					<div class="list__title">Контакты</div>
 					<div class="list-row list-row_head contacts-list__head">
 						<div class="list__num">#</div>
 						<div class="list__name">Канал</div>
 						<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Номер \ Ник</div>
-						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Последняя коммуникация</div>
+						<div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Последняя коммуникация</div>
 						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Действие</div>
 					</div>
 					<div class="list-row" *ngFor="let c of currentClient.contacts; let i = index">
 						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{c.typeString}}</div>
+						<div class="list__name">{{c.name}}</div>
 						<div class="list__type">{{c.value}}</div>
-						<div class="list__util">{{c.lastdate}}</div>
+						<div class="list__name">{{c.lastdate}}</div>
 						<div class="list__util">
 							<div *ngIf="c.type == 0; then callBlock else mailBlock"></div>
 							<ng-template #callBlock>
-								<img src="assets/images/Phone.svg" class="status-column__image">
+								<button class="button contact-button"><img src="assets/images/Call.svg" class="button__image"> Позвонить</button>
 								<img src="assets/images/Dots.svg" class="status-column__dots">
 							</ng-template>
 							<ng-template #mailBlock>
-								<img src="assets/images/Mail_blue.svg" class="status-column__image">
+								<button class="button contact-button"><img src="assets/images/Write.svg" class="button__image"> Написать</button>
 								<img src="assets/images/Dots.svg" class="status-column__dots">
 							</ng-template> 
 						</div>
 					</div>
 				</section>
 
-				<section class="left-section left-section__list transactions-list">
-					<div class="list__title">Транзакции</div>
-					<div class="list-row list-row_head transactions-list__head">
-						<div class="list__num">#</div>
-						<div class="list__name">Услуга</div>
-						<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Мастер</div>
-						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Стоимость</div>
-						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Дата</div>
-					</div>
-					<div class="transactions-list__body">
-						<div class="list-row" *ngFor="let t of currentClient.transactions; let i = index">
-							<div class="list__num">{{i + 1}}</div>
-							<div class="list__name">{{t.service}}</div>
-							<div class="list__type">{{t.master}}</div>
-							<div class="list__util">{{t.sum}}</div>
-							<div class="list__util">{{t.date}}</div>
-						</div>
-					</div>
+				<section class="left-section left-section__pages">
+					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
 				</section>
 				
 			</section>

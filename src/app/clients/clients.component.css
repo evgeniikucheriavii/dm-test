@@ -198,15 +198,14 @@
 {
 	font-style: normal;
 	font-weight: 500;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 16px;
-	color: #042635;
+	color: #3D71BF;
 	padding: 8px 0;
 }
 
 .contacts-list
 {
-	flex: 1 !important;
 	margin-bottom: 20px;
 }
 
@@ -215,12 +214,9 @@
 	border-bottom: 1px solid #3D71BF !important;
 }
 
-.transactions-list
+.contact-button
 {
-	flex: 4 !important;
-	max-height: 300px;
-	margin-bottom: 130px !important;
-	overflow: hidden;
+	width: 107px;
 }
 
 .transactions-list__body
