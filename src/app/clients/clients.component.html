@@ -8,11 +8,6 @@
 					<section class="header-section header-section__left">
 						Список клиентов
 					</section>
-			
-					<section class="header-section header-section__right">
-						<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-						<button class="button"><img src="assets/images/Import.svg" class="button__image"> Импортировать</button>
-					</section>
 					
 				</section>
 			
@@ -46,24 +41,19 @@
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> RFM</div>
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> LTV</div>
 				</div>
-				<div class="list-row" *ngFor="let c of clients; let i = index">
-					<div class="list__num">{{i + 1}}</div>
-					<div class="list__name">{{c.fio}}</div>
-					<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox"></label></div>
-					<div class="list__util">{{c.rfm}}</div>
-					<div class="list__util">{{c.ltvString}}</div>
+				<div class="list__body" style="height: 600px;">
+					<div class="list-row" *ngFor="let c of clients; let i = index">
+						<div class="list__num">{{i + 1}}</div>
+						<div class="list__name">{{c.fio}}</div>
+						<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox"></label></div>
+						<div class="list__util">{{c.rfm}}</div>
+						<div class="list__util">{{c.ltvString}}</div>
+					</div>
 				</div>
 			</section>
 			<section class="left-section left-section__pages">
-				<a href="#" class="page-link page-link_inactive"><img src="assets/images/Left_b.svg" class="button__image"> Пред</a>
-				<a href="#" class="page-link">1</a>
-				<a href="#" class="page-link page-link_inactive">...</a>
-				<a href="#" class="page-link">4</a>
-				<a href="#" class="page-link page-link_active">5</a>
-				<a href="#" class="page-link">6</a>
-				<a href="#" class="page-link page-link_inactive">...</a>
-				<a href="#" class="page-link">11</a>
-				<a href="#" class="page-link">След <img src="assets/images/Right_b.svg" class="button__image"></a>
+				<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+				<button class="button"><img src="assets/images/Import.svg" class="button__image"> Импортировать</button>
 			</section>
 		</div>
 	</section>
@@ -76,10 +66,22 @@
 						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
 					</div>
 				</section>
+				
+				<!--Log-->
+				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'log'">
+					<label class="header-search-label">
+						<span class="header-search-label__title">Поиск  </span>
+						<label class="header-search-label__element search-label">
+							<input type="search" class="search-input" name="search" id="search_input">
+							<button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
+						</label>
+					</label>
+				</section>
+
 			</section>
 
-			<!--Contacts-->
-			<section class="right-section right-section__transactions" *ngIf="currentTab == 0">
+			<!--profile-->
+			<section class="right-section right-section__transactions" *ngIf="tabs[currentTab].id == 'profile'">
 				<div class="banner">					
 					<div class="banner-item">
 						<div class="banner-item__header">RFM: </div>
@@ -158,32 +160,39 @@
 			</section>
 
 			<!--Reserve-->
-			<section class="right-section right-section__list" *ngIf="currentTab == 1">
-				Reserve
+			<section class="right-section right-section__list" *ngIf="tabs[currentTab].id == 'reserve'">
+				Бронирование
 			</section>
 
 			<!--Log-->
-			<section class="right-section right-section__list" *ngIf="currentTab == 2">
+			<section class="right-section right-section__list" *ngIf="tabs[currentTab].id == 'log'">
 				<div class="list-row list-row_head">
 					<div class="list__num">#</div>
 					<div class="list__name">Обращение</div>
 					<div class="list__service"><img src="assets/images/Sort_inactive.png" class="sort-image"> Услуга</div>
-					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Мастер</div>
+					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Ресурс</div>
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Дата</div>
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Статус</div>
 				</div>
-				<div class="list-row" *ngFor="let l of currentClient.log; let i = index">
-					<div class="list__num">{{i + 1}}</div>
-					<div class="list__name">{{l.query}}</div>
-					<div class="list__service">{{l.service}}</div>
-					<div class="list__util">{{l.master}}</div>
-					<div class="list__util">{{l.date}}</div>
-					<div class="list__util">
-						<div *ngIf="l.status; then closedBlock else openBlock"></div>
-						<ng-template #closedBlock><span class="status-column status-column_closed"><img src="assets/images/Closed.svg" class="status-column__image"> {{l.statusString}}</span></ng-template>
-						<ng-template #openBlock><span class="status-column status-column_open"><img src="assets/images/Open.svg" class="status-column__image"> {{l.statusString}}</span></ng-template> 
+				<div class="list__body" style="height: 610px;">
+					<div class="list-row" *ngFor="let l of currentClient.log; let i = index">
+						<div class="list__num">{{i + 1}}</div>
+						<div class="list__name">{{l.query}}</div>
+						<div class="list__service">{{l.service}}</div>
+						<div class="list__util">{{l.master}}</div>
+						<div class="list__util">{{l.date}}</div>
+						<div class="list__util">
+							<div *ngIf="l.status; then closedBlock else openBlock"></div>
+							<ng-template #closedBlock><span class="status-column status-column_closed"><img src="assets/images/Closed.svg" class="status-column__image"> {{l.statusString}}</span></ng-template>
+							<ng-template #openBlock><span class="status-column status-column_open"><img src="assets/images/Open.svg" class="status-column__image"> {{l.statusString}}</span></ng-template> 
+						</div>
 					</div>
 				</div>
+				
+				<section class="left-section left-section__pages">
+					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+				</section>
+
 			</section>
 		</div>
 	</section>

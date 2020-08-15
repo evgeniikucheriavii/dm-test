@@ -78,12 +78,13 @@ export class ClientsComponent implements OnInit
 		];
 
 		this.tabs = [
-			new Tab("contacts", "Контакты и транзакции"),
+			new Tab("profile", "Профиль"),
+			new Tab("sales", "Покупки"),
 			new Tab("reserve", "Бронирование"),
 			new Tab("log", "История обращений")
 		];
 
-		this.currentTab = 0;
+		this.currentTab = 3;
 
 		this.tabs[this.currentTab].Activate();
 	}
