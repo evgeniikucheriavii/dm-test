@@ -250,6 +250,22 @@ export class ResourcesUtilizationComponent implements OnInit {
 		
 	}
 
+	ScrollLeft()
+	{
+		let table = document.getElementById("schedule-table");
+
+		let leftScroll = document.getElementById("schedule-table");
+		let rightScroll = document.getElementById("schedule-table");
+
+		
+
+	}
+
+	ScrollRigth()
+	{
+
+	}
+
 }
 
 class Resource

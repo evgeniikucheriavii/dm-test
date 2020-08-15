@@ -95,9 +95,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="schedule-table">
-		
+				<div class="schedule-table" id="schedule-table">
+					<button class="arrow-button arrow-button_left" id="left-scroll" disabled></button>
+					<button class="arrow-button arrow-button_right" id="right-scroll"></button>
+
 					<div class="table-row table-row_head">
+						
 						<div class="table-col" *ngFor="let s of schedule; let i = index;" >
 							{{s.name}}
 						</div>

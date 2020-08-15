@@ -541,3 +541,18 @@
 }
 
 /**/
+
+/**/
+
+#left-scroll, #right-scroll
+{
+	position: fixed;
+	top: 200px;
+}
+
+#right-scroll
+{
+	left: 1810px;
+}
+
+/**/

@@ -180,6 +180,32 @@ textarea, select, input, button { outline: none; }
 	background-color: #0C62E3;
 }
 
+.arrow-button:disabled
+{
+	background-color: #F6F9FC;
+	border: 2px solid #D3DBF1;
+	cursor: default;
+}
+
+.arrow-button:disabled:hover
+{
+	border: 2px solid #D3DBF1;
+	background-color: #F6F9FC;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.arrow-button_left:disabled, .arrow-button_left:disabled:hover
+{
+	background-image: url(assets/images/Left_d.svg);
+}
+
+.arrow-button_right:disabled, .arrow-button_right:disabled:hover
+{
+	background-image: url(assets/images/Right_d.svg);
+}
+
+
 .page-link
 {
 	padding: 8px 12px;
@@ -782,7 +808,6 @@ select::-ms-expand { display: none;}
 {
 	flex: 2;
 }
-
 
 .list__body
 {
