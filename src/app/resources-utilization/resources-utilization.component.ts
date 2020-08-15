@@ -250,22 +250,49 @@ export class ResourcesUtilizationComponent implements OnInit {
 		
 	}
 
-	ScrollLeft()
+	ScrollTable(d:number)
+	{
+		let step = 100;
+
+		let table = document.getElementById("schedule-table");
+
+		let maxScrollLeft = table.scrollWidth - table.clientWidth;
+
+		let leftScroll = document.getElementById("left-scroll");
+		let rightScroll = document.getElementById("right-scroll");
+
+		table.scrollTo(table.scrollLeft + (step * d), 0);
+
+		this.CheckScroll();
+	}
+
+	CheckScroll()
 	{
 		let table = document.getElementById("schedule-table");
 
-		let leftScroll = document.getElementById("schedule-table");
-		let rightScroll = document.getElementById("schedule-table");
+		let maxScrollLeft = table.scrollWidth - table.clientWidth;
 
-		
+		let leftScroll = document.getElementById("left-scroll");
+		let rightScroll = document.getElementById("right-scroll");
 
+		if(table.scrollLeft == 0)
+		{
+			leftScroll.setAttribute("disabled", "disabled");
+		}
+		else
+		{
+			leftScroll.removeAttribute("disabled");
+		}
+
+		if(table.scrollLeft == maxScrollLeft)
+		{
+			rightScroll.setAttribute("disabled", "disabled");
+		}
+		else
+		{
+			rightScroll.removeAttribute("disabled");
+		}
 	}
-
-	ScrollRigth()
-	{
-
-	}
-
 }
 
 class Resource
