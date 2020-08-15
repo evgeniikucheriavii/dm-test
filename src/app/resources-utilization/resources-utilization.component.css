@@ -330,6 +330,19 @@
 
 /**/
 
+.head-name
+{
+	position: relative;
+	left: 10px;
+}
+
+.head-percent
+{
+	position: relative;
+	left: 20px;
+	font-size: 14px;
+}
+
 .time-table
 {
 	margin-top: 55px;
