@@ -195,9 +195,16 @@
 
 .status-img
 {
-	width: 8px;
+	width: 9px;
+	height: 9px;
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.status-img_done
+{
+	width: 5px;
+	height: 5px;
 }
 
 .header-status-img
@@ -207,24 +214,28 @@
 	margin: 5px 10px 5px 15px;
 }
 
-.status_active
+.status_active, .status_done, .status_fail
 {
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 14px;
 	line-height: 16px;
-
-	color: #5AB413;
 }
 
-.status_closed
+.status_active
 {
-	font-family: Roboto;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 14px;
-	line-height: 16px;
+	color: #EBBA00;
+}
+
+.status_done
+{
+	color: #00CB00;
+}
+
+.status_fail
+{
+	color: #D42F45;
 }
 
 .content-bottom__right

@@ -2,10 +2,10 @@
 	<section class="content-section">
 		<section class="content-section__top">
 			<!--utilization-rules-->
-			<div *ngIf="currentTab == 0" class="top_rules">Настройка правила: <span class="rule-name">{{currentRule.title}}</span></div>
+			<div *ngIf="tabs[currentTab].id == 'rules'" class="top_rules">Настройка правила: <span class="rule-name">{{currentRule.title}}</span></div>
 
 			<!--actions-->
-			<div *ngIf="currentTab == 1" class="top_actions">
+			<div *ngIf="tabs[currentTab].id == 'actions'" class="top_actions">
 				<label class="header-search-label">
 					<span class="header-search-label__title">Поиск  </span>
 					<label class="header-search-label__element search-label">
@@ -54,7 +54,7 @@
 		</section>
 
 		<!--utilization-rules-->
-		<section class="content-section__bottom bottom_rules" *ngIf="currentTab == 0">
+		<section class="content-section__bottom bottom_rules" *ngIf="tabs[currentTab].id == 'rules'">
 			
 			<section class="content-bottom__left left_rules">
 
@@ -102,7 +102,7 @@
 		</section>
 
 		<!--action-->
-		<section class="content-section__bottom bottom_actions" *ngIf="currentTab == 1">
+		<section class="content-section__bottom bottom_actions" *ngIf="tabs[currentTab].id == 'actions'">
 
 			<section class="actions-bottom__left">
 				<section class="left-section left-section__list resources-list" style="height: 745px;">
@@ -122,14 +122,19 @@
 							<div class="list__service">{{r.interval}}</div>
 							<div class="list__util">{{r.vote}}</div>
 							<div class="list__util">
-								<div *ngIf="r.status == 0" class="status_closed">
-									<img src="assets/images/Lock.svg" class="status-img">
-									закрыто
+								<div *ngIf="r.status == 0" class="status_done">
+									<img src="assets/images/Green_dot.svg" class="status-img status-img_done">
+									завершен
 								</div>
 
 								<div *ngIf="r.status == 1" class="status_active">
-									<img src="assets/images/Active.svg" class="status-img">
-									активно
+									<img src="assets/images/Yellow_dots.svg" class="status-img status-img_active">
+									активен
+								</div>
+
+								<div *ngIf="r.status == -1" class="status_fail">
+									<img src="assets/images/Red_dot.svg" class="status-img status-img_fail">
+									не удачно
 								</div>
 							</div>
 						</div>
