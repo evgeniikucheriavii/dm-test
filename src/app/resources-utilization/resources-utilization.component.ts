@@ -192,7 +192,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 		
 
 
-		this.currentTab = 2;
+		this.currentTab = 3;
 
 		this.tabs = [
 			new Tab("profile", "Профиль"),

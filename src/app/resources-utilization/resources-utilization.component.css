@@ -157,8 +157,7 @@
 .resources-list
 {
 	flex: 4 !important;
-	max-height: 550px;
-	margin-bottom: 130px !important;
+	max-height: 640px;
 	overflow: hidden;
 }
 
