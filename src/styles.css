@@ -18,7 +18,32 @@ body, html
 	background: linear-gradient(0deg, #F9FCFD, #F9FCFD), #FFFFFF;
 }
 
+::-webkit-scrollbar 
+{
+	width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track 
+{
+	background: linear-gradient(180deg, rgba(0, 64, 160, 0.1) 0%, rgba(26, 82, 165, 0.1) 77.78%);
+	opacity: 0.1;
+	border-radius: 28px;
+	width: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb
+{
+	background: #093751;
+	border-radius: 28px;
+	width: 6px;
+	height: 39px;
+}
+
 textarea, select, input, button { outline: none; }
+
+
 
 .textarea
 {
@@ -816,6 +841,12 @@ select::-ms-expand { display: none;}
 .list__body::-webkit-scrollbar 
 {
 	width: 6px;
+}
+
+.status-column__dots
+{
+	height: 16px;
+	margin-left: 25px;
 }
 
 /* Track */

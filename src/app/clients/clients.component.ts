@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tab } from '../tab';
+import { Special } from '../special'
+import { Contact } from '../contact'
 
 @Component({
 	selector: 'app-clients',
@@ -146,32 +148,6 @@ class Client
 	}
 }
 
-class Contact
-{
-	type:number;
-	name:string;
-	value:string;
-	lastdate:string;
-	typeString:string;
-
-	constructor(type:number, name:string, value:string, lastdate:string)
-	{
-		this.type = type;
-		this.name = name;
-		this.value = value;
-		this.lastdate = lastdate;
-
-		if(this.type == 0)
-		{
-			this.typeString = "Телефон";
-		}
-		else
-		{
-			this.typeString = "Почта";
-		}
-	}
-}
-
 class TransactionLog
 {
 	service:string;
@@ -184,18 +160,6 @@ class TransactionLog
 		this.service = service;
 		this.master = master;
 		this.sum = sum;
-		this.date = date;
-	}
-}
-
-class Special
-{
-	name:string;
-	date:string;
-
-	constructor(name:string, date:string)
-	{
-		this.name = name;
 		this.date = date;
 	}
 }

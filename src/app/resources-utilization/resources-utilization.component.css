@@ -139,6 +139,103 @@
 
 /*Header end*/
 
+/* profile Banner*/
+
+.right-section__profile
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-content: flex-start;
+	flex: 9;
+    margin: 0 40px 40px 40px; 
+    overflow: auto;
+}
+
+.banner
+{
+	width: 1199px;
+	height: 187px;
+	box-sizing: border-box;
+	padding: 45px 60px;
+	margin-bottom: 19px;
+
+	background: url(../../assets/images/Contacts_banner.png) 100% 100% no-repeat;
+	background-color: #003584;
+	background-size: cover;
+
+	font-size: 18px;
+	line-height: 21px;
+	color: #fff;
+	
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: stretch;
+}
+
+.banner-item
+{
+	border-left: 1px solid rgba(184, 215, 255, 0.3); 
+    padding: 0 	40px;
+}
+
+.banner-item:first-child
+{
+	border-left: 1px solid transparent;
+}
+
+.banner-item__header
+{
+	font-weight: bold;
+	padding: 4.5px 0;
+	font-family: Roboto;
+    font-style: normal;
+    text-align: center;
+}
+
+.banner-item__body
+{
+    color: #B8D4FF;
+    text-align: center;
+}
+
+.list__title
+{
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 16px;
+	color: #3D71BF;
+	padding: 8px 0;
+}
+
+.contacts-list
+{
+	margin-bottom: 20px;
+}
+
+.contacts-list__head, .transactions-list__head
+{
+	border-bottom: 1px solid rgba(61, 113, 191, 0.3) !important;
+}
+
+.contact-button
+{
+	width: 107px;
+}
+
+.transactions-list__body
+{
+	overflow: auto;
+}
+
+.transactions-list__body::-webkit-scrollbar 
+{
+	width: 6px;
+}
+
 
 /*List*/
 
@@ -169,29 +266,6 @@
 .resources-list__body
 {
 	overflow: auto;
-}
-
-.resources-list__body::-webkit-scrollbar 
-{
-	width: 6px;
-}
-
-/* Track */
-.resources-list__body::-webkit-scrollbar-track 
-{
-	background: linear-gradient(180deg, rgba(0, 64, 160, 0.1) 0%, rgba(26, 82, 165, 0.1) 77.78%);
-	opacity: 0.1;
-	border-radius: 28px;
-	width: 6px;
-}
-
-/* Handle */
-.resources-list__body::-webkit-scrollbar-thumb
-{
-	background: #093751;
-	border-radius: 28px;
-	width: 6px;
-	height: 39px;
 }
 
 /*List end*/

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Tab } from '../tab';
+import { Resource } from '../resource'
+import { Special } from '../special'
+import { Contact } from '../contact'
 
 @Component({
   selector: 'app-resources-utilization',
@@ -152,6 +155,18 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 		this.currentResource = this.resources[2];
 
+        this.currentResource.specials = [
+			new Special("Коммуникации только по email", "20.03.2019"),
+			new Special("Коммуникации только по email", "20.03.2019"),
+			new Special("Коммуникации только по email", "20.03.2019")
+        ];
+        
+        this.currentResource.contacts = [
+			new Contact(0, "Телефон",  "88005553535", "20.03.2020"),
+			new Contact(1, "Почта", "mail@gmail.com", "20.03.2020"),
+			new Contact(1, "WhatsApp", "88005553535", "20.03.2020")
+		];
+
 		this.dates =
 		[
 			new DateGraph("12.06", 15),
@@ -192,7 +207,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 		
 
 
-		this.currentTab = 2;
+		this.currentTab = 0;
 
 		this.tabs = [
 			new Tab("profile", "Профиль"),
@@ -291,44 +306,6 @@ export class ResourcesUtilizationComponent implements OnInit {
 		else
 		{
 			rightScroll.removeAttribute("disabled");
-		}
-	}
-}
-
-class Resource
-{
-	name:string;
-	type:string;
-	util:number;
-	color:string;
-
-	services = [];
-
-	constructor(name:string, type:string, util:number)
-	{
-		this.name = name;
-		this.type = type;
-		this.util = util;
-
-		if(util <= 10)
-		{
-			this.color = "red";
-		}
-		else if(util > 10 && util < 16)
-		{
-			this.color = "brown";
-		}
-		else if(util > 16 && util < 30)
-		{
-			this.color = "lgreen";
-		}
-		else if(util >= 30 && util < 40)
-		{
-			this.color = "green";
-		}
-		else 
-		{
-			this.color = "bgreen";
 		}
 	}
 }
