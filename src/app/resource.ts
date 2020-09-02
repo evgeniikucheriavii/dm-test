@@ -1,6 +1,7 @@
 export class Resource
 {
-	name:string;
+    name:string;
+    fullname:string;
 	type:string;
 	util:number;
     color:string;
@@ -16,7 +17,8 @@ export class Resource
 
 	constructor(name:string, type:string, util:number)
 	{
-		this.name = name;
+        this.name = name;
+        this.fullname = "Колесов Александр Иванович";
 		this.type = type;
 		this.util = util;
 

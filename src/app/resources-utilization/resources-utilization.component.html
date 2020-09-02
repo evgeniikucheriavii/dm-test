@@ -59,7 +59,17 @@
 		<div class="container">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
-					<div class="header-name">{{currentResource.name}}</div>
+                    <div class="header-name">
+                        <span *ngIf="tabs[currentTab].id != 'profile'">{{currentResource.name}}</span>
+                        <span *ngIf="tabs[currentTab].id == 'profile'">
+                            {{currentResource.fullname}}
+                            <button class="button button_small"><img class="button__image" src="assets/images/pencil.svg"></button>
+                        </span>
+                        
+                        <div class="header-subname" *ngIf="tabs[currentTab].id == 'profile'">
+                            Муж | 38 лет
+                        </div>
+                    </div>
 					<div class="tabs">
 						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
 					</div>
@@ -226,11 +236,11 @@
 							<div *ngIf="c.type == 0; then callBlock else mailBlock"></div>
 							<ng-template #callBlock>
 								<button class="button contact-button"><img src="assets/images/Call.svg" class="button__image"> Позвонить</button>
-								<img src="assets/images/Dots.svg" class="status-column__dots">
+								<img src="assets/images/Dots.svg" class="status-column__dots list__dots">
 							</ng-template>
 							<ng-template #mailBlock>
 								<button class="button contact-button"><img src="assets/images/Write.svg" class="button__image"> Написать</button>
-								<img src="assets/images/Dots.svg" class="status-column__dots">
+								<img src="assets/images/Dots.svg" class="status-column__dots list__dots">
 							</ng-template> 
 						</div>
 					</div>

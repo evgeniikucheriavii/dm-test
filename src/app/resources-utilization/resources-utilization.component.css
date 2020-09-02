@@ -312,6 +312,15 @@
 	color: #093751;
 }
 
+.header-subname
+{
+    font-weight: normal;
+    font-size: 14px !important;
+    line-height: 16px;
+    color: rgba(9, 55, 81, 0.6);
+    position: absolute;
+}
+
 .filter-label
 {
 	display: flex;

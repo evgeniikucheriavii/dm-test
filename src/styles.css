@@ -136,6 +136,18 @@ textarea, select, input, button { outline: none; }
 	cursor: pointer;
 }
 
+.button:active
+{
+    transform: scale(0.99);
+}
+
+.button_small
+{
+    height: 24px;
+    width: 24px;
+    padding: 6px;
+}
+
 .button_hollow
 {
 	border: 1px solid #3D71BF; 
@@ -151,6 +163,11 @@ textarea, select, input, button { outline: none; }
 	border: 1px solid  #0C62E3; 
 	color: #fff;
 	padding: 11px;
+}
+
+.button_small:hover
+{
+    padding: 5px;
 }
 
 .button:disabled:hover
@@ -817,11 +834,12 @@ select::-ms-expand { display: none;}
 {
     display: none;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 .list-row:hover .list__dots
 {
-    display: block;
+    display: inline-block;
 }
 
 .list__num
