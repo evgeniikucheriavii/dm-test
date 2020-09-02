@@ -207,7 +207,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 		
 
 
-		this.currentTab = 1;
+		this.currentTab = 0;
 
 		this.tabs = [
 			new Tab("profile", "Профиль"),
@@ -233,8 +233,20 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 			this.tabs[this.currentTab].Activate();
 		}
-	}
+    }
+    
+    public ShowEditMenu()
+    {
+        let block = document.getElementById("edit-menu");
 
+        block.className = "edit-menu";
+    }
+
+    public HideEditMenu()
+    {
+        let block = document.getElementById("edit-menu");
+        block.className = "edit-menu _hidden";
+    }
 
 	IsCurrentHour(hour:number)
 	{

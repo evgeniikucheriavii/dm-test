@@ -63,7 +63,43 @@
                         <span *ngIf="tabs[currentTab].id != 'profile'">{{currentResource.name}}</span>
                         <span *ngIf="tabs[currentTab].id == 'profile'">
                             {{currentResource.fullname}}
-                            <button class="button button_small"><img class="button__image" src="assets/images/pencil.svg"></button>
+                            <button class="button button_small"><img class="button__image" src="assets/images/pencil.svg"  (click)="ShowEditMenu();"></button>
+
+                            <div class="edit-menu _hidden" id="edit-menu">
+                                <div class="edit-menu__title" (click)="HideEditMenu();">
+                                    <div>Изменить</div>
+                                    <img src="assets/images/Up.png" class="edit-title__image">
+                                </div>
+                                <div class="edit-menu__body">
+                                    <div class="edit-body__title">ФИО</div>
+                                    <label class="input-label edit-body__input-label">
+                                        <input type="text" class="input edit-body__input" placeholder="ФИО" value="{{currentResource.fullname}}">
+                                    </label>
+                                    <hr class="hr edit-body__hr">
+                                    <div class="edit-body__title">Пол</div>
+                                    <label class="edit-menu__label">
+                                        <label class="box-label box-label_radio">
+                                            <input type="radio" name="sex" class="box-label__input box-label__input_radio">
+                                        </label> 
+                                        <span class="lable-name">Муж</span>
+                                    </label>
+
+                                    <label class="edit-menu__label">
+                                        <label class="box-label box-label_radio">
+                                            <input type="radio" name="sex" class="box-label__input box-label__input_radio">
+                                        </label> 
+                                        <span class="lable-name">Жен</span>
+                                    </label>
+
+
+                                    <hr class="hr edit-body__hr">
+                                    <div class="edit-body__title">Дата рождения</div>
+                                    <label class="header-date-label__element date-label  edit-body__date-label">
+                                        <input type="date" class="date-input  edit-body__date" name="date" placeholder="Период">
+                                    </label>
+                                    <button class="button">Сохранить</button>
+                                </div>
+                            </div>
                         </span>
                         
                         <div class="header-subname" *ngIf="tabs[currentTab].id == 'profile'">

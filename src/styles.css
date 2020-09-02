@@ -18,6 +18,13 @@ body, html
 	background: linear-gradient(0deg, #F9FCFD, #F9FCFD), #FFFFFF;
 }
 
+._hidden
+{
+    position: absolute;
+    left: -999999999px;
+    display: none;
+}
+
 ::-webkit-scrollbar 
 {
 	width: 6px;
@@ -706,6 +713,13 @@ select::-ms-expand { display: none;}
 }
 
 /*Checkboxes and radio*/
+
+.label
+{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 .box-label
 {
