@@ -10,6 +10,7 @@ import { RecomendationsEngineComponent } from './recomendations-engine/recomenda
 import { ScheduleComponent } from './schedule/schedule.component';
 import { PricesComponent } from './prices/prices.component';
 import { CompanyScheduleComponent } from './company-schedule/company-schedule.component';
+import { HelpComponent } from './help/help.component';
 
 const appRoutes = [
 	{ path: '', component: AppComponent },
@@ -19,7 +20,7 @@ const appRoutes = [
 	{ path: 'schedules', component: ScheduleComponent },
 	{ path: 'company-schedules', component: CompanyScheduleComponent },
 	{ path: 'clients', component: ClientsComponent },
-	{ path: 'help', component: AppComponent }
+	{ path: 'help', component: HelpComponent }
 ];
 
 @NgModule({
@@ -32,6 +33,7 @@ const appRoutes = [
     ScheduleComponent,
     PricesComponent,
     CompanyScheduleComponent,
+    HelpComponent,
   ],
   imports: [
 	BrowserModule,

@@ -1,0 +1,86 @@
+<div class="container">
+	<section class="content-section">
+		<section class="content-section__bottom bottom_rules">
+			
+			<section class="content-bottom__left left_rules">
+
+                <section class="left-section">
+                    <div class="left-header">Древо справочников <button class="button"><img src="assets/images/Plus.svg"> Добавить справочник</button></div>
+                </section>
+
+				<section class="left-section file-tree">
+                    <div class='node__name'>
+                        <img src='assets/images/Folder.svg' class='node__image'>
+                        <div>Все</div>
+                    </div>
+                    <ng-container
+                        *ngTemplateOutlet="recursiveListTmpl; context:{ list: nodes }"
+                    ></ng-container>
+                        
+                    <ng-template #recursiveListTmpl let-list="list">
+                        <div class='node' *ngFor="let node of list">
+                            <div class='node__name'>
+                                <img src='assets/images/{{node.img}}.svg' class='node__image'>
+                                <div *ngIf="node.active" class="node_active">{{node.name}}</div>
+                                <div *ngIf="!node.active">{{node.name}}</div>
+                            </div>
+                            <div class='node__children' *ngIf="node.children.length > 0">
+                                <ng-container
+                                *ngTemplateOutlet="recursiveListTmpl; context:{ list: node.children }"
+                            ></ng-container>
+                            </div>
+                        </div>
+                    </ng-template>
+                </section>
+
+			</section>
+
+			<section class="content-bottom__right right_rules">
+                
+                <section class="right-top">
+
+                    <label class="header-search-label">
+                        <span class="header-search-label__title">Поиск  </span>
+                        <label class="header-search-label__element search-label">
+                            <input type="search" class="search-input" name="search" id="search_input">
+                            <button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
+                        </label>
+                    </label>
+
+                    <label for="select_01" class="select right-select">
+						<input type="radio" name="list" value="not_changed" id="bg_01" class="select-bg select-radio select-list" checked />
+						<input type="radio" name="list" value="not_changed" class="select-select select-radio select-list" id="select_01">
+						<label class="bg" for="bg_01"></label>
+						<div class="items">
+							<input type="radio" name="list" value="first_value" id="list[0]" class="select-radio select-list">
+							<label for="list[0]">Трудовой</label>
+							<input type="radio" name="list" value="second_value" id="list[1]" class="select-radio select-list">
+							<label for="list[1]">Не трудовой</label>
+							<span id="text" class="select-text">Фильтр</span>
+						</div>
+                    </label>
+                    
+                    <button class="button"><img src="assets/images/Plus.svg"> Добавить правило</button>
+
+                </section>
+
+				<section class="left-section left-section__list resources-list" style="height: 500px;">
+					<div class="list-row list-row_head  rules-list__head">
+                        <div class="list__num">#</div>
+						<div class="list__name">День недели</div>
+						<div class="list__type">Время работы</div>
+					</div>
+					<div class="rules-list__body">
+						<div class="list-row" *ngFor="let r of resources; let i = index">
+							<div class="list__num">{{i + 1}}.</div>
+							<div class="list__name">{{r.day}}</div>
+							<div class="list__type">{{r.time}}</div>
+						</div>
+					</div>
+				</section>
+
+			</section>
+
+		</section>
+	</section>
+</div>
