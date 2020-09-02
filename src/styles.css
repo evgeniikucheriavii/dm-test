@@ -813,6 +813,17 @@ select::-ms-expand { display: none;}
 	border-bottom: 1px solid transparent;
 }
 
+.list__dots
+{
+    display: none;
+    cursor: pointer;
+}
+
+.list-row:hover .list__dots
+{
+    display: block;
+}
+
 .list__num
 {
 	width: 50px;

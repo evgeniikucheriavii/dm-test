@@ -141,8 +141,19 @@
 
 				</section>
 
-				<!--Service-->
+                <!--Service-->
 				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'service'">
+					<label class="header-search-label">
+						<span class="header-search-label__title">Поиск  </span>
+						<label class="header-search-label__element search-label">
+							<input type="search" class="search-input" name="search" id="search_input">
+							<button type="submit" class="search-button" id="search_submit"><img class="button__image" src="assets/images/Search.svg"></button>
+						</label>
+					</label>
+				</section>
+                
+				<!--Sales-->
+				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'sales'">
 					<label class="header-search-label">
 						<span class="header-search-label__title">Поиск  </span>
 						<label class="header-search-label__element search-label">
@@ -283,6 +294,35 @@
 		
 					</div>
 				</div>
+			</section>
+
+            <!--Sales-->
+			<section class="right-section right-section__graph" *ngIf="tabs[currentTab].id == 'sales'">
+				<section class="left-section left-section__list resources-list">
+					<div class="list-row list-row_head resources-row resources-list__head">
+						<div class="list__num">#</div>
+						<div class="list__name">Услуга</div>
+						<div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Клиент</div>
+						<div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Стоимость</div>
+                        <div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Дата</div>
+                        <div class="list__util"></div>
+					</div>
+					<div class="resources-list__body">
+						<div class="list-row resources-row" *ngFor="let s of currentResource.services; let i = index">
+							<div class="list__num">{{i + 1}}</div>
+							<div class="list__name">{{s.service}}</div>
+							<div class="list__name">Колесов В. В.</div>
+							<div class="list__name">1500</div>
+                            <div class="list__name">20.03.2020</div>
+                            <div class="list__util">
+                                <img src="assets/images/Dots.svg" class="status-column__dots list__dots">
+                            </div>
+						</div>
+					</div>
+				</section>
+				<section style="margin-bottom: 20px;">
+					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+				</section>
 			</section>
 
 			<!--Services-->
