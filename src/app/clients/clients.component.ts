@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tab } from '../tab';
 import { Special } from '../special'
 import { Contact } from '../contact'
+import { ServiceLog } from '../servicelog'
 
 @Component({
 	selector: 'app-clients',
@@ -41,7 +42,32 @@ export class ClientsComponent implements OnInit
 			new Client("Аппарат Экзарта", 3212, 50345)
 		];
 
-		this.currentClient = this.clients[2];
+        this.currentClient = this.clients[2];
+        
+        this.currentClient.services = [
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500),
+			new ServiceLog("Консультативный прием", "30 минут", 1500)
+		];
 
 		this.currentClient.log = [
 			new LogEntry("Консультативный прием", "Массаж 45 минут", "Колесов А.В.", "22.01.2020", true),
@@ -93,7 +119,7 @@ export class ClientsComponent implements OnInit
 			new Tab("log", "История обращений")
 		];
 
-		this.currentTab = 0;
+		this.currentTab = 1;
 
 		this.tabs[this.currentTab].Activate();
 	}
@@ -125,6 +151,7 @@ class Client
 	log = [];
 	contacts = [];
 	transactions = [];
+	services = [];
 
 	specials = [];
 

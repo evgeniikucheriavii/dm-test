@@ -318,7 +318,7 @@
 	justify-content: space-between;
 	align-content: flex-start;
 	flex: 9;
-	padding: 0 40px 100px 40px; 
+    padding: 0 40px 100px 40px; 
 }
 
 .status-column

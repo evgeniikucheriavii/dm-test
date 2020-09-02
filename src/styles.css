@@ -25,6 +25,11 @@ body, html
     display: none;
 }
 
+._scroll
+{
+    overflow: auto;
+}
+
 ::-webkit-scrollbar 
 {
 	width: 6px;
