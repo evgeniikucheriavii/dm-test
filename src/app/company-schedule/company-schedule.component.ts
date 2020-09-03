@@ -155,6 +155,24 @@ export class CompanyScheduleComponent implements OnInit
 		
 	}
 
+
+    OpenMenu(i:number)
+    {
+        let menu = document.getElementById("schedule-menu");
+        let overlay = document.getElementById("menu-overlay");
+
+        menu.className = "schedule-menu";
+        overlay.className = "schedule-table__overlay";
+    }
+
+    CloseMenu()
+    {
+        let menu = document.getElementById("schedule-menu");
+        let overlay = document.getElementById("menu-overlay");
+
+        menu.className = "schedule-menu _hidden";
+        overlay.className = "schedule-table__overlay _hidden";
+    }
 }
 
 class Resource

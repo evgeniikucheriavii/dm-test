@@ -128,6 +128,127 @@
 	</section>
 
 	<section class="section__right">
+        <div class="schedule-table__overlay _hidden" id="menu-overlay" (click)="CloseMenu();"></div>
+
+
+        <div class="schedule-menu _hidden" id="schedule-menu">
+            <div class="schedule-menu__title">
+                <div>Консультация</div>
+                <img src="assets/images/Arrow_exit.svg" class="schedule-title__image" (click)="CloseMenu();">
+            </div>
+
+            <div class="schedule-menu__row">
+                <div class="schedule-menu__row-name"><b>Статус:</b> ---</div>
+                <div class="schedule-menu__row-dots">
+                    <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                    <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+                </div>
+            </div>
+
+            <div class="schedule-menu__row">
+                <div class="schedule-menu__row-name"><b>Клиент:</b> ---</div>
+                <div class="schedule-menu__row-dots">
+                    <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                    <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+                </div>
+            </div>
+
+            <div class="schedule-menu__row">
+                <div class="schedule-menu__row-name"><b>Ресурс:</b> ---</div>
+                <div class="schedule-menu__row-dots">
+                    <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                    <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+                </div>
+            </div>
+
+            <div class="schedule-menu__row">
+                <div class="schedule-menu__row-name"><b>Офис \ Кабинет:</b> ---</div>
+                <div class="schedule-menu__row-dots">
+                    <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                    <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+                </div>
+            </div>
+
+            <div class="schedule-menu__row">
+                <div class="schedule-menu__row-name"><b>Время:</b> ---</div>
+                <div class="schedule-menu__row-dots">
+                    <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                    <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+                </div>
+            </div>
+
+            <div class="schedule-menu__row">
+                <div class="schedule-menu__row-name"><b>Оборудование:</b> ---</div>
+                <div class="schedule-menu__row-dots">
+                    <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                    <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+                </div>
+            </div>
+
+            <div class="schedule-menu__row">
+                <div class="schedule-menu__row-name"><b>Канал:</b> ---</div>
+                <div class="schedule-menu__row-dots">
+                    <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                    <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+                </div>
+            </div>
+
+            <div class="schedule-menu__row">
+                <div class="schedule-menu__row-name"><b>Правило утилизации:</b> ---</div>
+                <div class="schedule-menu__row-dots">
+                    <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                    <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+                </div>
+            </div>
+
+            <div class="schedule-menu__row schedule-menu__row-textarea">
+                <b>Текст сообщения:</b>
+                <textarea class="textarea schedule-menu__textarea"></textarea>
+            </div>
+
+            <div class="row-textarea__buttons">
+                <button class="button">Вывести</button>
+                <button class="button button_hollow">Сохранить</button>
+                <button class="button button_hollow">Удалить</button>
+            </div>
+
+            <div class="schedule-menu__history">
+                <div class="history__title">
+                    <div>История поиска</div>
+                    <img src="assets/images/Up.png" class="history-title__image">
+                </div>
+                <div class="history__content">
+                    <section class="left-section left-section__list resources-list">
+                        <div class="list-row list-row_head resources-row history-list__head">
+                            <div class="list__num">#</div>
+                            <div class="list__name">Клиент</div>
+                            <div class="list__service">Статус</div>
+                        </div>
+                        <div class="resources-list__body">
+                            <div class="list-row resources-row">
+                                <div class="list__num">#</div>
+                                <div class="list__name">Клиент</div>
+                                <div class="list__service">Статус</div>
+                            </div>
+                            <div class="list-row resources-row">
+                                <div class="list__num">#</div>
+                                <div class="list__name">Клиент</div>
+                                <div class="list__service">Статус</div>
+                            </div>
+                            <div class="list-row resources-row">
+                                <div class="list__num">#</div>
+                                <div class="list__name">Клиент</div>
+                                <div class="list__service">Статус</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+
+
+
 		<div class="time-table">
 			<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
 				<div class="table-col table-col_time">
@@ -139,7 +260,6 @@
 			</div>
 		</div>
 		<div class="schedule-table">
-
 			<div class="table-row table-row_head">
 				<div class="table-col" *ngFor="let s of schedule; let i = index;" >
 					{{s.name}}
@@ -150,7 +270,7 @@
 				<div class="table-col" *ngFor="let s of schedule; let i = index;">
 					<div *ngIf="s.HasTasks(t.hour)" class="table-col__container">
 						<div class="table-task {{j.Classes()}}"
-							*ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;">
+							*ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;"  (click)="OpenMenu(i);">
 							<div class="task-name">{{j.name}}</div>
 							<div class="task-time">
 								{{t.hour}}:<span *ngIf="j.start < 10">0</span>{{j.start}} -
@@ -159,13 +279,13 @@
 							</div>
 						</div>
 						<div class="table-task" *ngIf="!s.GetTasks(t.hour).Check()">
-							<span *ngIf="currentHour <= t.hour" class="task-add">+</span>
+							<span *ngIf="currentHour <= t.hour" class="task-add" (click)="OpenMenu(0);">+</span>
 							<span *ngIf="currentHour > t.hour">-</span>
 						</div>
 					</div>
 					<div *ngIf="!s.HasTasks(t.hour)" class="table-col__container">
 						<div class="table-task">
-							<span *ngIf="currentHour <= t.hour" class="task-add">+</span>
+							<span *ngIf="currentHour <= t.hour" class="task-add" (click)="OpenMenu(0);">+</span>
 							<span *ngIf="currentHour > t.hour">-</span>
 						</div>
 					</div>
