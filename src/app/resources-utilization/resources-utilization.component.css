@@ -149,16 +149,15 @@
 	align-content: flex-start;
 	flex: 9;
     margin: 0 40px 40px 40px; 
-    overflow: auto;
 }
 
 .banner
 {
 	width: 1199px;
-	height: 187px;
+    max-height: 187px;
+    flex: 1;
 	box-sizing: border-box;
 	padding: 45px 60px;
-	margin-bottom: 19px;
 
 	background: url(../../assets/images/Contacts_banner.png) 100% 100% no-repeat;
 	background-color: #003584;
@@ -199,6 +198,14 @@
 {
     color: #B8D4FF;
     text-align: center;
+}
+
+.profile-body
+{
+    overflow: auto;
+    flex: 2;
+    max-height: 460px;
+    padding-top: 19px;
 }
 
 .list__title
@@ -278,7 +285,7 @@
 	flex-direction: row;
 	align-content: space-around;
 	justify-content: start;
-	padding: 0 30px 20px 20px;
+    padding: 15px 20px;
 	align-items: center;
 }
 
@@ -319,6 +326,11 @@
     line-height: 16px;
     color: rgba(9, 55, 81, 0.6);
     position: absolute;
+}
+
+.profile-search-label
+{
+    margin-top: -10px;
 }
 
 .edit-menu

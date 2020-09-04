@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -11,9 +12,10 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { PricesComponent } from './prices/prices.component';
 import { CompanyScheduleComponent } from './company-schedule/company-schedule.component';
 import { HelpComponent } from './help/help.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes = [
-	{ path: '', component: AppComponent },
+	{ path: '', component: HomeComponent },
 	{ path: 'utilization', component: ResourcesUtilizationComponent },
 	{ path: 'prices', component: PricesComponent },
 	{ path: 'recomendations', component: RecomendationsEngineComponent },
@@ -34,12 +36,13 @@ const appRoutes = [
     PricesComponent,
     CompanyScheduleComponent,
     HelpComponent,
+    HomeComponent,
   ],
   imports: [
 	BrowserModule,
 	RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [
 	  AppComponent
 	]
