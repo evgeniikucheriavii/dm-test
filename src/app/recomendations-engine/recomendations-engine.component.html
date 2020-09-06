@@ -111,7 +111,7 @@
 						<div class="list__type">Ресурс</div>
 						<div class="list__service">Услуга</div>
 						<div class="list__service">Временный интервал</div>
-						<div class="list__util">Оценили сообщения</div>
+						<div class="list__util">Отправлено</div>
 						<div class="list__util">Статус</div>
 					</div>
 					<div class="rules-list__body">
@@ -120,7 +120,7 @@
 							<div class="list__type">{{r.name}}</div>
 							<div class="list__service">{{r.service}}</div>
 							<div class="list__service">{{r.interval}}</div>
-							<div class="list__util">{{r.vote}}</div>
+							<div class="list__util _center">{{r.vote}}</div>
 							<div class="list__util">
 								<div *ngIf="r.status == 0" class="status_done">
 									<img src="assets/images/Green_dot.svg" class="status-img status-img_done">

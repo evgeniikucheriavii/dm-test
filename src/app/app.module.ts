@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, PathLocationStrategy, LocationStrategy } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
 import { AppComponent } from './app.component';

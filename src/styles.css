@@ -30,6 +30,11 @@ body, html
     overflow: auto;
 }
 
+._center
+{
+    text-align: center; 
+}
+
 ::-webkit-scrollbar 
 {
 	width: 6px;
