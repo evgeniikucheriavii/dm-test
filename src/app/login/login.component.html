@@ -1,0 +1,20 @@
+
+<div class="login_form">
+    <form method="post" name="login_form" id="login_form" *ngIf="loged == false">
+        <div>Авторизация</div>
+        <label class="input-label">
+            <input type="text" class="input" placeholder="Логин" #loginInput id="login">
+        </label><br>
+        <label class="input-label">
+            <input type="password" class="input" placeholder="Пароль" #passwordInput id="passoword">
+        </label>
+        
+        <button class="button" (click)="handleLogin(loginInput.value, passwordInput.value)">Сохранить</button>
+        <p>{{msg}}</p>
+
+    </form>
+    <div *ngIf="loged == true">
+        Вы авторизованы!
+    </div>
+</div>
+

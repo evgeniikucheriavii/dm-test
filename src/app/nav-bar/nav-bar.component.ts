@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as restservice from '../rest.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,15 +11,26 @@ import { Component, OnInit } from '@angular/core';
 export class NavBarComponent implements OnInit 
 {
 	links = [];
-	messages:number;
+    messages:number;
+    loged:boolean
 
-	constructor() { }
+	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router) { }
 
 	ngOnInit(): void 
 	{
 		this.messages = 1;
 
-		this.links = 
+        if(this.cookieService.get("token") == "" || this.cookieService.get("token") == null)
+        {
+            this.loged = false
+            this.validateLogin()
+        }
+        else
+        {
+            this.loged = true
+        }
+
+        this.links = 
 		[
 			new NavLink("Утилизация ресурсов", "/utilization"),
 			new NavLink("Динамическое ценообразование", "/prices"),
@@ -28,7 +42,21 @@ export class NavBarComponent implements OnInit
 			new NavLink("Клиенты", "/clients"),
 			new NavLink("Справочник", "/help")
 		];
-	}
+    }
+    
+    validateLogin()
+    {
+        if(this.cookieService.get("token") == "" || this.cookieService.get("login") == null)
+        {
+            this.router.navigate(["/login"])
+            // document.location.reload()
+            // window.stop()
+        }
+        else 
+        {
+            
+        }
+    }
 }
 
 class NavLink

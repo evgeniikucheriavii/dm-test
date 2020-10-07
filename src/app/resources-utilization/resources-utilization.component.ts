@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { Tab } from '../tab';
 import { Resource } from '../resource'
 import { Special } from '../special'
 import { Contact } from '../contact'
 import { ServiceLog } from '../servicelog'
+import * as restservice from '../rest.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resources-utilization',
@@ -15,7 +18,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 	currentResource:Resource;
 	currentTab:number;
 
-	resources = [];
+	resources:Resource[] = [];
 	hours = [];
 	dates = [];
 	tabs = [];
@@ -25,10 +28,13 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 	schedule = [];
 
-	constructor() { }
+	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router) { }
 
 	ngOnInit(): void 
 	{
+
+        this.getResources()
+
 		this.time = [
 			{ hour: 9 },
 			{ hour: 10 },
@@ -136,37 +142,19 @@ export class ResourcesUtilizationComponent implements OnInit {
 			]),
 		];
 
-		this.resources =
-		[
-			new Resource("Иванов Иван", "Трудовой", 15),
-			new Resource("Сидоров Сергей", "Трудовой", 10),
-			new Resource("Колесов А. В.", "Трудовой", 12),
-			new Resource("Петрова Светлана", "Трудовой", 5),
-			new Resource("Баярова Алина", "Трудовой", 22),
-			new Resource("Аппарат Экзарта", "Трудовой", 31),
-			new Resource("Платформа Галилео", "Оборудование", 3),
-			new Resource("Петрова Светлана", "Оборудование", 18),
-			new Resource("Баярова Алина", "Оборудование", 22),
-			new Resource("Петрова Светлана", "Трудовой", 33),
-			new Resource("Аппарат Экзарта", "Трудовой", 15),
-			new Resource("Платформа Галилео", "Трудовой", 10),
-			new Resource("Петрова Светлана", "Оборудование", 12),
-			new Resource("Аппарат Экзарта", "Оборудование", 5)
-		];
+		// this.currentResource = this.resources[2];
 
-		this.currentResource = this.resources[2];
-
-        this.currentResource.specials = [
-			new Special("Коммуникации только по email", "20.03.2019"),
-			new Special("Коммуникации только по email", "20.03.2019"),
-			new Special("Коммуникации только по email", "20.03.2019")
-        ];
+        // this.currentResource.specials = [
+		// 	new Special("Коммуникации только по email", "20.03.2019"),
+		// 	new Special("Коммуникации только по email", "20.03.2019"),
+		// 	new Special("Коммуникации только по email", "20.03.2019")
+        // ];
         
-        this.currentResource.contacts = [
-			new Contact(0, "Телефон",  "88005553535", "20.03.2020"),
-			new Contact(1, "Почта", "mail@gmail.com", "20.03.2020"),
-			new Contact(1, "WhatsApp", "88005553535", "20.03.2020")
-		];
+        // this.currentResource.contacts = [
+		// 	new Contact(0, "Телефон",  "88005553535", "20.03.2020"),
+		// 	new Contact(1, "Почта", "mail@gmail.com", "20.03.2020"),
+		// 	new Contact(1, "WhatsApp", "88005553535", "20.03.2020")
+		// ];
 
 		this.dates =
 		[
@@ -181,32 +169,30 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 		this.hours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ];
 
-		this.currentResource.services = [
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500),
-			new ServiceLog("Консультативный прием", "30 минут", 1500)
-		];
-		
-
+		// this.currentResource.services = [
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
+		// 	new ServiceLog("Консультативный прием", "30 минут", 1500)
+		// ];
 
 		this.currentTab = 0;
 
@@ -218,8 +204,24 @@ export class ResourcesUtilizationComponent implements OnInit {
 			new Tab("log", "Лог")
 		];
 
-		this.tabs[this.currentTab].Activate();
-	}
+        this.tabs[this.currentTab].Activate();
+    }
+
+    getResources()
+    {
+        this.rest.getResources().subscribe((rest:any) => {
+            let temp = rest
+
+            for(let i = 0; i < temp.length; i++)
+            {
+                this.resources.push(new Resource(temp[i]))
+            }
+
+            this.SwitchResource(0)
+            ApplicationRef.tick()
+            this.SwitchResource(0)
+        })
+    }
 
 	public SwitchTab(index:number)
 	{
@@ -233,9 +235,35 @@ export class ResourcesUtilizationComponent implements OnInit {
 			}
 
 			this.tabs[this.currentTab].Activate();
-		}
+        }
+        
+    }
+
+
+    public SwitchResource(index:number)
+    {
+        this.currentResource = this.resources[index]
+
+        let items = document.getElementsByClassName("list-row_res")
+
+        for(let i = 0; i < items.length; i++)
+        {
+            items[i].className = "list-row list-row_res"
+
+            if(i == index)
+            {
+                items[i].className = "list-row list-row_res list-row_active"
+            }
+        }
     }
     
+
+    public alert(msg:string)
+    {
+        window.alert(msg)
+    }
+
+
     public ShowEditMenu()
     {
         let block = document.getElementById("edit-menu");
@@ -320,7 +348,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 		{
 			rightScroll.removeAttribute("disabled");
 		}
-	}
+    }
 }
 
 class DateGraph
