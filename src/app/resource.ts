@@ -15,7 +15,7 @@ export class Resource implements IResource
     ResourceType:IResourceType
     Company:ICompany
 
-    fullname:string;
+    shortname:string;
 	type:string;
 	util:number;
     color:string;
@@ -33,7 +33,7 @@ export class Resource implements IResource
 	{
         this.id = res.id
         this.name = res.name
-        this.fullname = "Колесов Александр Иванович"
+        this.shortname = ""
         this.ResourceType = res.ResourceType
         this.sex = res.sex
         this.birthdate = res.birthdate
@@ -81,6 +81,36 @@ export class Resource implements IResource
         {
             this.ageString = yearsDiff + " лет"
         }
+
+        if(this.sex != "-1")
+        {
+            let w = this.name.split(" ")
+            console.log(w.length)
+            if(w.length > 1)
+            {
+
+                w[1] = w[1][0] + "."
+                this.shortname = w[0] + " " + w[1]
+
+                if(w.length > 2)
+                {
+                    w[2] = w[2][0] + "."
+                    this.shortname += " " + w[2]
+                }
+                
+                
+            }
+            else 
+            {
+                this.shortname = this.name
+            }
+            
+        }
+        else
+        {
+            this.shortname = this.name
+        }
+        
 
 		this.util = 10;
 

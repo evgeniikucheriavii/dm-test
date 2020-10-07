@@ -207,6 +207,11 @@ export class ResourcesUtilizationComponent implements OnInit {
         this.tabs[this.currentTab].Activate();
     }
 
+    goToResourceForm()
+    {
+        this.router.navigate(["resource"])
+    }
+
     getResources()
     {
         this.rest.getResources().subscribe((rest:any) => {

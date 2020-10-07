@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TttComponent } from './ttt/ttt.component';
 import { LoginComponent } from './login/login.component';
 import { ExitComponent } from './exit/exit.component';
+import { ResourceFormComponent } from './resource-form/resource-form.component';
 // import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
@@ -30,6 +31,7 @@ const appRoutes = [
 	{ path: 'clients', component: ClientsComponent },
 	{ path: 'help', component: HelpComponent },
 	{ path: 'ttt', component: TttComponent },
+	{ path: 'resource', component: ResourceFormComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'exit', component: ExitComponent },
 ];
@@ -49,6 +51,7 @@ const appRoutes = [
     TttComponent,
     LoginComponent,
     ExitComponent,
+    ResourceFormComponent,
   ],
   imports: [
 	BrowserModule,

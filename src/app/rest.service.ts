@@ -115,6 +115,20 @@ export class RestService
         );
     }
 
+    getCompanyByUserId(uid:string)
+    {
+        return this.http.get<ICompany>(endpoint + 'company_by_user/' + uid + '/').pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    getResourceTypes()
+    {
+        return this.http.get<IResourceType>(endpoint + 'resource_types/').pipe(
+            catchError(this.handleError)
+        )
+    }
+
     login(login:string, password:string): Observable<any>
     {
         let input:ILogin = {login: login, password: password}
