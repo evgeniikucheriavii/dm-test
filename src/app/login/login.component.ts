@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { exception } from 'console';
 
 @Component({
     selector: 'app-login',
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit
 
         if(this.cookieService.get("token"))
         {
-            this.loged = true
+            this.loged = true 
         }
     }
 
@@ -41,6 +40,7 @@ export class LoginComponent implements OnInit
                         this.cookieService.set("token", rest.token)
                         this.cookieService.set("tokenDate", rest.tokenDate)
                         this.cookieService.set("id", rest.id)
+                        this.cookieService.set("Company", rest.Company)
                         result = true
                         document.location.reload()
                     }
@@ -65,11 +65,7 @@ export class LoginComponent implements OnInit
         }
         
     }
-
-    validateLogin(token:string)
-    {
-        
-    }
+    
 
     handleLogin(login, password)
     {

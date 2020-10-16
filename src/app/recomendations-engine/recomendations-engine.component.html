@@ -2,7 +2,7 @@
 	<section class="content-section">
 		<section class="content-section__top">
 			<!--utilization-rules-->
-			<div *ngIf="tabs[currentTab].id == 'rules'" class="top_rules">Настройка правила: <span class="rule-name">{{currentRule.title}}</span></div>
+			<div *ngIf="tabs[currentTab].id == 'rules'" class="top_rules">Настройка правила: <span class="rule-name">{{currentCat.str}}</span></div>
 
 			<!--actions-->
 			<div *ngIf="tabs[currentTab].id == 'actions'" class="top_actions">
@@ -57,21 +57,7 @@
 		<section class="content-section__bottom bottom_rules" *ngIf="tabs[currentTab].id == 'rules'">
 			
 			<section class="content-bottom__left left_rules">
-
-				<section class="left-section left-section__list resources-list">
-					<div class="list-row list-row_head  rules-list__head">
-						<div class="list__num">#</div>
-						<div class="list__name">Название раздела</div>
-						<div class="list__type">Скидка в %</div>
-					</div>
-					<div class="rules-list__body">
-						<div class="list-row" *ngFor="let r of rules; let i = index">
-							<div class="list__num">{{i + 1}}</div>
-							<div class="list__name">{{r.title}}</div>
-							<div class="list__type">{{r.discount}}</div>
-						</div>
-					</div>
-				</section>
+                <app-list [listdata]="cats_list" [callback]="SwitchCat"></app-list>
 
 				<section class="left-section left-section__buttons">
 					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить правило</button>
@@ -82,21 +68,7 @@
 			</section>
 
 			<section class="content-bottom__right right_rules">
-				
-				<section class="left-section left-section__list resources-list" style="height: 500px;">
-					<div class="list-row list-row_head  rules-list__head">
-						<div class="list__name">Ресурсы и % загрузки от целевых значений</div>
-						<div class="list__type">Скидка %</div>
-					</div>
-					<div class="rules-list__body">
-						<div class="list-row" *ngFor="let r of resources; let i = index">
-							<div class="list__num">{{i + 1}}.</div>
-							<div class="list__name">{{r.title}}</div>
-							<div class="list__type">{{r.discount}}</div>
-						</div>
-					</div>
-				</section>
-
+                <app-list [listdata]="rules_list"></app-list>
 			</section>
 
 		</section>

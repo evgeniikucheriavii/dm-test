@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TttComponent } from './ttt.component';
+import { MiscFormComponent } from './misc-form.component';
 
-describe('TttComponent', () => {
-  let component: TttComponent;
-  let fixture: ComponentFixture<TttComponent>;
+describe('MiscFormComponent', () => {
+  let component: MiscFormComponent;
+  let fixture: ComponentFixture<MiscFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TttComponent ]
+      declarations: [ MiscFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TttComponent);
+    fixture = TestBed.createComponent(MiscFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

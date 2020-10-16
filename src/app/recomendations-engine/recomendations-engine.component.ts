@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { Tab } from '../tab';
+import * as restservice from '../rest.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { UtilizationRule } from '../utilization-rule';
+import { UtilizationCat } from '../utilization-cat';
+import { ListData } from '../list-data';
+import { ListCol } from '../list-col';
+import { ListRow } from '../list-row';
 
 @Component({
 	selector: 'app-recomendations-engine',
@@ -11,46 +19,38 @@ export class RecomendationsEngineComponent implements OnInit
 	tabs = [];
 	currentTab:number;
 
-	rules = [];
-	currentRule:Rule;
-
-	resources = [];
+	utilizationCats:UtilizationCat[] = [];
+    currentCat:UtilizationCat;
+    
+    cats_list:ListData
+    rules_list:ListData
 
 	searchLog = [];
 
-	data = [];
+    data = [];
+    
+    SwitchCat = (index:number) =>
+    {
+        this.currentCat = this.utilizationCats[index]
+        this.appRef.tick()
 
-	constructor() { }
+        this.FormLists()
+    }
 
-	ngOnInit(): void 
+	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
+
+    ngOnInit(): void 
 	{
 		this.tabs = [
 			new Tab("rules", "Правила экстренной утилизации"),
 			new Tab("actions", "Action Center")
 		];
 
-		this.currentTab = 1;
+		this.currentTab = 0;
 
-		this.tabs[this.currentTab].Activate();
-
-		this.rules = [
-			new Rule("За 2 дня до утилизации", 30),
-			new Rule("За 1 день до утилизации", 40),
-			new Rule("В день утилизации", 50)
-		];
-
-		this.currentRule = this.rules[2];
-
-		this.resources = [
-			new Rule("Если ресурс >60% до цели ", 0),
-			new Rule("Если ресурс 60<40% до цели ", 0),
-			new Rule("Если ресурс 40<20% до цели ", 0),
-			new Rule("Если ресурс 20<0% до цели ", 0),
-			new Rule("Если ресурс 0<20% сверху цели ", 0),
-			new Rule("Если ресурс 20%<40% сверху цели ", 0),
-			new Rule("Если ресурс 40%<60% сверху цели", 0),
-			new Rule("Если ресурс 60% сверху цели", 0)
-		];
+        this.tabs[this.currentTab].Activate();
+        
+        this.getUtilizationCats()
 
 
 		this.searchLog = [
@@ -90,6 +90,77 @@ export class RecomendationsEngineComponent implements OnInit
 		];
 	}
 
+    getUtilizationCats()
+    {
+        this.rest.getUtilizationCatsWithRules("1").subscribe((rest:any) => { 
+            for(let i = 0; i < rest.length; i++)
+            {
+                this.utilizationCats.push(new UtilizationCat(rest[i]))
+                // this.getUtilizationRules(this.utilizationCats[i])
+            }
+
+            this.currentCat = this.utilizationCats[0]
+            this.appRef.tick()
+            this.FormLists()
+            this.SwitchCat(0)
+            
+        })
+    }
+
+    getUtilizationRules(cat:UtilizationCat)
+    {
+        this.rest.getUtilizationRule(cat.id).subscribe((rest:any) => {
+            for(let i = 0; i < rest.length; i++)
+            {
+                cat.addRule(rest[i])
+            }
+
+        })
+    }
+
+    FormLists()
+    {
+        let cat_rows = []
+
+        for(let i = 0; i < this.utilizationCats.length; i++)
+        {
+            cat_rows.push(new ListRow([this.utilizationCats[i].str, this.utilizationCats[i].discount]))
+        }
+
+        this.cats_list = new ListData(
+            [
+                new ListCol("Название раздела", "name"),
+                new ListCol("Скидка в %", "type"),
+            ],
+            cat_rows,
+            "cats",
+            "",
+            true,
+            "list__head_lined"
+        )
+
+        let rules_rows = []
+
+        let rules = this.currentCat.rules
+
+        for(let i = 0; i < rules.length; i++)
+        {
+            rules_rows.push(new ListRow([rules[i].str, rules[i].discount]))
+        }
+
+        this.rules_list = new ListData(
+            [
+                new ListCol("Ресурсы и % загрузки от целевых значений", "name"),
+                new ListCol("Скидка %", "type"),
+            ],
+            rules_rows,
+            "rules",
+            "",
+            true,
+            "list__head_lined"
+        )
+    }
+
 	public SwitchTab(index:number)
 	{
 		if(index <= this.tabs.length)
@@ -117,19 +188,6 @@ export class RecomendationsEngineComponent implements OnInit
 		{
 			priority.className = "priority";
 		}
-	}
-}
-
-
-class Rule
-{
-	title:string;
-	discount:number;
-
-	constructor(title:string, discount:number)
-	{
-		this.title = title;
-		this.discount = discount;
 	}
 }
 

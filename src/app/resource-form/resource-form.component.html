@@ -31,10 +31,10 @@
             <input type="radio" name="list_rt" value="not_changed" class="select-select select-radio select-list" id="select_rt">
             <label class="bg" for="bg_rt"></label>
             <div class="items">
-                <ng-tempate *ngFor="let r of ResourceTypes; let i = index">
+                <ng-template *ngFor="let r of ResourceTypes; let i = index">
                     <input type="radio" name="list_rt" value="{{r.id}}" id="list_rt[{{i}}]" class="select-radio select-list">
                     <label for="list_rt[{{i}}]">{{r.name}}</label>
-                </ng-tempate>
+                </ng-template>
                 <span id="text" class="select-text"></span>
             </div>
         </label>
@@ -48,7 +48,7 @@
         <input type="date" class="date-input  edit-body__date" name="date" placeholder="Период">
     </label>
     
-    <button class="button" (click)="handleSave(fioInput.value, passwordInput.value)">Сохранить</button>
+    <button class="button" (click)="handleSave(fioInput.value, '')">Сохранить</button>
     <p>{{msg}}</p>
     
 </form>

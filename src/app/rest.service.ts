@@ -3,6 +3,7 @@ import { catchError } from 'rxjs/internal/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UtilizationCat } from './utilization-cat';
 
 
 export interface IOffice
@@ -41,7 +42,7 @@ export interface IMisc
 {
     id:string
     value:string
-    datetime:string
+    date:string
 }
 
 
@@ -77,17 +78,52 @@ export interface IResource
 }
 
 
+export interface IClient
+{
+    id:string
+    name:string
+    birthdate:string
+    sex:string
+    Misc:IMisc[]
+    Offices:IOffice[]
+    Contacts:IContact[]
+    Company:ICompany
+}
+
+
+export interface IUtilizationCat
+{
+    id:string
+    day:string
+    discount:string
+    Company:ICompany
+    Rules:IUtilizationRule[]
+}
+
+
+export interface IUtilizationRule
+{
+    id:string
+    percent_from:string
+    percent_to:string
+    is_up:boolean
+    discount:string
+}
+
+
 export interface IUser
 {
     id:string
     name:string
 }
 
+
 export interface ILogin
 {
     login:string
     password:string
 }
+
 
 const endpoint = 'http://localhost:8000/api/v1/';
 
@@ -108,12 +144,14 @@ export class RestService
         return body || { };
     }
 
+
     getResources(): Observable<any> 
     {
         return this.http.get<IResource>(endpoint + 'resources/').pipe(
           catchError(this.handleError)
         );
     }
+
 
     getCompanyByUserId(uid:string)
     {
@@ -122,6 +160,7 @@ export class RestService
         )
     }
 
+
     getResourceTypes()
     {
         return this.http.get<IResourceType>(endpoint + 'resource_types/').pipe(
@@ -129,6 +168,45 @@ export class RestService
         )
     }
 
+
+    getOfficesByCompanyId(cid:string)
+    {
+        return this.http.get<IOffice>(endpoint + 'offices_by_company/' + cid + '/').pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    getUtilizationCatsWithRules(cid:string)
+    {
+        return this.http.get<IUtilizationCat>(endpoint + 'utilization_cats_with_rules/' + cid + '/').pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    getUtilizationCats(cid:string)
+    {
+        return this.http.get<IUtilizationCat>(endpoint + 'utilization_cat/' + cid + '/').pipe(
+            catchError(this.handleError)
+        )
+    }
+
+
+    getUtilizationRule(cid:string)
+    {
+        return this.http.get<IUtilizationRule>(endpoint + 'utilization_rule/' + cid + '/').pipe(
+            catchError(this.handleError)
+        )
+    }
+
+
+    getClientsByCompanyId(cid:string)
+    {
+        return this.http.get<IClient>(endpoint + 'clients/' + cid + '/').pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    
     login(login:string, password:string): Observable<any>
     {
         let input:ILogin = {login: login, password: password}
@@ -137,12 +215,14 @@ export class RestService
         );
     }
 
+
     validateLogin(token:string, tokenDate:string, id:string)
     {
         return this.http.post(endpoint + "validate_login/?format=json", {token: token, tokenDate: tokenDate, id: id}).pipe(
             catchError(this.handleError)
         );
     }
+
 
     private handleError(error: HttpErrorResponse): any {
         if (error.error instanceof ErrorEvent) 

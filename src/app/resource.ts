@@ -1,3 +1,5 @@
+import { DropdownItem } from './dropdown-item'
+import { DropdownList } from './dropdown-list'
 import { IResource, ICompany, IContact, IContactType, IMisc, IOffice, IProduct, IResourceType } from "./rest.service"
 
 export class Resource implements IResource
@@ -14,6 +16,11 @@ export class Resource implements IResource
     Products:IProduct[]
     ResourceType:IResourceType
     Company:ICompany
+
+    typeList:DropdownList
+    signList:DropdownList
+    officeList:DropdownList
+    statusList:DropdownList
 
     shortname:string;
 	type:string;
@@ -56,9 +63,9 @@ export class Resource implements IResource
             this.sexString = "Обр"
         }
 
-        let dt = Date.parse(this.birthdate)
+        let bdt = Date.parse(this.birthdate)
         let nd = new Date(Date.now())
-        dt = new Date(dt)
+        let dt = new Date(bdt)
 
         let timeDiff = Math.abs(nd.getTime() - dt.getTime())
         let yearsDiff = Math.ceil(timeDiff / (1000 * 3600 * 24 * 365))
@@ -85,7 +92,7 @@ export class Resource implements IResource
         if(this.sex != "-1")
         {
             let w = this.name.split(" ")
-            console.log(w.length)
+            
             if(w.length > 1)
             {
 
@@ -111,6 +118,25 @@ export class Resource implements IResource
             this.shortname = this.name
         }
         
+        this.typeList = new DropdownList("type", "Тип", [
+            new DropdownItem("Трудовой", "1"),
+            new DropdownItem("Оборудование", "2")
+        ])
+
+        this.signList = new DropdownList("sign", "Признак", [
+            new DropdownItem("Родительский", "1"),
+            new DropdownItem("Дочерний", "2"),
+        ])
+
+        this.officeList = new DropdownList("office", "Офис", [
+            new DropdownItem("Офис 1", "1"),
+            new DropdownItem("Офис 2", "2")
+        ])
+
+        this.statusList = new DropdownList("status", "Статус", [
+            new DropdownItem("Активен", "1"),
+            new DropdownItem("Пассивен", "2"),
+        ])
 
 		this.util = 10;
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { exception } from 'console';
 
 @Component({
     selector: 'app-exit',

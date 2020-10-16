@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { exception } from 'console';
 
 
 @Component({
@@ -13,6 +12,7 @@ import { exception } from 'console';
 export class ResourceFormComponent implements OnInit 
 {
 
+    msg:string
     edit:boolean
     company:restservice.ICompany
     ResourceTypes:restservice.IResourceType[]
@@ -48,7 +48,7 @@ export class ResourceFormComponent implements OnInit
 
     }
 
-    handleSave() 
+    handleSave(fio:string, pass:string) 
     {
 
     }

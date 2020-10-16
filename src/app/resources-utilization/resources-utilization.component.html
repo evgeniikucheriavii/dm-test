@@ -31,7 +31,9 @@
 				</section>
 			</section>
 
-			<section class="left-section left-section__list">
+            <app-list [listdata]="resources_list" [callback]="SwitchResource"></app-list>
+            
+			<!-- <section class="left-section left-section__list">
 				<div class="list-row list-row_head">
 					<div class="list__num">#</div>
 					<div class="list__name">Ресурс</div>
@@ -46,16 +48,17 @@
 						<div class="list__util _{{r.color}} _center">{{r.util}}%</div>
 					</div>
 				</div>
-			</section>
+			</section> -->
 
 			<section class="left-section__pages">
 				<button class="button" (click)="goToResourceForm()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-				<button class="button"><img src="assets/images/Import.svg" class="button__image"> Импортировать</button>
+				<button class="button" (click)="alert('Вызов API клиента')"><img src="assets/images/Import.svg" class="button__image"> Импортировать</button>
 			</section>
 
 		</div>
 	</section>
 	<section class="main-section main-section_right">
+        <!-- <app-popup [popup]="currentPopup"></app-popup> -->
 		<div class="container">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
@@ -73,7 +76,7 @@
                                 <div class="edit-menu__body">
                                     <div class="edit-body__title">ФИО</div>
                                     <label class="input-label edit-body__input-label">
-                                        <input type="text" class="input edit-body__input" placeholder="ФИО" value="{{currentResource.fullname}}">
+                                        <input type="text" class="input edit-body__input" placeholder="ФИО" value="{{currentResource.name}}">
                                     </label>
                                     <hr class="hr edit-body__hr">
                                     <div class="edit-body__title">Пол</div>
@@ -113,77 +116,14 @@
 
                 <!--Profile-->
 				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'profile'">
-					<label class="header-search-label profile-search-label">
-						<span class="header-search-label__title">Тип  </span>
-                        
-                        <label for="select_02" class="select select-label_graph">
-                            <input type="radio" name="list_2" value="not_changed" id="bg_02" class="select-bg select-radio select-list" checked />
-                            <input type="radio" name="list_2" value="not_changed" class="select-select select-radio select-list" id="select_02">
-                            <label class="bg" for="bg_02"></label>
-                            <div class="items">
-                                <input type="radio" name="list_2" value="first_value" id="list_2[0]" class="select-radio select-list">
-                                <label for="list_2[0]">Трудовой</label>
-                                <input type="radio" name="list_2" value="second_value" id="list_2[1]" class="select-radio select-list">
-                                <label for="list_2[1]">Не трудовой</label>
-                                <span id="text" class="select-text">Тип</span>
-                            </div>
-                        </label>
-
-                    </label>
+					
+                    <app-dropdown [list]="currentResource.typeList"></app-dropdown>
                     
-                    <label class="header-search-label profile-search-label">
-						<span class="header-search-label__title">Признак  </span>
-                        
-                        <label for="select_03" class="select select-label_graph">
-                            <input type="radio" name="list_3" value="not_changed" id="bg_03" class="select-bg select-radio select-list" checked />
-                            <input type="radio" name="list_3" value="not_changed" class="select-select select-radio select-list" id="select_03">
-                            <label class="bg" for="bg_03"></label>
-                            <div class="items">
-                                <input type="radio" name="list_3" value="first_value" id="list_3[0]" class="select-radio select-list">
-                                <label for="list_3[0]">Родительский</label>
-                                <input type="radio" name="list_3" value="second_value" id="list_3[1]" class="select-radio select-list">
-                                <label for="list_3[1]">Дочерний</label>
-                                <span id="text" class="select-text">Признак</span>
-                            </div>
-                        </label>
+                    <app-dropdown [list]="currentResource.signList"></app-dropdown>
 
-                    </label>
-                    
-                    <label class="header-search-label profile-search-label">
-						<span class="header-search-label__title">Офис  </span>
-                        
-                        <label for="select_04" class="select select-label_graph">
-                            <input type="radio" name="list_4" value="not_changed" id="bg_04" class="select-bg select-radio select-list" checked />
-                            <input type="radio" name="list_4" value="not_changed" class="select-select select-radio select-list" id="select_04">
-                            <label class="bg" for="bg_04"></label>
-                            <div class="items">
-                                <input type="radio" name="list_4" value="first_value" id="list_4[0]" class="select-radio select-list">
-                                <label for="list_4[0]">Офис 1</label>
-                                <input type="radio" name="list_4" value="second_value" id="list_4[1]" class="select-radio select-list">
-                                <label for="list_4[1]">Офис 2</label>
-                                <span id="text" class="select-text">Офис</span>
-                            </div>
-                        </label>
+                    <app-dropdown [list]="currentResource.officeList"></app-dropdown>
 
-                    </label>
-                    
-                    <label class="header-search-label profile-search-label">
-						<span class="header-search-label__title">Статус  </span>
-                        
-                        <label for="select_05" class="select select-label_graph">
-                            <input type="radio" name="list_5" value="not_changed" id="bg_05" class="select-bg select-radio select-list" checked />
-                            <input type="radio" name="list_5" value="not_changed" class="select-select select-radio select-list" id="select_05">
-                            <label class="bg" for="bg_05"></label>
-                            <div class="items">
-                                <input type="radio" name="list_5" value="first_value" id="list_5[0]" class="select-radio select-list">
-                                <label for="list_5[0]">Активен</label>
-                                <input type="radio" name="list_2" value="second_value" id="list_5[1]" class="select-radio select-list">
-                                <label for="list_5[1]">Не активен</label>
-                                <span id="text" class="select-text">Статус</span>
-                            </div>
-                        </label>
-
-					</label>
+                    <app-dropdown [list]="currentResource.statusList"></app-dropdown>
 
 				</section>
 
@@ -235,27 +175,31 @@
 				</div>
 
                 <div class="profile-body">
-                    <section class="left-section left-section__list transactions-list">
+
+                    <app-list [listdata]="misc_list" [callback]=""></app-list>
+                    <!-- <section class="left-section left-section__list transactions-list">
                         <div class="list__title">Особенности</div>
                         <div class="list-row list-row_head transactions-list__head">
                             <div class="list__num">#</div>
                             <div class="list__name">Особенность</div>
                             <div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Добавлено</div>
                         </div>
-                        <div class="transactions-list__body">
+                        <div class="transactions-list__body" >
                             <div class="list-row" *ngFor="let s of currentResource.Misc; let i = index">
                                 <div class="list__num">{{i + 1}}</div>
                                 <div class="list__name">{{s.value}}</div>
-                                <div class="list__name">{{s.datetime}}</div>
+                                <div class="list__name">{{s.date}}</div>
                             </div>
                         </div>
-                    </section>
+                    </section> -->
     
                     <section class="left-section left-section__pages">
-                        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+                        <button class="button" (click)="addMisc()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
                     </section>
     
-                    <section class="left-section left-section__list contacts-list">
+                    <app-list [listdata]="contacts_list" [callback]=""></app-list>
+
+                    <!-- <section class="left-section left-section__list contacts-list">
                         <div class="list__title">Контакты</div>
                         <div class="list-row list-row_head contacts-list__head">
                             <div class="list__num">#</div>
@@ -280,10 +224,10 @@
                                 </div> 
                             </div>
                         </div>
-                    </section>
+                    </section> -->
     
                     <section class="left-section left-section__pages">
-                        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+                        <button class="button" (click)="addContact()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
                     </section>
                 </div>
 				

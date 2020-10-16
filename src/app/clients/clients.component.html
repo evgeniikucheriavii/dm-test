@@ -42,9 +42,9 @@
 					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> LTV</div>
 				</div>
 				<div class="list__body" style="height: 600px;">
-					<div class="list-row" *ngFor="let c of clients; let i = index">
+					<div class="list-row list-row_client" *ngFor="let c of clients; let i = index" (click)="SwitchClient(i)">
 						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{c.fio}}</div>
+						<div class="list__name">{{c.shortname}}</div>
 						<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox"></label></div>
 						<div class="list__util">{{c.rfm}}</div>
 						<div class="list__util">{{c.ltvString}}</div>
@@ -63,7 +63,7 @@
 		<div class="container container_log">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
-					<div class="header-name">{{currentClient.fio}}</div>
+					<div class="header-name">{{currentClient.name}}</div>
 					<div class="tabs">
 						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
 					</div>
@@ -123,26 +123,11 @@
 					</div>
 				</div>
 
-				<section class="left-section left-section__list transactions-list">
-					<div class="list__title">Особенность</div>
-					<div class="list-row list-row_head transactions-list__head">
-						<div class="list__num">#</div>
-						<div class="list__name">Особенность</div>
-						<div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Добавлено</div>
-					</div>
-					<div class="transactions-list__body">
-						<div class="list-row" *ngFor="let s of currentClient.specials; let i = index">
-							<div class="list__num">{{i + 1}}</div>
-							<div class="list__name">{{s.name}}</div>
-							<div class="list__name">{{s.date}}</div>
-						</div>
-					</div>
-				</section>
-
-				<section class="left-section left-section__pages">
+				
+                <app-list [listdata]="contacts_list"></app-list>
+                <section class="left-section left-section__pages">
 					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
 				</section>
-
 				<section class="left-section left-section__list contacts-list">
 					<div class="list__title">Контакты</div>
 					<div class="list-row list-row_head contacts-list__head">
@@ -152,9 +137,9 @@
 						<div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Последняя коммуникация</div>
 						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Действие</div>
 					</div>
-					<div class="list-row" *ngFor="let c of currentClient.contacts; let i = index">
+					<div class="list-row" *ngFor="let c of currentClient.Contacts; let i = index">
 						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{c.name}}</div>
+						<div class="list__name">{{c.ContactType.name}}</div>
 						<div class="list__type">{{c.value}}</div>
 						<div class="list__name">{{c.lastdate}}</div>
 						<div class="list__util">

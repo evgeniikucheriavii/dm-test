@@ -15,10 +15,15 @@ import { CompanyScheduleComponent } from './company-schedule/company-schedule.co
 import { HelpComponent } from './help/help.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TttComponent } from './ttt/ttt.component';
 import { LoginComponent } from './login/login.component';
 import { ExitComponent } from './exit/exit.component';
 import { ResourceFormComponent } from './resource-form/resource-form.component';
+import { MiscFormComponent } from './misc-form/misc-form.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { PopupComponent } from './popup/popup.component';
+import { ContactsListComponent } from './contacts-list/contacts-list.component';
+import { ListComponent } from './list/list.component';
 // import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
@@ -30,10 +35,10 @@ const appRoutes = [
 	{ path: 'company-schedules', component: CompanyScheduleComponent },
 	{ path: 'clients', component: ClientsComponent },
 	{ path: 'help', component: HelpComponent },
-	{ path: 'ttt', component: TttComponent },
 	{ path: 'resource', component: ResourceFormComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'exit', component: ExitComponent },
+	{ path: 'list', component: ListComponent },
 ];
 
 @NgModule({
@@ -48,10 +53,15 @@ const appRoutes = [
     CompanyScheduleComponent,
     HelpComponent,
     HomeComponent,
-    TttComponent,
     LoginComponent,
     ExitComponent,
     ResourceFormComponent,
+    MiscFormComponent,
+    ContactFormComponent,
+    DropdownComponent,
+    PopupComponent,
+    ContactsListComponent,
+    ListComponent,
   ],
   imports: [
 	BrowserModule,

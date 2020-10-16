@@ -7,6 +7,11 @@ import { ServiceLog } from '../servicelog'
 import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { PopupElement } from '../popup-element';
+import { ListData } from '../list-data';
+import { ListCol } from '../list-col';
+import { first } from 'rxjs/operators';
+import { ListRow } from '../list-row';
 
 @Component({
   selector: 'app-resources-utilization',
@@ -16,9 +21,15 @@ import { Router } from '@angular/router';
 export class ResourcesUtilizationComponent implements OnInit {
 
 	currentResource:Resource;
-	currentTab:number;
+    currentTab:number;
+    
+    currentPopup:PopupElement
 
-	resources:Resource[] = [];
+    resources:Resource[] = [];
+    resources_list:ListData
+    contacts_list:ListData
+    misc_list:ListData
+
 	hours = [];
 	dates = [];
 	tabs = [];
@@ -26,9 +37,15 @@ export class ResourcesUtilizationComponent implements OnInit {
 	time = [];
 	currentHour:number;
 
-	schedule = [];
+    schedule = [];
+    
+    SwitchResource = (index:number) =>
+    {
+        this.currentResource = this.resources[index]
+        this.FormLists()
+    }
 
-	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router) { }
+	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
 	ngOnInit(): void 
 	{
@@ -169,31 +186,6 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 		this.hours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ];
 
-		// this.currentResource.services = [
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
-		// 	new ServiceLog("Консультативный прием", "30 минут", 1500)
-		// ];
-
 		this.currentTab = 0;
 
 		this.tabs = [
@@ -205,11 +197,23 @@ export class ResourcesUtilizationComponent implements OnInit {
 		];
 
         this.tabs[this.currentTab].Activate();
+
+        this.currentPopup = new PopupElement("Title", "123")
     }
 
     goToResourceForm()
     {
         this.router.navigate(["resource"])
+    }
+
+    addMisc()
+    {
+        this.currentPopup = new PopupElement("Title", "123")
+    }
+
+    addContact()
+    {
+        alert("bbb")
     }
 
     getResources()
@@ -222,10 +226,107 @@ export class ResourcesUtilizationComponent implements OnInit {
                 this.resources.push(new Resource(temp[i]))
             }
 
+            this.currentResource = this.resources[0]
+            this.FormLists()
             this.SwitchResource(0)
-            ApplicationRef.tick()
+            this.appRef.tick()
+            // setTimeout("", 1)
             this.SwitchResource(0)
         })
+    }
+
+    FormLists()
+    {
+        let res_cols = [
+            new ListCol("Ресурс", "name"),
+            new ListCol("Тип", "type", true),
+            new ListCol("Утилизация", "util", true)
+        ]
+
+        let res_rows = []
+
+        for(let i = 0; i < this.resources.length; i++)
+        {
+            res_rows.push(new ListRow([
+                this.resources[i].shortname,
+                this.resources[i].ResourceType.name,
+                this.resources[i].util + "%"
+            ]))
+        }
+
+        this.resources_list = new ListData(res_cols, res_rows, "resources")
+
+        let misc_cols = [
+            new ListCol("Особенность", "name"),
+            new ListCol("Добавлено", "type")
+        ]
+        
+        let misc_rows = []
+
+        let misc = this.currentResource.Misc
+
+        for(let i = 0; i < misc.length; i++)
+        {
+            misc_rows.push(new ListRow([misc[i].value, misc[i].date]))
+        }
+        
+        this.misc_list = new ListData(misc_cols, misc_rows, "misc", "Особенности", true, "list__head_lined")
+
+    //     <div class="list-row list-row_head contacts-list__head">
+    //     <div class="list__num">#</div>
+    //     <div class="list__name">Канал</div>
+    //     <div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Номер \ Ник</div>
+    //     <div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Последняя коммуникация</div>
+    //     <div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Действие</div>
+    // </div>
+        // <div class="list__num">{{i + 1}}</div>
+        //                     <div class="list__name">{{c.ContactType.name}}</div>
+        //                     <div class="list__type">{{c.Contact}}</div>
+        //                     <div class="list__name">{{c.lastdate}}</div>
+        //                     <div class="list__util">
+        //                         <div *ngIf="c.ContactType.action == 'phone'">
+        //                             <button class="button contact-button" (click)="alert('Вызов API клиента: ' + c.ContactType.action)"><img src="assets/images/Call.svg" class="button__image"> Позвонить</button>
+        //                             <img src="assets/images/Dots.svg" class="status-column__dots list__dots">
+        //                         </div>
+        //                         <div *ngIf="c.ContactType.action != 'phone'">
+        //                             <button class="button contact-button" (click)="alert('Вызов API клиента: ' + c.ContactType.action)"><img src="assets/images/Write.svg" class="button__image"> Написать</button>
+        //                             <img src="assets/images/Dots.svg" class="status-column__dots list__dots">
+        //                         </div> 
+        //                     </div>
+
+
+        let contacts_cols = [
+            new ListCol("Канал", "name"),
+            new ListCol("Номер \ Ник", "type", true),
+            new ListCol("Последняя коммуникация", "name", true),
+            new ListCol("Действие", "util", true),
+        ]
+
+        let contacts_rows = []
+
+        let contacts = this.currentResource.Contacts
+
+        for(let i = 0; i < contacts.length; i++)
+        {
+            contacts_rows.push(new ListRow([
+                contacts[i].ContactType.name,
+                contacts[i].Contact,
+                "",
+                ""
+            ]))
+        }
+
+        this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", true, "list__head_lined")
+    }
+
+    getResourceTypes()
+    {
+
+    }
+
+    getOffices()
+    {
+        
     }
 
 	public SwitchTab(index:number)
@@ -243,25 +344,6 @@ export class ResourcesUtilizationComponent implements OnInit {
         }
         
     }
-
-
-    public SwitchResource(index:number)
-    {
-        this.currentResource = this.resources[index]
-
-        let items = document.getElementsByClassName("list-row_res")
-
-        for(let i = 0; i < items.length; i++)
-        {
-            items[i].className = "list-row list-row_res"
-
-            if(i == index)
-            {
-                items[i].className = "list-row list-row_res list-row_active"
-            }
-        }
-    }
-    
 
     public alert(msg:string)
     {
