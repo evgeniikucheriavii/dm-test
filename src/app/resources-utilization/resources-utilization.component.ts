@@ -8,10 +8,8 @@ import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { PopupElement } from '../popup-element';
-import { ListData } from '../list-data';
-import { ListCol } from '../list-col';
+import { ListData, ListCol, ListRow, ListButton } from '../list/list.component';
 import { first } from 'rxjs/operators';
-import { ListRow } from '../list-row';
 
 @Component({
   selector: 'app-resources-utilization',
@@ -42,7 +40,8 @@ export class ResourcesUtilizationComponent implements OnInit {
     SwitchResource = (index:number) =>
     {
         this.currentResource = this.resources[index]
-        this.FormLists()
+        this.FormMiscList()
+        this.FormContactsList()
     }
 
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
@@ -230,12 +229,20 @@ export class ResourcesUtilizationComponent implements OnInit {
             this.FormLists()
             this.SwitchResource(0)
             this.appRef.tick()
-            // setTimeout("", 1)
-            this.SwitchResource(0)
         })
     }
 
     FormLists()
+    {
+        this.FormResourcesList()
+
+        this.FormMiscList()
+
+        this.FormContactsList()
+
+    }
+
+    FormResourcesList()
     {
         let res_cols = [
             new ListCol("Ресурс", "name"),
@@ -255,7 +262,10 @@ export class ResourcesUtilizationComponent implements OnInit {
         }
 
         this.resources_list = new ListData(res_cols, res_rows, "resources")
+    }
 
+    FormMiscList()
+    {
         let misc_cols = [
             new ListCol("Особенность", "name"),
             new ListCol("Добавлено", "type")
@@ -271,8 +281,12 @@ export class ResourcesUtilizationComponent implements OnInit {
         }
         
         this.misc_list = new ListData(misc_cols, misc_rows, "misc", "Особенности", true, "list__head_lined")
+    }
 
-    //     <div class="list-row list-row_head contacts-list__head">
+    FormContactsList()
+    {
+
+         //     <div class="list-row list-row_head contacts-list__head">
     //     <div class="list__num">#</div>
     //     <div class="list__name">Канал</div>
     //     <div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Номер \ Ник</div>
@@ -293,8 +307,6 @@ export class ResourcesUtilizationComponent implements OnInit {
         //                             <img src="assets/images/Dots.svg" class="status-column__dots list__dots">
         //                         </div> 
         //                     </div>
-
-
         let contacts_cols = [
             new ListCol("Канал", "name"),
             new ListCol("Номер \ Ник", "type", true),
@@ -308,11 +320,29 @@ export class ResourcesUtilizationComponent implements OnInit {
 
         for(let i = 0; i < contacts.length; i++)
         {
+            let comm = "никогда"
+
+            if(Number(contacts[i].LastCommunication.id) > 0)
+            {
+                comm = contacts[i].LastCommunication.datetime + ""
+            }
+            
+            let btn = null
+
+            if(contacts[i].ContactType.action == "phone")
+            {
+                btn = new ListButton("Позвонить", "Call")
+            }
+            else
+            {
+                btn = new ListButton("Написать", "Write")
+            }
+
             contacts_rows.push(new ListRow([
                 contacts[i].ContactType.name,
                 contacts[i].Contact,
-                "",
-                ""
+                comm,
+                btn
             ]))
         }
 
@@ -348,6 +378,12 @@ export class ResourcesUtilizationComponent implements OnInit {
     public alert(msg:string)
     {
         window.alert(msg)
+    }
+
+    public Communicate(obj:any, index:number)
+    {
+        let api = obj.currentResource.Contacts[index].ContactType.action
+        window.alert("API Call: " + api)
     }
 
 

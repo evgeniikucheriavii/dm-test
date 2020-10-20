@@ -73,18 +73,6 @@
 	border-bottom: 1px solid transparent;
 }
 
-.list__dots
-{
-    display: none;
-    cursor: pointer;
-    vertical-align: middle;
-}
-
-.list-row:hover .list__dots
-{
-    display: inline-block;
-}
-
 .list__num
 {
 	width: 50px;
@@ -110,10 +98,83 @@
 	overflow: auto;
 }
 
-.status-column__dots
+
+
+.list__sale
 {
-	height: 16px;
+	margin-left: 100px;
+}
+
+.list__util
+{
+	flex: 1.5;
+}
+
+.list-row_b
+{
+	justify-content: space-between;
+}
+
+.list-row_b:hover .details-button
+{
+	display: block;
+}
+
+.list__n
+{
+	width: 40px;
+	margin-right: 20px;
+}
+
+.list__koef
+{
+	width: 98px;
+	text-align: center;
+	margin-right: 20px;
+}
+
+.list__pname
+{
+	width: 425px;
+}
+
+.list__pmin
+{
+	width: 120px;
+}
+
+.list__pmax
+{
+	width: 162px;
+}
+
+.list__pmax_first
+{
 	margin-left: 25px;
+}
+
+.list__pmax_last
+{
+	margin-right: 80px !important;
+}
+
+.list__dots
+{
+    display: none;
+    cursor: pointer;
+    vertical-align: middle;
+    height: 16px;
+}
+
+.list-row:hover .list__dots
+{
+    display: inline-block;
+}
+
+.list-button
+{
+    width: 107px;
+    display: inline-block;
 }
 
 .sort-image

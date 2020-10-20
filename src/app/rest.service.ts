@@ -30,11 +30,20 @@ export interface IContactType
 }
 
 
+export interface ICommunicationLog
+{
+    id:string
+    datetime:string
+    User:IUser
+}
+
+
 export interface IContact
 {
     id:string
     Contact:string
     ContactType:IContactType
+    LastCommunication:ICommunicationLog
 }
 
 
@@ -152,6 +161,12 @@ export class RestService
         );
     }
 
+    updateResource(res:IResource)
+    {
+        return this.http.put<IResource>("", res).pipe(
+            catchError(this.handleError)
+        )
+    }
 
     getCompanyByUserId(uid:string)
     {

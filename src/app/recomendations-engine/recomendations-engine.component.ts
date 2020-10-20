@@ -5,9 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { UtilizationRule } from '../utilization-rule';
 import { UtilizationCat } from '../utilization-cat';
-import { ListData } from '../list-data';
-import { ListCol } from '../list-col';
-import { ListRow } from '../list-row';
+import { ListData, ListCol, ListRow } from '../list/list.component';
 
 @Component({
 	selector: 'app-recomendations-engine',
@@ -34,7 +32,7 @@ export class RecomendationsEngineComponent implements OnInit
         this.currentCat = this.utilizationCats[index]
         this.appRef.tick()
 
-        this.FormLists()
+        this.FormRulesList()
     }
 
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
@@ -120,6 +118,12 @@ export class RecomendationsEngineComponent implements OnInit
 
     FormLists()
     {
+        this.FormCatsList()
+        this.FormRulesList()
+    }
+
+    public FormCatsList()
+    {
         let cat_rows = []
 
         for(let i = 0; i < this.utilizationCats.length; i++)
@@ -138,7 +142,10 @@ export class RecomendationsEngineComponent implements OnInit
             true,
             "list__head_lined"
         )
+    }
 
+    public FormRulesList()
+    {
         let rules_rows = []
 
         let rules = this.currentCat.rules

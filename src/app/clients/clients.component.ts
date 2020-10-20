@@ -8,9 +8,7 @@ import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { PopupElement } from '../popup-element';
-import { ListData } from '../list-data';
-import { ListCol } from '../list-col';
-import { ListRow } from '../list-row';
+import { ListData, ListCol, ListRow } from '../list/list.component';
 
 @Component({
 	selector: 'app-clients',
@@ -24,36 +22,25 @@ export class ClientsComponent implements OnInit
 	sections = [];
 
     clients:Client[] = [];
-    
+
+    clients_list:ListData    
     contacts_list:ListData
+    misc_list:ListData
 	
 	currentClient:Client;
 	currentTab:number;
+
+    SwitchClient = (index:number) =>
+    {
+        this.currentClient = this.clients[index]
+        this.FormLists()
+    }
 
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
 	ngOnInit(): void 
 	{
         this.getClients()
-
-		// this.clients = [
-		// 	new Client("Иванов Иван", 1231, 44000),
-		// 	new Client("Сидоров Сергей", 1231, 63000),
-		// 	new Client("Колесов А. В.", 1131, 50000),
-		// 	new Client("Петрова Светлана", 3212, 7200),
-		// 	new Client("Баярова Алина", 2122, 22500),
-		// 	new Client("Аппарат Экзарта", 2312, 50345),
-		// 	new Client("Платформа Галилео", 1231, 63000),       
-		// 	new Client("Петрова Светлана", 1231, 50000),
-		// 	new Client("Баярова Алина", 1131, 7200),
-		// 	new Client("Петрова Светлана", 3212, 22500),
-		// 	new Client("Аппарат Экзарта", 2122, 50345),
-		// 	new Client("Платформа Галилео", 2312, 7200),
-		// 	new Client("Петрова Светлана", 1131, 22500),
-		// 	new Client("Аппарат Экзарта", 3212, 50345)
-		// ];
-
-        // this.currentClient = this.clients[2];
         
         // this.currentClient.services = [
 		// 	new ServiceLog("Консультативный прием", "30 минут", 1500),
@@ -98,11 +85,6 @@ export class ClientsComponent implements OnInit
 		// 	new LogEntry("Консультативный прием", "Массаж 45 минут", "Колесов А.В.", "11.05.2018", true)
 		// ];
 
-		// this.currentClient.contacts = [
-		// 	new Contact(0, "Телефон",  "88005553535", "20.03.2020"),
-		// 	new Contact(1, "Почта", "mail@gmail.com", "20.03.2020"),
-		// 	new Contact(1, "WhatsApp", "88005553535", "20.03.2020")
-		// ];
 
 		// this.currentClient.transactions = [
 		// 		new TransactionLog("Массаж 45 минут", "Колесов А. В.", 1500, "20.03.2020"),
@@ -115,12 +97,6 @@ export class ClientsComponent implements OnInit
 		// 		new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020"),
 		// 		new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020"),
 		// 		new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020")
-		// ];
-
-		// this.currentClient.specials = [
-		// 	new Special("Коммуникации только по email", "20.03.2019"),
-		// 	new Special("Коммуникации только по email", "20.03.2019"),
-		// 	new Special("Коммуникации только по email", "20.03.2019")
 		// ];
 
 		this.tabs = [
@@ -160,54 +136,104 @@ export class ClientsComponent implements OnInit
                 this.clients.push(new Client(temp[i]))
             }
 
-            
+            this.currentClient = this.clients[0]
+            this.FormLists()
             this.SwitchClient(0)
             this.appRef.tick()
-            this.SwitchClient(0)
-            this.FormLists()
         })
     }
 
     FormLists()
     {
-        let rows = []
-        // let contacts = this.currentClient.Contacts
+        let clients_cols = [
+            new ListCol("ФИО", "name"),
+            new ListCol("Акции", "type", true),
+            new ListCol("RFM", "util", true),
+            new ListCol("LTV", "util", true)
+        ]
+
+        let clients_rows = []
+    //         <div class="list-row list-row_client" *ngFor="let c of clients; let i = index" (click)="SwitchClient(i)">
+    //             <div class="list__num">{{i + 1}}</div>
+    //             <div class="list__name">{{c.shortname}}</div>
+    //             <div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox"></label></div>
+    //             <div class="list__util">{{c.rfm}}</div>
+    //             <div class="list__util">{{c.ltvString}}</div>
+    //         </div>
+    //     </div>
+    // </section>
+
+
+        for(let i = 0; i < this.clients.length; i++)
+        {
+            clients_rows.push(new ListRow([
+                this.clients[i].shortname,
+                // this.clients[i].,
+                "",
+                this.clients[i].rfm + "",
+                this.clients[i].ltvString,
+            ]))
+        }
+
+        this.clients_list = new ListData(
+            clients_cols, 
+            clients_rows,
+            "clients"
+        )
+
+        let misc_rows = []
+       
         let misc = this.currentClient.Misc
 
         for(let i = 0; i < misc.length; i++)
         {
-            rows.push(new ListRow([misc[i].value, misc[i].date]))
+            misc_rows.push(new ListRow([misc[i].value, misc[i].date]))
         }
 
-        this.contacts_list = new ListData(
+        this.misc_list = new ListData(
             [
                 new ListCol("Особенность", "name"),
                 new ListCol("Добавлено", "name"),
             ], 
-            rows, 
+            misc_rows, 
             "contacts",
             "Особенности", 
             true,
             "list__head_lined"
             )
-    }
 
-    SwitchClient(index:number)
-    {
-        this.currentClient = this.clients[index]
+        let contacts_cols = [
+            new ListCol("Канал", "name"),
+            new ListCol("Номер \ Ник", "type", true),
+            new ListCol("Последняя коммуникация", "name", true),
+            new ListCol("Действие", "util", true),
+        ]
 
-        let items = document.getElementsByClassName("list-row_client")
+        let contacts_rows = []
 
-        for(let i = 0; i < items.length; i++)
+        let contacts = this.currentClient.Contacts
+
+        for(let i = 0; i < contacts.length; i++)
         {
-            items[i].className = "list-row list-row_client"
+            let comm = "никогда"
 
-            if(i == index)
+            if(Number(contacts[i].LastCommunication.id) > 0)
             {
-                items[i].className = "list-row list-row_client list-row_active"
+                comm = contacts[i].LastCommunication.datetime + ""
             }
+            
+            contacts_rows.push(new ListRow([
+                contacts[i].ContactType.name,
+                contacts[i].Contact,
+                comm,
+                ""
+            ]))
         }
+
+        this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", true, "list__head_lined")
     }
+
+    
 }
 
 class TransactionLog

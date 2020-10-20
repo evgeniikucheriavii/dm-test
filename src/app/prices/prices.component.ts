@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ListData, ListCol, ListRow } from '../list/list.component';
 
 @Component({
 	selector: 'app-prices',
@@ -8,13 +9,20 @@ import { Component, OnInit } from '@angular/core';
 export class PricesComponent implements OnInit 
 {
 
-	data = [];
-	openedDetails:number = -1;
+    data = [];
+    prices = []
+    openedDetails:number = -1;
+    
+    prices_list:ListData
 
-	constructor() { }
+    constructor() { }
+    
+    
 
 	ngOnInit(): void 
 	{
+
+        this.FormLists()
 
 		this.data = [
 			new Resource("Иванов Иван", 2000, 1000, 1, 1000, 25000, 12500, 1),
@@ -37,7 +45,30 @@ export class PricesComponent implements OnInit
 
 		let obj = this;
 		window.addEventListener("click", function (e) { obj.HideDetails(e); });
-	}
+    }
+    
+    FormLists()
+    {
+        let prices_cols = [
+            new ListCol("Ресурс", "pname"),
+            new ListCol("Цена max", "pmin _center", true),
+            new ListCol("Цена min", "pmin _center", true),
+            new ListCol("коэф", "koef", true),
+            new ListCol("Max доход в месяц", "pmax list__pmax_first", true),
+            new ListCol("Min доход в месяц", "pmax list__pmax_last", true),
+            new ListCol("Продажа", "service", true)
+        ]
+
+        let prices_rows = []
+
+        for(let i = 0; i < this.prices.length; i++)
+        {
+            prices_rows.push(new ListRow(["", ""]))
+        }
+
+        this.prices_list = new ListData(prices_cols, prices_rows, "prices")
+
+    }
 
 	ShowDetails(i:number)
 	{

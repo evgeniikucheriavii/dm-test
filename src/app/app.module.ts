@@ -24,6 +24,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { PopupComponent } from './popup/popup.component';
 import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ListComponent } from './list/list.component';
+import { ContextComponent } from './context/context.component';
 // import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
@@ -62,6 +63,7 @@ const appRoutes = [
     PopupComponent,
     ContactsListComponent,
     ListComponent,
+    ContextComponent,
   ],
   imports: [
 	BrowserModule,

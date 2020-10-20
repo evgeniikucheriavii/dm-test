@@ -33,24 +33,8 @@
 				</section>
 			</section>
 
-			<section class="left-section left-section__list">
-				<div class="list-row list-row_head">
-					<div class="list__num">#</div>
-					<div class="list__name">ФИО</div>
-					<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Акции</div>
-					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> RFM</div>
-					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> LTV</div>
-				</div>
-				<div class="list__body" style="height: 600px;">
-					<div class="list-row list-row_client" *ngFor="let c of clients; let i = index" (click)="SwitchClient(i)">
-						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{c.shortname}}</div>
-						<div class="list__type"><label class="box-label box-label_checkbox"><input type="checkbox" class="box-label__input box-label__input_checkbox"></label></div>
-						<div class="list__util">{{c.rfm}}</div>
-						<div class="list__util">{{c.ltvString}}</div>
-					</div>
-				</div>
-			</section>
+            <app-list [listdata]="clients_list" [callback]="SwitchClient"></app-list>
+            
 			<section class="left-section left-section__pages">
 				<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
 				<button class="button"><img src="assets/images/Import.svg" class="button__image"> Импортировать</button>
@@ -124,37 +108,12 @@
 				</div>
 
 				
-                <app-list [listdata]="contacts_list"></app-list>
+                <app-list [listdata]="misc_list"></app-list>
                 <section class="left-section left-section__pages">
 					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-				</section>
-				<section class="left-section left-section__list contacts-list">
-					<div class="list__title">Контакты</div>
-					<div class="list-row list-row_head contacts-list__head">
-						<div class="list__num">#</div>
-						<div class="list__name">Канал</div>
-						<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Номер \ Ник</div>
-						<div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Последняя коммуникация</div>
-						<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Действие</div>
-					</div>
-					<div class="list-row" *ngFor="let c of currentClient.Contacts; let i = index">
-						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{c.ContactType.name}}</div>
-						<div class="list__type">{{c.value}}</div>
-						<div class="list__name">{{c.lastdate}}</div>
-						<div class="list__util">
-							<div *ngIf="c.type == 0; then callBlock else mailBlock"></div>
-							<ng-template #callBlock>
-								<button class="button contact-button"><img src="assets/images/Call.svg" class="button__image"> Позвонить</button>
-								<img src="assets/images/Dots.svg" class="status-column__dots">
-							</ng-template>
-							<ng-template #mailBlock>
-								<button class="button contact-button"><img src="assets/images/Write.svg" class="button__image"> Написать</button>
-								<img src="assets/images/Dots.svg" class="status-column__dots">
-							</ng-template> 
-						</div>
-					</div>
-				</section>
+                </section>
+                
+				<app-list [listdata]="contacts_list"></app-list>
 
 				<section class="left-section left-section__pages">
 					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>

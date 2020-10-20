@@ -7,7 +7,14 @@
     <div class="list__body">
         <div class="list-row list-row_{{listdata.listname}}" (click)="ItemClick(i)" *ngFor="let row of listdata.rows; let i = index">
             <div class="list__num" *ngIf="listdata.showId">{{i + 1}}</div>
-            <div class="list__{{listdata.cols[i].type}}" *ngFor="let val of row.values; let i = index">{{val}}</div>
+            <div class="list__{{listdata.cols[j].type}}" *ngFor="let val of row.values; let j = index; let last = last">
+                <span *ngIf="val.type != 'button'">{{val}}</span>
+                <div>
+                    <button *ngIf="val.type == 'button'"class="button list-button" (click)="ClickButton(i)"><img src="assets/images/{{val.icon}}.svg" class="button__image"> {{val.text}}</button>
+                    <img src="assets/images/Dots.svg" class="list__dots" *ngIf="last && have_dots" (click)="ClickDots(i)">
+                </div>
+            </div>
         </div>
+
     </div>
 </section>
