@@ -33,7 +33,7 @@
 				</section>
 			</section>
 
-            <app-list [listdata]="clients_list" [callback]="SwitchClient"></app-list>
+            <app-list [listdata]="clients_list" [callback]="SwitchClient" [height]="600"></app-list>
             
 			<section class="left-section left-section__pages">
 				<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
@@ -47,14 +47,13 @@
 		<div class="container container_log">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
-					<div class="header-name">{{currentClient.name}}</div>
-					<div class="tabs">
-						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
-					</div>
+                    <div class="header-name">{{currentClient.name}}</div>
+                    
+					<app-tabs [tabsdata]="tabsdata" [callback]="SwitchTab" [obj]="this"></app-tabs>
 				</section>
                 
                 <!--Log-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'sales'">
+				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'sales'">
 					<label class="header-search-label">
 						<span class="header-search-label__title">Поиск  </span>
 						<label class="header-search-label__element search-label">
@@ -65,7 +64,7 @@
 				</section>
 
 				<!--Log-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'log'">
+				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
 					<label class="header-search-label">
 						<span class="header-search-label__title">Поиск  </span>
 						<label class="header-search-label__element search-label">
@@ -79,7 +78,7 @@
 			</section>
 
 			<!--profile-->
-			<section class="right-section right-section__transactions" *ngIf="tabs[currentTab].id == 'profile'">
+			<section class="right-section right-section__transactions" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
 				<div class="banner">					
 					<div class="banner-item">
 						<div class="banner-item__header">RFM: </div>
@@ -122,7 +121,7 @@
 			</section>
 
             <!--Sales-->
-			<section class="right-section right-section__list" *ngIf="tabs[currentTab].id == 'sales'">
+			<section class="right-section right-section__list" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'sales'">
 				<section class="left-section left-section__list resources-list">
 					<div class="list-row list-row_head resources-row resources-list__head">
 						<div class="list__num">#</div>
@@ -151,12 +150,12 @@
 			</section>
 
 			<!--Reserve-->
-			<section class="right-section right-section__list" *ngIf="tabs[currentTab].id == 'reserve'">
+			<section class="right-section right-section__list" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'reserve'">
 				Бронирование
 			</section>
 
 			<!--Log-->
-			<section class="right-section right-section__list" *ngIf="tabs[currentTab].id == 'log'">
+			<section class="right-section right-section__list" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
 				<div class="list-row list-row_head">
 					<div class="list__num">#</div>
 					<div class="list__name">Обращение</div>

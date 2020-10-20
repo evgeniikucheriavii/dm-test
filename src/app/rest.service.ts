@@ -134,7 +134,7 @@ export interface ILogin
 }
 
 
-const endpoint = 'http://localhost:8000/api/v1/';
+const endpoint = 'http://localhost:50084/api/v1/';
 
 
 @Injectable({

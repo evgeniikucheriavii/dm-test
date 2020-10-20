@@ -1,5 +1,5 @@
 import { ApplicationRef, Component, OnInit } from '@angular/core';
-import { Tab } from '../tab';
+import { Tab, TabsData } from '../tabs/tabs.component';
 import { Resource } from '../resource'
 import { Special } from '../special'
 import { Contact } from '../contact'
@@ -19,7 +19,8 @@ import { first } from 'rxjs/operators';
 export class ResourcesUtilizationComponent implements OnInit {
 
 	currentResource:Resource;
-    currentTab:number;
+
+    tabsdata:TabsData
     
     currentPopup:PopupElement
 
@@ -30,7 +31,6 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 	hours = [];
 	dates = [];
-	tabs = [];
 
 	time = [];
 	currentHour:number;
@@ -42,6 +42,11 @@ export class ResourcesUtilizationComponent implements OnInit {
         this.currentResource = this.resources[index]
         this.FormMiscList()
         this.FormContactsList()
+    }
+
+    SwitchTab = (index:number) =>
+	{
+        // this.tabsdata.currentTab = index;
     }
 
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
@@ -185,17 +190,15 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 		this.hours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ];
 
-		this.currentTab = 0;
-
-		this.tabs = [
+		let tabs = [
 			new Tab("profile", "Профиль"),
 			new Tab("sales", "Продажи"),
 			new Tab("load", "Загрузка"),
 			new Tab("service", "Услуги"),
 			new Tab("log", "Лог")
-		];
-
-        this.tabs[this.currentTab].Activate();
+        ];
+        
+        this.tabsdata = new TabsData("resources", tabs)
 
         this.currentPopup = new PopupElement("Title", "123")
     }
@@ -356,22 +359,6 @@ export class ResourcesUtilizationComponent implements OnInit {
 
     getOffices()
     {
-        
-    }
-
-	public SwitchTab(index:number)
-	{
-		if(index <= this.tabs.length)
-		{
-			this.currentTab = index;
-
-			for(let i = 0; i < this.tabs.length; i++)
-			{
-				this.tabs[i].Deactivate();
-			}
-
-			this.tabs[this.currentTab].Activate();
-        }
         
     }
 

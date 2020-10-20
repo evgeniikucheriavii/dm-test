@@ -31,7 +31,7 @@
 				</section>
 			</section>
 
-            <app-list [listdata]="resources_list" [callback]="SwitchResource" [obj]="this"></app-list>
+            <app-list [listdata]="resources_list" [callback]="SwitchResource" [obj]="this" [height]="600"></app-list>
             
 			<!-- <section class="left-section left-section__list">
 				<div class="list-row list-row_head">
@@ -63,8 +63,8 @@
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
                     <div class="header-name">
-                        <span *ngIf="tabs[currentTab].id != 'profile'">{{currentResource.name}}</span>
-                        <span *ngIf="tabs[currentTab].id == 'profile'">
+                        <span *ngIf="tabsdata.tabs[tabsdata.currentTab].id != 'profile'">{{currentResource.name}}</span>
+                        <span *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
                             {{currentResource.name}}
                             <button class="button button_small"><img class="button__image" src="assets/images/pencil.svg"  (click)="ShowEditMenu();"></button>
 
@@ -105,17 +105,15 @@
                             </div>
                         </span>
                         
-                        <div class="header-subname" *ngIf="tabs[currentTab].id == 'profile'">
+                        <div class="header-subname" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
                             {{currentResource.sexString}} | {{currentResource.ageString}}
                         </div>
                     </div>
-					<div class="tabs">
-						<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
-					</div>
+					<app-tabs [tabsdata]="tabsdata" [callback]="SwitchTab"></app-tabs>
 				</section>
 
                 <!--Profile-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'profile'">
+				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
 					
                     <app-dropdown [list]="currentResource.typeList"></app-dropdown>
                     
@@ -128,7 +126,7 @@
 				</section>
 
                 <!--Service-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'service'">
+				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'service'">
 					<label class="header-search-label">
 						<span class="header-search-label__title">Поиск  </span>
 						<label class="header-search-label__element search-label">
@@ -139,7 +137,7 @@
 				</section>
                 
 				<!--Sales-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'sales'">
+				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'sales'">
 					<label class="header-search-label">
 						<span class="header-search-label__title">Поиск  </span>
 						<label class="header-search-label__element search-label">
@@ -150,13 +148,13 @@
 				</section>
 
 				<!--Log-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabs[currentTab].id == 'log'">
+				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
 					
 				</section>
 			</section>
 
             <!--profile-->
-			<section class="right-section right-section__profile" *ngIf="tabs[currentTab].id == 'profile'">
+			<section class="right-section right-section__profile" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
 				<div class="banner">					
 					<div class="banner-item">
 						<div class="banner-item__header">Доступность ресурса в текущем месяце </div>
@@ -192,7 +190,7 @@
 			</section>
 
 			<!--Load-->
-			<section class="right-section right-section__schedule" *ngIf="tabs[currentTab].id == 'load'">
+			<section class="right-section right-section__schedule" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'load'">
 				<div class="time-table">
 					<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
 						<div class="table-col table-col_time">
@@ -246,7 +244,7 @@
 			</section>
 
             <!--Sales-->
-			<section class="right-section right-section__graph" *ngIf="tabs[currentTab].id == 'sales'">
+			<section class="right-section right-section__graph" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'sales'">
 				<section class="left-section left-section__list resources-list">
 					<div class="list-row list-row_head resources-row resources-list__head">
 						<div class="list__num">#</div>
@@ -275,7 +273,7 @@
 			</section>
 
 			<!--Services-->
-			<section class="right-section right-section__graph" *ngIf="tabs[currentTab].id == 'service'">
+			<section class="right-section right-section__graph" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'service'">
 				<section class="left-section left-section__list resources-list">
 					<div class="list-row list-row_head resources-row resources-list__head">
 						<div class="list__num">#</div>
@@ -302,7 +300,7 @@
 			</section>
 
 			<!--Log-->
-			<section class="right-section right-section__graph" *ngIf="tabs[currentTab].id == 'log'">
+			<section class="right-section right-section__graph" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
 				Log
 			</section>
 		</div>

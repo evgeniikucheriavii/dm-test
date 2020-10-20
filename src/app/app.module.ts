@@ -25,6 +25,7 @@ import { PopupComponent } from './popup/popup.component';
 import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ListComponent } from './list/list.component';
 import { ContextComponent } from './context/context.component';
+import { TabsComponent } from './tabs/tabs.component';
 // import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
@@ -64,6 +65,7 @@ const appRoutes = [
     ContactsListComponent,
     ListComponent,
     ContextComponent,
+    TabsComponent,
   ],
   imports: [
 	BrowserModule,

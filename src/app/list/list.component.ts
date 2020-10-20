@@ -4,7 +4,7 @@ import { EventEmitter } from 'protractor';
 @Component({
     selector: 'app-list',
     templateUrl: './list.component.html',
-    inputs: ['listdata', 'callback', 'dots_callback', 'button_callback', 'obj'],
+    inputs: ['listdata', 'callback', 'dots_callback', 'button_callback', 'obj', "height"],
     styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit 
@@ -14,6 +14,7 @@ export class ListComponent implements OnInit
     callback: (index:number) => void
     dots_callback: (obj:any, index:number) => void
     button_callback: (obj:any, index:number) => void
+    height:string
 
     have_dots:boolean = false
     have_button:boolean = false
@@ -30,13 +31,24 @@ export class ListComponent implements OnInit
         
         if(typeof(this.button_callback) == "function") 
             this.have_button = true
+
+        
+        setTimeout(this.SetHeight, 100)
+        
+    }
+
+    SetHeight()
+    {
+        // let list_body = document.getElementById("list__body_" + this.listdata.listname)
+
+        // console.log(this.listdata)
     }
 
     ItemClick(index:number)
     {
         if(typeof(this.callback) != "function")
             return
-            
+
         let rows = document.getElementsByClassName("list-row_" + this.listdata.listname)
         for(let i = 0; i < this.listdata.rows.length; i++)
         {

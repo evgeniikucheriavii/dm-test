@@ -1,5 +1,5 @@
 import { ApplicationRef, Component, OnInit } from '@angular/core';
-import { Tab } from '../tab';
+import { Tab, TabsData } from '../tabs/tabs.component';
 import { Special } from '../special'
 import { Contact } from '../contact'
 import { ServiceLog } from '../servicelog'
@@ -18,7 +18,7 @@ import { ListData, ListCol, ListRow } from '../list/list.component';
 
 export class ClientsComponent implements OnInit 
 {
-	tabs = [];
+	tabsdata:TabsData
 	sections = [];
 
     clients:Client[] = [];
@@ -28,12 +28,16 @@ export class ClientsComponent implements OnInit
     misc_list:ListData
 	
 	currentClient:Client;
-	currentTab:number;
 
     SwitchClient = (index:number) =>
     {
         this.currentClient = this.clients[index]
         this.FormLists()
+    }
+
+    SwitchTab = (index:number) =>
+	{
+		// this.currentTab = index
     }
 
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
@@ -99,32 +103,15 @@ export class ClientsComponent implements OnInit
 		// 		new TransactionLog("Прием врача", "Колесов А. В.", 1500, "20.03.2020")
 		// ];
 
-		this.tabs = [
+	    let tabs = [
 			new Tab("profile", "Профиль"),
 			new Tab("sales", "Покупки"),
 			new Tab("reserve", "Бронирование"),
 			new Tab("log", "История обращений")
-		];
-
-		this.currentTab = 0;
-
-		this.tabs[this.currentTab].Activate();
+        ];
+        
+        this.tabsdata = new TabsData("clients", tabs)
 	}
-
-	public SwitchTab(index:number)
-	{
-		if(index <= this.tabs.length)
-		{
-			this.currentTab = index;
-
-			for(let i = 0; i < this.tabs.length; i++)
-			{
-				this.tabs[i].Deactivate();
-			}
-
-			this.tabs[this.currentTab].Activate();
-		}
-    }
     
     getClients()
     {

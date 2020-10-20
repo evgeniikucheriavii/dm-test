@@ -1,5 +1,5 @@
 import { ApplicationRef, Component, OnInit } from '@angular/core';
-import { Tab } from '../tab';
+import { Tab, TabsData } from '../tabs/tabs.component';
 import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
@@ -14,8 +14,7 @@ import { ListData, ListCol, ListRow } from '../list/list.component';
 })
 export class RecomendationsEngineComponent implements OnInit 
 {
-	tabs = [];
-	currentTab:number;
+	tabsdata:TabsData
 
 	utilizationCats:UtilizationCat[] = [];
     currentCat:UtilizationCat;
@@ -35,18 +34,21 @@ export class RecomendationsEngineComponent implements OnInit
         this.FormRulesList()
     }
 
+    SwitchTab = (index:number) =>
+    {
+
+    }
+
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
     ngOnInit(): void 
 	{
-		this.tabs = [
+		let tabs = [
 			new Tab("rules", "Правила экстренной утилизации"),
 			new Tab("actions", "Action Center")
 		];
 
-		this.currentTab = 0;
-
-        this.tabs[this.currentTab].Activate();
+        this.tabsdata = new TabsData("recomendations", tabs)
         
         this.getUtilizationCats()
 
@@ -167,21 +169,6 @@ export class RecomendationsEngineComponent implements OnInit
             "list__head_lined"
         )
     }
-
-	public SwitchTab(index:number)
-	{
-		if(index <= this.tabs.length)
-		{
-			this.currentTab = index;
-
-			for(let i = 0; i < this.tabs.length; i++)
-			{
-				this.tabs[i].Deactivate();
-			}
-
-			this.tabs[this.currentTab].Activate();
-		}
-	}
 
 	public PriorityClick()
 	{

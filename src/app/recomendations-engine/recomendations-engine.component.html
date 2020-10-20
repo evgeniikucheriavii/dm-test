@@ -2,10 +2,10 @@
 	<section class="content-section">
 		<section class="content-section__top">
 			<!--utilization-rules-->
-			<div *ngIf="tabs[currentTab].id == 'rules'" class="top_rules">Настройка правила: <span class="rule-name">{{currentCat.str}}</span></div>
+			<div *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'rules'" class="top_rules">Настройка правила: <span class="rule-name">{{currentCat.str}}</span></div>
 
 			<!--actions-->
-			<div *ngIf="tabs[currentTab].id == 'actions'" class="top_actions">
+			<div *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'actions'" class="top_actions">
 				<label class="header-search-label">
 					<span class="header-search-label__title">Поиск  </span>
 					<label class="header-search-label__element search-label">
@@ -47,14 +47,12 @@
 				<button class="button header-bottom__button"> <img src="assets/images/Plus.svg" class="button__image"> Добавить слот</button>
 			</div>
 
-			<div class="tabs">
-				<button *ngFor="let t of tabs; let i = index" class="{{t.classes}}" id="tab_{{t.id}}" (click)="SwitchTab(i)">{{t.name}}</button>
-			</div>
+			<app-tabs [tabsdata]="tabsdata" [callback]="SwitchTab" [obj]="this"></app-tabs>
 
 		</section>
 
 		<!--utilization-rules-->
-		<section class="content-section__bottom bottom_rules" *ngIf="tabs[currentTab].id == 'rules'">
+		<section class="content-section__bottom bottom_rules" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'rules'">
 			
 			<section class="content-bottom__left left_rules">
                 <app-list [listdata]="cats_list" [callback]="SwitchCat"></app-list>
@@ -74,7 +72,7 @@
 		</section>
 
 		<!--action-->
-		<section class="content-section__bottom bottom_actions" *ngIf="tabs[currentTab].id == 'actions'">
+		<section class="content-section__bottom bottom_actions" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'actions'">
 
 			<section class="actions-bottom__left">
 				<section class="left-section left-section__list resources-list" style="height: 745px;">

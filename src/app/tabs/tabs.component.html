@@ -1,0 +1,3 @@
+<div class="tabs">
+    <button *ngFor="let t of tabsdata.tabs; let i = index" class="{{t.classes}}" id="tab_{{tabsdata.name}}_{{t.id}}" (click)="TabClick(i)">{{t.name}}</button>
+</div>
