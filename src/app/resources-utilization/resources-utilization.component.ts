@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { PopupElement } from '../popup-element';
 import { ListData, ListCol, ListRow, ListButton } from '../list/list.component';
 import { first } from 'rxjs/operators';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-resources-utilization',
@@ -262,10 +263,15 @@ export class ResourcesUtilizationComponent implements OnInit {
         ]
 
         let rows = []
-
+        let showId = true
 
         let booking = this.currentResource.Booking
-        console.log(booking)
+        
+        if(booking.length == 0)
+        {
+            rows.push(new ListRow(["Нет данных"]))
+            showId = false
+        }
 
         for(let i = 0; i < booking.length; i++)
         {
@@ -292,7 +298,7 @@ export class ResourcesUtilizationComponent implements OnInit {
         }
 
 
-        this.sales_list = new ListData(cols, rows, "sales", "", true, "list__head_lined")
+        this.sales_list = new ListData(cols, rows, "sales", "", showId, "list__head_lined")
     }
 
     FormServicesList()

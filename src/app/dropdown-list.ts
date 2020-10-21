@@ -10,6 +10,6 @@ export class DropdownList
     {
         this.name = name
         this.items = items
-        this.title = title
+        this.title = title + ""
     }
 }

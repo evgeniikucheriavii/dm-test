@@ -1,21 +1,21 @@
-<label class="header-search-label profile-search-label">
+<label class="header-search-label profile-search-label" [formGroup]="fg">
 
     <span class="header-search-label__title">{{list.title}}  </span>
 
-    <label for="select_{{list.name}}" class="select select-label_graph">
+    <label for="select_{{name}}" class="select select-label_graph">
 
-        <input type="radio" name="list_{{list.name}}" value="not_changed" id="bg_{{list.name}}" class="select-bg select-radio select-list" checked />
+        <input type="radio" name="list_{{name}}" value="not_changed" id="bg_{{name}}" class="select-bg select-radio select-list" checked />
 
-        <input type="radio" name="list_{{list.name}}" value="not_changed" class="select-select select-radio select-list" id="select_{{list.name}}">
+        <input type="radio" name="list_{{name}}" value="not_changed" class="select-select select-radio select-list" id="select_{{name}}">
 
-        <label class="bg" for="bg_{{list.name}}"></label>
+        <label class="bg" for="bg_{{name}}"></label>
 
         <div class="items">
-            <input *ngFor="let item of list.items; let i = index" type="radio" name="list_{{list.name}}[{{i}}]" value="{{item.value}}" id="list_{{list.name}}[{{i}}]" class="select-radio select-list">
-
-            <label *ngFor="let item of list.items; let i = index" for="list_{{list.name}}[{{i}}]">{{item.title}}</label>
-
-            <span id="text_{{list.name}}" class="select-text">{{list.title}}</span>
+            <div *ngFor="let item of list.items; let i = index">
+                <input type="radio" name="list_{{name}}" formControlName="list_{{name}}" value="{{item.value}}" id="list_{{name}}[{{i}}]" class="select-radio select-list" (click)="OnChange(item.value)">
+                <label for="list_{{name}}[{{i}}]">{{item.title}}</label>
+            </div>
+            <span id="text_{{name}}" class="select-text">{{list.title}}</span>
         </div>
 
     </label>

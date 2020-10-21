@@ -53,8 +53,6 @@ export class UtilizationCat implements IUtilizationCat
                 d = "дней"
             }
 
-            console.log(d)
-
             if(n > 0)
             {
                 this.str = "Через " + Math.abs(n) + " " + d + " после утилизации"
@@ -64,7 +62,6 @@ export class UtilizationCat implements IUtilizationCat
                 this.str = "За " + Math.abs(n) + " " + d + " до утилизации"
             }
         }
-        console.log(this.str)
     }
 
     addRule(rule:IUtilizationRule)

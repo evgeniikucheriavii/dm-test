@@ -26,6 +26,7 @@ import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ListComponent } from './list/list.component';
 import { ContextComponent } from './context/context.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 // import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
@@ -71,6 +72,8 @@ const appRoutes = [
 	BrowserModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
     // AppRoutingModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],

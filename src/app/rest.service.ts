@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UtilizationCat } from './utilization-cat';
+import { CookieService } from 'ngx-cookie-service';
 
 
 export interface IOffice
@@ -129,6 +130,15 @@ export interface IResource
 }
 
 
+export interface IResourceData
+{
+    name:string
+    birthdate:string
+    sex:string
+    ResourceType:string
+}
+
+
 export interface IClient
 {
     id:string
@@ -185,7 +195,7 @@ const endpoint = 'http://localhost:50084/api/v1/';
 export class RestService 
 {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private cookieService:CookieService) { }
 
 
 
@@ -195,6 +205,25 @@ export class RestService
         return body || { };
     }
 
+
+    createResource(resource:IResourceData)
+    {
+        let data = {
+            token: this.cookieService.get("token"),
+            data: {
+                name: resource.name,
+                sex: resource.sex,
+                birthdate: resource.birthdate,
+                ResourceType: resource.ResourceType
+            }
+        }
+
+        console.log(data)
+        
+        return this.http.post(endpoint + "resource_create/", data).pipe(
+            catchError(this.handleError)
+        )
+    }
 
     getResources(): Observable<any> 
     {

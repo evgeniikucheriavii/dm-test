@@ -115,13 +115,10 @@
                 <!--Profile-->
 				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
 					
-                    <app-dropdown [list]="currentResource.typeList"></app-dropdown>
-                    
-                    <app-dropdown [list]="currentResource.signList"></app-dropdown>
-
-                    <app-dropdown [list]="currentResource.officeList"></app-dropdown>
-
-                    <app-dropdown [list]="currentResource.statusList"></app-dropdown>
+                    <!-- <app-dropdown [name]="currentResource.typeList.name" [list]="currentResource.typeList"></app-dropdown>
+                    <app-dropdown [name]="currentResource.signList.name" [list]="currentResource.signList"></app-dropdown>
+                    <app-dropdown [name]="currentResource.officeList.name" [list]="currentResource.officeList"></app-dropdown>
+                    <app-dropdown [name]="currentResource.statusList.name" [list]="currentResource.statusList"></app-dropdown> -->
 
 				</section>
 
