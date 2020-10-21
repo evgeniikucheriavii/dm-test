@@ -28,6 +28,8 @@ export class ResourcesUtilizationComponent implements OnInit {
     resources_list:ListData
     contacts_list:ListData
     misc_list:ListData
+    services_list:ListData
+    sales_list:ListData
 
 	hours = [];
 	dates = [];
@@ -42,6 +44,8 @@ export class ResourcesUtilizationComponent implements OnInit {
         this.currentResource = this.resources[index]
         this.FormMiscList()
         this.FormContactsList()
+        this.FormServicesList()
+        this.FormSalesList()
     }
 
     SwitchTab = (index:number) =>
@@ -242,6 +246,95 @@ export class ResourcesUtilizationComponent implements OnInit {
         this.FormMiscList()
 
         this.FormContactsList()
+
+        this.FormServicesList()
+
+        this.FormSalesList()
+    }
+
+    FormSalesList()
+    {
+        let cols = [
+            new ListCol("Услуга", "name"),
+            new ListCol("Клиент", "name", true),
+            new ListCol("Стоимость", "name", true),
+            new ListCol("Дата", "name", true)
+        ]
+
+        let rows = []
+
+
+        let booking = this.currentResource.Booking
+        console.log(booking)
+
+        for(let i = 0; i < booking.length; i++)
+        {
+            for(let j = 0; j < booking[i].Orders.length; j++)
+            {
+                let product = ""
+
+                for(let k = 0; k < this.currentResource.Products.length; k++)
+                {
+                    if(this.currentResource.Products[k].id == booking[i].Product)
+                    {
+                        product = this.currentResource.Products[k].name
+                        break
+                    }
+                }
+
+                rows.push(new ListRow([
+                    product,
+                    booking[i].Client.name,
+                    booking[i].Orders[j].actualprice,
+                    booking[i].Orders[j].datetime
+                ]))
+            }
+        }
+
+
+        this.sales_list = new ListData(cols, rows, "sales", "", true, "list__head_lined")
+    }
+
+    FormServicesList()
+    {
+        let cols = [
+            new ListCol("Услуга", "service"),
+            new ListCol("Частота", "type", true),
+            new ListCol("Длительность", "type", true),
+            new ListCol("Востребованность", "type", true),
+            new ListCol("Стоимость (руб)", "util", true),
+        ]
+
+        let rows = []
+
+        let products = this.currentResource.Products
+        let rates = this.currentResource.Rates
+
+        for(let i = 0; i < products.length; i++)
+        {
+            let price = Number(products[i].price)
+
+            for(let j = 0; j < rates.length; j++)
+            {
+                if(rates[j].Product == products[i].id)
+                {
+                    price *= Number(rates[j].ratio)
+                    break;
+                }
+            }
+
+            rows.push(new ListRow([
+                products[i].name, 
+                "Никогда", 
+                products[i].duration, 
+                "0",
+                price + ""
+            ]))
+        }
+
+
+        this.services_list = new ListData(cols, rows, "services", "", true, "list__head_lined")
+
 
     }
 

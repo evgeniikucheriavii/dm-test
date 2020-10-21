@@ -55,6 +55,15 @@ export interface IMisc
 }
 
 
+export interface IRate
+{
+    id:string
+    ratio:string
+    Product:string
+    Resource:string
+}
+
+
 export interface IProduct
 {
     id:string
@@ -62,6 +71,37 @@ export interface IProduct
     Company:string
     ResourceType:IResourceType
     duration:string
+    price:string
+}
+
+
+export interface IOrder
+{
+    id:string
+    datetime:string
+    actualprice:string
+    Booking:string
+}
+
+
+export interface IBookingStatus
+{
+    id:string
+    name:string
+}
+
+
+export interface IBooking
+{
+    id:string
+    datetime:string
+    actualduration:string
+    Client:IClient
+    User:string
+    Product:string
+    BookingStatus:IBookingStatus
+    Resource:string
+    Orders:IOrder[]
 }
 
 
@@ -84,6 +124,8 @@ export interface IResource
     Products:IProduct[]
     ResourceType:IResourceType
     Company:ICompany
+    Rates:IRate[]
+    Booking:IBooking[]
 }
 
 

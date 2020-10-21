@@ -1,6 +1,6 @@
 import { DropdownItem } from './dropdown-item'
 import { DropdownList } from './dropdown-list'
-import { IResource, ICompany, IContact, IContactType, IMisc, IOffice, IProduct, IResourceType } from "./rest.service"
+import { IResource, ICompany, IContact, IContactType, IMisc, IOffice, IProduct, IResourceType, IRate, IBooking } from "./rest.service"
 
 export class Resource implements IResource
 {
@@ -16,6 +16,8 @@ export class Resource implements IResource
     Products:IProduct[]
     ResourceType:IResourceType
     Company:ICompany
+    Rates:IRate[]
+    Booking:IBooking[]
 
     typeList:DropdownList
     signList:DropdownList
@@ -49,6 +51,8 @@ export class Resource implements IResource
         this.Contacts = res.Contacts
         this.Products = res.Products
         this.Company = res.Company
+        this.Rates = res.Rates
+        this.Booking = res.Booking
 
         if(this.sex == "1") 
         {
