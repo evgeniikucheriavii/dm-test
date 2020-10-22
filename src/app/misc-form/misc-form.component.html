@@ -1,1 +1,11 @@
-<p>misc-form works!</p>
+<form class="misc_form" [formGroup]="misc_form" (ngSubmit)="OnSubmit()">
+    <div>Добавление Особенности</div><br>
+    <br>
+    <label class="input-label">
+        <input type="text" class="input" placeholder="Особенность" formControlName="name">
+    </label><br>
+    <br>
+    <button class="button" type="submit" >Сохранить</button>
+    <p>{{msg}}</p>
+    
+</form>

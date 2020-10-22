@@ -18,6 +18,9 @@ export class Resource implements IResource
     Company:ICompany
     Rates:IRate[]
     Booking:IBooking[]
+    AvailableHours:string
+    LastMonthHours:string
+    AvgHourRate:string
 
     typeList:DropdownList
     signList:DropdownList
@@ -53,6 +56,9 @@ export class Resource implements IResource
         this.Company = res.Company
         this.Rates = res.Rates
         this.Booking = res.Booking
+        this.AvailableHours = res.AvailableHours
+        this.LastMonthHours = res.LastMonthHours
+        this.AvgHourRate = res.AvgHourRate
 
         if(this.sex == "1") 
         {
@@ -143,10 +149,6 @@ export class Resource implements IResource
         ])
 
 		this.util = 10;
-
-        this.avg = 1350;
-        this.spent = 650;
-        this.available = 245;
 
 		if(this.util <= 10)
 		{

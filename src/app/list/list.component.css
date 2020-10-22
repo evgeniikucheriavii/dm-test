@@ -158,6 +158,13 @@
 	margin-right: 80px !important;
 }
 
+._centered
+{
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
 .list__dots
 {
     display: none;

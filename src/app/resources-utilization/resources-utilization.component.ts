@@ -11,6 +11,7 @@ import { PopupElement } from '../popup-element';
 import { ListData, ListCol, ListRow, ListButton } from '../list/list.component';
 import { first } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ResourceFormComponent } from '../resource-form/resource-form.component';
 
 @Component({
   selector: 'app-resources-utilization',
@@ -23,7 +24,10 @@ export class ResourcesUtilizationComponent implements OnInit {
 
     tabsdata:TabsData
     
+    popupIndex:any
+    popups:PopupElement[] = []
     currentPopup:PopupElement
+    popupVisibility:string = "_hidden"
 
     resources:Resource[] = [];
     resources_list:ListData
@@ -31,6 +35,10 @@ export class ResourcesUtilizationComponent implements OnInit {
     misc_list:ListData
     services_list:ListData
     sales_list:ListData
+
+    selected_misc:number = 0
+    selected_contact:number = 0
+    selected_resource:number = 0
 
 	hours = [];
 	dates = [];
@@ -54,13 +62,34 @@ export class ResourcesUtilizationComponent implements OnInit {
         // this.tabsdata.currentTab = index;
     }
 
+    MiscPopup = (obj:any, index:number) =>
+    {
+        obj.selected_misc = index
+        obj.popupVisibility = ""
+        obj.currentPopup = obj.popups[0]
+    }
+
+    ContactsPopup = (obj:any, index:number) =>
+    {
+        obj.selected_contact = index
+        obj.currentPopup = obj.popups[1]
+        obj.popupVisibility = ""
+    }
+
+    PopupCallback = (obj:any, index:number) =>
+    {
+        let r = obj.selected_resource
+        obj.getResources()
+        obj.SwitchResource(r)
+    }
+
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
 	ngOnInit(): void 
 	{
 
         this.getResources()
-
+        
 		this.time = [
 			{ hour: 9 },
 			{ hour: 10 },
@@ -168,20 +197,6 @@ export class ResourcesUtilizationComponent implements OnInit {
 			]),
 		];
 
-		// this.currentResource = this.resources[2];
-
-        // this.currentResource.specials = [
-		// 	new Special("Коммуникации только по email", "20.03.2019"),
-		// 	new Special("Коммуникации только по email", "20.03.2019"),
-		// 	new Special("Коммуникации только по email", "20.03.2019")
-        // ];
-        
-        // this.currentResource.contacts = [
-		// 	new Contact(0, "Телефон",  "88005553535", "20.03.2020"),
-		// 	new Contact(1, "Почта", "mail@gmail.com", "20.03.2020"),
-		// 	new Contact(1, "WhatsApp", "88005553535", "20.03.2020")
-		// ];
-
 		this.dates =
 		[
 			new DateGraph("12.06", 15),
@@ -205,17 +220,28 @@ export class ResourcesUtilizationComponent implements OnInit {
         
         this.tabsdata = new TabsData("resources", tabs)
 
-        this.currentPopup = new PopupElement("Title", "123")
+        this.popups = [
+            new PopupElement("Особенности", "sdasd1", "misc_form"),
+            new PopupElement("Контакты", "sdasd2", "contacts_form"),
+            new PopupElement("Новый ресурс", "sdasd3", "resource_form"),
+            new PopupElement("Услуги", "sdasd4", "service_form"),
+        ]
+
+        this.currentPopup = this.popups[0]
     }
 
     goToResourceForm()
     {
-        this.router.navigate(["resource"])
+        this.currentPopup = this.popups[2]
+        this.popupVisibility = ""
     }
 
     addMisc()
     {
-        this.currentPopup = new PopupElement("Title", "123")
+        // this.currentPopup = new PopupElement("Title", "123")
+        this.currentPopup = this.popups[0]
+        this.popupVisibility = ""
+        this.popupIndex = this.currentResource.id
     }
 
     addContact()
@@ -356,10 +382,12 @@ export class ResourcesUtilizationComponent implements OnInit {
 
         for(let i = 0; i < this.resources.length; i++)
         {
+            let classes = "_" + this.resources[i].color + " _centered";
+
             res_rows.push(new ListRow([
                 this.resources[i].shortname,
-                this.resources[i].ResourceType.name,
-                this.resources[i].util + "%"
+                this.resources[i].ResourceType.name,    
+                "<span class='" + classes + "'>" + this.resources[i].util + "%</span>"
             ]))
         }
 

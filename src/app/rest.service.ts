@@ -127,6 +127,9 @@ export interface IResource
     Company:ICompany
     Rates:IRate[]
     Booking:IBooking[]
+    AvgHourRate:string
+    LastMonthHours:string
+    AvailableHours:string
 }
 
 
@@ -205,6 +208,33 @@ export class RestService
         return body || { };
     }
 
+    deleteMisc(id:number)
+    {
+        let data = {
+            token: this.cookieService.get("token"),
+            id: id
+        }
+
+        return this.http.post(endpoint + "misc_delete/", data).pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    createMisc(misc:any)
+    {
+        let data = {
+            token: this.cookieService.get("token"),
+            data: {
+                value: misc.value,
+                Resource: misc.resource,
+                Client: misc.client,
+            }
+        }
+
+        return this.http.post(endpoint + "misc_create/", data).pipe(
+            catchError(this.handleError)
+        )
+    }
 
     createResource(resource:IResourceData)
     {

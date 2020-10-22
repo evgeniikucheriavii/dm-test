@@ -110,10 +110,10 @@ export class ListData
 
 export class ListRow 
 {
-    values:string[]
+    values:any[]
     isTitle:boolean = false
 
-    constructor(values:string[], isTitle:boolean = false)
+    constructor(values:any[], isTitle:boolean = false)
     {
         this.values = values
         this.isTitle = isTitle

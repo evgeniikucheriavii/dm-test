@@ -9,11 +9,15 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
     selector: 'app-resource-form',
+    inputs: ['obj', 'index', 'callback'],
     templateUrl: './resource-form.component.html',
     styleUrls: ['./resource-form.component.css']
 })
 export class ResourceFormComponent implements OnInit 
 {
+    obj:any
+    index:any
+    callback:(obj:any, args:any) => void
 
     msg:string
     edit:boolean
@@ -25,17 +29,10 @@ export class ResourceFormComponent implements OnInit
     resource_form:FormGroup = new FormGroup({
         name: new FormControl(''),
         sex: new FormControl(''),
-        birthdate: new FormControl(''),
-        type: new FormControl('')
+        birthdate: new FormControl('')
     })
 
     typeval:number = -1
-
-    ListChanged = (obj:any, value:any) => 
-    {
-        console.log(value)
-        this.typeval = value
-    }
 
     constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router) { }
 
@@ -91,7 +88,14 @@ export class ResourceFormComponent implements OnInit
 
     OnSubmit() 
     {
-        console.log(this.typeval)
+        if(this.resource_form.get("sex").value == -1)
+        {
+            this.typeval = 2
+        }
+        else
+        {
+            this.typeval = 1
+        }
 
         let data:restservice.IResourceData = {
             name: this.resource_form.get("name").value,

@@ -1,6 +1,23 @@
-<div class="popup {{visible}}" id="popup">
+<div class="popup {{visible}}" id="popup" [style.height.px]="height" (click)="Hide($event)">
     <div class="popup__container">
         <div class="popup__title">{{popup.title}}</div>
-        <div class="popup__body">{{popup.content}}</div>
+        <div class="popup__body">
+            <div *ngIf="popup.type =='resource_form'">
+                <app-resource-form [obj]="obj" [index]="index" [callback]="callback"></app-resource-form>
+            </div>
+            <div *ngIf="popup.type =='misc_form'">
+                <app-misc-form [type]="type" [obj]="obj" [index]="index" [callback]="callback"></app-misc-form>
+            </div>
+            <div *ngIf="popup.type =='contacts_form'">
+                <app-resource-form [obj]="obj" [index]="index" [callback]="callback"></app-resource-form>
+            </div>
+            <div *ngIf="popup.type =='client_form'">
+                <app-resource-form [obj]="obj" [index]="index" [callback]="callback"></app-resource-form>
+            </div>
+            <div *ngIf="popup.type =='service_form'">
+                <app-resource-form [obj]="obj" [index]="index" [callback]="callback"></app-resource-form>
+            </div>
+
+        </div>
     </div>
 </div>

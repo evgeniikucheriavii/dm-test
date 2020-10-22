@@ -32,23 +32,6 @@
 			</section>
 
             <app-list [listdata]="resources_list" [callback]="SwitchResource" [obj]="this" [height]="600"></app-list>
-            
-			<!-- <section class="left-section left-section__list">
-				<div class="list-row list-row_head">
-					<div class="list__num">#</div>
-					<div class="list__name">Ресурс</div>
-					<div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Тип</div>
-					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Утилизация</div>
-				</div>
-				<div class="list__body" style="height: 600px;">
-					<div class="list-row list-row_res" *ngFor="let r of resources; let i = index" (click)="SwitchResource(i)">
-						<div class="list__num">{{r.id}}</div>
-						<div class="list__name">{{r.shortname}}</div>
-						<div class="list__type">{{r.ResourceType.name}}</div>
-						<div class="list__util _{{r.color}} _center">{{r.util}}%</div>
-					</div>
-				</div>
-			</section> -->
 
 			<section class="left-section__pages">
 				<button class="button" (click)="goToResourceForm()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
@@ -58,7 +41,6 @@
 		</div>
 	</section>
 	<section class="main-section main-section_right">
-        <!-- <app-popup [popup]="currentPopup"></app-popup> -->
 		<div class="container">
 			<section class="right-section right-section__header">
 				<section class="header__top header__top_right">
@@ -115,10 +97,10 @@
                 <!--Profile-->
 				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
 					
-                    <!-- <app-dropdown [name]="currentResource.typeList.name" [list]="currentResource.typeList"></app-dropdown>
+                    <app-dropdown [name]="currentResource.typeList.name" [list]="currentResource.typeList"></app-dropdown>
                     <app-dropdown [name]="currentResource.signList.name" [list]="currentResource.signList"></app-dropdown>
                     <app-dropdown [name]="currentResource.officeList.name" [list]="currentResource.officeList"></app-dropdown>
-                    <app-dropdown [name]="currentResource.statusList.name" [list]="currentResource.statusList"></app-dropdown> -->
+                    <app-dropdown [name]="currentResource.statusList.name" [list]="currentResource.statusList"></app-dropdown>
 
 				</section>
 
@@ -155,29 +137,29 @@
 				<div class="banner">					
 					<div class="banner-item">
 						<div class="banner-item__header">Доступность ресурса в текущем месяце </div>
-						<div class="banner-item__body">{{currentResource.available}} часов</div>
+						<div class="banner-item__body">{{currentResource.AvailableHours}} часов</div>
 					</div>
 					<div class="banner-item">
 						<div class="banner-item__header">Потрачено времени на оказание услуг в прошлом месяце </div>
-						<div class="banner-item__body">{{currentResource.spent}} часов</div>
+						<div class="banner-item__body">{{currentResource.LastMonthHours}} часов</div>
 					</div>
 					<div class="banner-item">
 						<div class="banner-item__header">Средневзвешенная стоимость Человекочаса </div>
 						<div class="banner-item__body">
-							{{currentResource.avg}} ₽
+							{{currentResource.AvgHourRate}} ₽
 						</div>
 					</div>
 				</div>
 
                 <div class="profile-body">
 
-                    <app-list [listdata]="misc_list" [callback]=""  [obj]="this"></app-list>
-    
+                    <app-list [listdata]="misc_list" [dots_callback]="MiscPopup" [obj]="this"></app-list>
+                    
                     <section class="left-section left-section__pages">
                         <button class="button" (click)="addMisc()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
                     </section>
     
-                    <app-list [listdata]="contacts_list" [callback]="" [dots_callback]="alert" [button_callback]="Communicate" [obj]="this"></app-list>
+                    <app-list [listdata]="contacts_list" [callback]="" [dots_callback]="ContactsPopup" [button_callback]="Communicate" [obj]="this"></app-list>
     
                     <section class="left-section left-section__pages">
                         <button class="button" (click)="addContact()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
@@ -263,3 +245,5 @@
 		</div>
 	</section>
 </div>
+<app-popup [popup]="currentPopup" [visible]="popupVisibility" [callback]="PopupCallback" [index]="popupIndex" [obj]="this"></app-popup>
+<app-context></app-context>

@@ -54,6 +54,7 @@ export class PricesComponent implements OnInit
             new ListCol("Цена max", "pmin _center", true),
             new ListCol("Цена min", "pmin _center", true),
             new ListCol("коэф", "koef", true),
+            new ListCol("Целевой доход", "pmin", true),
             new ListCol("Max доход в месяц", "pmax list__pmax_first", true),
             new ListCol("Min доход в месяц", "pmax list__pmax_last", true),
             new ListCol("Продажа", "service", true)
