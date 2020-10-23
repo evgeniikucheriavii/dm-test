@@ -1,5 +1,4 @@
-import { DropdownItem } from './dropdown-item'
-import { DropdownList } from './dropdown-list'
+import { DropdownItem, DropdownList } from './dropdown/dropdown.component'
 import { IResource, ICompany, IContact, IContactType, IMisc, IOffice, IProduct, IResourceType, IRate, IBooking } from "./rest.service"
 
 export class Resource implements IResource
@@ -21,6 +20,7 @@ export class Resource implements IResource
     AvailableHours:string
     LastMonthHours:string
     AvgHourRate:string
+    status:boolean
 
     typeList:DropdownList
     signList:DropdownList
@@ -29,12 +29,14 @@ export class Resource implements IResource
 
     shortname:string;
 	type:string;
-	util:number;
+	util:string;
     color:string;
     
     available:number;
     spent:number;
-    avg:number;
+    avg:string;
+    lastmonth:string
+    availability:string
 
     services = [];
     contacts = [];
@@ -56,9 +58,11 @@ export class Resource implements IResource
         this.Company = res.Company
         this.Rates = res.Rates
         this.Booking = res.Booking
-        this.AvailableHours = res.AvailableHours
-        this.LastMonthHours = res.LastMonthHours
-        this.AvgHourRate = res.AvgHourRate
+        this.AvailableHours = res.availability
+        this.LastMonthHours = res.lastmonth
+        this.AvgHourRate = res.avg
+        this.util = res.util
+        this.status = res.status
 
         if(this.sex == "1") 
         {
@@ -129,40 +133,40 @@ export class Resource implements IResource
         }
         
         this.typeList = new DropdownList("type", "Тип", [
-            new DropdownItem("Трудовой", "1"),
+            new DropdownItem("Трудовой", "3"),
             new DropdownItem("Оборудование", "2")
-        ])
+        ], 0)
 
         this.signList = new DropdownList("sign", "Признак", [
             new DropdownItem("Родительский", "1"),
             new DropdownItem("Дочерний", "2"),
-        ])
+        ], 0)
 
         this.officeList = new DropdownList("office", "Офис", [
             new DropdownItem("Офис 1", "1"),
             new DropdownItem("Офис 2", "2")
-        ])
+        ], 0)
 
         this.statusList = new DropdownList("status", "Статус", [
             new DropdownItem("Активен", "1"),
             new DropdownItem("Пассивен", "2"),
-        ])
+        ], 0)
 
-		this.util = 10;
+		let num_util = Number(this.util);
 
-		if(this.util <= 10)
+		if(num_util <= 10)
 		{
 			this.color = "red";
 		}
-		else if(this.util > 10 && this.util < 16)
+		else if(num_util > 10 && num_util < 16)
 		{
 			this.color = "brown";
 		}
-		else if(this.util > 16 && this.util < 30)
+		else if(num_util > 16 && num_util < 30)
 		{
 			this.color = "lgreen";
 		}
-		else if(this.util >= 30 && this.util < 40)
+		else if(num_util >= 30 && num_util < 40)
 		{
 			this.color = "green";
 		}

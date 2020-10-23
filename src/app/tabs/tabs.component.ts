@@ -19,21 +19,11 @@ export class TabsComponent implements OnInit
         // this.TabClick(0)
     }
 
-    TabClick(index:number)
+    public TabClick(index:number)
     {
         this.callback(index)
 
-        if(index <= this.tabsdata.tabs.length)
-		{
-			this.tabsdata.currentTab = index;
-
-			for(let i = 0; i < this.tabsdata.tabs.length; i++)
-			{
-				this.tabsdata.tabs[i].Deactivate();
-			}
-
-			this.tabsdata.tabs[this.tabsdata.currentTab].Activate();
-		}
+        this.tabsdata.Activate(index)
     }
 
 }
@@ -51,6 +41,21 @@ export class TabsData
         this.name = name
 
         this.tabs[this.currentTab].Activate();
+    }
+
+    public Activate(index:number)
+    {
+        if(index <= this.tabs.length)
+		{
+			this.currentTab = index;
+
+			for(let i = 0; i < this.tabs.length; i++)
+			{
+				this.tabs[i].Deactivate();
+			}
+
+			this.tabs[this.currentTab].Activate();
+		}
     }
 }
 

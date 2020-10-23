@@ -66,8 +66,18 @@ export class ListComponent implements OnInit
         
     }
 
-    ClickDots(index:number)
+    ClickDots(e, index:number)
     {
+        if(e.pageX < window.innerWidth - 250)
+            this.obj.context_left = e.pageX + 20
+        else
+            this.obj.context_left = e.pageX - 250
+        
+        if(e.pageY < window.innerHeight - 250)
+            this.obj.context_top = e.pageY
+        else
+        this.obj.context_top = e.pageY - 250
+        this.obj.context_type = "misc"
         this.dots_callback(this.obj, index)
     }
 
@@ -86,26 +96,45 @@ export class ListData
     showId:boolean = true
     rows:ListRow[]
     cols:ListCol[]
-    titleclasses:string
+    titleclasses:string = ""
     listname:string = ""
+    options:ListOptions
 
-    constructor(cols:ListCol[], rows:ListRow[], listname:string, title:string = "", showId:boolean = true, titleclasses:string = "")
+    constructor(cols:ListCol[], rows:ListRow[], listname:string, title:string = "", options:ListOptions = new ListOptions())
     {
         this.rows = rows
         this.cols = cols
         this.title = title
-        this.showId = showId
-        this.titleclasses = titleclasses
         this.listname = listname
+        this.options = options
 
         if(title == "")
         {
-            this.showTitle = false
+            this.options.showTitle = false
+        }
+
+        if(this.options.lined)
+        {
+            this.titleclasses = "list__head_lined"
         }
     }
     
 }
 
+export class ListOptions
+{
+    lined:boolean = false
+    reversed:boolean = false
+    showId:boolean = true
+    showTitle:boolean = false
+
+    constructor(showId:boolean = true, lined:boolean = false, reversed:boolean = false)
+    {
+        this.showId = showId
+        this.lined = lined
+        this.reversed = reversed
+    }
+}
 
 
 export class ListRow 

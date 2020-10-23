@@ -8,7 +8,7 @@ import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { PopupElement } from '../popup-element';
-import { ListData, ListCol, ListRow, ListButton } from '../list/list.component';
+import { ListData, ListCol, ListRow, ListButton, ListOptions } from '../list/list.component';
 import { first } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ResourceFormComponent } from '../resource-form/resource-form.component';
@@ -23,7 +23,13 @@ export class ResourcesUtilizationComponent implements OnInit {
 	currentResource:Resource;
 
     tabsdata:TabsData
-    
+
+    context_left:number = 100
+    context_top:number = 100
+    context_visibility:string = "_hidden"
+    context_type:string = ""
+
+
     popupIndex:any
     popups:PopupElement[] = []
     currentPopup:PopupElement
@@ -81,6 +87,21 @@ export class ResourcesUtilizationComponent implements OnInit {
         let r = obj.selected_resource
         obj.getResources()
         obj.SwitchResource(r)
+    }
+
+    MiscContext = (obj:any, index:number) =>
+    {
+        this.context_visibility = ""
+    }
+
+    ContactsContext = (obj:any, index:number) =>
+    {
+        this.context_visibility = ""
+    }
+
+    ContextCallback = (obj:any, data:any) =>
+    {
+
     }
 
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
@@ -283,9 +304,9 @@ export class ResourcesUtilizationComponent implements OnInit {
     {
         let cols = [
             new ListCol("Услуга", "name"),
-            new ListCol("Клиент", "name", true),
-            new ListCol("Стоимость", "name", true),
-            new ListCol("Дата", "name", true)
+            new ListCol("Клиент", "type", true),
+            new ListCol("Стоимость", "pmin", true),
+            new ListCol("Дата и время", "pmin", true)
         ]
 
         let rows = []
@@ -301,40 +322,65 @@ export class ResourcesUtilizationComponent implements OnInit {
 
         for(let i = 0; i < booking.length; i++)
         {
-            for(let j = 0; j < booking[i].Orders.length; j++)
+            let product = ""
+
+            for(let k = 0; k < this.currentResource.Products.length; k++)
             {
-                let product = ""
-
-                for(let k = 0; k < this.currentResource.Products.length; k++)
+                if(this.currentResource.Products[k].id == booking[i].Product)
                 {
-                    if(this.currentResource.Products[k].id == booking[i].Product)
-                    {
-                        product = this.currentResource.Products[k].name
-                        break
-                    }
+                    product = this.currentResource.Products[k].name
+                    break
                 }
-
-                rows.push(new ListRow([
-                    product,
-                    booking[i].Client.name,
-                    booking[i].Orders[j].actualprice,
-                    booking[i].Orders[j].datetime
-                ]))
             }
+
+            let dt = this.FormatDate(booking[i].datetime)
+
+            rows.push(new ListRow([
+                product,
+                booking[i].Client.name,
+                booking[i].actualprice,
+                dt
+            ]))
+        }
+
+        let sales_options = new ListOptions(showId, true)
+
+        this.sales_list = new ListData(cols, rows, "sales", "", sales_options)
+    }
+
+    FormatDate(date:string)
+    {
+        let d = new Date(date)
+
+        let dN = d.getDay()
+        let day = ""
+
+        if (Number(dN) < 10)
+        {
+            day = "0" + String(dN)
+        }
+
+        let mN = d.getMonth()
+        let month = ""
+
+        if (Number(mN) < 10)
+        {
+            month = "0" + String(mN)
         }
 
 
-        this.sales_list = new ListData(cols, rows, "sales", "", showId, "list__head_lined")
+
+        return  day + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes()
     }
 
     FormServicesList()
     {
         let cols = [
-            new ListCol("Услуга", "service"),
-            new ListCol("Частота", "type", true),
-            new ListCol("Длительность", "type", true),
-            new ListCol("Востребованность", "type", true),
-            new ListCol("Стоимость (руб)", "util", true),
+            new ListCol("Услуга", "name"),
+            new ListCol("Частота", "pmax", true),
+            new ListCol("Длительность", "pmin", true),
+            new ListCol("Востребованность", "pmax", true),
+            new ListCol("Стоимость (руб)", "pmax", true),
         ]
 
         let rows = []
@@ -357,15 +403,16 @@ export class ResourcesUtilizationComponent implements OnInit {
 
             rows.push(new ListRow([
                 products[i].name, 
-                "Никогда", 
+                products[i].regularity + "", 
                 products[i].duration, 
-                "0",
+                products[i].demand + "",
                 price + ""
             ]))
         }
 
+        let service_options = new ListOptions(true, true)
 
-        this.services_list = new ListData(cols, rows, "services", "", true, "list__head_lined")
+        this.services_list = new ListData(cols, rows, "services", "", service_options)
 
 
     }
@@ -409,8 +456,10 @@ export class ResourcesUtilizationComponent implements OnInit {
         {
             misc_rows.push(new ListRow([misc[i].value, misc[i].date]))
         }
+
+        let misc_options = new ListOptions(true, true)
         
-        this.misc_list = new ListData(misc_cols, misc_rows, "misc", "Особенности", true, "list__head_lined")
+        this.misc_list = new ListData(misc_cols, misc_rows, "misc", "Особенности", misc_options)
     }
 
     FormContactsList()
@@ -476,7 +525,9 @@ export class ResourcesUtilizationComponent implements OnInit {
             ]))
         }
 
-        this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", true, "list__head_lined")
+        let contacts_options = new ListOptions(true, true)
+
+        this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", contacts_options)
     }
 
     getResourceTypes()

@@ -75,41 +75,7 @@
 		<section class="content-section__bottom bottom_actions" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'actions'">
 
 			<section class="actions-bottom__left">
-				<section class="left-section left-section__list resources-list" style="height: 745px;">
-					<div class="list-row list-row_head  rules-list__head">
-						<div class="list__num">#</div>
-						<div class="list__type">Ресурс</div>
-						<div class="list__service">Услуга</div>
-						<div class="list__service">Временный интервал</div>
-						<div class="list__util">Отправлено</div>
-						<div class="list__util">Статус</div>
-					</div>
-					<div class="rules-list__body">
-						<div class="list-row" *ngFor="let r of data; let i = index">
-							<div class="list__num">{{i + 1}}</div>
-							<div class="list__type">{{r.name}}</div>
-							<div class="list__service">{{r.service}}</div>
-							<div class="list__service">{{r.interval}}</div>
-							<div class="list__util _center">{{r.vote}}</div>
-							<div class="list__util">
-								<div *ngIf="r.status == 0" class="status_done">
-									<img src="assets/images/Green_dot.svg" class="status-img status-img_done">
-									завершен
-								</div>
-
-								<div *ngIf="r.status == 1" class="status_active">
-									<img src="assets/images/Yellow_dots.svg" class="status-img status-img_active">
-									активен
-								</div>
-
-								<div *ngIf="r.status == -1" class="status_fail">
-									<img src="assets/images/Red_dot.svg" class="status-img status-img_fail">
-									не удачно
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+                <app-list [listdata]="action_list" [height]="680"></app-list>
 			</section>
 			
 
@@ -143,38 +109,9 @@
 				</section>
 
 				<section class="actions-bottom__right-bottom">
-					<div class="line"><b>История поиска: </b></div>
-					<section class="left-section left-section__list resources-list">
-						<div class="list-row list-row_head  rules-list__head">
-							<div class="list__num">#</div>
-							<div class="list__type">Дата / Время</div>
-							<div class="list__name">Клиент</div>
-							<div class="list__type">Статус</div>
-						</div>
-						<div class="rules-list__body" style="height: 372px;">
-							<div class="list-row" *ngFor="let s of searchLog; let i = index">
-								<div class="list__num">{{s.id}}</div>
-								<div class="list__type">{{s.date}}</div>
-								<div class="list__name">{{s.client}}</div>
-								<div class="list__type">
-									<div *ngIf="s.status == 0">
-										<img src="assets/images/Approve.svg">
-										Забронировала
-									</div>
-
-									<div *ngIf="s.status == 1">
-										<img src="assets/images/Eye.svg">
-										Не прочитал
-									</div>
-
-									<div *ngIf="s.status == 2">
-										<img src="assets/images/Cross.svg">
-										Удалил
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>
+                    <div class="line"><b>История поиска: </b></div>
+                    
+                    <app-list [listdata]="search_list" [height]="350"></app-list>
 				</section>
 
 			</section>

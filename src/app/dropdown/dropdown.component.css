@@ -1,6 +1,21 @@
-/* Select */
 
-/*
+.dropdown-label
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown__title
+{
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    line-height: 16px;
+    margin-right: 10px;
+}
+
+/* 
 
 .select-radio
 {
@@ -21,7 +36,7 @@
 	line-height: 36px;
 	font-weight: normal;
 	font-size: 14px;
-	position: relative;
+	position: relative; 
 	width: 244px;
 	height: 36px;
 	box-sizing: border-box;
@@ -30,7 +45,7 @@
 
 .select:before
 {
-	content: url(./assets/images/Down.png);
+	content: url('../../assets/images/Down.png');
 	display: inline-block;
 	background: #3D71BF;
 	position: absolute;
@@ -49,7 +64,7 @@
 .select:hover:before
 {
 	background: #fff;
-	content: url(assets/images/Up.png);
+	content: url('../../assets/images/Up.png');
 }
 
 .select .select-list:not(:checked) ~ .select-text
@@ -133,6 +148,4 @@
 ._top-select 
 {
 	z-index: 5000;
-}
-*/
-/* Select End*/
+} */

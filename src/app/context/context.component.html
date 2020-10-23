@@ -1,1 +1,7 @@
-<div class="context-menu">asdasd</div>
+<div class="context-container {{visibility}}" (click)="Hide()"></div>
+<div class="context-menu {{visibility}}" [style.top]="top + 'px'" [style.left]="left + 'px'">
+    <div *ngIf="type == 'misc'">
+        <p><button class="button" (click)="ButtonClick('update')">Изменить</button></p>
+        <p><button class="button" (click)="ButtonClick('delete')">Удалить</button></p>
+    </div>
+</div>

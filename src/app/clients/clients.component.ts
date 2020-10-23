@@ -8,7 +8,7 @@ import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { PopupElement } from '../popup-element';
-import { ListData, ListCol, ListRow } from '../list/list.component';
+import { ListData, ListCol, ListRow, ListOptions } from '../list/list.component';
 
 @Component({
 	selector: 'app-clients',
@@ -177,6 +177,8 @@ export class ClientsComponent implements OnInit
             misc_rows.push(new ListRow([misc[i].value, misc[i].date]))
         }
 
+        let misc_options = new ListOptions(true, true)
+
         this.misc_list = new ListData(
             [
                 new ListCol("Особенность", "name"),
@@ -185,8 +187,7 @@ export class ClientsComponent implements OnInit
             misc_rows, 
             "contacts",
             "Особенности", 
-            true,
-            "list__head_lined"
+            misc_options
             )
 
         let contacts_cols = [
@@ -216,8 +217,10 @@ export class ClientsComponent implements OnInit
                 ""
             ]))
         }
+        
+        let clients_options = new ListOptions(true, true)
 
-        this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", true, "list__head_lined")
+        this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", clients_options)
     }
 
     

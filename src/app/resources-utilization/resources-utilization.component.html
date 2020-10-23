@@ -31,7 +31,7 @@
 				</section>
 			</section>
 
-            <app-list [listdata]="resources_list" [callback]="SwitchResource" [obj]="this" [height]="600"></app-list>
+            <app-list [listdata]="resources_list" [callback]="SwitchResource" [obj]="this" [height]="580"></app-list>
 
 			<section class="left-section__pages">
 				<button class="button" (click)="goToResourceForm()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
@@ -153,13 +153,13 @@
 
                 <div class="profile-body">
 
-                    <app-list [listdata]="misc_list" [dots_callback]="MiscPopup" [obj]="this"></app-list>
+                    <app-list [listdata]="misc_list" [dots_callback]="MiscContext" [obj]="this"></app-list>
                     
                     <section class="left-section left-section__pages">
                         <button class="button" (click)="addMisc()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
                     </section>
     
-                    <app-list [listdata]="contacts_list" [callback]="" [dots_callback]="ContactsPopup" [button_callback]="Communicate" [obj]="this"></app-list>
+                    <app-list [listdata]="contacts_list" [callback]="" [dots_callback]="ContactsContext" [button_callback]="Communicate" [obj]="this"></app-list>
     
                     <section class="left-section left-section__pages">
                         <button class="button" (click)="addContact()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
@@ -246,4 +246,4 @@
 	</section>
 </div>
 <app-popup [popup]="currentPopup" [visible]="popupVisibility" [callback]="PopupCallback" [index]="popupIndex" [obj]="this"></app-popup>
-<app-context></app-context>
+<app-context [left]="context_left" [top]="context_top" [obj]="this" [type]="context_type" [visibility]="context_visibility"></app-context>

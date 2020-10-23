@@ -1,10 +1,10 @@
-<label class="header-search-label profile-search-label" [formGroup]="fg">
+<label class="dropdown-label" [formGroup]="fg">
 
-    <span class="header-search-label__title">{{list.title}}  </span>
+    <span class="dropdown__title">{{list.title}}  </span>
 
     <label for="select_{{name}}" class="select select-label_graph">
 
-        <input type="radio" name="list_{{name}}" value="not_changed" id="bg_{{name}}" class="select-bg select-radio select-list" checked />
+        <input type="radio" name="list_{{name}}" value="not_changed" id="bg_{{name}}" class="select-bg select-radio select-list" [checked]="list.none_checked"/>
 
         <input type="radio" name="list_{{name}}" value="not_changed" class="select-select select-radio select-list" id="select_{{name}}">
 
@@ -12,7 +12,7 @@
 
         <div class="items">
             <div *ngFor="let item of list.items; let i = index">
-                <input type="radio" name="list_{{name}}" formControlName="list_{{name}}" value="{{item.value}}" id="list_{{name}}[{{i}}]" class="select-radio select-list" (click)="OnChange(item.value)">
+                <input type="radio" name="list_{{name}}" formControlName="list_{{name}}" value="{{item.value}}" id="list_{{name}}[{{i}}]" class="select-radio select-list" (click)="OnChange(item.value)" [checked]="item.checked">
                 <label for="list_{{name}}[{{i}}]">{{item.title}}</label>
             </div>
             <span id="text_{{name}}" class="select-text">{{list.title}}</span>

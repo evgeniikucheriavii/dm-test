@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { UtilizationRule } from '../utilization-rule';
 import { UtilizationCat } from '../utilization-cat';
-import { ListData, ListCol, ListRow } from '../list/list.component';
+import { ListData, ListCol, ListRow, ListOptions } from '../list/list.component';
 
 @Component({
 	selector: 'app-recomendations-engine',
@@ -21,6 +21,8 @@ export class RecomendationsEngineComponent implements OnInit
     
     cats_list:ListData
     rules_list:ListData
+    action_list:ListData
+    search_list:ListData
 
 	searchLog = [];
 
@@ -50,6 +52,7 @@ export class RecomendationsEngineComponent implements OnInit
 
         this.tabsdata = new TabsData("recomendations", tabs)
         
+        this.tabsdata.Activate(1)
         this.getUtilizationCats()
 
 
@@ -122,6 +125,95 @@ export class RecomendationsEngineComponent implements OnInit
     {
         this.FormCatsList()
         this.FormRulesList()
+        this.FormActionCenter()
+        this.FormSearchList()
+    }
+
+    FormActionCenter()
+    {
+        let cols = [
+            new ListCol("Ресурс", "type"),
+            new ListCol("Услуга", "service"),
+            new ListCol("Временный интервал", "service"),
+            new ListCol("Отправлено", "util"),
+            new ListCol("Статус", "util"),
+        ]
+
+        let rows = []
+
+        for(let i = 0; i < this.data.length; i++)
+        {
+
+            let val = ""
+
+            if(this.data[i].status == 0)
+            {
+                val = "<div class='status_done'><img src='assets/images/Green_dot.svg' class='status-img status-img_active'> завершен</div>"
+            }
+            else if(this.data[i].status == 1)
+            {
+                val = "<div class='status_active'><img src='assets/images/Yellow_dots.svg' class='status-img status-img_active'> активен</div>"
+            }
+            else if(this.data[i].status == -1)
+            {
+                val = "<div class='status_fail'><img src='assets/images/Red_dot.svg' class='status-img status-img_active'> не удачно</div>"
+            }
+
+
+
+            rows.push(new ListRow([
+                this.data[i].name,
+                this.data[i].service,
+                this.data[i].interval,
+                this.data[i].vote,
+                val
+            ]))
+        }
+
+        let options = new ListOptions(true, true)
+
+        this.action_list = new ListData(cols, rows, "actions", "", options)
+    }
+
+    FormSearchList()
+    {
+        let cols = [
+            new ListCol("Дата / Время", "type"),
+            new ListCol("Клиент", "name"),
+            new ListCol("Статус", "type"),
+        ]
+
+        let rows = []
+
+        for(let i = 0; i < this.searchLog.length; i++)
+        {
+            let val = ""
+
+            if(this.searchLog[i].status == 0)
+            {
+                val = "<img src='assets/images/Approve.svg'> Забронировала"
+            } 
+            else if(this.searchLog[i].status == 1)
+            {
+                val = "<img src='assets/images/Eye.svg'> Не прочитал"
+            }
+            else if(this.searchLog[i].status == 2)
+            {
+                val = "<img src='assets/images/Cross.svg'> Удалил"
+            }
+
+            rows.push(new ListRow([this.searchLog[i].date, this.searchLog[i].client, val]))
+        }
+
+        let options = new ListOptions(true, true, true) 
+
+        this.search_list = new ListData(
+            cols, 
+            rows,
+            "search",
+            "",
+            options
+        )
     }
 
     public FormCatsList()
@@ -133,6 +225,8 @@ export class RecomendationsEngineComponent implements OnInit
             cat_rows.push(new ListRow([this.utilizationCats[i].str, this.utilizationCats[i].discount]))
         }
 
+        let cat_options = new ListOptions(true, true)
+
         this.cats_list = new ListData(
             [
                 new ListCol("Название раздела", "name"),
@@ -141,8 +235,7 @@ export class RecomendationsEngineComponent implements OnInit
             cat_rows,
             "cats",
             "",
-            true,
-            "list__head_lined"
+            cat_options
         )
     }
 
@@ -157,6 +250,8 @@ export class RecomendationsEngineComponent implements OnInit
             rules_rows.push(new ListRow([rules[i].str, rules[i].discount]))
         }
 
+        let rules_options = new ListOptions(true, true)
+
         this.rules_list = new ListData(
             [
                 new ListCol("Ресурсы и % загрузки от целевых значений", "name"),
@@ -165,8 +260,7 @@ export class RecomendationsEngineComponent implements OnInit
             rules_rows,
             "rules",
             "",
-            true,
-            "list__head_lined"
+            rules_options
         )
     }
 

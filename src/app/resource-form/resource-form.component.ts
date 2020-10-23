@@ -3,9 +3,7 @@ import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { DropdownItem } from '../dropdown-item';
-import { DropdownList } from '../dropdown-list';
-import { DropdownComponent } from '../dropdown/dropdown.component';
+import { DropdownComponent, DropdownList, DropdownItem } from '../dropdown/dropdown.component';
 
 @Component({
     selector: 'app-resource-form',

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ListCol, ListData, ListOptions, ListRow } from '../list/list.component';
 
 @Component({
     selector: 'app-help',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpComponent implements OnInit 
 {
+
+    listdata:ListData
 
     resources = [];
     nodes:FileNode[] = [];
@@ -38,9 +41,42 @@ export class HelpComponent implements OnInit
             ])
         ];
         
+        this.FormLists()
 
         // this.fileTreeHtml = this.GetTree(this.fileTree);
     }
+
+    FormLists()
+    {
+        this.GetTree(this.nodes)
+        this.FormNodesList()
+    }
+
+    FormNodesList()
+    {
+        let cols = [
+            new ListCol("День недели", "name"),
+            new ListCol("Время работы", "type"),
+        ]
+
+        let rows = []
+
+        for(let i = 0; i < this.resources.length; i++)
+        {
+            rows.push(new ListRow([this.resources[i].day, this.resources[i].time]))
+        }
+
+        let nodes_options = new ListOptions(true, true)
+
+        this.listdata = new ListData(
+            cols, 
+            rows, 
+            "nodes", 
+            "", 
+            nodes_options
+            )
+    }
+
 
     private GetTree(nodes:FileNode[])
     {

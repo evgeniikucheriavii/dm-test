@@ -73,15 +73,8 @@ export interface IProduct
     ResourceType:IResourceType
     duration:string
     price:string
-}
-
-
-export interface IOrder
-{
-    id:string
-    datetime:string
-    actualprice:string
-    Booking:string
+    demand:string
+    regularity:string
 }
 
 
@@ -102,7 +95,7 @@ export interface IBooking
     Product:string
     BookingStatus:IBookingStatus
     Resource:string
-    Orders:IOrder[]
+    actualprice:string
 }
 
 
@@ -127,9 +120,11 @@ export interface IResource
     Company:ICompany
     Rates:IRate[]
     Booking:IBooking[]
-    AvgHourRate:string
-    LastMonthHours:string
-    AvailableHours:string
+    avg:string
+    lastmonth:string
+    availability:string
+    util:string
+    status:boolean
 }
 
 
@@ -189,7 +184,7 @@ export interface ILogin
 }
 
 
-const endpoint = 'http://localhost:50084/api/v1/';
+const endpoint = 'http://dimarke.ru/api/v1/';
 
 
 @Injectable({
@@ -215,7 +210,13 @@ export class RestService
             id: id
         }
 
-        return this.http.post(endpoint + "misc_delete/", data).pipe(
+        let csrftoken = this.cookieService.get("csrftoken")
+        let headers = new HttpHeaders({"X-CSRFToken": csrftoken})
+
+        return this.http.post(
+            endpoint + "misc_delete/", 
+            data,
+            {"headers": headers}).pipe(
             catchError(this.handleError)
         )
     }
@@ -231,7 +232,13 @@ export class RestService
             }
         }
 
-        return this.http.post(endpoint + "misc_create/", data).pipe(
+        let csrftoken = this.cookieService.get("csrftoken")
+        let headers = new HttpHeaders({"X-CSRFToken": csrftoken})
+
+        return this.http.post(
+            endpoint + "misc_create/", 
+            data,
+            {"headers": headers}).pipe(
             catchError(this.handleError)
         )
     }
@@ -250,7 +257,13 @@ export class RestService
 
         console.log(data)
         
-        return this.http.post(endpoint + "resource_create/", data).pipe(
+        let csrftoken = this.cookieService.get("csrftoken")
+        let headers = new HttpHeaders({"X-CSRFToken": csrftoken})
+
+        return this.http.post(
+            endpoint + "resource_create/", 
+            data, 
+            {"headers": headers}).pipe(
             catchError(this.handleError)
         )
     }
@@ -325,8 +338,13 @@ export class RestService
     
     login(login:string, password:string): Observable<any>
     {
-        let input:ILogin = {login: login, password: password}
-        return this.http.post(endpoint + "login/?format=json", input).pipe(
+        let input = {login: login, password: password}
+        let csrftoken = this.cookieService.get("csrftoken")
+        let headers = new HttpHeaders({"X-CSRFToken": csrftoken})
+        return this.http.post(
+            endpoint + "login/?format=json", 
+            input, 
+            {"headers":headers}).pipe(
             catchError(this.handleError)
         );
     }
