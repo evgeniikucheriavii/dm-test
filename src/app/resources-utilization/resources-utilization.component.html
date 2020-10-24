@@ -105,7 +105,7 @@
 				</section>
 
                 <!--Service-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'service'">
+				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'service' || tabsdata.tabs[tabsdata.currentTab].id == 'log'">
 					<label class="header-search-label">
 						<span class="header-search-label__title">Поиск  </span>
 						<label class="header-search-label__element search-label">
@@ -126,10 +126,10 @@
 					</label>
 				</section>
 
-				<!--Log-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
+				<!-- Log -->
+				<!-- <section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
 					
-				</section>
+				</section> -->
 			</section>
 
             <!--profile-->
@@ -240,7 +240,7 @@
 
 			<!--Log-->
 			<section class="right-section right-section__graph" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
-				Log
+				<app-list [listdata]="log_list" [height]="600"></app-list>
 			</section>
 		</div>
 	</section>

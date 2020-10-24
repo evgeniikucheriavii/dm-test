@@ -9,7 +9,7 @@ import { ListData, ListCol, ListRow } from '../list/list.component';
 export class PricesComponent implements OnInit 
 {
 
-    data = [];
+    data:CustomData[] = [];
     prices = []
     openedDetails:number = -1;
     
@@ -22,26 +22,28 @@ export class PricesComponent implements OnInit
 	ngOnInit(): void 
 	{
 
-        this.FormLists()
+        
 
 		this.data = [
-			new Resource("Иванов Иван", 2000, 1000, 1, 1000, 25000, 12500, 1),
-			new Resource("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-			new Resource("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
-			new Resource("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-			new Resource("Сидоров Сергей", 2000, 1000, 0.83, 1000, 25000, 12500, 1),
-			new Resource("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-			new Resource("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
-			new Resource("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-			new Resource("Сидоров Сергей", 2000, 1000, 1.5, 1000, 25000, 12500, 0),
-			new Resource("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-			new Resource("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-			new Resource("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 0),
-			new Resource("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-			new Resource("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-			new Resource("Сидоров Сергей", 2000, 1000, 2.1, 1000, 25000, 12500, 1),
-			new Resource("Петрова Светлана", 1245, 1000, 1, 1000, 25000, 12500, 1)
-		];
+			new CustomData("Иванов Иван", 2000, 1000, 1, 1000, 25000, 12500, 1),
+			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
+			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
+			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
+			new CustomData("Сидоров Сергей", 2000, 1000, 0.83, 1000, 25000, 12500, 1),
+			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
+			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
+			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
+			new CustomData("Сидоров Сергей", 2000, 1000, 1.5, 1000, 25000, 12500, 0),
+			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
+			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
+			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 0),
+			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
+			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
+			new CustomData("Сидоров Сергей", 2000, 1000, 2.1, 1000, 25000, 12500, 1),
+			new CustomData("Петрова Светлана", 1245, 1000, 1, 1000, 25000, 12500, 1)
+        ];
+        
+        this.FormLists()
 
 		let obj = this;
 		window.addEventListener("click", function (e) { obj.HideDetails(e); });
@@ -62,9 +64,36 @@ export class PricesComponent implements OnInit
 
         let prices_rows = []
 
-        for(let i = 0; i < this.prices.length; i++)
+        for(let i = 0; i < this.data.length; i++)
         {
-            prices_rows.push(new ListRow(["", ""]))
+            let koef = ""
+            if(this.data[i].koef != null)
+            {
+                koef = String(this.data[i].koef)
+            }
+
+            let sale = ""
+
+            if(this.data[i].sale == 0)
+            {
+                sale = "<div class='status_closed'><img src='assets/images/Lock.svg'class='status-img'> Заблокирована системой</div>"
+            }
+            else
+            {
+                sale = "<div class='status_active'><img src='assets/images/Active.svg'class='status-img'> Открыта</div>"
+            }
+
+            
+            prices_rows.push(new ListRow([
+                this.data[i].name,
+                this.data[i].priceMax,
+                this.data[i].priceMin,
+                koef,
+                this.data[i].goalIncome,
+                this.data[i].maxMonthlyIncome,
+                this.data[i].minMonthlyIncome,
+                sale
+            ]))
         }
 
         this.prices_list = new ListData(prices_cols, prices_rows, "prices")
@@ -103,7 +132,7 @@ export class PricesComponent implements OnInit
 
 }
 
-class Resource
+class CustomData
 {
 	name:string;
 

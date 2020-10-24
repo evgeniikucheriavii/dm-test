@@ -41,6 +41,7 @@ export class ResourcesUtilizationComponent implements OnInit {
     misc_list:ListData
     services_list:ListData
     sales_list:ListData
+    log_list:ListData
 
     selected_misc:number = 0
     selected_contact:number = 0
@@ -298,6 +299,8 @@ export class ResourcesUtilizationComponent implements OnInit {
         this.FormServicesList()
 
         this.FormSalesList()
+
+        this.FormLogList()
     }
 
     FormSalesList()
@@ -323,24 +326,27 @@ export class ResourcesUtilizationComponent implements OnInit {
         for(let i = 0; i < booking.length; i++)
         {
             let product = ""
-
-            for(let k = 0; k < this.currentResource.Products.length; k++)
+            if(String(booking[i].BookingStatus) == "2") 
             {
-                if(this.currentResource.Products[k].id == booking[i].Product)
+                for(let k = 0; k < this.currentResource.Products.length; k++)
                 {
-                    product = this.currentResource.Products[k].name
-                    break
+                    if(this.currentResource.Products[k].id == booking[i].Product)
+                    {
+                        product = this.currentResource.Products[k].name
+                        break
+                    }
                 }
+
+                
+                let dt = this.FormatDate(booking[i].datetime)
+
+                rows.push(new ListRow([
+                    product,
+                    booking[i].Client.name,
+                    booking[i].actualprice,
+                    dt
+                ]))
             }
-
-            let dt = this.FormatDate(booking[i].datetime)
-
-            rows.push(new ListRow([
-                product,
-                booking[i].Client.name,
-                booking[i].actualprice,
-                dt
-            ]))
         }
 
         let sales_options = new ListOptions(showId, true)
@@ -353,7 +359,7 @@ export class ResourcesUtilizationComponent implements OnInit {
         let d = new Date(date)
 
         let dN = d.getDay()
-        let day = ""
+        let day = String(dN)
 
         if (Number(dN) < 10)
         {
@@ -361,16 +367,32 @@ export class ResourcesUtilizationComponent implements OnInit {
         }
 
         let mN = d.getMonth()
-        let month = ""
+        let month = String(mN)
 
         if (Number(mN) < 10)
         {
             month = "0" + String(mN)
         }
 
+        let hN = d.getHours()
 
+        let hour = String(hN)
 
-        return  day + "." + month + "." + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes()
+        if(Number(hN) < 10)
+        {
+            hour = "0" + String(hN)
+        }
+
+        let minN = d.getMinutes()
+
+        let minutes = String(minN)
+
+        if(Number(minN) < 10)
+        {
+            minutes = "0" + String(minN)
+        }
+
+        return  day + "." + month + "." + d.getFullYear() + " " + hour + ":" + minutes
     }
 
     FormServicesList()
@@ -422,7 +444,7 @@ export class ResourcesUtilizationComponent implements OnInit {
         let res_cols = [
             new ListCol("Ресурс", "name"),
             new ListCol("Тип", "type", true),
-            new ListCol("Утилизация", "util", true)
+            new ListCol("Утилизация", "type", true)
         ]
 
         let res_rows = []
@@ -528,6 +550,49 @@ export class ResourcesUtilizationComponent implements OnInit {
         let contacts_options = new ListOptions(true, true)
 
         this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", contacts_options)
+    }
+
+
+    FormLogList()
+    {
+        //Действие (создание, удаление, редактирование), 
+        //Поле (имя, особенности, контакты,...), 
+        //новое значение, 
+        //дата.время, 
+        //пользователь
+        let log_cols = [
+            new ListCol("Действие", "util"),
+            new ListCol("Поле", "util"),
+            new ListCol("Новое значение", "type"),
+            new ListCol("Дата и время", "util"),
+            new ListCol("Пользователь", "type"),
+        ]
+
+        let log_rows = []
+
+        let data = [
+            {act: "Редактирование", field: "Тип", val: "Трудовой", datetime: "23.10.2020 13:30", user: "Корытный Евгений"},
+            {act: "Создание", field: "Особенность", val: "Топ мастер", datetime: "23.10.2020 13:29", user: "Корытный Евгений"},
+            {act: "Создание", field: "Контакт", val: "89037991538", datetime: "23.10.2020 13:25", user: "Корытный Евгений"},
+            {act: "Создание", field: "Контакт", val: "@Averyanova", datetime: "23.10.2020 12:30", user: "Корытный Евгений"},
+        ]
+
+        for(let i = 0; i < data.length; i++)
+        {
+            log_rows.push(new ListRow([
+                data[i].act,
+                data[i].field,
+                data[i].val,
+                data[i].datetime,
+                data[i].user
+            ]))
+        }
+
+        let log_options = new ListOptions(true, true)
+
+        this.log_list = new ListData(log_cols, log_rows, "log", "", log_options)
+
+
     }
 
     getResourceTypes()

@@ -1,5 +1,5 @@
 <section class="list-section">
-    <div class="list__title" *ngIf="listdata.showTitle">{{listdata.title}}</div>
+    <div class="list__title" *ngIf="listdata.options.showTitle">{{listdata.title}}</div>
     <div class="list__head {{listdata.titleclasses}}">
         <div class='list__num' *ngIf="listdata.showId">#</div>
         <div class="list__{{col.type}}" *ngFor="let col of listdata.cols"><img src="assets/images/Sort_inactive.png" class="sort-image" *ngIf="col.sortable"> {{col.name}}</div>

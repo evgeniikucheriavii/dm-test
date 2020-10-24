@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit
         if(this.cookieService.get("token"))
         {
             this.loged = true 
+            this.router.navigate(["/company-schedules"])
         }
     }
 
