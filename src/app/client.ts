@@ -39,6 +39,7 @@ export class Client implements IClient
         this.Misc = client.Misc
         this.Offices = client.Offices
         this.Contacts = client.Contacts
+        this.Booking = client.Booking
 
         this.rfm = client.rfm
         this.ltv = client.ltv

@@ -25,6 +25,7 @@ export class ClientsComponent implements OnInit
     contacts_list:ListData
     misc_list:ListData
     sales_list:ListData
+    history_list:ListData
 	
 	currentClient:Client;
 
@@ -34,6 +35,7 @@ export class ClientsComponent implements OnInit
         this.FormContactsList()
         this.FormMiscList()
         this.FormSalesList()
+        this.FormHistoryList()
     }
 
     SwitchTab = (index:number) =>
@@ -59,7 +61,7 @@ export class ClientsComponent implements OnInit
     
     getClients()
     {
-        this.rest.getClientsByCompanyId("1").subscribe((rest:any) => {
+        this.rest.getClients().subscribe((rest:any) => {
             let temp = rest
 
             for(let i = 0; i < temp.length; i++)
@@ -79,6 +81,7 @@ export class ClientsComponent implements OnInit
         this.FormClientsList()
         this.FormContactsList()
         this.FormMiscList()
+        this.FormHistoryList()
         this.FormSalesList()
     }
 
@@ -116,33 +119,79 @@ export class ClientsComponent implements OnInit
     {
         let sales_cols = [
             new ListCol("Услуга", "name"),
-            new ListCol("Клиент", "type", true),
+            new ListCol("Ресурс", "type", true),
             new ListCol("Стоимость", "pmin", true),
             new ListCol("Дата и время", "pmin", true)
         ]
 
         let sales_rows = []
 
-        let sales = this.currentClient.Booking
+        
+        let booking = this.currentClient.Booking
 
-        
-        
-        for(let i = 0; i < sales.length; i++)
+        let showId = true
+
+        if(booking.length <= 0)
         {
-            let dt = Formatter.FormatDate(sales[i].datetime)
-
-            sales_rows.push(new ListRow([
-                product,
-                booking[i].Client.name,
-                booking[i].actualprice,
-                dt
-            ]))
+            sales_rows.push(new ListRow(["Нет данных"]))
+            showId = false
         }
+        
+        for(let i = 0; i < booking.length; i++)
+        {
+            if(String(booking[i].BookingStatus) == "2") 
+            {
+                let dt = Formatter.FormatDateTime(booking[i].datetime)
 
-        let sales_options = new ListOptions(true, true)
+                let product = ""
+    
+                sales_rows.push(new ListRow([
+                    booking[i].Product.name,
+                    booking[i].Resource.name,
+                    booking[i].actualprice,
+                    dt
+                ]))
+            }
+            
+        }
+        
 
-        this.sales_list = new ListData(sales_cols, sales_rows, "sales", "", sales_options)
+        let sales_options = new ListOptions(showId, true)
+
+        this.sales_list = new ListData(
+            sales_cols, 
+            sales_rows, 
+            "sales", 
+            "", 
+            sales_options)
     }
+
+
+    FormHistoryList()
+    {
+        let history_cols = [
+            new ListCol("Обращение", "name"),
+            new ListCol("Услуга", "name", true),
+            new ListCol("Ресурс", "type", true),
+            new ListCol("Дата", "pmin", true),
+            new ListCol("Статус", "pmin", true)
+        ]
+
+        let showId = true
+
+        let history_rows = []
+
+        let history_options = new ListOptions(showId, true)
+
+        this.history_list = new ListData(
+            history_cols,
+            history_rows, 
+            "history",
+            "",
+            history_options
+        )
+    }
+
 
     FormMiscList()
     {
@@ -152,7 +201,8 @@ export class ClientsComponent implements OnInit
 
         for(let i = 0; i < misc.length; i++)
         {
-            misc_rows.push(new ListRow([misc[i].value, misc[i].date]))
+            let dt = Formatter.FormatDate(misc[i].date)
+            misc_rows.push(new ListRow([misc[i].value, dt]))
         }
 
         let misc_options = new ListOptions(true, true)
@@ -188,7 +238,7 @@ export class ClientsComponent implements OnInit
 
             if(Number(contacts[i].LastCommunication.id) > 0)
             {
-                comm = contacts[i].LastCommunication.datetime + ""
+                comm = Formatter.FormatDateTime(contacts[i].LastCommunication.datetime)
             }
             
             contacts_rows.push(new ListRow([

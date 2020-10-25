@@ -122,7 +122,7 @@
 
             <!--Sales-->
 			<section class="right-section right-section__list" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'sales'">
-				<app-list [listdata]="sales_list" [obj]="this"></app-list>
+				<app-list [listdata]="sales_list"></app-list>
 				<section style="margin-bottom: 20px;">
 					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
 				</section>
@@ -135,7 +135,8 @@
 
 			<!--Log-->
 			<section class="right-section right-section__list" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
-				<div class="list-row list-row_head">
+                <app-list [listdata]="history_list"></app-list>
+				<!-- <div class="list-row list-row_head">
 					<div class="list__num">#</div>
 					<div class="list__name">Обращение</div>
 					<div class="list__service"><img src="assets/images/Sort_inactive.png" class="sort-image"> Услуга</div>
@@ -156,7 +157,7 @@
 							<ng-template #openBlock><span class="status-column status-column_open"><img src="assets/images/Open.svg" class="status-column__image"> {{l.statusString}}</span></ng-template> 
 						</div>
 					</div>
-				</div>
+				</div> -->
 				
 				<section class="left-section left-section__pages">
 					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>

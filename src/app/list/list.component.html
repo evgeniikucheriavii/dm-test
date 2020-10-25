@@ -1,12 +1,12 @@
 <section class="list-section">
     <div class="list__title" *ngIf="listdata.options.showTitle">{{listdata.title}}</div>
     <div class="list__head {{listdata.titleclasses}}">
-        <div class='list__num' *ngIf="listdata.showId">#</div>
+        <div class='list__num' *ngIf="listdata.options.showId">#</div>
         <div class="list__{{col.type}}" *ngFor="let col of listdata.cols"><img src="assets/images/Sort_inactive.png" class="sort-image" *ngIf="col.sortable"> {{col.name}}</div>
     </div>
     <div class="list__body" id="list__body_{{listdata.listname}}" [style.height.px]="height">
         <div class="list-row list-row_{{listdata.listname}}" (click)="ItemClick(i)" *ngFor="let row of listdata.rows; let i = index">
-            <div class="list__num" *ngIf="listdata.showId">{{i + 1}}</div>
+            <div class="list__num" *ngIf="listdata.options.showId">{{i + 1}}</div>
 
             <div class="list__{{listdata.cols[j].type}}" *ngFor="let val of row.values; let j = index; let last = last">
 

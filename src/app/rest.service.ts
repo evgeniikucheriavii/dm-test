@@ -92,7 +92,7 @@ export interface IBooking
     actualduration:string
     Client:IClient
     User:string
-    Product:string
+    Product:IProduct
     BookingStatus:IBookingStatus
     Resource:string
     actualprice:string
@@ -150,7 +150,7 @@ export interface IClient
     Booking:IBooking[]
     ltv:string
     rfm:string
-    
+
 }
 
 
@@ -335,6 +335,17 @@ export class RestService
     getClientsByCompanyId(cid:string)
     {
         return this.http.get<IClient>(endpoint + 'clients/' + cid + '/').pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    getClients()
+    {
+        let data = {
+            token: this.cookieService.get("token")
+        }
+
+        return this.http.post<IClient>(endpoint + 'clients/', data).pipe(
             catchError(this.handleError)
         )
     }
