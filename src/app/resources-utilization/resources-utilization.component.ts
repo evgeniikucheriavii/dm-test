@@ -1,9 +1,6 @@
 import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { Tab, TabsData } from '../tabs/tabs.component';
 import { Resource } from '../resource'
-import { Special } from '../special'
-import { Contact } from '../contact'
-import { ServiceLog } from '../servicelog'
 import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
@@ -12,6 +9,7 @@ import { ListData, ListCol, ListRow, ListButton, ListOptions } from '../list/lis
 import { first } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ResourceFormComponent } from '../resource-form/resource-form.component';
+import { Formatter } from '../formatter';
 
 @Component({
   selector: 'app-resources-utilization',
@@ -307,7 +305,7 @@ export class ResourcesUtilizationComponent implements OnInit {
     {
         let cols = [
             new ListCol("Услуга", "name"),
-            new ListCol("Клиент", "type", true),
+            new ListCol("Ресурс", "type", true),
             new ListCol("Стоимость", "pmin", true),
             new ListCol("Дата и время", "pmin", true)
         ]
@@ -337,8 +335,7 @@ export class ResourcesUtilizationComponent implements OnInit {
                     }
                 }
 
-                
-                let dt = this.FormatDate(booking[i].datetime)
+                let dt = Formatter.FormatDateTime(booking[i].datetime)
 
                 rows.push(new ListRow([
                     product,
@@ -352,47 +349,6 @@ export class ResourcesUtilizationComponent implements OnInit {
         let sales_options = new ListOptions(showId, true)
 
         this.sales_list = new ListData(cols, rows, "sales", "", sales_options)
-    }
-
-    FormatDate(date:string)
-    {
-        let d = new Date(date)
-
-        let dN = d.getDay()
-        let day = String(dN)
-
-        if (Number(dN) < 10)
-        {
-            day = "0" + String(dN)
-        }
-
-        let mN = d.getMonth()
-        let month = String(mN)
-
-        if (Number(mN) < 10)
-        {
-            month = "0" + String(mN)
-        }
-
-        let hN = d.getHours()
-
-        let hour = String(hN)
-
-        if(Number(hN) < 10)
-        {
-            hour = "0" + String(hN)
-        }
-
-        let minN = d.getMinutes()
-
-        let minutes = String(minN)
-
-        if(Number(minN) < 10)
-        {
-            minutes = "0" + String(minN)
-        }
-
-        return  day + "." + month + "." + d.getFullYear() + " " + hour + ":" + minutes
     }
 
     FormServicesList()
@@ -476,7 +432,8 @@ export class ResourcesUtilizationComponent implements OnInit {
 
         for(let i = 0; i < misc.length; i++)
         {
-            misc_rows.push(new ListRow([misc[i].value, misc[i].date]))
+            let dt = Formatter.FormatDate(misc[i].date)
+            misc_rows.push(new ListRow([misc[i].value, dt]))
         }
 
         let misc_options = new ListOptions(true, true)
@@ -486,28 +443,6 @@ export class ResourcesUtilizationComponent implements OnInit {
 
     FormContactsList()
     {
-
-         //     <div class="list-row list-row_head contacts-list__head">
-    //     <div class="list__num">#</div>
-    //     <div class="list__name">Канал</div>
-    //     <div class="list__type"><img src="assets/images/Sort_inactive.png" class="sort-image"> Номер \ Ник</div>
-    //     <div class="list__name"><img src="assets/images/Sort_inactive.png" class="sort-image"> Последняя коммуникация</div>
-    //     <div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Действие</div>
-    // </div>
-        // <div class="list__num">{{i + 1}}</div>
-        //                     <div class="list__name">{{c.ContactType.name}}</div>
-        //                     <div class="list__type">{{c.Contact}}</div>
-        //                     <div class="list__name">{{c.lastdate}}</div>
-        //                     <div class="list__util">
-        //                         <div *ngIf="c.ContactType.action == 'phone'">
-        //                             <button class="button contact-button" (click)="alert('Вызов API клиента: ' + c.ContactType.action)"><img src="assets/images/Call.svg" class="button__image"> Позвонить</button>
-        //                             <img src="assets/images/Dots.svg" class="status-column__dots list__dots">
-        //                         </div>
-        //                         <div *ngIf="c.ContactType.action != 'phone'">
-        //                             <button class="button contact-button" (click)="alert('Вызов API клиента: ' + c.ContactType.action)"><img src="assets/images/Write.svg" class="button__image"> Написать</button>
-        //                             <img src="assets/images/Dots.svg" class="status-column__dots list__dots">
-        //                         </div> 
-        //                     </div>
         let contacts_cols = [
             new ListCol("Канал", "name"),
             new ListCol("Номер \ Ник", "type", true),
@@ -525,7 +460,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 
             if(Number(contacts[i].LastCommunication.id) > 0)
             {
-                comm = contacts[i].LastCommunication.datetime + ""
+                comm = Formatter.FormatDateTime(contacts[i].LastCommunication.datetime) + ""
             }
             
             let btn = null

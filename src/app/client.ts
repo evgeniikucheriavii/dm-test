@@ -1,4 +1,4 @@
-import { IClient, ICompany, IContact, IMisc, IOffice } from './rest.service';
+import { IBooking, IClient, ICompany, IContact, IMisc, IOffice } from './rest.service';
 
 export class Client implements IClient
 {
@@ -10,13 +10,14 @@ export class Client implements IClient
     Offices: IOffice[];
     Contacts: IContact[];
     Company: ICompany;
+    Booking:IBooking[]
 
     shortname:string
     sexString:string
 
     sale:boolean = false;
-    rfm:number;
-    ltv:number;
+    rfm:string
+    ltv:string
 
     ltvString:string;
 
@@ -39,10 +40,12 @@ export class Client implements IClient
         this.Offices = client.Offices
         this.Contacts = client.Contacts
 
-        this.rfm = 500
-        this.ltv = 50000
+        this.rfm = client.rfm
+        this.ltv = client.ltv
 
-        this.ltvString = this.Format(this.ltv)
+        let ltvNum = Number(this.ltv)
+
+        this.ltvString = this.Format(ltvNum)
 
         if(this.sex == "1") 
         {
@@ -75,18 +78,6 @@ export class Client implements IClient
             this.shortname = this.name
         }
     }
-
-
-    
-    
-    // constructor(fio:string, rfm:number, ltv:number)
-    // {
-    //     this.fio = fio;
-    //     this.rfm = rfm;
-    //     this.ltv = ltv;
-
-    //     this.ltvString = this.Format(ltv);
-    // }
 
     private Format(value:number)
     {

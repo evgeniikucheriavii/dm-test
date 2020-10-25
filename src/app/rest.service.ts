@@ -147,6 +147,10 @@ export interface IClient
     Offices:IOffice[]
     Contacts:IContact[]
     Company:ICompany
+    Booking:IBooking[]
+    ltv:string
+    rfm:string
+    
 }
 
 
