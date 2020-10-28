@@ -75,7 +75,7 @@
 		<section class="content-section__bottom bottom_actions" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'actions'">
 
 			<section class="actions-bottom__left">
-                <app-list [listdata]="action_list" [height]="680"></app-list>
+                <app-list [listdata]="promos_list" [height]="680" [obj]="this" [callback]="SwitchPromo"></app-list>
 			</section>
 			
 
@@ -84,24 +84,23 @@
 				<section class="actions-bottom__right-top">
 
 					<div class="right-top__header">
-						<div>Предложения</div>
-						<div><b>Статус</b> <img src="assets/images/Lock.svg" class="header-status-img"> Закрыто</div>
+						<div><b>Услуга: </b> {{currentPromo.Product.name}}</div>
+						<div><b>Статус: </b> <span [innerHTML]="promoStatus"></span></div>
 					</div>
 
 					<div class="right-top__body">
 
 						<div class="body-col">
-							<div><b>Ресурс:</b> Колесов А. В.</div>
-							<div><b>Цена:</b> 750 р (скидка 37%)</div>
-							<div><b>Дата:</b> 12.06.2020</div>
-							<div><b>Назначена:</b> 10.06.2020 в 16:21</div>
-							<div><b>Время:</b> 16:30 - 17:30</div>
-							<div><b>Канал:</b> SMS</div>
+							<div><b>Ресурс:</b> {{currentPromo.Resource.name}}</div>
+							<div><b>Цена:</b> {{newPrice}} ₽ (скидка {{currentPromo.discount}}%)</div>
+							<div><b>Дата:</b> {{formattedDate}}</div>
+							<div><b>Время:</b> {{currentPromo.interval}}</div>
+							<div><b>Канал:</b> {{currentPromo.channel}}</div>
 						</div>
 
 						<div class="body-col">
 							<div><b>Текст предложения:</b></div>
-							<textarea class="textarea textarea_message">Мы предлагаем вам скидку 37% на услугу: “Массаж со специалистом Колесовым А.В. на 12.06.2020 в 16:30”. Предложение дейтвует в течении 30 мин. Если оно вас заинтересовало, отправьте цифры “1” в ответ.</textarea>
+							<textarea class="textarea textarea_message">{{currentPromo.text}}</textarea>
 						</div>
 
 					</div>
@@ -109,9 +108,9 @@
 				</section>
 
 				<section class="actions-bottom__right-bottom">
-                    <div class="line"><b>История поиска: </b></div>
+                    <div class="line"><b>Предложения: </b></div>
                     
-                    <app-list [listdata]="search_list" [height]="350"></app-list>
+                    <app-list [listdata]="proposals_list" [height]="350"></app-list>
 				</section>
 
 			</section>

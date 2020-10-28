@@ -57,5 +57,40 @@ export class Formatter
     }
 
 
+    static FormatMoney(num:number)
+    {
+        let nfObject = new Intl.NumberFormat('ru-RU');
+        let output = nfObject.format(num);
 
+        return output; 
+    }
+
+
+    static GetShortName(name:string)
+    {
+        let w = name.split(" ")
+
+        let shortname = ""
+            
+        if(w.length > 1)
+        {
+
+            w[1] = w[1][0] + "."
+            shortname = w[0] + " " + w[1]
+
+            if(w.length > 2)
+            {
+                w[2] = w[2][0] + "."
+                shortname += " " + w[2]
+            }
+            
+            
+        }
+        else 
+        {
+            shortname = this.name
+        }
+
+        return shortname
+    }
 }

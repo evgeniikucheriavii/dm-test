@@ -170,56 +170,7 @@
 
 			<!--Load-->
 			<section class="right-section right-section__schedule" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'load'">
-				<div class="time-table">
-					<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
-						<div class="table-col table-col_time">
-							<div class="time-content">
-								<div>{{t.hour}}:00</div>
-								<div *ngIf="IsCurrentHour(t.hour)">сейчас</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="schedule-table" id="schedule-table" (scroll)="CheckScroll();">
-					<button class="arrow-button arrow-button_left" id="left-scroll" (click)="ScrollTable(-1);" disabled></button>
-					<button class="arrow-button arrow-button_right" id="right-scroll" (click)="ScrollTable(1);"></button>
-
-					<div class="table-row table-row_head">
-						
-						<div class="table-col" *ngFor="let s of schedule; let i = index;" >
-							<span class="head-name">{{s.name}}</span>
-							<span class="head-percent _brown">12%</span>
-						</div>
-					</div>
-		
-					<div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
-						<div class="table-col" *ngFor="let s of schedule; let i = index;">
-							<div *ngIf="s.HasTasks(t.hour)" class="table-col__container">
-								<div class="table-task {{j.Classes()}}"
-									*ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;">
-									<div class="task-name">{{j.name}}</div>
-									<div class="task-time">
-										{{t.hour}}:<span *ngIf="j.start < 10">0</span>{{j.start}} -
-										<span *ngIf="j.start + j.duration == 60">{{t.hour + 1}}:00</span>
-										<span *ngIf="j.start + j.duration < 60">{{t.hour}}:{{j.start + j.duration}}</span>
-									</div>
-								</div>
-								<div class="table-task" *ngIf="!s.GetTasks(t.hour).Check()">
-									<span *ngIf="currentHour <= t.hour" class="task-add">+</span>
-									<span *ngIf="currentHour > t.hour">-</span>
-								</div>
-							</div>
-							<div *ngIf="!s.HasTasks(t.hour)" class="table-col__container">
-								<div class="table-task">
-									<span *ngIf="currentHour <= t.hour" class="task-add">+</span>
-									<span *ngIf="currentHour > t.hour">-</span>
-								</div>
-							</div>
-							
-						</div>
-		
-					</div>
-				</div>
+				<app-time-table></app-time-table>
 			</section>
 
             <!--Sales-->

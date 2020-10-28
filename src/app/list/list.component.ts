@@ -127,12 +127,18 @@ export class ListOptions
     reversed:boolean = false
     showId:boolean = true
     showTitle:boolean = false
+    hideHead:boolean = false
 
-    constructor(showId:boolean = true, lined:boolean = false, reversed:boolean = false)
+    constructor(
+        showId:boolean = true, 
+        lined:boolean = false, 
+        reversed:boolean = false, 
+        hideHead:boolean = false)
     {
         this.showId = showId
         this.lined = lined
         this.reversed = reversed
+        this.hideHead = hideHead
     }
 }
 

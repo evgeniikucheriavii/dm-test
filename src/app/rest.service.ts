@@ -94,7 +94,7 @@ export interface IBooking
     User:string
     Product:IProduct
     BookingStatus:IBookingStatus
-    Resource:string
+    Resource:IResource
     actualprice:string
 }
 
@@ -125,6 +125,13 @@ export interface IResource
     availability:string
     util:string
     status:boolean
+    koef:string
+    price_min:string
+    price_max:string
+    income_goal:string
+    income_max:string
+    income_min:string
+    sale:string
 }
 
 
@@ -185,6 +192,32 @@ export interface ILogin
 {
     login:string
     password:string
+}
+
+
+export interface IProposal
+{
+    id:string
+    Client:IClient
+    Promo:string
+    datetime:string
+    status:string
+}
+
+
+export interface IPromo
+{
+    id:string
+    Company:string
+    Resource:IResource
+    Product:IProduct
+    Proposals:IProposal[]
+    date:string
+    interval:string
+    channel:string
+    discount:string
+    text:string
+    status:string
 }
 
 
@@ -274,7 +307,22 @@ export class RestService
 
     getResources(): Observable<any> 
     {
-        return this.http.get<IResource>(endpoint + 'resources/').pipe(
+        let data = {
+            "token": this.cookieService.get("token")
+        }
+
+        return this.http.post<IResource>(endpoint + 'resources/', data).pipe(
+          catchError(this.handleError)
+        );
+    }
+
+    getPromos(): Observable<any>
+    {
+        let data = {
+            "token": this.cookieService.get("token")
+        }
+
+        return this.http.post<IResource>(endpoint + 'promos/', data).pipe(
           catchError(this.handleError)
         );
     }

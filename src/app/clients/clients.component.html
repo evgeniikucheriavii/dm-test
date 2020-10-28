@@ -105,18 +105,19 @@
 						<div class="banner-item__body">готов к коммуникации<br> ⟶ продажа</div>
 					</div>
 				</div>
-
+                <div class="profile-body">
 				
-                <app-list [listdata]="misc_list"></app-list>
-                <section class="left-section left-section__pages">
-					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-                </section>
-                
-				<app-list [listdata]="contacts_list"></app-list>
+                    <app-list [listdata]="misc_list"></app-list>
+                    <section class="left-section left-section__pages">
+                        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+                    </section>s
+                    
+                    <app-list [listdata]="contacts_list"></app-list>
 
-				<section class="left-section left-section__pages">
-					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-				</section>
+                    <section class="left-section left-section__pages">
+                        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+                    </section>
+                </div>
 				
 			</section>
 
@@ -130,7 +131,7 @@
 
 			<!--Reserve-->
 			<section class="right-section right-section__list" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'reserve'">
-				Бронирование
+				<app-time-table></app-time-table>
 			</section>
 
 			<!--Log-->

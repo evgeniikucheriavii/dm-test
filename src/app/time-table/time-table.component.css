@@ -1,0 +1,285 @@
+
+
+.graph-row
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	border-bottom: 1px solid rgba(12, 42, 133, 0.2);
+	padding: 0 0 10px 0;
+}
+
+.graph-row:first-child, .graph-row:last-child
+{
+	border: 0;
+}
+
+.graph-column
+{
+	flex: 2;
+	text-align: center;
+}
+
+.graph-column__date
+{
+	margin-bottom: 10px;
+}
+
+.graph-column_head
+{
+	border-right: 1px solid rgba(61, 113, 191, 0.3);
+}
+
+.graph-column_head:nth-child(8n)
+{
+	border-right: 1px solid transparent;
+}
+
+.graph-column:first-child, .graph-column:last-child
+{
+	flex: 1;
+}
+
+/***/
+
+.legend_promo { background: #4D7FCA; color: #fff; }
+.legend_service { background: #FADF80; color: #68420A; }
+.legend_reserve { background: #4EAB51; color: #fff; }
+.legend_fail { background: #F5A2A2; color: #530808; }
+.legend_add { background: #fff; color: #232526; font-weight: 300; }
+.legend_waste { background: #fff; color: #232526; font-weight: 300; }
+.legend_promo-end { background: #E6ECF6; color: rgba(61, 113, 191, 0.5); }
+.legend_service-end { background: #FFFCF3; color: rgba(104, 66, 10, 0.5); }
+.legend_empty { background: #FDEDED; color: rgba(174, 30, 21, 0.5); }
+.legend_reserve-end { background: #DAEEEA; color: rgba(37, 98, 9, 0.5); }
+
+/**/
+
+.right-section__schedule
+{
+	margin: -40px 40px 40px 0;
+	padding: 40px 10px 0px 40px;
+	width: 1250px;
+	box-sizing: border-box;
+	/* main sahd2 */
+
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: stretch;
+}
+
+/**/
+
+.head-name
+{
+	position: relative;
+	left: 10px;
+}
+
+.head-percent
+{
+	position: relative;
+	left: 20px;
+	font-size: 14px;
+}
+
+.time-table
+{
+	margin-top: 55px;
+}
+
+.schedule-table
+{
+	overflow-y: auto;
+}
+
+.table-row
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
+
+.table-row_head
+{
+	color: #000;
+	font-size: 18px;
+	line-height: 21px;
+}
+
+.table-row:last-child
+{
+	margin-bottom: 50px;
+}
+
+.table-col, .table-col__container
+{
+	min-width: 320px;
+	max-width: 320px;
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
+
+.table-col
+{
+	border-right: 1px solid rgba(131, 146, 169, 0.3);
+	border-bottom: 1px solid rgba(131, 146, 169, 0.3);
+}
+
+.table-row:last-child .table-col
+{
+	border-bottom: 1px solid transparent;
+}
+
+.table-row_head .table-col
+{
+	justify-content: center;
+	border-bottom: 1px solid transparent;
+	height: 30px;
+	margin-bottom: 20px;
+	color: #093751;
+}
+
+.table-col:last-child
+{
+	border-right: 1px solid transparent;
+}
+
+.table-col_time
+{
+	box-sizing: border-box;
+	padding-left: 10px;
+	min-width: 80px;
+	width: 80px;
+	margin-right: 60px;
+	text-align: left;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+
+	color: #000;
+}
+
+.table-task
+{
+	height: 100%;
+	margin-right: 1px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	box-sizing: border-box;
+}
+
+.task_small .task-time, .task_small .task-name
+{ 
+	max-width: 60px !important; 
+	text-overflow: ellipsis;
+	overflow: hidden; 
+	white-space: nowrap;
+}
+
+.table-task:last-child
+{
+	margin-right: 0;
+}
+
+.task-name
+{
+	width: 100%;
+}
+
+.task-time
+{
+	text-overflow: ellipsis;
+	overflow: hidden; 
+	white-space: nowrap;
+}
+
+.task-add
+{
+	display: inline-block;
+	vertical-align: middle;
+	width: 18px;
+	height: 18px;
+	box-sizing: border-box;
+	text-align: center;
+	padding: 1px 2px;
+	background: rgba(196, 196, 196, 0.2);
+	color: #0C62E3;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 16px;
+	border-radius: 50%;
+
+}
+
+._past-hour .table-col_time
+{
+	color: #aaa;
+}
+
+._past-hour .legend_promo { background: #E6ECF6; color: rgba(61, 113, 191, 0.5); }
+._past-hour .legend_service { background: #FFFCF3; color: rgba(104, 66, 10, 0.5); }
+._past-hour .legend_fail { background: #FDEDED; color: rgba(174, 30, 21, 0.5); }
+._past-hour .legend_reserve { background: #DAEEEA; color: rgba(37, 98, 9, 0.5); }
+
+._current-hour .table-col_time
+{
+	font-weight: bold;
+	/* main sahd2 */
+}
+
+._current-hour .table-col_time .time-content
+{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-left: -15px;
+	padding-left: 10px;
+	width: 111px;
+	height: 65px;
+	background-image: url(../../assets/images/Time_Arrow.svg);
+	background-size: 100% 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+
+}
+
+._current-hour .table-col_time .time-content div
+{
+	width: 25px;
+	text-align: left;
+	margin-left: -50px;
+}
+
+/**/
+
+/**/
+
+#left-scroll, #right-scroll
+{
+	position: fixed;
+	top: 200px;
+}
+
+#right-scroll
+{
+	right: 80px;
+}
+
+/**/

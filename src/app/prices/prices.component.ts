@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ListData, ListCol, ListRow } from '../list/list.component';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
+import { ListData, ListCol, ListRow, ListOptions } from '../list/list.component';
+import { Resource } from '../resource';
+import * as restservice from '../rest.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { Formatter } from '../formatter';
 
 @Component({
 	selector: 'app-prices',
@@ -9,44 +14,65 @@ import { ListData, ListCol, ListRow } from '../list/list.component';
 export class PricesComponent implements OnInit 
 {
 
-    data:CustomData[] = [];
+    resources:Resource[] = [];
     prices = []
     openedDetails:number = -1;
+    income_goal:number = 0
+    income_max:number = 0
+    income_min:number = 0
+
+    income_goal_string:string = "0"
+    income_max_string:string = "0"
+    income_min_string:string = "0"
     
     prices_list:ListData
+    sum_list:ListData
 
-    constructor() { }
-    
-    
+    constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
 	ngOnInit(): void 
 	{
 
-        
+        this.getResources()
 
-		this.data = [
-			new CustomData("Иванов Иван", 2000, 1000, 1, 1000, 25000, 12500, 1),
-			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
-			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-			new CustomData("Сидоров Сергей", 2000, 1000, 0.83, 1000, 25000, 12500, 1),
-			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
-			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-			new CustomData("Сидоров Сергей", 2000, 1000, 1.5, 1000, 25000, 12500, 0),
-			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 0),
-			new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-			new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-			new CustomData("Сидоров Сергей", 2000, 1000, 2.1, 1000, 25000, 12500, 1),
-			new CustomData("Петрова Светлана", 1245, 1000, 1, 1000, 25000, 12500, 1)
-        ];
+		// this.data = [
+		// 	new CustomData("Иванов Иван", 2000, 1000, 1, 1000, 25000, 12500, 1),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 0.83, 1000, 25000, 12500, 1),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1.5, 1000, 25000, 12500, 0),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 0),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
+		// 	new CustomData("Сидоров Сергей", 2000, 1000, 2.1, 1000, 25000, 12500, 1),
+		// 	new CustomData("Петрова Светлана", 1245, 1000, 1, 1000, 25000, 12500, 1)
+        // ];
         
         this.FormLists()
 
 		let obj = this;
 		window.addEventListener("click", function (e) { obj.HideDetails(e); });
+    }
+
+    getResources()
+    {
+        this.rest.getResources().subscribe((rest:any) => {
+            let temp = rest
+
+            for(let i = 0; i < temp.length; i++)
+            {
+                this.resources.push(new Resource(temp[i]))
+            }
+
+            this.FormLists()
+            this.appRef.tick()
+        })
     }
     
     FormLists()
@@ -64,17 +90,21 @@ export class PricesComponent implements OnInit
 
         let prices_rows = []
 
-        for(let i = 0; i < this.data.length; i++)
+        this.income_goal = 0
+        this.income_max = 0
+        this.income_min = 0
+
+        for(let i = 0; i < this.resources.length; i++)
         {
             let koef = ""
-            if(this.data[i].koef != null)
+            if(this.resources[i].koef != null)
             {
-                koef = String(this.data[i].koef)
+                koef = String(this.resources[i].koef)
             }
 
             let sale = ""
 
-            if(this.data[i].sale == 0)
+            if(this.resources[i].sale == "0")
             {
                 sale = "<div class='status_closed'><img src='assets/images/Lock.svg'class='status-img'> Заблокирована системой</div>"
             }
@@ -85,18 +115,40 @@ export class PricesComponent implements OnInit
 
             
             prices_rows.push(new ListRow([
-                this.data[i].name,
-                this.data[i].priceMax,
-                this.data[i].priceMin,
-                koef,
-                this.data[i].goalIncome,
-                this.data[i].maxMonthlyIncome,
-                this.data[i].minMonthlyIncome,
+                this.resources[i].name,
+                Formatter.FormatMoney(Number(this.resources[i].price_max)),
+                Formatter.FormatMoney(Number(this.resources[i].price_min)),
+                this.resources[i].koef,
+                Formatter.FormatMoney(Number(this.resources[i].income_goal)),
+                Formatter.FormatMoney(Number(this.resources[i].income_max)),
+                Formatter.FormatMoney(Number(this.resources[i].income_min)),
                 sale
             ]))
+
+            this.income_goal += Number(this.resources[i].income_goal)
+            this.income_max += Number(this.resources[i].income_max)
+            this.income_min += Number(this.resources[i].income_min)
+
         }
 
         this.prices_list = new ListData(prices_cols, prices_rows, "prices")
+
+        this.income_goal_string = Formatter.FormatMoney(this.income_goal)
+        this.income_max_string = Formatter.FormatMoney(this.income_max)
+        this.income_min_string = Formatter.FormatMoney(this.income_min)
+
+        let sum_rows = [new ListRow([
+            "<div class='_status'>Всего ресурсов: " + this.resources.length + "</div>",
+            "",
+            "",
+            "",
+            "<div class='_status'>" + this.income_goal_string + "₽</div>",
+            "<div class='_status'>" + this.income_max_string + "₽</div>",
+            "<div class='_status'>" + this.income_min_string + "₽</div>",
+        ])]
+        let sum_options = new ListOptions(true, false, false, true)
+
+        this.sum_list = new ListData(prices_cols, sum_rows, "sum", "", sum_options)
 
     }
 

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { UtilizationRule } from '../utilization-rule';
 import { UtilizationCat } from '../utilization-cat';
 import { ListData, ListCol, ListRow, ListOptions } from '../list/list.component';
+import { IPromo } from '../rest.service';
+import { Formatter } from '../formatter';
 
 @Component({
 	selector: 'app-recomendations-engine',
@@ -19,14 +21,18 @@ export class RecomendationsEngineComponent implements OnInit
 	utilizationCats:UtilizationCat[] = [];
     currentCat:UtilizationCat;
     
-    cats_list:ListData
-    rules_list:ListData
-    action_list:ListData
-    search_list:ListData
+    cats_list:ListData = new ListData([], [], "")
+    rules_list:ListData = new ListData([], [], "")
+    promos_list:ListData = new ListData([], [], "")
+    proposals_list:ListData = new ListData([], [], "")
 
-	searchLog = [];
+    promos:IPromo[] = []
+    currentPromo:IPromo
 
-    data = [];
+    newPrice:string = ""
+    formattedDate = ""
+    promoStatus:string = ""
+
     
     SwitchCat = (index:number) =>
     {
@@ -38,6 +44,36 @@ export class RecomendationsEngineComponent implements OnInit
 
     SwitchTab = (index:number) =>
     {
+
+    }
+
+    SwitchPromo = (index:number) =>
+    {
+        this.currentPromo = this.promos[index]
+        this.FormPromosList()
+        this.FormProposalsList()
+
+        this.newPrice = String(Number(this.currentPromo.Product.price) / 100 * Number(this.currentPromo.discount))
+        this.formattedDate = Formatter.FormatDate(this.currentPromo.date)
+        
+        let status = Number(this.currentPromo.status)
+        let val = ""
+
+        if(status == 0)
+        {
+            val = "<img src='assets/images/Green_dot.svg' class='status-img status-img_active'> завершен"
+        }
+        else if(status == 1)
+        {
+            val = "<img src='assets/images/Yellow_dots.svg' class='status-img status-img_active'> активен"
+        }
+        else if(status == -1)
+        {
+            val = "<img src='assets/images/Red_dot.svg' class='status-img status-img_active'> не удачно"
+        }
+
+        this.promoStatus = val
+
 
     }
 
@@ -53,44 +89,8 @@ export class RecomendationsEngineComponent implements OnInit
         this.tabsdata = new TabsData("recomendations", tabs)
         
         this.tabsdata.Activate(1)
+        this.getPromos()
         this.getUtilizationCats()
-
-
-		this.searchLog = [
-			new SearchLog(11, "12.06 14.03", "Иванов Иван", 0),
-			new SearchLog(10, "12.06 14.03", "Иванов Иван", 1),
-			new SearchLog(9, "12.06 14.03", "Иванов Иван", 2),
-			new SearchLog(8, "12.06 14.03", "Иванов Иван", 0),
-			new SearchLog(7, "12.06 14.03", "Иванов Иван", 1),
-			new SearchLog(6, "12.06 14.03", "Иванов Иван", 2),
-			new SearchLog(5, "12.06 14.03", "Иванов Иван", 0),
-			new SearchLog(4, "12.06 14.03", "Иванов Иван", 1),
-			new SearchLog(3, "12.06 14.03", "Иванов Иван", 2),
-			new SearchLog(2, "12.06 14.03", "Иванов Иван", 0),
-			new SearchLog(1, "12.06 14.03", "Иванов Иван", 1)
-		];
-
-		this.data = [
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 0),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 13, 0),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 0),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 2, 0),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 4, 0),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 15, 0),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 32, 1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 2, 0),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 7, 1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 2, -1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, -1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, -1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
-			new Resource("Иванов Иван", "Массаж 45 минут", "13.06.2020 13:00 - 14:00", 5, 1),
-		];
 	}
 
     getUtilizationCats()
@@ -99,25 +99,29 @@ export class RecomendationsEngineComponent implements OnInit
             for(let i = 0; i < rest.length; i++)
             {
                 this.utilizationCats.push(new UtilizationCat(rest[i]))
-                // this.getUtilizationRules(this.utilizationCats[i])
             }
 
             this.currentCat = this.utilizationCats[0]
             this.appRef.tick()
-            this.FormLists()
+            this.FormCatsList()
+            this.FormRulesList()
             this.SwitchCat(0)
             
         })
     }
 
-    getUtilizationRules(cat:UtilizationCat)
+    getPromos()
     {
-        this.rest.getUtilizationRule(cat.id).subscribe((rest:any) => {
+        this.rest.getPromos().subscribe((rest:any) => { 
             for(let i = 0; i < rest.length; i++)
             {
-                cat.addRule(rest[i])
+                this.promos.push(rest[i])
             }
 
+            this.currentPromo = this.promos[0]
+            this.appRef.tick()
+            this.SwitchPromo(0)
+            
         })
     }
 
@@ -125,58 +129,60 @@ export class RecomendationsEngineComponent implements OnInit
     {
         this.FormCatsList()
         this.FormRulesList()
-        this.FormActionCenter()
-        this.FormSearchList()
+        this.FormPromosList()
+        this.FormProposalsList()
     }
 
-    FormActionCenter()
+    FormPromosList()
     {
         let cols = [
-            new ListCol("Ресурс", "type"),
+            new ListCol("Ресурс", "pmin"),
             new ListCol("Услуга", "service"),
-            new ListCol("Временный интервал", "service"),
-            new ListCol("Отправлено", "util"),
-            new ListCol("Статус", "util"),
+            new ListCol("Временный интервал", "pmin"),
+            new ListCol("Отправлено", "pmin"),
+            new ListCol("Статус", "pmin"),
         ]
 
         let rows = []
 
-        for(let i = 0; i < this.data.length; i++)
+        for(let i = 0; i < this.promos.length; i++)
         {
 
             let val = ""
 
-            if(this.data[i].status == 0)
+            let status = Number(this.promos[i].status)
+
+            if(status == 0)
             {
                 val = "<div class='status_done'><img src='assets/images/Green_dot.svg' class='status-img status-img_active'> завершен</div>"
             }
-            else if(this.data[i].status == 1)
+            else if(status == 1)
             {
                 val = "<div class='status_active'><img src='assets/images/Yellow_dots.svg' class='status-img status-img_active'> активен</div>"
             }
-            else if(this.data[i].status == -1)
+            else if(status == -1)
             {
                 val = "<div class='status_fail'><img src='assets/images/Red_dot.svg' class='status-img status-img_active'> не удачно</div>"
             }
 
-
-
             rows.push(new ListRow([
-                this.data[i].name,
-                this.data[i].service,
-                this.data[i].interval,
-                this.data[i].vote,
+                Formatter.GetShortName(this.promos[i].Resource.name),
+                this.promos[i].Product.name,
+                Formatter.FormatDate(this.promos[i].date) + " " + this.promos[i].interval,
+                this.promos[i].Proposals.length,
                 val
             ]))
         }
 
         let options = new ListOptions(true, true)
 
-        this.action_list = new ListData(cols, rows, "actions", "", options)
+        this.promos_list = new ListData(cols, rows, "actions", "", options)
     }
 
-    FormSearchList()
+    FormProposalsList()
     {
+        let proposals = this.currentPromo.Proposals
+
         let cols = [
             new ListCol("Дата / Время", "type"),
             new ListCol("Клиент", "name"),
@@ -185,29 +191,37 @@ export class RecomendationsEngineComponent implements OnInit
 
         let rows = []
 
-        for(let i = 0; i < this.searchLog.length; i++)
+        for(let i = 0; i < proposals.length; i++)
         {
             let val = ""
 
-            if(this.searchLog[i].status == 0)
+            let status = Number(proposals[i].status)
+
+            if(status == 1)
             {
-                val = "<img src='assets/images/Approve.svg'> Забронировала"
+                val = "<img src='assets/images/Approve.svg'> Забронировано"
             } 
-            else if(this.searchLog[i].status == 1)
+            else if(status == 0)
             {
-                val = "<img src='assets/images/Eye.svg'> Не прочитал"
+                val = "<img src='assets/images/Eye.svg'> Не прочитано"
             }
-            else if(this.searchLog[i].status == 2)
+            else if(status == -1)
             {
-                val = "<img src='assets/images/Cross.svg'> Удалил"
+                val = "<img src='assets/images/Cross.svg'> Удалено"
             }
 
-            rows.push(new ListRow([this.searchLog[i].date, this.searchLog[i].client, val]))
+            let dt = Formatter.FormatDateTime(proposals[i].datetime)
+
+            rows.push(new ListRow([
+                dt, 
+                proposals[i].Client.name, 
+                val
+            ]))
         }
 
         let options = new ListOptions(true, true, true) 
 
-        this.search_list = new ListData(
+        this.proposals_list = new ListData(
             cols, 
             rows,
             "search",
@@ -276,39 +290,5 @@ export class RecomendationsEngineComponent implements OnInit
 		{
 			priority.className = "priority";
 		}
-	}
-}
-
-class SearchLog
-{
-	id:number;
-	date:string;
-	client:string;
-	status:number;
-
-	constructor(id:number, date:string, client:string, status:number)
-	{
-		this.id = id;
-		this.date = date;
-		this.client = client;
-		this.status = status;
-	}
-}
-
-class Resource
-{
-	name:string;
-	service:string;
-	interval:string;
-	vote:number;
-	status:number;
-
-	constructor(name:string, service:string, interval:string, vote:number, status:number)
-	{
-		this.name = name;
-		this.service = service;
-		this.interval = interval;
-		this.vote = vote;
-		this.status = status;
 	}
 }

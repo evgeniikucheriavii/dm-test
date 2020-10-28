@@ -27,6 +27,7 @@ import { ListComponent } from './list/list.component';
 import { ContextComponent } from './context/context.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
+import { TimeTableComponent } from './time-table/time-table.component';
 // import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
@@ -67,6 +68,7 @@ const appRoutes = [
     ListComponent,
     ContextComponent,
     TabsComponent,
+    TimeTableComponent,
   ],
   imports: [
 	BrowserModule,

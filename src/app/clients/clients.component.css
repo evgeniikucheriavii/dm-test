@@ -149,11 +149,11 @@
 
 .banner
 {
-	width: 1199px;
 	height: 187px;
 	box-sizing: border-box;
-	padding: 45px 60px;
-	margin-bottom: 19px;
+    padding: 45px 60px;
+    margin: 0 -39px;
+    margin-bottom: 19px;
 
 	background: url(../../assets/images/Contacts_banner.png) 100% 100% no-repeat;
 	background-color: #003584;
@@ -191,7 +191,18 @@
 
 .banner-item__body
 {
-	color: #B8D4FF;
+    color: #B8D4FF;
+    margin-top: 20px;
+}
+
+.profile-body
+{
+    overflow: auto;
+    flex: 2;
+    max-height: 560px;
+    padding-top: 19px;
+    margin-right: -39px;
+    padding-right: 39px;
 }
 
 .list__title

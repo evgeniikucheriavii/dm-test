@@ -52,31 +52,6 @@
 
 /*List*/
 
-.rules-list__head
-{
-	border-bottom: 1px solid rgba(61, 113, 191, 0.3);
-
-}
-
-.rules-list__body
-{
-	height: 620px;
-}
-
-.list__sale
-{
-	margin-left: 100px;
-}
-
-.list__util
-{
-	flex: 1.5;
-}
-
-.list-row_b
-{
-	justify-content: space-between;
-}
 
 .details-menu
 {
@@ -127,48 +102,6 @@
 	width: 100%;
 }
 
-.list-row_b:hover .details-button
-{
-	display: block;
-}
-
-.list__n
-{
-	width: 40px;
-	margin-right: 20px;
-}
-
-.list__koef
-{
-	width: 98px;
-	text-align: center;
-	margin-right: 20px;
-}
-
-.list__pname
-{
-	width: 425px;
-}
-
-.list__pmin
-{
-	width: 120px;
-}
-
-.list__pmax
-{
-	width: 162px;
-}
-
-.list__pmax_first
-{
-	margin-left: 25px;
-}
-
-.list__pmax_last
-{
-	margin-right: 80px !important;
-}
 
 /*Footer*/
 

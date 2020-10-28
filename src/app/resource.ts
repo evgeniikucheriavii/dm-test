@@ -1,4 +1,5 @@
 import { DropdownItem, DropdownList } from './dropdown/dropdown.component'
+import { Formatter } from './formatter'
 import { IResource, ICompany, IContact, IContactType, IMisc, IOffice, IProduct, IResourceType, IRate, IBooking } from "./rest.service"
 
 export class Resource implements IResource
@@ -38,6 +39,14 @@ export class Resource implements IResource
     lastmonth:string
     availability:string
 
+    koef:string
+    price_max:string
+    price_min:string
+    income_goal:string
+    income_max:string
+    income_min:string
+    sale:string
+
     services = [];
     contacts = [];
     transactions = [];
@@ -63,6 +72,14 @@ export class Resource implements IResource
         this.AvgHourRate = res.avg
         this.util = res.util
         this.status = res.status
+        this.sale = res.sale
+
+        this.koef = res.koef
+        this.price_max = res.price_max
+        this.price_min = res.price_min
+        this.income_goal = res.income_goal
+        this.income_max = res.income_max
+        this.income_min = res.income_min
 
         if(this.sex == "1") 
         {
@@ -105,26 +122,7 @@ export class Resource implements IResource
 
         if(this.sex != "-1")
         {
-            let w = this.name.split(" ")
-            
-            if(w.length > 1)
-            {
-
-                w[1] = w[1][0] + "."
-                this.shortname = w[0] + " " + w[1]
-
-                if(w.length > 2)
-                {
-                    w[2] = w[2][0] + "."
-                    this.shortname += " " + w[2]
-                }
-                
-                
-            }
-            else 
-            {
-                this.shortname = this.name
-            }
+            this.shortname = Formatter.GetShortName(this.name)
             
         }
         else
