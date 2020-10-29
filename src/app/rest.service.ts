@@ -106,6 +106,18 @@ export interface IResourceType
 }
 
 
+export interface IResourceLog
+{
+    id:string
+    User:IUser
+    action:string
+    field:string
+    value:string
+    datetime:string
+    Resource:string
+}
+
+
 export interface IResource
 {
     id:string
@@ -117,6 +129,7 @@ export interface IResource
     Contacts:IContact[]
     Products:IProduct[]
     ResourceType:IResourceType
+    ResourceLog:IResourceLog[]
     Company:ICompany
     Rates:IRate[]
     Booking:IBooking[]
@@ -144,6 +157,18 @@ export interface IResourceData
 }
 
 
+export interface IClientRecord
+{
+    id:string
+    record:string
+    Resource:IResource
+    Product:IProduct
+    Client:string
+    status:string
+    date:string
+}
+
+
 export interface IClient
 {
     id:string
@@ -155,8 +180,12 @@ export interface IClient
     Contacts:IContact[]
     Company:ICompany
     Booking:IBooking[]
+    ClientRecords:IClientRecord[]
     ltv:string
     rfm:string
+    contactpolicy:string
+    cx:string
+    promo:boolean
 
 }
 

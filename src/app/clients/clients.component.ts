@@ -5,7 +5,7 @@ import * as restservice from '../rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { PopupElement } from '../popup-element';
-import { ListData, ListCol, ListRow, ListOptions } from '../list/list.component';
+import { ListData, ListCol, ListRow, ListOptions, ListButton } from '../list/list.component';
 import { Formatter } from '../formatter';
 
 @Component({
@@ -99,10 +99,20 @@ export class ClientsComponent implements OnInit
 
         for(let i = 0; i < this.clients.length; i++)
         {
+            let checked = ""
+
+            if(this.clients[i].promo)
+            {
+                checked = "checked"
+            }
+
+            let promo = "<label class='box-label box-label_checkbox'><input type='checkbox' class='box-label__input box-label__input_checkbox' " + checked + "'></label>"
+
+
             clients_rows.push(new ListRow([
                 this.clients[i].shortname,
                 // this.clients[i].,
-                "",
+                promo,
                 this.clients[i].rfm + "",
                 this.clients[i].ltvString,
             ]))
@@ -181,6 +191,30 @@ export class ClientsComponent implements OnInit
 
         let history_rows = []
 
+        let records = this.currentClient.ClientRecords
+
+        for(let i = 0; i < records.length; i++)
+        {
+            let val = ""
+
+            if(records[i].status == "1")
+            {
+                val = "<span class='status-column status-column_closed'><img src='assets/images/Lock.svg' class='status-column__image'> Закрыто</span>"
+            }
+            else if (records[i].status == "0")
+            {
+                val = "<span class='status-column status-column_open'><img src='assets/images/Green_dot.svg' class='status-column__image'> Открыто</span>"
+            }
+
+            history_rows.push(new ListRow([
+                records[i].record,
+                records[i].Product.name,
+                Formatter.GetShortName(records[i].Resource.name),
+                Formatter.FormatDate(records[i].date),
+                val,
+            ]))
+        }
+
         let history_options = new ListOptions(showId, true)
 
         this.history_list = new ListData(
@@ -240,12 +274,23 @@ export class ClientsComponent implements OnInit
             {
                 comm = Formatter.FormatDateTime(contacts[i].LastCommunication.datetime)
             }
+
+            let btn = null
+
+            if(contacts[i].ContactType.action == "phone")
+            {
+                btn = new ListButton("Позвонить", "Call")
+            }
+            else
+            {
+                btn = new ListButton("Написать", "Write")
+            }
             
             contacts_rows.push(new ListRow([
                 contacts[i].ContactType.name,
                 contacts[i].Contact,
                 comm,
-                ""
+                btn
             ]))
         }
         

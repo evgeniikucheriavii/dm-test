@@ -1,4 +1,5 @@
-import { IBooking, IClient, ICompany, IContact, IMisc, IOffice } from './rest.service';
+import { Formatter } from './formatter';
+import { IBooking, IClient, IClientRecord, ICompany, IContact, IMisc, IOffice } from './rest.service';
 
 export class Client implements IClient
 {
@@ -11,6 +12,10 @@ export class Client implements IClient
     Contacts: IContact[];
     Company: ICompany;
     Booking:IBooking[]
+    ClientRecords:IClientRecord[]
+    contactpolicy:string
+    cx:string
+    promo:boolean
 
     shortname:string
     sexString:string
@@ -22,13 +27,6 @@ export class Client implements IClient
     ltvString:string;
 
     fio:string;
-
-    log = [];
-    contacts = [];
-    transactions = [];
-    services = [];
-
-    specials = [];
     
     constructor(client:IClient)
     {
@@ -40,13 +38,17 @@ export class Client implements IClient
         this.Offices = client.Offices
         this.Contacts = client.Contacts
         this.Booking = client.Booking
+        this.ClientRecords = client.ClientRecords
+        this.contactpolicy = client.contactpolicy
+        this.cx = client.cx
+        this.promo = client.promo
 
         this.rfm = client.rfm
         this.ltv = client.ltv
 
         let ltvNum = Number(this.ltv)
 
-        this.ltvString = this.Format(ltvNum)
+        this.ltvString = Formatter.FormatMoney(ltvNum)
 
         if(this.sex == "1") 
         {
@@ -61,31 +63,6 @@ export class Client implements IClient
             this.sexString = "Обр"
         }
 
-        let w = this.name.split(" ")
-            
-        if(w.length > 1)
-        {
-            w[1] = w[1][0] + "."
-            this.shortname = w[0] + " " + w[1]
-
-            if(w.length > 2)
-            {
-                w[2] = w[2][0] + "."
-                this.shortname += " " + w[2]
-            }
-        }
-        else 
-        {
-            this.shortname = this.name
-        }
+        this.shortname = Formatter.GetShortName(this.name)
     }
-
-    private Format(value:number)
-    {
-        let nfObject = new Intl.NumberFormat('ru-RU');
-        let output = nfObject.format(value);
-
-        return output; 
-    }
-
 }

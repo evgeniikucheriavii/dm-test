@@ -1,6 +1,6 @@
 import { DropdownItem, DropdownList } from './dropdown/dropdown.component'
 import { Formatter } from './formatter'
-import { IResource, ICompany, IContact, IContactType, IMisc, IOffice, IProduct, IResourceType, IRate, IBooking } from "./rest.service"
+import { IResource, ICompany, IContact, IContactType, IMisc, IOffice, IProduct, IResourceType, IRate, IBooking, IResourceLog } from "./rest.service"
 
 export class Resource implements IResource
 {
@@ -15,6 +15,7 @@ export class Resource implements IResource
     Contacts:IContact[]
     Products:IProduct[]
     ResourceType:IResourceType
+    ResourceLog:IResourceLog[]
     Company:ICompany
     Rates:IRate[]
     Booking:IBooking[]
@@ -73,6 +74,7 @@ export class Resource implements IResource
         this.util = res.util
         this.status = res.status
         this.sale = res.sale
+        this.ResourceLog = res.ResourceLog
 
         this.koef = res.koef
         this.price_max = res.price_max

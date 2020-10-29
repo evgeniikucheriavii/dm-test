@@ -37,23 +37,14 @@ export class Formatter
     {
         let d = new Date(date)
 
-        let dN = d.getDay()
-        let day = String(dN)
+        //"datetime": "2020-10-01T09:50:58+03:00",
 
-        if (Number(dN) < 10)
-        {
-            day = "0" + String(dN)
-        }
+        let vals = date.split("T")[0].split("-")
+        let year = vals[0]
+        let month = vals[1]
+        let day = vals[2]
 
-        let mN = d.getMonth()
-        let month = String(mN)
-
-        if (Number(mN) < 10)
-        {
-            month = "0" + String(mN)
-        }
-
-        return day + "." + month + "." + d.getFullYear()
+        return day + "." + month + "." + year
     }
 
 

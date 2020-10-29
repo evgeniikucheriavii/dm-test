@@ -51,6 +51,7 @@ export class ResourcesUtilizationComponent implements OnInit {
         this.FormMiscList()
         this.FormContactsList()
         this.FormServicesList()
+        this.FormLogList()
         this.FormSalesList()
     }
 
@@ -354,11 +355,6 @@ export class ResourcesUtilizationComponent implements OnInit {
 
     FormLogList()
     {
-        //Действие (создание, удаление, редактирование), 
-        //Поле (имя, особенности, контакты,...), 
-        //новое значение, 
-        //дата.время, 
-        //пользователь
         let log_cols = [
             new ListCol("Действие", "util"),
             new ListCol("Поле", "util"),
@@ -369,21 +365,16 @@ export class ResourcesUtilizationComponent implements OnInit {
 
         let log_rows = []
 
-        let data = [
-            {act: "Редактирование", field: "Тип", val: "Трудовой", datetime: "23.10.2020 13:30", user: "Корытный Евгений"},
-            {act: "Создание", field: "Особенность", val: "Топ мастер", datetime: "23.10.2020 13:29", user: "Корытный Евгений"},
-            {act: "Создание", field: "Контакт", val: "89037991538", datetime: "23.10.2020 13:25", user: "Корытный Евгений"},
-            {act: "Создание", field: "Контакт", val: "@Averyanova", datetime: "23.10.2020 12:30", user: "Корытный Евгений"},
-        ]
+        let log = this.currentResource.ResourceLog
 
-        for(let i = 0; i < data.length; i++)
+        for(let i = 0; i < log.length; i++)
         {
             log_rows.push(new ListRow([
-                data[i].act,
-                data[i].field,
-                data[i].val,
-                data[i].datetime,
-                data[i].user
+                log[i].action,
+                log[i].field,
+                log[i].value,
+                Formatter.FormatDateTime(log[i].datetime),
+                log[i].User.name
             ]))
         }
 

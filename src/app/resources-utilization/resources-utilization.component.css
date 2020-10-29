@@ -153,10 +153,10 @@
 
 .banner
 {
-    max-height: 187px;
+    max-height: 177px;
     flex: 1;
 	box-sizing: border-box;
-    padding: 45px 60px;
+    padding: 35px 60px;
     margin: 0 -39px;
 
 	background: url(../../assets/images/Contacts_banner.png) 100% 100% no-repeat;

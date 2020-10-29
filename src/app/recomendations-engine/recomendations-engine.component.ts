@@ -138,9 +138,9 @@ export class RecomendationsEngineComponent implements OnInit
         let cols = [
             new ListCol("Ресурс", "pmin"),
             new ListCol("Услуга", "service"),
-            new ListCol("Временный интервал", "pmin"),
-            new ListCol("Отправлено", "pmin"),
-            new ListCol("Статус", "pmin"),
+            new ListCol("Временный интервал", "koef"),
+            new ListCol("Отправлено", "koef"),
+            new ListCol("Статус", "koef"),
         ]
 
         let rows = []

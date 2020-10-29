@@ -92,17 +92,17 @@
 						<div class="banner-item__header">Участник акции </div>
 						<div class="banner-item__body">
 							<label class="box-label box-label_checkbox">
-								<input type="checkbox" class="box-label__input box-label__input_checkbox">
+								<input type="checkbox" class="box-label__input box-label__input_checkbox" [checked]="currentClient.promo">
 							</label> Да
 						</div>
 					</div>
 					<div class="banner-item">
 						<div class="banner-item__header">Контактная политика: </div>
-						<div class="banner-item__body">max 2 раза в месяц<br>если скидка больше 30%</div>
+						<div class="banner-item__body">{{currentClient.contactpolicy}}</div>
 					</div>
 					<div class="banner-item">
 						<div class="banner-item__header">Цикл CX: </div>
-						<div class="banner-item__body">готов к коммуникации<br> ⟶ продажа</div>
+						<div class="banner-item__body">{{currentClient.cx}}</div>
 					</div>
 				</div>
                 <div class="profile-body">
@@ -110,7 +110,7 @@
                     <app-list [listdata]="misc_list"></app-list>
                     <section class="left-section left-section__pages">
                         <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-                    </section>s
+                    </section>
                     
                     <app-list [listdata]="contacts_list"></app-list>
 
@@ -137,29 +137,6 @@
 			<!--Log-->
 			<section class="right-section right-section__list" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'log'">
                 <app-list [listdata]="history_list"></app-list>
-				<!-- <div class="list-row list-row_head">
-					<div class="list__num">#</div>
-					<div class="list__name">Обращение</div>
-					<div class="list__service"><img src="assets/images/Sort_inactive.png" class="sort-image"> Услуга</div>
-					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Ресурс</div>
-					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Дата</div>
-					<div class="list__util"><img src="assets/images/Sort_inactive.png" class="sort-image"> Статус</div>
-				</div>
-				<div class="list__body" style="height: 610px;">
-					<div class="list-row" *ngFor="let l of currentClient.log; let i = index">
-						<div class="list__num">{{i + 1}}</div>
-						<div class="list__name">{{l.query}}</div>
-						<div class="list__service">{{l.service}}</div>
-						<div class="list__util">{{l.master}}</div>
-						<div class="list__util">{{l.date}}</div>
-						<div class="list__util">
-							<div *ngIf="l.status; then closedBlock else openBlock"></div>
-							<ng-template #closedBlock><span class="status-column status-column_closed"><img src="assets/images/Closed.svg" class="status-column__image"> {{l.statusString}}</span></ng-template>
-							<ng-template #openBlock><span class="status-column status-column_open"><img src="assets/images/Open.svg" class="status-column__image"> {{l.statusString}}</span></ng-template> 
-						</div>
-					</div>
-				</div> -->
-				
 				<section class="left-section left-section__pages">
 					<button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
 				</section>
