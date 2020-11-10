@@ -11,7 +11,7 @@ export class Resource implements IResource
     sex:string
     sexString:string
     Misc:IMisc[]
-    Offices:IOffice[]
+    Office:IOffice
     Contacts:IContact[]
     Products:IProduct[]
     ResourceType:IResourceType
@@ -57,12 +57,12 @@ export class Resource implements IResource
 	{
         this.id = res.id
         this.name = res.name
-        this.shortname = ""
+        this.shortname = res.name
         this.ResourceType = res.ResourceType
         this.sex = res.sex
         this.birthdate = res.birthdate
         this.Misc = res.Misc
-        this.Offices = res.Offices
+        this.Office = res.Office
         this.Contacts = res.Contacts
         this.Products = res.Products
         this.Company = res.Company
@@ -83,53 +83,14 @@ export class Resource implements IResource
         this.income_max = res.income_max
         this.income_min = res.income_min
 
-        if(this.sex == "1") 
-        {
-            this.sexString = "Муж"
-        } 
-        else if(this.sex == "0")
-        {
-            this.sexString = "Жен"
-        }
-        else
-        {
-            this.sexString = "Обр"
-        }
+        this.sexString = Formatter.GetSex(this.sex)
 
-        let bdt = Date.parse(this.birthdate)
-        let nd = new Date(Date.now())
-        let dt = new Date(bdt)
+        this.ageString = Formatter.GetAge(this.birthdate)
 
-        let timeDiff = Math.abs(nd.getTime() - dt.getTime())
-        let yearsDiff = Math.ceil(timeDiff / (1000 * 3600 * 24 * 365))
-
-        let yearsStr = "" + yearsDiff
-
-        if(yearsStr.endsWith("11") || yearsStr.endsWith("12") || yearsStr.endsWith("13") || yearsStr.endsWith("14"))
-        {
-            this.ageString = yearsDiff + " лет"
-        }
-        else if(yearsStr.endsWith("1")) 
-        {
-            this.ageString = yearsDiff + " год"
-        }
-        else if(yearsStr.endsWith("2") || yearsStr.endsWith("3") || yearsStr.endsWith("4"))
-        {
-            this.ageString = yearsDiff + " года"
-        }
-        else 
-        {
-            this.ageString = yearsDiff + " лет"
-        }
-
-        if(this.sex != "-1")
+        if(this.sex == "1" || this.sex == "0")
         {
             this.shortname = Formatter.GetShortName(this.name)
             
-        }
-        else
-        {
-            this.shortname = this.name
         }
         
         this.typeList = new DropdownList("type", "Тип", [

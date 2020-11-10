@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { PopupElement } from '../popup-element';
 import { ListData, ListCol, ListRow, ListOptions, ListButton } from '../list/list.component';
 import { Formatter } from '../formatter';
+import { ProfileData } from '../profile/profile.component';
+import { DropdownItem, DropdownList } from '../dropdown/dropdown.component';
+import { TimeData } from '../time-table/time-table.component';
 
 @Component({
 	selector: 'app-clients',
@@ -20,10 +23,12 @@ export class ClientsComponent implements OnInit
 	sections = [];
 
     clients:Client[] = [];
+    offices:restservice.IOffice[] = []
+    profile_data:ProfileData
+    dropdowns:DropdownList[] = []
+    timedata:TimeData
 
     clients_list:ListData    
-    contacts_list:ListData
-    misc_list:ListData
     sales_list:ListData
     history_list:ListData
 	
@@ -32,10 +37,10 @@ export class ClientsComponent implements OnInit
     SwitchClient = (index:number) =>
     {
         this.currentClient = this.clients[index]
-        this.FormContactsList()
-        this.FormMiscList()
+        this.FormProfile()
         this.FormSalesList()
         this.FormHistoryList()
+        this.FormTime()
     }
 
     SwitchTab = (index:number) =>
@@ -47,6 +52,7 @@ export class ClientsComponent implements OnInit
 
 	ngOnInit(): void 
 	{
+        this.getOffices()
         this.getClients()
 
 	    let tabs = [
@@ -76,13 +82,59 @@ export class ClientsComponent implements OnInit
         })
     }
 
+    FormTime()
+    {
+        this.timedata = new TimeData("client", this.currentClient.Booking)
+    }
+
     FormLists()
     {
         this.FormClientsList()
-        this.FormContactsList()
-        this.FormMiscList()
         this.FormHistoryList()
         this.FormSalesList()
+        this.FormTime()
+    }
+
+    getOffices()
+    {
+        this.rest.getOffices().subscribe((rest:any) => {
+            for(let i = 0; i < rest.length; i++)
+            {
+                this.offices.push(rest[i])
+            }
+
+            this.appRef.tick()
+        })
+    }
+
+    FormProfile()
+    {
+        this.profile_data = new ProfileData(this.currentClient, null)
+
+        let offices_list = []
+        let selected = -1
+
+        for(let i = 0; i < this.offices.length; i++)
+        {
+            offices_list.push(new DropdownItem(this.offices[i].name, this.offices[i].id))
+            // if(this.offices[i].id == this.currentClient.Office.id)
+            // {
+            //     selected = i
+            // }
+            
+        }
+
+        this.dropdowns = [
+            new DropdownList("offices", "Офис", offices_list, selected),
+            new DropdownList("status", "Статус", [
+                new DropdownItem("Активен", "1"),
+                new DropdownItem("В архиве", "2"),
+            ], 0),
+            new DropdownList("group", "группа", [
+                new DropdownItem("Приоритет", "1"),
+                new DropdownItem("Второстепенные", "2"),
+            ], 0),
+        ]
     }
 
     FormClientsList()
@@ -152,8 +204,6 @@ export class ClientsComponent implements OnInit
             if(String(booking[i].BookingStatus) == "2") 
             {
                 let dt = Formatter.FormatDateTime(booking[i].datetime)
-
-                let product = ""
     
                 sales_rows.push(new ListRow([
                     booking[i].Product.name,
@@ -199,11 +249,11 @@ export class ClientsComponent implements OnInit
 
             if(records[i].status == "1")
             {
-                val = "<span class='status-column status-column_closed'><img src='assets/images/Lock.svg' class='status-column__image'> Закрыто</span>"
+                val = "<span class='status-column status-column_closed'><img src='assets/images/Lock.svg' class='status-img'> Закрыто</span>"
             }
             else if (records[i].status == "0")
             {
-                val = "<span class='status-column status-column_open'><img src='assets/images/Green_dot.svg' class='status-column__image'> Открыто</span>"
+                val = "<span class='status-column status-column_open'><img src='assets/images/Green_dot.svg' class='status-img'> Открыто</span>"
             }
 
             history_rows.push(new ListRow([
@@ -224,79 +274,6 @@ export class ClientsComponent implements OnInit
             "",
             history_options
         )
-    }
-
-
-    FormMiscList()
-    {
-        let misc_rows = []
-       
-        let misc = this.currentClient.Misc
-
-        for(let i = 0; i < misc.length; i++)
-        {
-            let dt = Formatter.FormatDate(misc[i].date)
-            misc_rows.push(new ListRow([misc[i].value, dt]))
-        }
-
-        let misc_options = new ListOptions(true, true)
-
-        this.misc_list = new ListData(
-            [
-                new ListCol("Особенность", "name"),
-                new ListCol("Добавлено", "name"),
-            ], 
-            misc_rows, 
-            "contacts",
-            "Особенности", 
-            misc_options
-            )
-    }
-
-    FormContactsList()
-    {
-        let contacts_cols = [
-            new ListCol("Канал", "name"),
-            new ListCol("Номер \ Ник", "type", true),
-            new ListCol("Последняя коммуникация", "name", true),
-            new ListCol("Действие", "util", true),
-        ]
-
-        let contacts_rows = []
-
-        let contacts = this.currentClient.Contacts
-
-        for(let i = 0; i < contacts.length; i++)
-        {
-            let comm = "никогда"
-
-            if(Number(contacts[i].LastCommunication.id) > 0)
-            {
-                comm = Formatter.FormatDateTime(contacts[i].LastCommunication.datetime)
-            }
-
-            let btn = null
-
-            if(contacts[i].ContactType.action == "phone")
-            {
-                btn = new ListButton("Позвонить", "Call")
-            }
-            else
-            {
-                btn = new ListButton("Написать", "Write")
-            }
-            
-            contacts_rows.push(new ListRow([
-                contacts[i].ContactType.name,
-                contacts[i].Contact,
-                comm,
-                btn
-            ]))
-        }
-        
-        let clients_options = new ListOptions(true, true)
-
-        this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", clients_options)
     }
     
 }

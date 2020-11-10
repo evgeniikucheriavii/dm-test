@@ -78,47 +78,8 @@
 			</section>
 
 			<!--profile-->
-			<section class="right-section right-section__transactions" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
-				<div class="banner">					
-					<div class="banner-item">
-						<div class="banner-item__header">RFM: </div>
-						<div class="banner-item__body">{{currentClient.rfm}}</div>
-					</div>
-					<div class="banner-item">
-						<div class="banner-item__header">LTV: </div>
-						<div class="banner-item__body">{{currentClient.ltvString}}</div>
-					</div>
-					<div class="banner-item">
-						<div class="banner-item__header">Участник акции </div>
-						<div class="banner-item__body">
-							<label class="box-label box-label_checkbox">
-								<input type="checkbox" class="box-label__input box-label__input_checkbox" [checked]="currentClient.promo">
-							</label> Да
-						</div>
-					</div>
-					<div class="banner-item">
-						<div class="banner-item__header">Контактная политика: </div>
-						<div class="banner-item__body">{{currentClient.contactpolicy}}</div>
-					</div>
-					<div class="banner-item">
-						<div class="banner-item__header">Цикл CX: </div>
-						<div class="banner-item__body">{{currentClient.cx}}</div>
-					</div>
-				</div>
-                <div class="profile-body">
-				
-                    <app-list [listdata]="misc_list"></app-list>
-                    <section class="left-section left-section__pages">
-                        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-                    </section>
-                    
-                    <app-list [listdata]="contacts_list"></app-list>
-
-                    <section class="left-section left-section__pages">
-                        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-                    </section>
-                </div>
-				
+			<section class="right-section__profile" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
+                <app-profile [profile_data]="profile_data" [dropdowns]="dropdowns" [obj]="this"></app-profile>
 			</section>
 
             <!--Sales-->
@@ -131,7 +92,7 @@
 
 			<!--Reserve-->
 			<section class="right-section right-section__list" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'reserve'">
-				<app-time-table></app-time-table>
+				<app-time-table [timedata]="timedata" [width]="1200"></app-time-table>
 			</section>
 
 			<!--Log-->

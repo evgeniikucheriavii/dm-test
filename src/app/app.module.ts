@@ -28,6 +28,9 @@ import { ContextComponent } from './context/context.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { TimeTableComponent } from './time-table/time-table.component';
+import { ProfileComponent } from './profile/profile.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { RFMComponent } from './rfm/rfm.component';
 // import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
@@ -42,7 +45,7 @@ const appRoutes = [
 	{ path: 'resource', component: ResourceFormComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'exit', component: ExitComponent },
-	{ path: 'list', component: ListComponent },
+	{ path: 'rfm', component: RFMComponent },
 ];
 
 @NgModule({
@@ -69,6 +72,9 @@ const appRoutes = [
     ContextComponent,
     TabsComponent,
     TimeTableComponent,
+    ProfileComponent,
+    CalendarComponent,
+    RFMComponent,
   ],
   imports: [
 	BrowserModule,

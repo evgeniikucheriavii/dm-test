@@ -1,50 +1,165 @@
-<div class="time-table">
-    <div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
-        <div class="table-col table-col_time">
-            <div class="time-content">
-                <div>{{t.hour}}:00</div>
-                <div *ngIf="IsCurrentHour(t.hour)">сейчас</div>
+
+<div class="schedule-table__overlay {{schedule_overlay_class}}" id="menu-overlay" (click)="CloseMenu();"></div>
+
+<div class="schedule-menu {{schedule_menu_class}}" id="schedule-menu">
+   <div class="schedule-menu__title">
+       <div>Детали</div>
+       <img src="assets/images/Arrow_exit.svg" class="schedule-title__image" (click)="CloseMenu();">
+   </div>
+   <div *ngIf="current_schedule != null">
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Статус:</b> {{current_schedule.status}}</div>
+            <div class="schedule-menu__row-dots">
+                <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
             </div>
         </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Клиент:</b> {{current_schedule.Client.name}}</div>
+            <div class="schedule-menu__row-dots">
+                <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+            </div>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Ресурс:</b> {{current_schedule.Resource.name}}</div>
+            <div class="schedule-menu__row-dots">
+                <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+            </div>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Офис:</b> {{current_schedule.Resource.Office.name}}</div>
+            <div class="schedule-menu__row-dots">
+                <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+            </div>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Время:</b> {{cur_dt}}</div>
+            <div class="schedule-menu__row-dots">
+                <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+            </div>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Канал:</b> {{current_schedule.channel}}</div>
+            <div class="schedule-menu__row-dots">
+                <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+            </div>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Правило утилизации:</b> {{current_schedule.util}}</div>
+            <div class="schedule-menu__row-dots">
+                <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+            </div>
+        </div>
+
+        <div class="schedule-menu__row schedule-menu__row-textarea">
+            <b>Текст сообщения:</b>
+            <textarea class="textarea schedule-menu__textarea">{{current_schedule.text}}</textarea>
+        </div>
+
+        <div class="row-textarea__buttons">
+            <button class="button">Вывести</button>
+            <button class="button button_hollow">Сохранить</button>
+            <button class="button button_hollow">Удалить</button>
+        </div>
+
+        <!-- <div class="schedule-menu__history">
+            <div class="history__title">
+                <div>История поиска</div>
+                <img src="assets/images/Up.png" class="history-title__image">
+            </div>
+            <div class="history__content">
+                <section class="left-section left-section__list resources-list">
+                    <div class="list-row list-row_head resources-row history-list__head">
+                        <div class="list__num">#</div>
+                        <div class="list__name">Клиент</div>
+                        <div class="list__service">Статус</div>
+                    </div>
+                    <div class="resources-list__body">
+                        <div class="list-row resources-row">
+                            <div class="list__num">#</div>
+                            <div class="list__name">Клиент</div>
+                            <div class="list__service">Статус</div>
+                        </div>
+                        <div class="list-row resources-row">
+                            <div class="list__num">#</div>
+                            <div class="list__name">Клиент</div>
+                            <div class="list__service">Статус</div>
+                        </div>
+                        <div class="list-row resources-row">
+                            <div class="list__num">#</div>
+                            <div class="list__name">Клиент</div>
+                            <div class="list__service">Статус</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div> -->
     </div>
 </div>
-<div class="schedule-table" id="schedule-table" (scroll)="CheckScroll();">
-    <button class="arrow-button arrow-button_left" id="left-scroll" (click)="ScrollTable(-1);" disabled></button>
-    <button class="arrow-button arrow-button_right" id="right-scroll" (click)="ScrollTable(1);"></button>
 
-    <div class="table-row table-row_head">
-        
-        <div class="table-col" *ngFor="let s of schedule; let i = index;" >
-            <span class="head-name">{{s.name}}</span>
-            <span class="head-percent _brown">12%</span>
+
+<div class='time-container' [style.width.px]="width" *ngIf="timedata != null">
+    <div class="time-table">
+        <div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of timedata.time; let i = index;">
+            <div class="table-col table-col_time">
+                <div class="time-content">
+                    <div>{{t.hour}}:00</div>
+                    <div *ngIf="IsCurrentHour(t.hour)">сейчас</div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="schedule-table" id="schedule-table" (scroll)="CheckScroll();">
+        <button class="arrow-button arrow-button_left" id="left-scroll" (click)="ScrollTable(-1);" disabled></button>
+        <button class="arrow-button arrow-button_right" id="right-scroll" (click)="ScrollTable(1);"></button>
 
-    <div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of time; let i = index;">
-        <div class="table-col" *ngFor="let s of schedule; let i = index;">
-            <div *ngIf="s.HasTasks(t.hour)" class="table-col__container">
-                <div class="table-task {{j.Classes()}}"
-                    *ngFor="let j of s.GetTasks(t.hour).tasks; let i = index;">
-                    <div class="task-name">{{j.name}}</div>
-                    <div class="task-time">
-                        {{t.hour}}:<span *ngIf="j.start < 10">0</span>{{j.start}} -
-                        <span *ngIf="j.start + j.duration == 60">{{t.hour + 1}}:00</span>
-                        <span *ngIf="j.start + j.duration < 60">{{t.hour}}:{{j.start + j.duration}}</span>
-                    </div>
-                </div>
-                <div class="table-task" *ngIf="!s.GetTasks(t.hour).Check()">
-                    <span *ngIf="currentHour <= t.hour" class="task-add">+</span>
-                    <span *ngIf="currentHour > t.hour">-</span>
-                </div>
-            </div>
-            <div *ngIf="!s.HasTasks(t.hour)" class="table-col__container">
-                <div class="table-task">
-                    <span *ngIf="currentHour <= t.hour" class="task-add">+</span>
-                    <span *ngIf="currentHour > t.hour">-</span>
-                </div>
-            </div>
+        <div class="table-row table-row_head">
             
+            <div class="table-col" *ngFor="let s of timedata.schedule; let i = index;" >
+                <span class="head-name" [innerHtml]="s.name"></span>
+                <span class="head-percent {{timedata.dates[i].color}}" *ngIf="timedata.type == 'resource'">{{timedata.dates[i].util}}%</span>
+            </div>
         </div>
 
+        <div class="table-row {{GetRowClass(t.hour)}}" *ngFor="let t of timedata.time; let i = index;">
+            <div class="table-col" *ngFor="let s of timedata.schedule; let ij = index;">
+                <div *ngIf="s.HasTasks(t.hour)" class="table-col__container">
+                    <div class="table-task {{j.Classes()}}"
+                        *ngFor="let j of s.GetTasks(t.hour).tasks; let ik = index;" title="{{j.name}}" (click)="TaskClick(j)">
+                        <div class="task-name">{{j.shortname}}</div>
+                        <div class="task-time">
+                            {{t.hour}}:<span *ngIf="j.start < 10">0</span>{{j.start}} -
+                            <span *ngIf="j.start + j.duration == 60">{{t.hour + 1}}:00</span>
+                            <span *ngIf="j.start + j.duration < 60">{{t.hour}}:{{j.start + j.duration}}</span>
+                        </div>
+                    </div>
+                    <div class="table-task" *ngIf="!s.GetTasks(t.hour).Check()">
+                        <span *ngIf="timedata.currentHour <= t.hour" class="task-add">+</span>
+                        <span *ngIf="timedata.currentHour > t.hour">-</span>
+                    </div>
+                </div>
+                <div *ngIf="!s.HasTasks(t.hour)" class="table-col__container">
+                    <div class="table-task">
+                        <span *ngIf="timedata.currentHour <= t.hour" class="task-add">+</span>
+                        <span *ngIf="timedata.currentHour > t.hour">-</span>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
     </div>
 </div>

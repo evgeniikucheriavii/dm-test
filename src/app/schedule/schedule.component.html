@@ -53,7 +53,7 @@
 
 			</div>
 
-			<div class="schedule__body">
+			<div class="schedule__body" >
 
 				<div class="schedule-cat" *ngFor="let c of cats; let i = index">
 					<div class="cat-title" (click)="ToggleCat(i);">
@@ -61,17 +61,17 @@
 					</div>
 
 					<div class="cat-body" id="cat-body_{{i}}">
-						<div class="schedule-row" *ngFor="let r of c.resources; let i = index">
-							<div class="list-item list-item_big list-item_name">{{r.name}}</div>
+						<div class="schedule-row" *ngFor="let item of c.items; let k = index">
+							<div class="list-item list-item_big list-item_name">{{item.name}}</div>
 
-							<div class="list-item list-item_small" *ngFor="let a of r.activities">
-								<div class="_green-bg" *ngIf="a.task == 1">1</div>
-								<div class="_red-bg" *ngIf="a.task == 0">0</div>
+							<div class="list-item list-item_small" *ngFor="let h of item.hours; let j = index">
+                                    <div class="_green-bg" *ngIf="h >= item.plans[j] && item.plans[j] != '0'">{{h}}</div>
+                                    <div class="_red-bg" *ngIf="h < item.plans[j] && item.plans[j] != '0'">{{h}}</div>
 							</div>
 
-							<div class="list-item list-item_medium list-item_medium-first _right-line">{{r.plan}}</div>
-							<div class="list-item list-item_medium">{{r.done}}</div>
-							<div class="list-item list-item_medium _left-line">{{r.left}}</div>
+							<div class="list-item list-item_medium list-item_medium-first _right-line">{{item.plan}}</div>
+							<div class="list-item list-item_medium">{{item.worked}}</div>
+							<div class="list-item list-item_medium _left-line">{{item.left}}</div>
 
 						</div>
 					</div>

@@ -1,0 +1,60 @@
+
+.calendar
+{
+	display: block;
+	margin: 30px 0 17px 0;
+}
+
+.calendar__title
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	margin-bottom: 14px;
+}
+
+.calendar__week
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.calendar__week_head .calendar__day
+{
+	font-size: 12px;
+	line-height: 14px;
+	color: rgba(4, 38, 53, 0.6);
+}
+
+.calendar__day
+{
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	color: #042635;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.calendar__day_weekend
+{
+	color: #3D71BF;
+}
+
+.calendar__day_current
+{
+	background: rgba(61, 113, 191, 0.3);
+	color: #fff;
+}
+
+.calendar__day_selected
+{
+	background: #3D71BF;
+	color: #fff;
+}

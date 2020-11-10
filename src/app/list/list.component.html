@@ -1,8 +1,11 @@
 <section class="list-section">
     <div class="list__title" *ngIf="listdata.options.showTitle">{{listdata.title}}</div>
-    <div class="list__head list__head_lined" *ngIf="!listdata.options.hideHead">
+    <div class="list__head list__head_lined" *ngIf="!listdata.options.hideHead" >
         <div class='list__num' *ngIf="listdata.options.showId">#</div>
         <div class="list__{{col.type}}" *ngFor="let col of listdata.cols"><img src="assets/images/Sort_inactive.png" class="sort-image" *ngIf="col.sortable"> {{col.name}}</div>
+    </div>
+    <div class="list__head" *ngIf="listdata.options.hideHead" style="margin-top: -7px;" >
+        <div class="list__{{col.type}}" *ngFor="let col of listdata.cols" [innerHtml]="col.name"></div>
     </div>
     <div class="list__body" id="list__body_{{listdata.listname}}" [style.height.px]="height">
         <div class="list-row list-row_{{listdata.listname}}" (click)="ItemClick(i)" *ngFor="let row of listdata.rows; let i = index">

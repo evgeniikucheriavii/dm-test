@@ -1,0 +1,27 @@
+<section class="profile-header">
+	<div class="sex-age">{{profile_data.sex}} | {{profile_data.age}}</div>
+    <app-dropdown [name]="dropdown.name" [list]="dropdown" *ngFor="let dropdown of dropdowns"></app-dropdown>
+</section>
+
+<div class="banner">					
+    <div class="banner-item" *ngFor="let item of profile_data.banner_items">
+        <div class="banner-item__header">{{item.header}}</div>
+        <div class="banner-item__body">{{item.body}}</div>
+    </div>
+</div>
+
+<div class="profile-body">
+
+    <app-list [listdata]="profile_data.misc_list" [dots_callback]="MiscContext" [obj]="this"></app-list>
+    
+    <section class="left-section left-section__pages">
+        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+    </section>
+    <br>
+
+    <app-list [listdata]="profile_data.contacts_list" [callback]="" [dots_callback]="ContactsContext" [button_callback]="Communicate" [obj]="this"></app-list>
+
+    <section class="left-section left-section__pages">
+        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+    </section>
+</div>

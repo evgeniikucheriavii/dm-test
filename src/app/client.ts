@@ -8,7 +8,7 @@ export class Client implements IClient
     birthdate: string;
     sex: string;
     Misc: IMisc[];
-    Offices: IOffice[];
+    Office: IOffice
     Contacts: IContact[];
     Company: ICompany;
     Booking:IBooking[]
@@ -16,6 +16,7 @@ export class Client implements IClient
     contactpolicy:string
     cx:string
     promo:boolean
+    ageString:string
 
     shortname:string
     sexString:string
@@ -35,7 +36,7 @@ export class Client implements IClient
         this.birthdate = client.birthdate
         this.sex = client.sex
         this.Misc = client.Misc
-        this.Offices = client.Offices
+        this.Office = client.Office
         this.Contacts = client.Contacts
         this.Booking = client.Booking
         this.ClientRecords = client.ClientRecords
@@ -50,18 +51,9 @@ export class Client implements IClient
 
         this.ltvString = Formatter.FormatMoney(ltvNum)
 
-        if(this.sex == "1") 
-        {
-            this.sexString = "Муж"
-        } 
-        else if(this.sex == "0")
-        {
-            this.sexString = "Жен"
-        }
-        else
-        {
-            this.sexString = "Обр"
-        }
+        this.sexString = Formatter.GetSex(this.sex)
+
+        this.ageString = Formatter.GetAge(this.birthdate)
 
         this.shortname = Formatter.GetShortName(this.name)
     }

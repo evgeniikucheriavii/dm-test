@@ -10,6 +10,9 @@ import { first } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ResourceFormComponent } from '../resource-form/resource-form.component';
 import { Formatter } from '../formatter';
+import { ProfileData } from '../profile/profile.component';
+import { DropdownItem, DropdownList } from '../dropdown/dropdown.component';
+import { TimeData } from '../time-table/time-table.component';
 
 @Component({
   selector: 'app-resources-utilization',
@@ -41,6 +44,11 @@ export class ResourcesUtilizationComponent implements OnInit {
     sales_list:ListData
     log_list:ListData
 
+    profile_data:ProfileData
+    offices:restservice.IOffice[] = []
+    dropdowns:DropdownList[] = []
+    timedata:TimeData
+
     selected_misc:number = 0
     selected_contact:number = 0
     selected_resource:number = 0
@@ -48,11 +56,11 @@ export class ResourcesUtilizationComponent implements OnInit {
     SwitchResource = (index:number) =>
     {
         this.currentResource = this.resources[index]
-        this.FormMiscList()
-        this.FormContactsList()
         this.FormServicesList()
         this.FormLogList()
         this.FormSalesList()
+        this.FormProfile()
+        this.FormTime()
     }
 
     SwitchTab = (index:number) =>
@@ -100,7 +108,7 @@ export class ResourcesUtilizationComponent implements OnInit {
 
 	ngOnInit(): void 
 	{
-
+        this.getOffices()
         this.getResources()
 
 		let tabs = [
@@ -159,19 +167,76 @@ export class ResourcesUtilizationComponent implements OnInit {
         })
     }
 
+    getOffices()
+    {
+        this.rest.getOffices().subscribe((rest:any) => {
+            for(let i = 0; i < rest.length; i++)
+            {
+                this.offices.push(rest[i])
+            }
+
+            this.appRef.tick()
+        })
+    }
+
     FormLists()
     {
         this.FormResourcesList()
-
-        this.FormMiscList()
-
-        this.FormContactsList()
 
         this.FormServicesList()
 
         this.FormSalesList()
 
         this.FormLogList()
+    }
+
+    FormTime()
+    {
+        this.timedata = new TimeData("resource", this.currentResource.Booking)
+    }
+
+    FormProfile()
+    {
+        this.profile_data = new ProfileData(null, this.currentResource)
+
+        let offices_list = []
+        let selected = -1
+
+        for(let i = 0; i < this.offices.length; i++)
+        {
+            offices_list.push(new DropdownItem(this.offices[i].name, this.offices[i].id))
+            if(this.offices[i].id == this.currentResource.Office.id)
+            {
+                selected = i
+            }
+            
+        }
+
+        let selected_type = 0
+
+        if(this.currentResource.ResourceType.id == "2")
+        {
+            selected_type = 1
+        }
+
+        let status_selected = 1
+
+        if(this.currentResource.status)
+        {
+            status_selected = 0
+        }
+
+        this.dropdowns = [
+            new DropdownList("offices", "Офис", offices_list, selected),
+            new DropdownList("types", "Тип", [
+                new DropdownItem("Трудовой", "1"),
+                new DropdownItem("Оборудование", "2"),
+            ], selected_type),
+            new DropdownList("status", "Статус", [
+                new DropdownItem("Активен", "1"),
+                new DropdownItem("Пассивен", "2"),
+            ], status_selected),
+        ]
     }
 
     FormSalesList()
@@ -284,83 +349,15 @@ export class ResourcesUtilizationComponent implements OnInit {
         this.resources_list = new ListData(res_cols, res_rows, "resources")
     }
 
-    FormMiscList()
-    {
-        let misc_cols = [
-            new ListCol("Особенность", "name"),
-            new ListCol("Добавлено", "type")
-        ]
-        
-        let misc_rows = []
-
-        let misc = this.currentResource.Misc
-
-        for(let i = 0; i < misc.length; i++)
-        {
-            let dt = Formatter.FormatDate(misc[i].date)
-            misc_rows.push(new ListRow([misc[i].value, dt]))
-        }
-
-        let misc_options = new ListOptions(true, true)
-        
-        this.misc_list = new ListData(misc_cols, misc_rows, "misc", "Особенности", misc_options)
-    }
-
-    FormContactsList()
-    {
-        let contacts_cols = [
-            new ListCol("Канал", "name"),
-            new ListCol("Номер \ Ник", "type", true),
-            new ListCol("Последняя коммуникация", "name", true),
-            new ListCol("Действие", "util", true),
-        ]
-
-        let contacts_rows = []
-
-        let contacts = this.currentResource.Contacts
-
-        for(let i = 0; i < contacts.length; i++)
-        {
-            let comm = "никогда"
-
-            if(Number(contacts[i].LastCommunication.id) > 0)
-            {
-                comm = Formatter.FormatDateTime(contacts[i].LastCommunication.datetime) + ""
-            }
-            
-            let btn = null
-
-            if(contacts[i].ContactType.action == "phone")
-            {
-                btn = new ListButton("Позвонить", "Call")
-            }
-            else
-            {
-                btn = new ListButton("Написать", "Write")
-            }
-
-            contacts_rows.push(new ListRow([
-                contacts[i].ContactType.name,
-                contacts[i].Contact,
-                comm,
-                btn
-            ]))
-        }
-
-        let contacts_options = new ListOptions(true, true)
-
-        this.contacts_list = new ListData(contacts_cols, contacts_rows, "contacts", "Контакты", contacts_options)
-    }
-
 
     FormLogList()
     {
         let log_cols = [
-            new ListCol("Действие", "util"),
-            new ListCol("Поле", "util"),
+            new ListCol("Действие", "koef"),
+            new ListCol("Поле", "koef"),
             new ListCol("Новое значение", "type"),
-            new ListCol("Дата и время", "util"),
-            new ListCol("Пользователь", "type"),
+            new ListCol("Дата и время", "pmin"),
+            new ListCol("Пользователь", "pmax"),
         ]
 
         let log_rows = []
@@ -383,16 +380,6 @@ export class ResourcesUtilizationComponent implements OnInit {
         this.log_list = new ListData(log_cols, log_rows, "log", "", log_options)
 
 
-    }
-
-    getResourceTypes()
-    {
-
-    }
-
-    getOffices()
-    {
-        
     }
 
     public alert(msg:string)

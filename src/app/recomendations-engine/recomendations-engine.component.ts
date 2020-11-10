@@ -95,7 +95,7 @@ export class RecomendationsEngineComponent implements OnInit
 
     getUtilizationCats()
     {
-        this.rest.getUtilizationCatsWithRules("1").subscribe((rest:any) => { 
+        this.rest.getUtilizationCats().subscribe((rest:any) => { 
             for(let i = 0; i < rest.length; i++)
             {
                 this.utilizationCats.push(new UtilizationCat(rest[i]))
@@ -136,11 +136,11 @@ export class RecomendationsEngineComponent implements OnInit
     FormPromosList()
     {
         let cols = [
-            new ListCol("Ресурс", "pmin"),
+            new ListCol("Ресурс", "pmin2"),
             new ListCol("Услуга", "service"),
-            new ListCol("Временный интервал", "koef"),
-            new ListCol("Отправлено", "koef"),
-            new ListCol("Статус", "koef"),
+            new ListCol("Временный интервал", "koef3"),
+            new ListCol("Отправлено", "koef3"),
+            new ListCol("Статус", "koef2"),
         ]
 
         let rows = []
@@ -208,6 +208,10 @@ export class RecomendationsEngineComponent implements OnInit
             else if(status == -1)
             {
                 val = "<img src='assets/images/Cross.svg'> Удалено"
+            }
+            else if(status == 2)
+            {
+                val = "<img src='assets/images/Eye_green.svg'> Прочитано"
             }
 
             let dt = Formatter.FormatDateTime(proposals[i].datetime)

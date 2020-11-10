@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { TokenizeResult } from '@angular/compiler/src/ml_parser/lexer';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { element } from 'protractor';
 
@@ -16,19 +17,25 @@ export class DropdownComponent implements OnInit
 
     name:string
     list:DropdownList
+
+    bg_hidden:string = "_hidden"
+    items_hidden:string = "_hidden-items"
+    image_classes:string = "_blue"
+    image_path:string = "Down.png"
+
     callback:(obj:any, value:any) => void
 
-    constructor() { }
+    constructor(private appRef:ApplicationRef) { }
 
     ngOnInit(): void 
     {
         this.fg.addControl("list_" + this.name, new FormControl(''))
-        this.list.CheckByIndex(this.list.selected)
+        
     }
 
     ngAfterContentInit(): void
     {
-        
+        this.Select(this.list.selected)
     }
 
     OnChange(value:string)
@@ -38,7 +45,30 @@ export class DropdownComponent implements OnInit
         {
             this.callback(this.obj, this.fg.get("list_" + this.name).value)
         }
-        this.list.Check(value)
+    }
+
+    Close()
+    {
+        this.bg_hidden = "_hidden"
+        this.items_hidden = "_hidden-items"
+        // this.image_classes = "_blue"
+        // this.image_path = "Down.png"
+    }
+
+    Open()
+    {
+        this.bg_hidden = ""
+        this.items_hidden = ""
+        // this.image_classes = "_white"
+        // this.image_path = "Up.png"
+        // alert("Open")
+    }
+
+    Select(index:number)
+    {
+        this.Close()    
+        this.list.selected_title = this.list.items[index].title
+        this.list.selected = index
     }
 
 }
@@ -49,59 +79,16 @@ export class DropdownList
     name:string
     items:DropdownItem[] = []
     selected:number
+    selected_title:string = ""
     none_checked:boolean = true
 
-    constructor(name:string, title:string, items:DropdownItem[], seleted:number = -1)
+    constructor(name:string, title:string, items:DropdownItem[], selected:number = -1)
     {
         this.name = name
         this.items = items
         this.title = title + ""
-        this.selected = this.selected
-    }
-
-    Check(value:string)
-    {
-        for(let i = 0; i < this.items.length; i++)
-        {
-            this.items[i].Uncheck()
-
-            if(this.items[i].value == value)
-            {
-                this.items[i].Check()
-                this.selected = i
-            }  
-        }
-
-        if(this.selected == -1)
-        {
-            this.none_checked = true
-        }
-        else
-        {
-            this.none_checked = true
-        }
-
-    }
-
-    CheckByIndex(index:number)
-    {
-        this.selected = index
-        for(let i = 0; i < this.items.length; i++)
-        {
-            this.items[i].Uncheck()
-
-            if(index == i)
-                this.items[i].Check()
-        }
-
-        if(this.selected == -1)
-        {
-            this.none_checked = true
-        }
-        else
-        {
-            this.none_checked = false
-        }
+        this.selected_title = title + ""
+        this.selected = selected
     }
 }
 
@@ -115,15 +102,5 @@ export class DropdownItem
     {
         this.title = title
         this.value = value
-    }
-
-    Check()
-    {
-        this.checked = true
-    }
-
-    Uncheck()
-    {
-        this.checked = false
     }
 }

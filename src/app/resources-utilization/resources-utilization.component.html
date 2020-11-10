@@ -1,4 +1,4 @@
-<div class="resources-sections">
+<div class="resources-sections" *ngIf="currentResource != null">
 	<section class="main-section main-section_left">
 		<div class="container container__left">
 			<section class="left-section left-section__header">
@@ -87,21 +87,8 @@
                             </div>
                         </span>
                         
-                        <div class="header-subname" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
-                            {{currentResource.sexString}} | {{currentResource.ageString}}
-                        </div>
                     </div>
 					<app-tabs [tabsdata]="tabsdata" [callback]="SwitchTab"></app-tabs>
-				</section>
-
-                <!--Profile-->
-				<section class="header__bottom header__bottom_right" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
-					
-                    <app-dropdown [name]="currentResource.typeList.name" [list]="currentResource.typeList"></app-dropdown>
-                    <app-dropdown [name]="currentResource.signList.name" [list]="currentResource.signList"></app-dropdown>
-                    <app-dropdown [name]="currentResource.officeList.name" [list]="currentResource.officeList"></app-dropdown>
-                    <app-dropdown [name]="currentResource.statusList.name" [list]="currentResource.statusList"></app-dropdown>
-
 				</section>
 
                 <!--Service-->
@@ -134,43 +121,12 @@
 
             <!--profile-->
 			<section class="right-section right-section__profile" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'profile'">
-				<div class="banner">					
-					<div class="banner-item">
-						<div class="banner-item__header">Доступность ресурса в текущем месяце </div>
-						<div class="banner-item__body">{{currentResource.AvailableHours}} часов</div>
-					</div>
-					<div class="banner-item">
-						<div class="banner-item__header">Потрачено времени на оказание услуг в прошлом месяце </div>
-						<div class="banner-item__body">{{currentResource.LastMonthHours}} часов</div>
-					</div>
-					<div class="banner-item">
-						<div class="banner-item__header">Средневзвешенная стоимость Человекочаса </div>
-						<div class="banner-item__body">
-							{{currentResource.AvgHourRate}} ₽
-						</div>
-					</div>
-				</div>
-
-                <div class="profile-body">
-
-                    <app-list [listdata]="misc_list" [dots_callback]="MiscContext" [obj]="this"></app-list>
-                    
-                    <section class="left-section left-section__pages">
-                        <button class="button" (click)="addMisc()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-                    </section>
-    
-                    <app-list [listdata]="contacts_list" [callback]="" [dots_callback]="ContactsContext" [button_callback]="Communicate" [obj]="this"></app-list>
-    
-                    <section class="left-section left-section__pages">
-                        <button class="button" (click)="addContact()"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-                    </section>
-                </div>
-				
+                <app-profile [profile_data]="profile_data" [dropdowns]="dropdowns" [obj]="this"></app-profile>
 			</section>
 
 			<!--Load-->
 			<section class="right-section right-section__schedule" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'load'">
-				<app-time-table></app-time-table>
+				<app-time-table [timedata]="timedata" [width]="1200"></app-time-table>
 			</section>
 
             <!--Sales-->

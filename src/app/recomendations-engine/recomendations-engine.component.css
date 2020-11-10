@@ -328,7 +328,10 @@
 
 .textarea_message
 {
-	margin: 5px 0;
+    margin: 5px 0;
+    width: 444px;
+    max-width: 444px;
+    min-width: 444px;
 }
 
 /*Bottom end*/

@@ -72,9 +72,9 @@
 		</section>
 
 		<!--action-->
-		<section class="content-section__bottom bottom_actions" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'actions'">
+		<section class="content-section__bottom bottom_actions" *ngIf="tabsdata.tabs[tabsdata.currentTab].id == 'actions' &&  currentPromo != null">
 
-			<section class="actions-bottom__left">
+			<section class="actions-bottom__left" style="margin: 0 0 0 -40px;">
                 <app-list [listdata]="promos_list" [height]="680" [obj]="this" [callback]="SwitchPromo"></app-list>
 			</section>
 			

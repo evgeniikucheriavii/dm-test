@@ -143,6 +143,24 @@
 	width: 120px;
 }
 
+.list__pmin2
+{
+    width: 135px;
+}
+
+.list__koef2
+{
+    width: 98px;
+    margin-right: 5px;
+}
+
+.list__koef3
+{
+    width: 98px;
+    text-align: center;
+    margin-right: 5px;
+}
+
 .list__pmax
 {
 	width: 162px;
@@ -163,12 +181,6 @@
     width: 100%;
     text-align: center;
     display: block;
-}
-
-._status
-{
-	font-size: 18px !important;
-	line-height: 21px;
 }
 
 .list__dots

@@ -40,6 +40,7 @@ export class NavBarComponent implements OnInit
 				new NavLink("Расписание компании", "/company-schedules")
 			]),
 			new NavLink("Клиенты", "/clients"),
+			new NavLink("RFM", "/rfm"),
 			new NavLink("Справочник", "/help")
 		];
     }

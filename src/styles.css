@@ -766,3 +766,9 @@ select::-ms-expand { display: none;}
 }
 
 /*Checkboxes and radio end*/
+
+._status
+{
+	font-size: 18px !important;
+    line-height: 21px;
+}

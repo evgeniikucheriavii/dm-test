@@ -1,0 +1,21 @@
+<div class="calendar">
+    <div class="calendar__title">
+        <button class="arrow-button arrow-button_left" (click)="PrevMonth()"></button> 
+        <span>{{calendar.months[calendar.month_index]}}.{{calendar.year}}</span>
+        <button class="arrow-button arrow-button_right" (click)="NextMonth()"></button>
+    </div>
+    <div class="calendar__body">
+        <div class="calendar__week calendar__week_head">
+            <div class="calendar__day">ПН</div>
+            <div class="calendar__day">ВТ</div>
+            <div class="calendar__day">СР</div>
+            <div class="calendar__day">ЧТ</div>
+            <div class="calendar__day">ПТ</div>
+            <div class="calendar__day">СБ</div>
+            <div class="calendar__day">ВС</div>
+        </div>
+        <div class="calendar__week" *ngFor="let week of calendar.weeks; let i = index">
+            <div class="calendar__day {{day.classes}}" *ngFor="let day of week.days; let j = index" (click)="SelectDay(i, j);">{{day.dateStr}}</div>
+        </div>
+    </div>
+</div>

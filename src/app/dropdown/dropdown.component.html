@@ -1,22 +1,15 @@
-<label class="dropdown-label" [formGroup]="fg">
+<label class="dropdown-label" [formGroup]="fg" (click)="Open()">
 
-    <span class="dropdown__title">{{list.title}}  </span>
+    <span class="dropdown__title" *ngIf="list.title != ''">{{list.title}}  </span>
 
-    <label for="select_{{name}}" class="select select-label_graph">
-
-        <input type="radio" name="list_{{name}}" value="not_changed" id="bg_{{name}}" class="select-bg select-radio select-list" [checked]="list.none_checked"/>
-
-        <input type="radio" name="list_{{name}}" value="not_changed" class="select-select select-radio select-list" id="select_{{name}}">
-
-        <label class="bg" for="bg_{{name}}"></label>
-
-        <div class="items">
-            <div *ngFor="let item of list.items; let i = index">
-                <input type="radio" name="list_{{name}}" formControlName="list_{{name}}" value="{{item.value}}" id="list_{{name}}[{{i}}]" class="select-radio select-list" (click)="OnChange(item.value)" [checked]="item.checked">
-                <label for="list_{{name}}[{{i}}]">{{item.title}}</label>
-            </div>
-            <span id="text_{{name}}" class="select-text">{{list.title}}</span>
+    <label for="select_{{name}}" class="dropdown">
+        <div class="dropdown__head">
+            <span id="text_{{name}}" class="dropdown-selected">{{list.selected_title}}</span>
+            <span class="dropdown-image__container {{image_classes}}"><img class="dropdown-image" src="../../assets/images/Down.png"></span>
         </div>
-
+        <div class="dropdown__items {{items_hidden}}">
+            <div *ngFor="let item of list.items; let i = index" (click)="Select(i); Close()" class="dropdown-item">{{item.title}}</div>
+        </div>
     </label>
 </label>
+<div class="dropdown-bg {{bg_hidden}}" (click)="Close()"></div>

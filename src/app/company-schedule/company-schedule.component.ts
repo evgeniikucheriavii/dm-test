@@ -1,4 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
+import { Tab, TabsData } from '../tabs/tabs.component';
+import { Client } from '../client';
+import * as restservice from '../rest.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { PopupElement } from '../popup-element';
+import { ListData, ListCol, ListRow, ListOptions, ListButton } from '../list/list.component';
+import { Formatter } from '../formatter';
+import { ProfileData } from '../profile/profile.component';
+import { DropdownItem, DropdownList } from '../dropdown/dropdown.component';
+import { TimeData } from '../time-table/time-table.component';
+import { Resource } from '../resource';
+import { Calendar } from '../calendar/calendar.component';
+import { observable } from 'rxjs';
 
 @Component({
 	selector: 'app-company-schedule',
@@ -8,305 +22,47 @@ import { Component, OnInit } from '@angular/core';
 export class CompanyScheduleComponent implements OnInit 
 {
 
-	calendar:Calendar;
-	time = [];
-	currentHour:number;
+    calendar:Calendar;
+    
+    timedata:TimeData
+    booking:restservice.IBooking[] = []
+    resources:Resource[] = []
+    company_schedules:restservice.ICompanySchedule[] = []
+    
+    SelectDate = (obj:any, date:number, month:number, year:number) => 
+    {
+        this.calendar.FormCalendar()
+        this.timedata.date = new Date(year, month - 1, date)
+        this.timedata.Form()
+        // alert(this.timedata.date)
+    }
 
-	schedule = [];
-
-	constructor() { }
+	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
 	ngOnInit(): void 
 	{
-		this.time = [
-			{ hour: 9 },
-			{ hour: 10 },
-			{ hour: 11 },
-			{ hour: 12 },
-			{ hour: 13 },
-			{ hour: 14 },
-			{ hour: 15 },
-			{ hour: 16 },
-			{ hour: 17 },
-			{ hour: 18 },
-			{ hour: 19 },
-			{ hour: 20 }
-		];
-		
-		this.currentHour = 14;
-
-		this.schedule = [
-			new Resource("Калиниченко Д.С.", [
-				new Schedule(9, [
-					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 0),
-					new Task("Task", 30, 15, 0),
-					new Task("Task", 45, 15, 0)
-				]),
-				new Schedule(10, [
-					new Task("Task", 0, 60, 1)
-				]),
-				new Schedule(15, [
-					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 2),
-					new Task("Task", 30, 15, 3)
-				]),
-			]),
-			new Resource("Колесов А.В.", [
-				new Schedule(9, [
-					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 1),
-					new Task("Task", 30, 15, 2),
-					new Task("Task", 45, 15, 3)
-				]),
-				new Schedule(10, [
-					new Task("Task", 0, 60, 0)
-				]),
-
-				new Schedule(15, [
-					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 0),
-					new Task("Task", 30, 15, 0)
-				]),
-
-				new Schedule(17, [
-					new Task("Task", 0, 60, 1)
-				]),
-			]),
-
-			new Resource("Гринченко М.А.", [
-				new Schedule(15, [
-					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 0),
-					new Task("Task", 30, 15, 3),
-					new Task("Task", 45, 15, 0)
-				]),
-				new Schedule(17, [
-					new Task("Task", 0, 60, 0),
-				]),
-				new Schedule(19, [
-					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 0),
-					new Task("Task", 30, 15, 0)
-				]),
-			]),
-
-			new Resource("Аппарат Экзарта", [
-				new Schedule(12, [
-					new Task("Task", 0, 15, 1),
-					new Task("Task", 15, 15, 1),
-					new Task("Task", 30, 15, 1),
-					new Task("Task", 45, 15, 1)
-				]),
-				new Schedule(16, [
-					new Task("Task", 0, 60, 0)
-				]),
-				new Schedule(20, [
-					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 0)
-				]),
-			]),
-
-			new Resource("Гринченко М.А.", [
-				new Schedule(15, [
-					new Task("Task", 0, 15, 0),
-					new Task("Task", 15, 15, 2),
-					new Task("Task", 30, 15, 2),
-					new Task("Task", 45, 15, 0)
-				]),
-				new Schedule(17, [
-					new Task("Task", 0, 60, 0)
-				]),
-				new Schedule(19, [
-					new Task("Task", 0, 15, 3),
-					new Task("Task", 15, 15, 3),
-					new Task("Task", 30, 15, 3)
-				]),
-			]),
-		];
-	}
-
-	IsCurrentHour(hour:number)
-	{
-		if(this.currentHour == hour)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	GetRowClass(hour:number)
-	{
-		if(this.currentHour > hour)
-		{
-			return "_past-hour";
-		} 
-		else if(this.currentHour == hour)
-		{
-			return "_current-hour";
-		}
-		else
-		{
-			return "_future-hour";
-		}
-		
-	}
-
-
-    OpenMenu(i:number)
+        this.getCompanySchedule()
+        this.calendar = new Calendar(26, 10, 2020)
+        
+    }
+    
+    getCompanySchedule()
     {
-        let menu = document.getElementById("schedule-menu");
-        let overlay = document.getElementById("menu-overlay");
+        this.rest.getCompanySchedule().subscribe((rest:any) => {
 
-        menu.className = "schedule-menu";
-        overlay.className = "schedule-table__overlay";
+            for(let i = 0; i < rest.length; i++)
+            {
+                this.company_schedules.push(rest[i])
+            }
+
+            this.FormTime()
+            this.appRef.tick()
+        })
     }
 
-    CloseMenu()
+    FormTime()
     {
-        let menu = document.getElementById("schedule-menu");
-        let overlay = document.getElementById("menu-overlay");
-
-        menu.className = "schedule-menu _hidden";
-        overlay.className = "schedule-table__overlay _hidden";
+        this.timedata = new TimeData("schedule", [], this.company_schedules, this.calendar.selected_date)
     }
-}
-
-class Resource
-{
-	name:string;
-
-	schedule = [];
-
-	constructor(name:string, schedule:any)
-	{
-		this.name = name;
-		this.schedule = schedule;
-	}
-
-	HasTasks(hour:number)
-	{
-		let has = false;
-
-		for(let i = 0; i < this.schedule.length; i++)
-		{
-			if(this.schedule[i].hour == hour)
-			{
-				has = true;
-				break;
-			}
-		}
-
-		return has;
-	}
-
-	GetTasks(hour:number)
-	{
-		let tasks = [];
-
-		for(let i = 0; i < this.schedule.length; i++)
-		{
-			if(this.schedule[i].hour == hour)
-			{
-				tasks = this.schedule[i];
-				break;
-			}
-		}
-
-		return tasks;
-	}
-}
-
-class Schedule
-{
-	hour:number;
-	
-	tasks = [];
-
-	isFull:boolean = false;
-
-	constructor(hour:number, tasks:any)
-	{
-		this.hour = hour;
-		this.tasks = tasks;
-
-		this.Check();
-	}
-
-	Check()
-	{
-		let duration = 0;
-
-		for(let i = 0; i < this.tasks.length; i ++)
-		{
-			duration += this.tasks[i].duration;
-		}
-
-		if(duration == 60) 
-			return true;
-		else 
-			return false;
-	}
-}
-
-class Task
-{
-	start:number;
-	duration:number;
-
-	name:string;
-
-	type:number;
-	typeClass:string;
-
-	sizeClass:string;
-
-	constructor(name:string, start:number, duration:number, type:number)
-	{
-		this.name = name;
-		this.start = start;
-		this.duration = duration;
-		this.type = type;
-
-		switch(this.type)
-		{
-			case 0: this.typeClass = "legend_promo"; break;
-			case 1: this.typeClass = "legend_service"; break;
-			case 2: this.typeClass = "legend_reserve"; break;
-			case 3: this.typeClass = "legend_fail"; break;
-		}
-
-		if(this.duration >= 15 && this.duration < 30)
-		{
-			this.sizeClass = "task_small";
-		}
-		else if(this.duration >= 30 && this.duration < 45)
-		{
-			this.sizeClass = "task_medium";
-		}
-		else if(this.duration >= 45 && this.duration < 60)
-		{
-			this.sizeClass = "task_large";
-		}
-		else
-		{
-			this.sizeClass = "task_huge";
-		}
-	}
-
-	Classes()
-	{
-		return this.typeClass + " " + this.sizeClass; 
-	}
-}
-
-
-class Calendar
-{
-	weeks = [];
-
-
+    
 }

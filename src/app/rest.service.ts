@@ -125,7 +125,7 @@ export interface IResource
     birthdate:string
     sex:string
     Misc:IMisc[]
-    Offices:IOffice[]
+    Office:IOffice
     Contacts:IContact[]
     Products:IProduct[]
     ResourceType:IResourceType
@@ -176,7 +176,7 @@ export interface IClient
     birthdate:string
     sex:string
     Misc:IMisc[]
-    Offices:IOffice[]
+    Office:IOffice
     Contacts:IContact[]
     Company:ICompany
     Booking:IBooking[]
@@ -250,11 +250,89 @@ export interface IPromo
 }
 
 
+export interface IWorkSchedule
+{
+    id:string
+    Resource:IResource
+    Company:ICompany
+    dayplan:string
+    dayworked:string
+    plan:string
+    worked:string
+}
+
+
+export interface ICompanySchedule
+{
+    id:string
+    Company:ICompany
+    Client:IClient
+    Resource:IResource
+    Product:IProduct
+    datetime:string
+    duration:string
+    event_type:string
+    status:string
+    text:string
+    channel:string
+    util:string
+}
+
+
+export interface IRFMCriteria
+{
+    id:string
+    cat:string
+    clients:string
+    group:string
+    criteria:string
+    Company:string
+}
+
+
+export interface IRFMGroup
+{
+    id:string
+    name:string
+    groups:string
+    num:string
+    Company:string
+}
+
+
+export interface IRFMSettings
+{
+    id:string
+    groups:string
+    name:string
+    Company:string
+}
+
+
+export interface IRFMPolicy
+{
+    id:string
+    frequency:string
+    groups:string
+    commtype:string
+    Company:string
+}
+
+
+export interface IRFMData
+{
+    policy:IRFMPolicy[]
+    groups:IRFMGroup[]
+    settings:IRFMSettings[]
+    criteria:IRFMCriteria[]
+}
+
+
 const endpoint = 'http://dimarke.ru/api/v1/';
 
 
 @Injectable({
-  providedIn: 'root'
+     providedIn: 'root'
 })
 export class RestService 
 {
@@ -379,25 +457,53 @@ export class RestService
     }
 
 
-    getOfficesByCompanyId(cid:string)
+    getOffices()
     {
-        return this.http.get<IOffice>(endpoint + 'offices_by_company/' + cid + '/').pipe(
+        return this.Post<IOffice>('offices/', true)
+    }
+
+
+    getBooking()
+    {
+        return this.Post<IBooking>('booking/', true)
+    }
+
+
+    getWorkSchedule()
+    {
+        return this.Post<IWorkSchedule>('work_schedule/', true)
+    }
+
+
+    getCompanySchedule()
+    {
+        return this.Post<ICompanySchedule>('company_schedule/', true)
+    }
+
+    getRFM()
+    {
+        return this.Post<IRFMData>('rfm/', true)
+    }
+
+
+    Post<T>(page:string, token:boolean, data:any = {})
+    {
+        if(token)
+        {
+            data = {
+                "token": this.cookieService.get("token")
+            }
+        }
+
+        return this.http.post<T>(endpoint + page, data).pipe(
             catchError(this.handleError)
         )
     }
 
-    getUtilizationCatsWithRules(cid:string)
+    
+    getUtilizationCats()
     {
-        return this.http.get<IUtilizationCat>(endpoint + 'utilization_cats_with_rules/' + cid + '/').pipe(
-            catchError(this.handleError)
-        )
-    }
-
-    getUtilizationCats(cid:string)
-    {
-        return this.http.get<IUtilizationCat>(endpoint + 'utilization_cat/' + cid + '/').pipe(
-            catchError(this.handleError)
-        )
+        return this.Post<IUtilizationCat>('utilization_cats/', true)
     }
 
 

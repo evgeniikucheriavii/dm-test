@@ -1,0 +1,78 @@
+.profile-header
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 0 22px 0;
+}
+
+.sex-age
+{
+    margin-right: 22px;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    line-height: 16px;
+    margin-right: 10px;
+}
+
+.banner
+{
+    max-height: 177px;
+    flex: 1;
+	box-sizing: border-box;
+    padding: 35px 60px;
+    margin: 0 -39px;
+    /* margin-top: -10px; */
+
+	background: url(../../assets/images/Contacts_banner.png) 100% 100% no-repeat;
+	background-color: #003584;
+	background-size: cover;
+
+	font-size: 18px;
+	line-height: 21px;
+	color: #fff;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: stretch;
+}
+
+.banner-item
+{
+	border-left: 1px solid rgba(184, 215, 255, 0.3); 
+    padding: 0 	40px;
+}
+
+.banner-item:first-child
+{
+	border-left: 1px solid transparent;
+}
+
+.banner-item__header
+{
+	font-weight: bold;
+	padding: 4.5px 0;
+	font-family: Roboto;
+    font-style: normal;
+    text-align: center;
+}
+
+.banner-item__body
+{
+    color: #B8D4FF;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-body
+{
+    overflow: auto;
+    flex: 2;
+    max-height: 560px;
+    padding-top: 19px;
+    margin-right: -39px;
+    padding-right: 39px;
+}

@@ -137,18 +137,31 @@ export class PricesComponent implements OnInit
         this.income_max_string = Formatter.FormatMoney(this.income_max)
         this.income_min_string = Formatter.FormatMoney(this.income_min)
 
-        let sum_rows = [new ListRow([
-            "<div class='_status'>Всего ресурсов: " + this.resources.length + "</div>",
-            "",
-            "",
-            "",
-            "<div class='_status'>" + this.income_goal_string + "₽</div>",
-            "<div class='_status'>" + this.income_max_string + "₽</div>",
-            "<div class='_status'>" + this.income_min_string + "₽</div>",
-        ])]
-        let sum_options = new ListOptions(true, false, false, true)
+        // new ListCol("Ресурс", "pname"),
+        // new ListCol("Цена max", "pmin _center", true),
+        // new ListCol("Цена min", "pmin _center", true),
+        // new ListCol("коэф", "koef", true),
+        // new ListCol("Целевой доход", "pmin", true),
+        // new ListCol("Max доход в месяц", "pmax list__pmax_first", true),
+        // new ListCol("Min доход в месяц", "pmax list__pmax_last", true),
+        // new ListCol("Продажа", "service", true)
 
-        this.sum_list = new ListData(prices_cols, sum_rows, "sum", "", sum_options)
+
+        let sum_cols = [
+            new ListCol("", "num"),
+            new ListCol("<div class='_status'>Всего ресурсов: " + this.resources.length + "</div>", "pname"),
+            new ListCol("", "pmin _center"),
+            new ListCol("", "pmin _center"),
+            new ListCol("", "koef"),
+            new ListCol("<div class='_status'>" + this.income_goal_string + "₽</div>", "pmin"),
+            new ListCol("<div class='_status'>" + this.income_max_string + "₽</div>", "pmax list__pmax_first"),
+            new ListCol("<div class='_status'>" + this.income_min_string + "₽</div>", "pmax list__pmax_last"),
+            new ListCol("", "service"),
+        ]
+
+        let sum_options = new ListOptions(false, false, false, true)
+
+        this.sum_list = new ListData(sum_cols, [], "sum", "", sum_options)
 
     }
 
