@@ -51,26 +51,51 @@ export class GraphComponent implements OnInit
 
         let lines = []
 
-        let nodes = [
-            new GraphNode(50000, ""),
-            new GraphNode(55000, ""),
-            new GraphNode(43000, ""),
-            new GraphNode(22000, ""),
-            new GraphNode(70000, ""),
-            new GraphNode(67000, ""),
+        let names = [
+            "Доступность",
+            "Оказано услуг",
+            "Стоимость человекочаса",
+            "Max доход",
+            "Целевой доход",
+            "Min доход",
+            "Коэф",
         ]
 
-        let nodes2 = [
-            new GraphNode(30000, ""),
-            new GraphNode(40000, ""),
-            new GraphNode(41000, ""),
-            new GraphNode(46000, ""),
-            new GraphNode(20000, ""),
-            new GraphNode(33000, ""),
+        let colors = [
+            "#f00",
+            "#0f0",
+            "#00f",
+            "#ff0",
+            "#f0f",
+            "#0ff",
+            "#ссf",
         ]
 
-        lines.push(new GraphLine("График 1", "#f00", nodes))
-        lines.push(new GraphLine("График 2", "#0f0", nodes2))
+        for(let i = 1; i < 8; i++)
+        {
+            let nodes = [
+                new GraphNode(150 * i, ""),
+                new GraphNode(300 * i, ""),
+                new GraphNode(500 * i, ""),
+                new GraphNode(220 * i, ""),
+                new GraphNode(700 * i, ""),
+                new GraphNode(67 * i, ""),
+            ]
+
+            if(i == 7)
+            {
+                nodes = [
+                    new GraphNode(100, ""),
+                    new GraphNode(80, ""),
+                    new GraphNode(50, ""),
+                    new GraphNode(23, ""),
+                    new GraphNode(30, ""),
+                    new GraphNode(60, ""),
+                ]
+            }
+
+            lines.push(new GraphLine(names[i - 1], colors[i - 1], nodes))
+        }
 
         this.graph_data = new GraphData("", lines)
 
@@ -187,6 +212,7 @@ export class GraphComponent implements OnInit
     Select(index:number)
     {
         this.graph_data.Select(index)
+        this.InitValues()
         this.Update()
     }
 
