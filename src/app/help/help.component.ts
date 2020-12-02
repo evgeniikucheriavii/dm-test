@@ -15,6 +15,8 @@ export class HelpComponent implements OnInit
     nodes:FileNode[] = [];
     fileTreeHtml:string;
 
+    loaded:boolean = false
+
     constructor() { }
 
     ngOnInit(): void 
@@ -42,6 +44,8 @@ export class HelpComponent implements OnInit
         ];
         
         this.FormLists()
+
+        this.loaded = true
 
         // this.fileTreeHtml = this.GetTree(this.fileTree);
     }

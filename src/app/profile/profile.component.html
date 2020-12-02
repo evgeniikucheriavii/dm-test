@@ -1,27 +1,31 @@
-<section class="profile-header">
-	<div class="sex-age">{{profile_data.sex}} | {{profile_data.age}}</div>
-    <app-dropdown [name]="dropdown.name" [list]="dropdown" *ngFor="let dropdown of dropdowns"></app-dropdown>
-</section>
+<div style="max-height: 760px;">
+    <section class="profile-header">
+        <div class="sex-age">{{profile_data.sex}} | {{profile_data.age}}</div>
+        <app-dropdown [name]="dropdown.name" [list]="dropdown" *ngFor="let dropdown of dropdowns"></app-dropdown>
+    </section>
 
-<div class="banner">					
-    <div class="banner-item" *ngFor="let item of profile_data.banner_items">
-        <div class="banner-item__header">{{item.header}}</div>
-        <div class="banner-item__body">{{item.body}}</div>
+    <div class="banner">					
+        <div class="banner-item" *ngFor="let item of profile_data.banner_items">
+            <div class="banner-item__header">{{item.header}}</div>
+            <div class="banner-item__body">{{item.body}}</div>
+        </div>
     </div>
-</div>
 
-<div class="profile-body">
+    <div class="profile-body">
+        <section *ngIf="profile_data.type == 'resource'">
+            <app-graph [graph_data]="profile_data.graph_data"></app-graph>
+        </section>
+        <app-list [listdata]="profile_data.misc_list" [dots_callback]="MiscContext" [obj]="this"></app-list>
+        
+        <section class="left-section left-section__pages">
+            <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+        </section>
+        <br>
 
-    <app-list [listdata]="profile_data.misc_list" [dots_callback]="MiscContext" [obj]="this"></app-list>
-    
-    <section class="left-section left-section__pages">
-        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-    </section>
-    <br>
+        <app-list [listdata]="profile_data.contacts_list" [callback]="" [dots_callback]="ContactsContext" [button_callback]="Communicate" [obj]="this"></app-list>
 
-    <app-list [listdata]="profile_data.contacts_list" [callback]="" [dots_callback]="ContactsContext" [button_callback]="Communicate" [obj]="this"></app-list>
-
-    <section class="left-section left-section__pages">
-        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
-    </section>
+        <section class="left-section left-section__pages">
+            <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
+        </section>
+    </div>
 </div>

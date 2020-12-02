@@ -32,7 +32,9 @@ export class ClientsComponent implements OnInit
     sales_list:ListData
     history_list:ListData
 	
-	currentClient:Client;
+    currentClient:Client;
+    
+    loaded:boolean = false
 
     SwitchClient = (index:number) =>
     {
@@ -79,6 +81,7 @@ export class ClientsComponent implements OnInit
             this.FormLists()
             this.SwitchClient(0)
             this.appRef.tick()
+            this.loaded = true
         })
     }
 

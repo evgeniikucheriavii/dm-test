@@ -1,4 +1,5 @@
-<div class="container">
+<app-loading *ngIf="!loaded"></app-loading>
+<div class="container" *ngIf="loaded">
 	<section class="content-section">
 		<section class="content-section__bottom bottom_rules">
 			

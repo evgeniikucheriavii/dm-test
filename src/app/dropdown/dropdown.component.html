@@ -1,8 +1,8 @@
 <label class="dropdown-label" [formGroup]="fg" (click)="Open()">
 
-    <span class="dropdown__title" *ngIf="list.title != ''">{{list.title}}  </span>
+    <span class="dropdown__title" *ngIf="list.title != '' && list.options.showTitle == true">{{list.title}}  </span>
 
-    <label for="select_{{name}}" class="dropdown">
+    <label for="select_{{name}}" class="dropdown {{list.classes}}">
         <div class="dropdown__head">
             <span id="text_{{name}}" class="dropdown-selected">{{list.selected_title}}</span>
             <span class="dropdown-image__container {{image_classes}}"><img class="dropdown-image" src="../../assets/images/Down.png"></span>

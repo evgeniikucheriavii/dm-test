@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../client';
 import { DropdownItem, DropdownList } from '../dropdown/dropdown.component';
 import { Formatter } from '../formatter';
+import { GraphData } from '../graph/graph.component';
 import { ListButton, ListCol, ListData, ListOptions, ListRow } from '../list/list.component';
 import { Resource } from '../resource';
 import { IContact, IMisc } from '../rest.service';
@@ -15,6 +16,7 @@ import { IContact, IMisc } from '../rest.service';
         'contacts_callback',
         'misc_callback',
         'obj',
+        'graph_data'
     ],
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css']
@@ -22,9 +24,10 @@ import { IContact, IMisc } from '../rest.service';
 export class ProfileComponent implements OnInit 
 {
 
-    profile_data:ProfileData
-    dropdowns:DropdownList[]
-    type:string
+    profile_data:ProfileData = null
+    dropdowns:DropdownList[] = []
+    type:string = ""
+    graph_data:GraphData = null
 
     ContactsContext = () =>
     {
@@ -60,6 +63,8 @@ export class ProfileData
     contacts_list:ListData
     misc_list:ListData
 
+    graph_data:GraphData = null
+
     Resource:Resource = null
     Client:Client = null
 
@@ -75,6 +80,7 @@ export class ProfileData
             this.type = "resource"
             this.sex = this.Resource.sexString
             this.age = this.Resource.ageString
+            this.FormGraph()
         }
         else if(this.Client != null)
         {
@@ -90,6 +96,11 @@ export class ProfileData
         this.FormMiscList()
         this.FormContactsList()
         this.FormBannerItems()
+    }
+
+    FormGraph()
+    {
+
     }
 
     FormBannerItems()
@@ -118,9 +129,13 @@ export class ProfileData
         else if(this.type == "resource")
         {
             this.banner_items = [
-                new BannerItem("Доступность ресурса в текущем месяце", this.Resource.AvailableHours + " часов"),
-                new BannerItem("Потрачено времени на оказание услуг в прошлом месяце", this.Resource.LastMonthHours + " часов"),
+                new BannerItem("Доступность в текущем месяце", this.Resource.AvailableHours + " часов"),
+                new BannerItem("Оказано услуг в прошлом месяце", this.Resource.LastMonthHours + " часов"),
                 new BannerItem("Средневзвешенная стоимость человекочаса", this.Resource.AvgHourRate + " ₽"),
+                new BannerItem("Max доход / мес", Formatter.FormatMoney(Number(this.Resource.income_max)) + " ₽"),
+                new BannerItem("Целевой доход / мес", Formatter.FormatMoney(Number(this.Resource.income_goal)) + " ₽"),
+                new BannerItem("Min доход / мес", Formatter.FormatMoney(Number(this.Resource.income_min)) + " ₽"),
+                new BannerItem("Коэф. раскрученности", this.Resource.koef),
             ]
         }
         

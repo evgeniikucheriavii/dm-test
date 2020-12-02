@@ -28,31 +28,14 @@ export class PricesComponent implements OnInit
     prices_list:ListData
     sum_list:ListData
 
+    loaded:boolean = false
+
     constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
 	ngOnInit(): void 
 	{
 
         this.getResources()
-
-		// this.data = [
-		// 	new CustomData("Иванов Иван", 2000, 1000, 1, 1000, 25000, 12500, 1),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 0.83, 1000, 25000, 12500, 1),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 1),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1.5, 1000, 25000, 12500, 0),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 0),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 1, 1000, 25000, 12500, 0),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, null, 1000, 25000, 12500, 1),
-		// 	new CustomData("Сидоров Сергей", 2000, 1000, 2.1, 1000, 25000, 12500, 1),
-		// 	new CustomData("Петрова Светлана", 1245, 1000, 1, 1000, 25000, 12500, 1)
-        // ];
         
         this.FormLists()
 
@@ -72,6 +55,7 @@ export class PricesComponent implements OnInit
 
             this.FormLists()
             this.appRef.tick()
+            this.loaded = true
         })
     }
     

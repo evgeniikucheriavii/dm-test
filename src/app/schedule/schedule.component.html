@@ -1,4 +1,5 @@
-<div class="container">
+<app-loading *ngIf="!loaded"></app-loading>
+<div class="container" *ngIf="loaded">
 	<section class="section-top">
 		<label class="header-search-label">
 			<span class="header-search-label__title">Поиск </span>

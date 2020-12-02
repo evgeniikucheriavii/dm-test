@@ -23,7 +23,7 @@ export class DropdownComponent implements OnInit
     image_classes:string = "_blue"
     image_path:string = "Down.png"
 
-    callback:(obj:any, value:any) => void
+    callback:(obj:any, value:any) => void = null
 
     constructor(private appRef:ApplicationRef) { }
 
@@ -66,9 +66,15 @@ export class DropdownComponent implements OnInit
 
     Select(index:number)
     {
-        this.Close()    
         this.list.selected_title = this.list.items[index].title
         this.list.selected = index
+
+        if(this.callback != null)
+        {
+            this.callback(this.obj, this.list.items[index].value)
+        }
+        
+        this.Close()
     }
 
 }
@@ -81,14 +87,42 @@ export class DropdownList
     selected:number
     selected_title:string = ""
     none_checked:boolean = true
+    options:DropdownOptions = null
+    classes:string = ""
 
-    constructor(name:string, title:string, items:DropdownItem[], selected:number = -1)
+    constructor(
+        name:string, 
+        title:string, 
+        items:DropdownItem[], 
+        selected:number = -1, 
+        options:DropdownOptions = new DropdownOptions())
     {
         this.name = name
         this.items = items
         this.title = title + ""
         this.selected_title = title + ""
         this.selected = selected
+        this.options = options
+
+        if(this.options.fullSize)
+        {
+            this.classes += " dropdown_fullsize"
+        }
+    }
+}
+
+export class DropdownOptions
+{
+    showTitle:boolean = false
+    fullSize:boolean = false
+
+    constructor(
+        showTitle:boolean = true,
+        fullSize:boolean = false
+        )
+    {
+        this.showTitle = showTitle
+        this.fullSize = fullSize
     }
 }
 

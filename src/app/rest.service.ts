@@ -269,6 +269,7 @@ export interface ICompanySchedule
     Client:IClient
     Resource:IResource
     Product:IProduct
+    Office:IOffice
     datetime:string
     duration:string
     event_type:string
@@ -304,7 +305,7 @@ export interface IRFMSettings
 {
     id:string
     groups:string
-    name:string
+    frequency:string
     Company:string
 }
 
@@ -411,6 +412,7 @@ export class RestService
             catchError(this.handleError)
         )
     }
+    
 
     getResources(): Observable<any> 
     {
@@ -480,11 +482,25 @@ export class RestService
         return this.Post<ICompanySchedule>('company_schedule/', true)
     }
 
+    createCompanySchedule(value:any)
+    {
+        let data = {
+            token: this.cookieService.get("token"),
+            data: value
+        }
+
+        return this.Post<any>("company_schedule/create/", false, data)
+    }
+
     getRFM()
     {
         return this.Post<IRFMData>('rfm/', true)
     }
 
+    getProducts()
+    {
+        return this.Post<IProduct>("products/", true)
+    }
 
     Post<T>(page:string, token:boolean, data:any = {})
     {
@@ -532,7 +548,6 @@ export class RestService
             catchError(this.handleError)
         )
     }
-
     
     login(login:string, password:string): Observable<any>
     {

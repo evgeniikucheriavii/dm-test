@@ -1,0 +1,195 @@
+<div class="schedule-table__overlay" id="menu-overlay" (click)="Close();"  *ngIf="current_schedule != null || additional_data != null"></div>
+
+<div class="schedule-menu" id="schedule-menu" *ngIf="current_schedule != null || additional_data != null">
+    <div class="schedule-menu__title" *ngIf="current_schedule != null && additional_data == null">
+        <div *ngIf="current_schedule.event_type == '1'">Промоакция</div>
+        <div *ngIf="current_schedule.event_type == '2'">Услуга</div>
+        <div *ngIf="current_schedule.event_type == '3'">Зарезервированное время</div>
+        <div *ngIf="current_schedule.event_type == '4'">Акция не сработала</div>
+        <img src="assets/images/Arrow_exit.svg" class="schedule-title__image" (click)="Close();">
+    </div>
+
+    <div class="schedule-menu__title" *ngIf="current_schedule == null && additional_data != null">
+        <div>Новая запись</div>
+        <img src="assets/images/Arrow_exit.svg" class="schedule-title__image" (click)="Close();">
+    </div>
+    <div *ngIf="current_schedule != null && additional_data == null">
+ 
+         <div class="schedule-menu__row">
+             <div class="schedule-menu__row-name"><b>Статус:</b> {{current_schedule.status}}</div>
+             <div class="schedule-menu__row-dots">
+                 <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                 <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+             </div>
+         </div>
+ 
+         <div class="schedule-menu__row">
+             <div class="schedule-menu__row-name"><b>Клиент:</b> {{current_schedule.Client.name}}</div>
+             <div class="schedule-menu__row-dots">
+                 <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                 <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+             </div>
+         </div>
+ 
+         <div class="schedule-menu__row">
+             <div class="schedule-menu__row-name"><b>Ресурс:</b> {{current_schedule.Resource.name}}</div>
+             <div class="schedule-menu__row-dots">
+                 <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                 <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+             </div>
+         </div>
+ 
+         <div class="schedule-menu__row" *ngIf="current_schedule.Office != null">
+             <div class="schedule-menu__row-name"><b>Офис:</b> {{current_schedule.Office.name}}</div>
+             <div class="schedule-menu__row-dots">
+                 <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                 <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+             </div>
+         </div>
+ 
+         <div class="schedule-menu__row">
+             <div class="schedule-menu__row-name"><b>Время:</b> {{cur_dt}}</div>
+             <div class="schedule-menu__row-dots">
+                 <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                 <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+             </div>
+         </div>
+ 
+         <div class="schedule-menu__row">
+             <div class="schedule-menu__row-name"><b>Канал:</b> {{current_schedule.channel}}</div>
+             <div class="schedule-menu__row-dots">
+                 <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                 <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+             </div>
+         </div>
+ 
+         <div class="schedule-menu__row">
+             <div class="schedule-menu__row-name">
+                 <b *ngIf="current_schedule.event_type == '1'">Правило утилизации:</b> 
+                 <b *ngIf="current_schedule.event_type != '1'">Подтверждение:</b> 
+                 {{current_schedule.util}}</div>
+             <div class="schedule-menu__row-dots">
+                 <img class="schedule-menu__dots" src="assets/images/Pencil_b.svg">
+                 <img class="schedule-menu__dots" src="assets/images/Cross_b.svg">
+             </div>
+         </div>
+ 
+         <div class="schedule-menu__row schedule-menu__row-textarea">
+             <b>Текст сообщения:</b>
+             <textarea class="textarea schedule-menu__textarea">{{current_schedule.text}}</textarea>
+         </div>
+ 
+         <div class="row-textarea__buttons">
+             <button class="button" (click)="Show()">Вывести</button>
+             <button class="button button_hollow" (click)="Save()">Сохранить</button>
+             <button class="button button_hollow" (click)="Delete()">Удалить</button>
+         </div>
+ 
+         <!-- <div class="schedule-menu__history">
+             <div class="history__title">
+                 <div>История поиска</div>
+                 <img src="assets/images/Up.png" class="history-title__image">
+             </div>
+             <div class="history__content">
+                 <section class="left-section left-section__list resources-list">
+                     <div class="list-row list-row_head resources-row history-list__head">
+                         <div class="list__num">#</div>
+                         <div class="list__name">Клиент</div>
+                         <div class="list__service">Статус</div>
+                     </div>
+                     <div class="resources-list__body">
+                         <div class="list-row resources-row">
+                             <div class="list__num">#</div>
+                             <div class="list__name">Клиент</div>
+                             <div class="list__service">Статус</div>
+                         </div>
+                         <div class="list-row resources-row">
+                             <div class="list__num">#</div>
+                             <div class="list__name">Клиент</div>
+                             <div class="list__service">Статус</div>
+                         </div>
+                         <div class="list-row resources-row">
+                             <div class="list__num">#</div>
+                             <div class="list__name">Клиент</div>
+                             <div class="list__service">Статус</div>
+                         </div>
+                     </div>
+                 </section>
+             </div>
+         </div> -->
+     </div>
+
+     <form *ngIf="current_schedule == null && additional_data != null && form_ready" [formGroup]="schedule_form">
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Статус:</b> </div>
+            <label class="input-label" style="max-width: 170px;">
+                <input type="text" class="input" placeholder="Статус" formControlName="status" style="max-width: 150px;">
+            </label>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Тип:</b> </div>
+            <app-dropdown [obj]="this" [name]="types_dropdown.name" [list]="types_dropdown" [callback]="SelectType"></app-dropdown>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Клиент:</b> </div>
+            <app-dropdown [obj]="this" [name]="clients_dropdown.name" [list]="clients_dropdown" [callback]="SelectClient"></app-dropdown>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Ресурс:</b> </div>
+            <app-dropdown [obj]="this" [name]="resources_dropdown.name" [list]="resources_dropdown" [callback]="SelectResource"></app-dropdown>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Услуга:</b> </div>
+            <app-dropdown [obj]="this" [name]="products_dropdown.name" [list]="products_dropdown" [callback]="SelectProduct"></app-dropdown>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Офис:</b> </div>
+            <app-dropdown [obj]="this" [name]="offices_dropdown.name" [list]="offices_dropdown" [callback]="SelectOffice"></app-dropdown>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Время:</b> </div>
+            <label class="header-date-label__element date-label  edit-body__date-label">
+                <input type="datetime-local" class="date-input  edit-body__date" name="date" formControlName="date"
+                placeholder="Период">
+            </label>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Длительность:</b> </div>
+            <label class="input-label" style="max-width: 120px;">
+                <input type="text" class="input" placeholder="Длительность" formControlName="duration" style="max-width: 100px;">
+            </label>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>Канал:</b> </div>
+            <label class="input-label" style="max-width: 170px;">
+                <input type="text" class="input" placeholder="Канал" formControlName="channel" style="max-width: 150px;">
+            </label>
+        </div>
+
+        <div class="schedule-menu__row">
+            <div class="schedule-menu__row-name"><b>{{utilName}}:</b> </div>
+            <label class="input-label" style="max-width: 120px;">
+                <input type="text" class="input" placeholder="{{utilPlaceholder}}" formControlName="util" style="max-width: 100px;">
+            </label>
+        </div>
+
+        <div class="schedule-menu__row schedule-menu__row-textarea">
+            <b>Текст сообщения:</b>
+            <textarea class="textarea schedule-menu__textarea" placeholder="Текст" formControlName="msg"></textarea>
+        </div>
+
+        <div class="row-textarea__buttons">
+            <button class="button button_hollow" (click)="Save()">Сохранить</button>
+            <button class="button button_hollow" (click)="Close()">Отмена</button>
+        </div>
+    </form>
+
+ </div>

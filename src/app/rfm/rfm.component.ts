@@ -27,6 +27,9 @@ export class RFMComponent implements OnInit
     criteria_lists:ListData[] = []
     groups_list:ListData
     settings_list:ListData
+    policy_list:ListData
+
+    loaded:boolean = false
 
     constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
@@ -40,6 +43,7 @@ export class RFMComponent implements OnInit
         this.rest.getRFM().subscribe((rest:restservice.IRFMData) => {
             this.data = rest
             this.FormLists()
+            this.loaded = true
         })
     }
 
@@ -48,6 +52,7 @@ export class RFMComponent implements OnInit
         this.FormCriteriaLists()
         this.FormGroupsList()
         this.FormSettingsList()
+        this.FormPolicyList()
     }
 
     FormCriteriaLists()
@@ -70,8 +75,8 @@ export class RFMComponent implements OnInit
 
 
         let cols = [
-            new ListCol("Клиентов", "service"),
-            new ListCol("Группа", "service"),
+            new ListCol("Клиентов", "type"),
+            new ListCol("Группа", "type"),
             new ListCol("Критерий", "service"),
         ]
 
@@ -112,11 +117,20 @@ export class RFMComponent implements OnInit
     {
         let cols = [
             new ListCol("Название", "name"),
-            new ListCol("Группы", "type"),
+            new ListCol("Группы", "name"),
             new ListCol("Количество", "pmin"),
         ]
 
         let rows = []
+
+        for(let i = 0; i < this.data.groups.length; i++)
+        {
+            rows.push(new ListRow([
+                this.data.groups[i].name,
+                this.data.groups[i].groups,
+                this.data.groups[i].num
+            ]))
+        }
 
         let options = new ListOptions(false, true)
 
@@ -135,7 +149,7 @@ export class RFMComponent implements OnInit
         for(let i = 0; i < this.data.settings.length; i++)
         {
             rows.push(new ListRow([
-                this.data.settings[i].name,
+                this.data.settings[i].frequency,
                 this.data.settings[i].groups,
             ]))
         }
@@ -143,7 +157,72 @@ export class RFMComponent implements OnInit
         let options = new ListOptions(false, true)
 
         this.settings_list = new ListData(cols, rows, "settings", "", options)
+    }
 
+    SortPolicy(a:restservice.IRFMPolicy, b:restservice.IRFMPolicy)
+    {
+        if(a.commtype < b.commtype)
+        {
+            return -1
+        }
+        else if(a.commtype > b.commtype)
+        {
+            return 1
+        }
+        return 0
+    }
+
+    FormPolicyList()
+    {
+        let cols = [
+            new ListCol("Тип коммуникации", "service"),
+            new ListCol("Группа", "name"),
+            new ListCol("Частота", "util"),
+        ]
+
+        let rows = []
+
+        this.data.policy.sort(this.SortPolicy)
+
+        let rowsdata = []
+
+        let names = [
+            "",
+            "Продажа",
+            "Поддержка",
+            "Реактивация",
+            "Возврат"
+        ]
+
+        for(let i = 0; i < this.data.policy.length; i++)
+        {
+            let typename = ""
+
+            typename = names[Number(this.data.policy[i].commtype)]
+
+            if(i != 0)
+            {
+                if(this.data.policy[i].commtype == this.data.policy[i - 1].commtype)
+                {
+                    typename = ""
+                }
+            }
+            
+            rows.push(new ListRow([
+                typename,
+                this.data.policy[i].groups,
+                this.data.policy[i].frequency,
+            ]))
+            
+        }
+
+        
+
+        //1 - Продажа, 2 - поддержка, 3 - реактивация, 4- возврат:
+
+        let options = new ListOptions(false, true)
+
+        this.policy_list = new ListData(cols, rows, "policy", "", options)
     }
 
 

@@ -25,6 +25,8 @@ export class ScheduleComponent implements OnInit
     cats = [];
     schedules = []
 
+    loaded:boolean = false
+
 	constructor(public rest:restservice.RestService, private cookieService:CookieService, private router:Router, private appRef:ApplicationRef) { }
 
 	ngOnInit(): void 
@@ -42,81 +44,6 @@ export class ScheduleComponent implements OnInit
 		];
 
         this.getSchedule()
-
-		// let hr = { name: "Трудовые", resources: [
-		// 	new Resource("Калиниченко Д.С.", 140, 40, 100, [
-		// 		{ date: "01.07", task: 1 },
-		// 		{ date: "02.07", task: 1 },
-		// 		{ date: "03.07", task: 1 },
-		// 		{ date: "04.07", task: 1 },
-		// 		{ date: "05.07", task: null },
-		// 		{ date: "06.07", task: null },
-		// 		{ date: "07.07", task: null },
-		// 		{ date: "08.07", task: 1 },
-		// 		{ date: "09.07", task: 1 }
-		// 	]),
-		// 	new Resource("Колесов А.В.", 160, 20, 150, [
-		// 		{ date: "01.07", task: 1 },
-		// 		{ date: "02.07", task: 1 },
-		// 		{ date: "03.07", task: 1 },
-		// 		{ date: "04.07", task: 1 },
-		// 		{ date: "05.07", task: 1 },
-		// 		{ date: "06.07", task: null },
-		// 		{ date: "07.07", task: null },
-		// 		{ date: "08.07", task: 1 },
-		// 		{ date: "09.07", task: 1 }
-		// 	]),
-		// 	new Resource("Гринченко М.А.", 140, 20, 13, [
-		// 		{ date: "01.07", task: 1 },
-		// 		{ date: "02.07", task: 1 },
-		// 		{ date: "03.07", task: null },
-		// 		{ date: "04.07", task: 1 },
-		// 		{ date: "05.07", task: 1 },
-		// 		{ date: "06.07", task: null },
-		// 		{ date: "07.07", task: null },
-		// 		{ date: "08.07", task: null },
-		// 		{ date: "09.07", task: 1 }
-		// 	])
-		// ] };
-
-		// let tech = { name: "Оборудование", resources: [
-		// 	new Resource("Аппарат Экзарта", 140, 40, 100, [
-		// 		{ date: "01.07", task: 0 },
-		// 		{ date: "02.07", task: 1 },
-		// 		{ date: "03.07", task: 0 },
-		// 		{ date: "04.07", task: null },
-		// 		{ date: "05.07", task: null },
-		// 		{ date: "06.07", task: null },
-		// 		{ date: "07.07", task: null },
-		// 		{ date: "08.07", task: 0 },
-		// 		{ date: "09.07", task: 0 }
-		// 	]),
-		// 	new Resource("Платформа Гелилео", 160, 20, 150, [
-		// 		{ date: "01.07", task: 1 },
-		// 		{ date: "02.07", task: 1 },
-		// 		{ date: "03.07", task: 1 },
-		// 		{ date: "04.07", task: 0 },
-		// 		{ date: "05.07", task: 1 },
-		// 		{ date: "06.07", task: null },
-		// 		{ date: "07.07", task: null },
-		// 		{ date: "08.07", task: 1 },
-		// 		{ date: "09.07", task: 0 }
-		// 	]),
-		// 	new Resource("Система #124", 140, 20, 13, [
-		// 		{ date: "01.07", task: 1 },
-		// 		{ date: "02.07", task: 1 },
-		// 		{ date: "03.07", task: null },
-		// 		{ date: "04.07", task: 1 },
-		// 		{ date: "05.07", task: 1 },
-		// 		{ date: "06.07", task: null },
-		// 		{ date: "07.07", task: null },
-		// 		{ date: "08.07", task: null },
-		// 		{ date: "09.07", task: null }
-		// 	])
-		// ] };
-
-		// this.cats = [ hr, tech ];
-
     }
     
     getSchedule()
@@ -129,6 +56,7 @@ export class ScheduleComponent implements OnInit
             
             this.FormSchedules()
             this.appRef.tick()
+            this.loaded = true
         })
     }
 

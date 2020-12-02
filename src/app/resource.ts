@@ -115,25 +115,17 @@ export class Resource implements IResource
 
 		let num_util = Number(this.util);
 
-		if(num_util <= 10)
+		if(num_util < 80)
 		{
 			this.color = "red";
 		}
-		else if(num_util > 10 && num_util < 16)
-		{
-			this.color = "brown";
-		}
-		else if(num_util > 16 && num_util < 30)
+		else if(num_util >= 80 && num_util < 100)
 		{
 			this.color = "lgreen";
 		}
-		else if(num_util >= 30 && num_util < 40)
+		else if(num_util == 100)
 		{
 			this.color = "green";
-		}
-		else 
-		{
-			this.color = "bgreen";
 		}
 	}
 }

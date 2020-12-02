@@ -53,6 +53,8 @@ export class ResourcesUtilizationComponent implements OnInit {
     selected_contact:number = 0
     selected_resource:number = 0
     
+    loaded:boolean = false
+
     SwitchResource = (index:number) =>
     {
         this.currentResource = this.resources[index]
@@ -164,6 +166,7 @@ export class ResourcesUtilizationComponent implements OnInit {
             this.FormLists()
             this.SwitchResource(0)
             this.appRef.tick()
+            this.loaded = true
         })
     }
 
@@ -227,14 +230,13 @@ export class ResourcesUtilizationComponent implements OnInit {
         }
 
         this.dropdowns = [
-            new DropdownList("offices", "Офис", offices_list, selected),
-            new DropdownList("types", "Тип", [
-                new DropdownItem("Трудовой", "1"),
-                new DropdownItem("Оборудование", "2"),
+            new DropdownList("sign", "Признак", [
+                new DropdownItem("Родительский", "1"),
+                new DropdownItem("Дочерний", "2"),
             ], selected_type),
             new DropdownList("status", "Статус", [
                 new DropdownItem("Активен", "1"),
-                new DropdownItem("Пассивен", "2"),
+                new DropdownItem("Не доступен", "2"),
             ], status_selected),
         ]
     }

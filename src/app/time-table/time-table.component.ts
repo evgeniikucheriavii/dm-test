@@ -6,20 +6,29 @@ import { ResourceSchedule } from '../schedule/schedule.component';
 
 @Component({
     selector: 'app-time-table',
-    inputs: ['timedata', 'width'],
+    inputs: [
+        'timedata', 
+        'width', 
+        'add_callback',
+        'open_callback',
+        'close_callback'
+        ],
     templateUrl: './time-table.component.html',
     styleUrls: ['./time-table.component.css']
 })
 export class TimeTableComponent implements OnInit 
 {
     width:number
-
     timedata:TimeData
     schedule_menu_class:string = "_hidden"
     schedule_overlay_class:string = "_hidden"
     current_schedule:ICompanySchedule = null
     current_datetime:string = ""
     cur_dt:string = ""
+
+    add_callback:(obj:any, value:any) => void
+    open_callback:(obj:any, value:any) => void
+    close_callback:(obj:any, value:any) => void
 
     constructor() { }
 
@@ -28,6 +37,14 @@ export class TimeTableComponent implements OnInit
        
     }
 
+    AddTask(value:any = "")
+    {
+        if(this.add_callback != null)
+        {
+            let ds = "" + this.timedata.date.getDate() + "." + (this.timedata.date.getMonth() + 1) + "." + this.timedata.date.getFullYear()
+            this.add_callback(this, "T" + value + " D" + ds)
+        }
+    }
 
     TaskClick(task:any)
     {
@@ -44,6 +61,15 @@ export class TimeTableComponent implements OnInit
                     this.current_datetime = Formatter.FormatDate(this.current_schedule.datetime)
                     
                     this.cur_dt = this.current_datetime + " " + Formatter.FormatTime(this.timedata.company_schedules[i].datetime)
+
+                    if(this.open_callback != null)
+                    {
+                        this.open_callback(this, {
+                            current_schedule: this.current_schedule,
+                            current_datetime: this.current_datetime,
+                            cur_dt: this.cur_dt
+                        })
+                    }
                     break
                 }
             }
@@ -58,6 +84,11 @@ export class TimeTableComponent implements OnInit
         this.current_schedule = null
         this.current_datetime = ""
         this.cur_dt = ""
+
+        if(this.close_callback != null)
+        {
+            this.close_callback(this, "")
+        }
     }
 
     IsCurrentHour(hour:number)
@@ -177,7 +208,7 @@ export class TimeData
                 m = "0" + m
             }
 
-            let ds = "2020-10-26T" + h + ":" + m + ":59+03:00"
+            let ds = "2020-10-26T11:00:59+03:00"
             // alert(ds)
             this.date = new Date(ds) 
             // alert(this.date)

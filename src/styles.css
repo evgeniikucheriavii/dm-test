@@ -37,7 +37,8 @@ body, html
 
 ::-webkit-scrollbar 
 {
-	width: 6px;
+    width: 6px;
+    height: 6px;
 }
 
 /* Track */
@@ -301,7 +302,7 @@ textarea, select, input, button { outline: none; }
 .input
 {
 	width: 244px;
-	height: 36px;
+	height: 32px;
 }
 
 .search-label, .date-label, .input-label

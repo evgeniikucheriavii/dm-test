@@ -62,7 +62,7 @@ export class Calendar
         this.year = year
 
         this.current_date = new Date()
-        this.selected_date = new Date(year, this.month_index, date)
+        this.selected_date = new Date(year, this.month_index, date, 11, 0)
 
         this.FormCalendar()
     }

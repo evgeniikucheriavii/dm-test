@@ -19,10 +19,10 @@
 
 .banner
 {
-    max-height: 177px;
+    max-height: 230px;
     flex: 1;
 	box-sizing: border-box;
-    padding: 35px 60px;
+    padding: 35px 5px;
     margin: 0 -39px;
     /* margin-top: -10px; */
 
@@ -71,7 +71,7 @@
 {
     overflow: auto;
     flex: 2;
-    max-height: 560px;
+    max-height: 480px;
     padding-top: 19px;
     margin-right: -39px;
     padding-right: 39px;

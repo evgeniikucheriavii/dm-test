@@ -1,4 +1,5 @@
-<div class="container">
+<app-loading *ngIf="!loaded"></app-loading>
+<div class="container" *ngIf="loaded">
 	<section class="content-section">
 		<section class="content-section__top">
 			<!--utilization-rules-->
@@ -28,8 +29,8 @@
 							<label class="priority__label"><label class="box-label box-label_radio">
 								<input type="radio" class="box-label__input box-label__input_radio" name="service" value="potential">
 							</label> С большим клиентским потенциалом </label>
-						</div>
-
+                        </div>
+                        
 						<hr class="hr">
 
 						<div class="priority__block">

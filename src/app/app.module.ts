@@ -31,6 +31,9 @@ import { TimeTableComponent } from './time-table/time-table.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { RFMComponent } from './rfm/rfm.component';
+import { LoadingComponent } from './loading/loading.component';
+import { ScheduleMenuComponent } from './schedule-menu/schedule-menu.component';
+import { GraphComponent } from './graph/graph.component';
 // import { AppRoutingModule } from './app-routing.module';
 
 const appRoutes = [
@@ -75,6 +78,9 @@ const appRoutes = [
     ProfileComponent,
     CalendarComponent,
     RFMComponent,
+    LoadingComponent,
+    ScheduleMenuComponent,
+    GraphComponent,
   ],
   imports: [
 	BrowserModule,

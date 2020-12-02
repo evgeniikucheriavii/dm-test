@@ -1,4 +1,18 @@
-<div class="container">
+<app-loading *ngIf="!loaded"></app-loading>
+<app-schedule-menu 
+    [current_schedule]="current_schedule"
+    [current_datetime]="current_datetime"
+    [cur_dt]="cur_dt"
+    [additional_data]="additional_data"
+    [open_callback]="OpenMenu"
+    [close_callback]="CloseMenu"
+    [save_callback]="SaveTask"
+    [edit_callback]="EditMenu"
+    [delete_callback]="DeleteMenu"
+    *ngIf="additional_data != null || current_schedule != null"
+    >
+</app-schedule-menu>
+<div class="container" *ngIf="loaded">
 
 	<section class="section__left">
 		<label class="header-search-label__element search-label left-input">
@@ -7,18 +21,7 @@
 					src="assets/images/Search.svg"></button>
 		</label>
 
-		<label for="select_01" class="select header-select-label left-input">
-			<input type="radio" name="list" value="not_changed" id="bg_01" class="select-bg select-radio select-list" checked />
-			<input type="radio" name="list" value="not_changed" class="select-select select-radio select-list" id="select_01">
-			<label class="bg" for="bg_01"></label>
-			<div class="items">
-				<input type="radio" name="list" value="first_value" id="list[0]" class="select-radio select-list">
-				<label for="list[0]">Трудовой</label>
-				<input type="radio" name="list" value="second_value" id="list[1]" class="select-radio select-list">
-				<label for="list[1]">Не трудовой</label>
-				<span id="text" class="select-text">Фильтр</span>
-			</div>
-		</label>
+		<app-dropdown [obj]="this" [name]="typeDropdown.name" [list]="typeDropdown" [callback]="SelectType"></app-dropdown>
 
 		<label class="left-input left-input_checkbox">
 			<label class="box-label box-label_checkbox">
@@ -27,7 +30,7 @@
 			Убрать завершенные акции
 		</label>
 
-		<button class="button"><img src="assets/images/Plus.svg" class="button__image  button__image_left">
+		<button class="button" (click)="AddTask(this, '')"><img src="assets/images/Plus.svg" class="button__image  button__image_left">
 			Забронировать услугу</button>
 
 		<app-calendar [calendar]="calendar" [callback]="SelectDate" [obj]="this"></app-calendar>
@@ -36,39 +39,28 @@
 		<label class="left-row">
 			<div class="left-row__title">Ресурсы:</div>
 			
-			<label for="select_02" class="select header-select-label left-row__select">
-				<input type="radio" name="list_02" value="not_changed" id="bg_02" class="select-bg select-radio select-list" checked />
-				<input type="radio" name="list_02" value="not_changed" class="select-select select-radio select-list" id="select_02">
-				<label class="bg" for="bg_02"></label>
-				<div class="items">
-					<input type="radio" name="list_02" value="first_value" id="list_02[0]" class="select-radio select-list">
-					<label for="list_02[0]">Все</label>
-					<input type="radio" name="list_02" value="second_value" id="list_02[1]" class="select-radio select-list">
-					<label for="list_02[1]">Все</label>
-					<span id="text_02" class="select-text">Все</span>
-				</div>
-			</label>
+			<app-dropdown [obj]="this" [name]="resourcesDropdown.name" [list]="resourcesDropdown" [callback]="SelectResource"></app-dropdown>
 		</label>
 		<label class="left-row left-row_bottom">
-			<div class="left-row__title">Загрузка:</div> <div class="left-row__load">40%</div>
+			<div class="left-row__title">Загрузка:</div> <div class="left-row__load">{{utilString}}%</div>
 		</label>
 
         <div class="legend">
             <div class="left-title">Легенда</div>
             <div class="legend-item legend_promo">Промоакции</div>
-            <div class="legend-item legend_service">Услуги</div>
-            <div class="legend-item legend_reserve">Зарезервированное время</div>
+            <div class="legend-item legend_service">Акция идет</div>
+            <div class="legend-item legend_reserve">Зарезервировано по акции</div>
             <div class="legend-item legend_fail">Акция не сработала</div>
-            <div class="legend-item legend_add"><span class="task-add">+</span> Добавить услугу/акцию</div>
-            <div class="legend-item legend_waste">- Неиспользованное время</div>
-            <div class="legend-item legend_promo-end">Акция завершена</div>
-            <div class="legend-item legend_service-end">Услуга завершена</div>
-            <div class="legend-item legend_empty">Незарезервированное время</div>
-            <div class="legend-item legend_reserve-end">Зарезервированное время</div>
         </div>
 	</section>
 
-    <app-time-table [timedata]="timedata" [width]="1490" style="margin-top:40px;"></app-time-table>
+    <app-time-table 
+        [timedata]="timedata" 
+        [width]="1490" 
+        [add_callback]="AddTask" 
+        [open_callback]="OpenMenu" 
+        [close_callback]="CloseMenu" 
+        style="margin-top:40px;"></app-time-table>
 	
 
 </div>

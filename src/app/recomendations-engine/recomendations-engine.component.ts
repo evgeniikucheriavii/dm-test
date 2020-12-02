@@ -32,6 +32,10 @@ export class RecomendationsEngineComponent implements OnInit
     newPrice:string = ""
     formattedDate = ""
     promoStatus:string = ""
+    
+    loaded:boolean = false
+    promo_loaded:boolean = false
+    utils_loaded:boolean = false
 
     
     SwitchCat = (index:number) =>
@@ -107,6 +111,8 @@ export class RecomendationsEngineComponent implements OnInit
             this.FormRulesList()
             this.SwitchCat(0)
             
+            this.utils_loaded = true
+            this.CheckLoading()
         })
     }
 
@@ -121,8 +127,17 @@ export class RecomendationsEngineComponent implements OnInit
             this.currentPromo = this.promos[0]
             this.appRef.tick()
             this.SwitchPromo(0)
-            
+            this.promo_loaded = true
+            this.CheckLoading()
         })
+    }
+
+    CheckLoading()
+    {
+        if(this.promo_loaded && this.utils_loaded)
+        {
+            this.loaded = true
+        }
     }
 
     FormLists()

@@ -1,4 +1,5 @@
-<div class="rfm-main">
+<app-loading *ngIf="!loaded"></app-loading>
+<div class="rfm-main" *ngIf="loaded">
     <div class="rfm-col rfm-col_left">
         <div class="rfm-col__header">
             <div class="rfm-title">RFM-Критерии</div>
@@ -20,6 +21,7 @@
                 <div class="rfm-title">Группы</div>
                 <div><button class="button">Распределить</button></div>
             </div>
+            <br>
             <app-list [listdata]="groups_list"></app-list>
         </div>
         <div class='rfm-row'>
@@ -27,11 +29,17 @@
                 <div class="rfm-title">Настройки работы с группами</div>
                 <div><button class="button">Распределить</button></div>
             </div>
+            <br>
             <app-list [listdata]="settings_list"></app-list>
         </div>
     </div>
 
     <div class="rfm-col rfm-col_right">
+        <div class="rfm-col__header">
+            <div class="rfm-title">Контактная политика</div>
+        </div>
         <br>
+        <app-list [listdata]="policy_list"></app-list>
+        <button class="button"><img src="assets/images/Plus.svg" class="button__image"> Добавить</button>
     </div>
 </div>
